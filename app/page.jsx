@@ -53,23 +53,12 @@ const agregarProducto = async () => {
       imagen: nuevoProducto.imagen,
     });
 
-    setProductos([
-      ...productos,
-      nuevoProducto
-    ]);
-
-    setNuevoProducto({
-      nombre: "",
-      descripcion: "",
-      precio: "",
-      imagen: "",
-    });
-
     alert("Producto agregado correctamente");
+    
   } catch (error) {
     console.error(error);
     alert("Error al guardar");
-  })
+  }
 };
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
