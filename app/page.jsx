@@ -71,7 +71,7 @@ const agregarProducto = async () => {
     alert("Bienvenido administrador");
   } catch (error) {
     alert("Correo o contraseña incorrectos");
-  })
+  }
 };
   return ( 
     {!adminLogueado ? (
