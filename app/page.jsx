@@ -40,7 +40,35 @@ const [nuevoProducto, setNuevoProducto] = useState({
   imagen: '',
 });
 
-const agregarProducto = () => {
+const agregarProducto = async () => {
+  if (!nuevoProducto.nombre) return;
+
+  try {
+    await addDoc(collection(db, "productos"), {
+      nombre: nuevoProducto.nombre,
+      descripcion: nuevoProducto.descripcion,
+      precio: nuevoProducto.precio,
+      imagen: nuevoProducto.imagen,
+    });
+
+    setProductos([
+      ...productos,
+      nuevoProducto
+    ]);
+
+    setNuevoProducto({
+      nombre: "",
+      descripcion: "",
+      precio: "",
+      imagen: "",
+    });
+
+    alert("Producto agregado correctamente");
+  } catch (error) {
+    console.error(error);
+    alert("Error al guardar");
+  }
+};
   if (!nuevoProducto.nombre) return;
 
   setProductos([
