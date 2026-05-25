@@ -1,3 +1,5 @@
+import { db } from "./firebase";
+import { collection, addDoc } from "firebase/firestore";
 'use client';
 import { useState } from 'react';
 export default function FerreteriaPage() {
