@@ -1,6 +1,6 @@
 import './globals.css';
 export const metadata = {
-  title: 'Ferretería Online',
+  title: 'Brico Hogar Peru',
   description: 'Tienda online de ferretería',
 };
 
