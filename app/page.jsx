@@ -4,7 +4,7 @@ export default function FerreteriaPage() {
     'Herramientas Manuales',
     'Materiales de Construcción',
     'Electricidad',
-    'Plomería',
+    'Gasfinteria',
     'Pinturas y Acabados',
   ];
 
@@ -158,10 +158,17 @@ export default function FerreteriaPage() {
 
           <div>
             <h5 className="font-bold mb-3">Contacto</h5>
-            <p className="text-gray-300">WhatsApp: 999 999 999</p>
-            <p className="text-gray-300">correo@ferremas.com</p>
+            <p className="text-gray-300">WhatsApp: 51921 883 870</p>
+            <p className="text-gray-300">bricohogarperu@hotmail.com</p>
             <p className="text-gray-300">Lima, Perú</p>
           </div>
+          <a
+  href="https://wa.me/51921883870"
+  target="_blank"
+  className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-2xl z-50 font-bold"
+>
+  WhatsApp
+</a>
         </div>
       </footer>
     </div>
