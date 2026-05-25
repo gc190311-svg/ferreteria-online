@@ -84,7 +84,7 @@ const agregarProducto = async () => {
     precio: '',
     imagen: '',
   });
-};
+
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <header className="bg-black text-white">
