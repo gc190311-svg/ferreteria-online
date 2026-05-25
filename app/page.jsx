@@ -29,7 +29,7 @@ export default function FerreteriaPage() {
       imagen:
         'https://images.unsplash.com/photo-1581147036324-c1c7591d4a2b?q=80&w=1200&auto=format&fit=crop',
     },
-  ];
+  ]);
 const agregarProducto = () => {
   const nuevoProducto = {
     nombre: 'Nuevo Producto',
