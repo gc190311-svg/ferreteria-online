@@ -11,6 +11,29 @@ export default function FerreteriaPage() {
   ];
 
  const [productos, setProductos] = useState([
+   const [nuevoProducto, setNuevoProducto] = useState({
+  nombre: '',
+  descripcion: '',
+  precio: '',
+  imagen: '',
+});
+  const agregarProducto = () => {
+  if (!nuevoProducto.nombre) return;
+
+  setProductos([
+    ...productos,
+    {
+      ...nuevoProducto,
+    },
+  ]);
+
+  setNuevoProducto({
+    nombre: '',
+    descripcion: '',
+    precio: '',
+    imagen: '',
+  });
+};
     {
       nombre: 'Taladro Percutor 800W',
       precio: 'S/ 149.90',
@@ -30,7 +53,7 @@ export default function FerreteriaPage() {
         'https://images.unsplash.com/photo-1581147036324-c1c7591d4a2b?q=80&w=1200&auto=format&fit=crop',
     },
   ]);
-const agregarProducto = () => {
+
   const nuevoProducto = {
     nombre: 'Nuevo Producto',
     descripcion: 'Descripción del producto',
@@ -105,6 +128,67 @@ const agregarProducto = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-3xl font-bold">Productos Destacados</h3>
+            <div className="grid md:grid-cols-4 gap-4 mt-6 mb-8">
+
+  <input
+    type="text"
+    placeholder="Nombre"
+    value={nuevoProducto.nombre}
+    onChange={(e) =>
+      setNuevoProducto({
+        ...nuevoProducto,
+        nombre: e.target.value,
+      })
+    }
+    className="border p-3 rounded-xl"
+  />
+
+  <input
+    type="text"
+    placeholder="Descripción"
+    value={nuevoProducto.descripcion}
+    onChange={(e) =>
+      setNuevoProducto({
+        ...nuevoProducto,
+        descripcion: e.target.value,
+      })
+    }
+    className="border p-3 rounded-xl"
+  />
+
+  <input
+    type="text"
+    placeholder="Precio"
+    value={nuevoProducto.precio}
+    onChange={(e) =>
+      setNuevoProducto({
+        ...nuevoProducto,
+        precio: e.target.value,
+      })
+    }
+    className="border p-3 rounded-xl"
+  />
+
+  <input
+    type="text"
+    placeholder="URL Imagen"
+    value={nuevoProducto.imagen}
+    onChange={(e) =>
+      setNuevoProducto({
+        ...nuevoProducto,
+        imagen: e.target.value,
+      })
+    }
+    className="border p-3 rounded-xl"
+  />
+</div>
+
+<button
+  onClick={agregarProducto}
+  className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-bold"
+>
+  Guardar Producto
+</button>
             <button
   onClick={agregarProducto}
   className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-xl"
@@ -130,6 +214,9 @@ const agregarProducto = () => {
 
                 <div className="p-5">
                   <h4 className="font-bold text-xl">{producto.nombre}</h4>
+                  <p className="text-gray-600 mt-2">
+  {producto.descripcion}
+</p>
                   <p className="text-yellow-600 text-2xl font-extrabold mt-2">
                     {producto.precio}
                   </p>
