@@ -1,3 +1,4 @@
+import './globals.css';
 export const metadata = {
   title: 'Ferretería Online',
   description: 'Tienda online de ferretería',
