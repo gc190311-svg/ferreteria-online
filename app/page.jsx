@@ -55,18 +55,6 @@ const agregarProducto = () => {
     imagen: '',
   });
 };
-    
-
-  const nuevoProducto = {
-    nombre: 'Nuevo Producto',
-    descripcion: 'Descripción del producto',
-    precio: 'S/ 0.00',
-    imagen:
-      'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=1200&auto=format&fit=crop',
-  });
-
-  setProductos([...productos, nuevoProducto]);
-};
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <header className="bg-black text-white">
