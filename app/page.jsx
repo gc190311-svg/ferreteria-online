@@ -69,24 +69,8 @@ const agregarProducto = async () => {
   } catch (error) {
     console.error(error);
     alert("Error al guardar");
-  }
+  })
 };
-  if (!nuevoProducto.nombre) return;
-
-  setProductos([
-    ...productos,
-    {
-      ...nuevoProducto,
-    },
-  ]);
-
-  setNuevoProducto({
-    nombre: '',
-    descripcion: '',
-    precio: '',
-    imagen: '',
-  });
-
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <header className="bg-black text-white">
