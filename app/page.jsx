@@ -1,3 +1,5 @@
+'use client';
+import { useState } from 'react';
 export default function FerreteriaPage() {
   const categorias = [
     'Herramientas Eléctricas',
@@ -8,7 +10,7 @@ export default function FerreteriaPage() {
     'Pinturas y Acabados',
   ];
 
-  const productos = [
+ const [productos, setProductos] = useState([
     {
       nombre: 'Taladro Percutor 800W',
       precio: 'S/ 149.90',
@@ -28,7 +30,17 @@ export default function FerreteriaPage() {
         'https://images.unsplash.com/photo-1581147036324-c1c7591d4a2b?q=80&w=1200&auto=format&fit=crop',
     },
   ];
+const agregarProducto = () => {
+  const nuevoProducto = {
+    nombre: 'Nuevo Producto',
+    descripcion: 'Descripción del producto',
+    precio: 'S/ 0.00',
+    imagen:
+      'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=1200&auto=format&fit=crop',
+  };
 
+  setProductos([...productos, nuevoProducto]);
+};
   return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <header className="bg-black text-white">
@@ -93,6 +105,12 @@ export default function FerreteriaPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-3xl font-bold">Productos Destacados</h3>
+            <button
+  onClick={agregarProducto}
+  className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-xl"
+>
+  Agregar Producto
+</button>
             <button className="bg-black text-white px-5 py-2 rounded-xl">
               Ver Todos
             </button>
