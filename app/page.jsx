@@ -1,5 +1,7 @@
 'use client';
 
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase";
 import { db } from "./firebase";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from 'react';
@@ -34,11 +36,15 @@ const cargarProductos = async () => {
   setProductos(listaProductos);
 };
 const [nuevoProducto, setNuevoProducto] = useState({
-  nombre: '',
-  descripcion: '',
-  precio: '',
-  imagen: '',
+  nombre: "",
+  descripcion: "",
+  precio: "",
+  imagen: "",
 });
+
+const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+const [adminLogueado, setAdminLogueado] = useState(false);
 
 const agregarProducto = async () => {
   if (!nuevoProducto.nombre) return;
@@ -58,7 +64,48 @@ const agregarProducto = async () => {
     alert("Error al guardar");
   }
 };
-  return (
+  const loginAdmin = async () => {
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    setAdminLogueado(true);
+    alert("Bienvenido administrador");
+  } catch (error) {
+    alert("Correo o contraseña incorrectos");
+  })
+};
+  return ( 
+    {!adminLogueado ? (
+  <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="bg-white p-8 rounded-xl shadow-lg w-96">
+      <h2 className="text-2xl font-bold mb-4 text-center">
+        Login Administrador
+      </h2>
+
+      <input
+        type="email"
+        placeholder="Correo"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="w-full border p-3 rounded mb-4"
+      />
+
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className="w-full border p-3 rounded mb-4"
+      />
+
+      <button
+        onClick={loginAdmin}
+        className="w-full bg-black text-white p-3 rounded"
+      >
+        Ingresar
+      </button>
+    </div>
+  </div>
+) : (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <header className="bg-black text-white">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
