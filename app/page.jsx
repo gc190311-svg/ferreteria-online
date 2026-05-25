@@ -1,8 +1,8 @@
 'use client';
 
 import { db } from "./firebase";
-import { collection, addDoc } from "firebase/firestore";
-import { useState } from 'react';
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { useState, useEffect } from 'react';
 
 export default function FerreteriaPage() {
   const categorias = [
@@ -14,27 +14,25 @@ export default function FerreteriaPage() {
     'Pinturas y Acabados',
   ];
 
-const [productos, setProductos] = useState([
-  {
-    nombre: 'Taladro Percutor 800W',
-    precio: 'S/ 149.90',
-    imagen:
-      'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=1200&auto=format&fit=crop',
-  },
-  {
-    nombre: 'Amoladora Angular',
-    precio: 'S/ 189.90',
-    imagen:
-      'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=1200&auto=format&fit=crop',
-  },
-  {
-    nombre: 'Juego de Destornilladores',
-    precio: 'S/ 39.90',
-    imagen:
-      'https://images.unsplash.com/photo-1581147036324-c1c7591d4a2b?q=80&w=1200&auto=format&fit=crop',
-  },
-]);
+const [productos, setProductos] = useState([]);
+useEffect(() => {
+  cargarProductos();
+}, []);
 
+const cargarProductos = async () => {
+  const querySnapshot = await getDocs(collection(db, "productos"));
+
+  const listaProductos = [];
+
+  querySnapshot.forEach((doc) => {
+    listaProductos.push({
+      id: doc.id,
+      ...doc.data(),
+    });
+  });
+
+  setProductos(listaProductos);
+};
 const [nuevoProducto, setNuevoProducto] = useState({
   nombre: '',
   descripcion: '',
