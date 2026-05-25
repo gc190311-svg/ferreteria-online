@@ -10,14 +10,35 @@ export default function FerreteriaPage() {
     'Pinturas y Acabados',
   ];
 
- const [productos, setProductos] = useState([
-   const [nuevoProducto, setNuevoProducto] = useState({
+const [productos, setProductos] = useState([
+  {
+    nombre: 'Taladro Percutor 800W',
+    precio: 'S/ 149.90',
+    imagen:
+      'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    nombre: 'Amoladora Angular',
+    precio: 'S/ 189.90',
+    imagen:
+      'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=1200&auto=format&fit=crop',
+  },
+  {
+    nombre: 'Juego de Destornilladores',
+    precio: 'S/ 39.90',
+    imagen:
+      'https://images.unsplash.com/photo-1581147036324-c1c7591d4a2b?q=80&w=1200&auto=format&fit=crop',
+  },
+]);
+
+const [nuevoProducto, setNuevoProducto] = useState({
   nombre: '',
   descripcion: '',
   precio: '',
   imagen: '',
 });
-  const agregarProducto = () => {
+
+const agregarProducto = () => {
   if (!nuevoProducto.nombre) return;
 
   setProductos([
