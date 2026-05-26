@@ -139,7 +139,7 @@ return (
     >
       WhatsApp
     </a>
-  </footer>
-</div>
-);
+      </footer>
+    </div>
+  );
 }
