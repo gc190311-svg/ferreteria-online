@@ -237,42 +237,43 @@ return (
       </section>
 
       <footer className="bg-black text-white py-10">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-8">
-          <div>
-            <h4 className="text-2xl font-bold text-yellow-400">FERREMÁS</h4>
-            <p className="mt-4 text-gray-300">
-              Tu tienda online de confianza para productos de ferretería.
-            </p>
-          </div>
+  <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 px-6">
+    
+    <div>
+      <h4 className="font-bold mb-3">FERREMÁS</h4>
+      <p className="text-gray-300">
+        Todo en herramientas y materiales para construcción.
+      </p>
+    </div>
 
-          <div>
-            <h5 className="font-bold mb-3">Enlaces</h5>
-            <ul className="space-y-2 text-gray-300">
-              <li>Inicio</li>
-              <li>Productos</li>
-              <li>Ofertas</li>
-              <li>Contacto</li>
-            </ul>
-          </div>
+    <div>
+      <h5 className="font-bold mb-3">Enlaces</h5>
+      <ul className="space-y-2">
+        <li>Inicio</li>
+        <li>Productos</li>
+        <li>Ofertas</li>
+        <li>Contacto</li>
+      </ul>
+    </div>
 
-          <div>
-            <h5 className="font-bold mb-3">Contacto</h5>
-            <p className="text-gray-300">WhatsApp: 51921 883 870</p>
-            <p className="text-gray-300">bricohogarperu@hotmail.com</p>
-            <p className="text-gray-300">Lima, Perú</p>
-          </div>
-          <a
-  href="https://wa.me/51921883870"
-  target="_blank"
-  className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-2xl z-50 font-bold"
->
-  WhatsApp
-</a>
+    <div>
+      <h5 className="font-bold mb-3">Contacto</h5>
+      <p className="text-gray-300">WhatsApp: 51921883870</p>
+      <p className="text-gray-300">bricohogarperu@hotmail.com</p>
+      <p className="text-gray-300">Lima, Perú</p>
+    </div>
 
-</div>
+  </div>
+
+  <a
+    href="https://wa.me/51921883870"
+    target="_blank"
+    className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-2xl z-50 font-bold"
+  >
+    WhatsApp
+  </a>
 </footer>
+
 </div>
 );
 }
-
-
