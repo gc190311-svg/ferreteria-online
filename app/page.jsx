@@ -74,26 +74,8 @@ const agregarProducto = async () => {
         Login Administrador
       </h2>
 
-      <input
-        type="email"
-        placeholder="Correo"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full border p-3 rounded mb-4"
       />
 
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full border p-3 rounded mb-4"
-      />
-
-      <button
-        onClick={loginAdmin}
-        className="w-full bg-black text-white p-3 rounded"
-      >
         Ingresar
       </button>
     </div>
