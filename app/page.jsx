@@ -60,221 +60,86 @@ const agregarProducto = async () => {
   
 return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
-      <header className="bg-black text-white">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
-          <div>
-            <h1 className="text-3xl font-bold text-yellow-400">FERREMÁS</h1>
-            <p className="text-sm">Todo en Ferretería</p>
-          </div>
 
-          <div className="hidden md:flex gap-6 text-sm">
-            <a href="#">Inicio</a>
-            <a href="#">Productos</a>
-            <a href="#">Ofertas</a>
-            <a href="#">Contacto</a>
-          </div>
-        </div>
-      </header>
+  <header className="bg-black text-white">
+    <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+      <div>
+        <h1 className="text-3xl font-bold text-yellow-400">FERREMÁS</h1>
+        <p className="text-sm">Todo en Ferretería</p>
+      </div>
 
-      <section className="bg-gradient-to-r from-black to-gray-900 text-white">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 px-6 py-16 items-center">
-          <div>
-            <h2 className="text-5xl font-extrabold leading-tight">
-              Todo lo que necesitas para tu obra
-            </h2>
-            <p className="mt-6 text-lg text-gray-300">
-              Venta online de herramientas, materiales eléctricos, plomería,
-              pinturas y más.
-            </p>
+      <div className="hidden md:flex gap-6 text-sm">
+        <a href="#">Inicio</a>
+        <a href="#">Productos</a>
+        <a href="#">Ofertas</a>
+        <a href="#">Contacto</a>
+      </div>
+    </div>
+  </header>
 
-            <button className="mt-8 bg-yellow-400 hover:bg-yellow-500 text-black font-bold px-6 py-3 rounded-2xl shadow-lg transition">
-              Ver Productos
-            </button>
-          </div>
+  <section className="bg-gradient-to-r from-black to-gray-900 text-white">
+    <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 px-6 py-16 items-center">
 
-          <div>
-            <img
-              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=1400&auto=format&fit=crop"
-              alt="Ferretería"
-              className="rounded-3xl shadow-2xl"
-            />
-          </div>
-        </div>
-      </section>
+      <div>
+        <h2 className="text-5xl font-extrabold leading-tight">
+          Todo lo que necesitas para tu obra
+        </h2>
 
-      <section className="max-w-7xl mx-auto px-6 py-14">
-        <h3 className="text-3xl font-bold mb-8">Categorías</h3>
+        <p className="mt-6 text-lg text-gray-300">
+          Venta online de herramientas, materiales eléctricos,
+          plomería, pinturas y más.
+        </p>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
-          {categorias.map((cat) => (
-            <div
-              key={cat}
-              className="bg-white rounded-2xl p-5 shadow hover:shadow-xl transition text-center"
-            >
-              <div className="text-4xl mb-3">🛠️</div>
-              <p className="font-semibold text-sm">{cat}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+        <button className="mt-8 bg-yellow-400 text-black px-6 py-3 rounded-xl font-bold">
+          Ver Productos
+        </button>
+      </div>
 
-      <section className="bg-white py-14">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-center justify-between mb-8">
-            <h3 className="text-3xl font-bold">Productos Destacados</h3>
-            <div className="grid md:grid-cols-4 gap-4 mt-6 mb-8">
+      <img
+        src="https://images.unsplash.com/photo-1504307651254-35680f356dfd"
+        alt="Construcción"
+        className="rounded-3xl shadow-2xl"
+      />
+    </div>
+  </section>
 
-  <input
-    type="text"
-    placeholder="Nombre"
-    value={nuevoProducto.nombre}
-    onChange={(e) =>
-      setNuevoProducto({
-        ...nuevoProducto,
-        nombre: e.target.value,
-      })
-    }
-    className="border p-3 rounded-xl"
-  />
+  <footer className="bg-black text-white py-10">
+    <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 px-6">
 
-  <input
-    type="text"
-    placeholder="Descripción"
-    value={nuevoProducto.descripcion}
-    onChange={(e) =>
-      setNuevoProducto({
-        ...nuevoProducto,
-        descripcion: e.target.value,
-      })
-    }
-    className="border p-3 rounded-xl"
-  />
+      <div>
+        <h4 className="font-bold mb-3">FERREMÁS</h4>
+        <p className="text-gray-300">
+          Todo en herramientas y materiales para construcción.
+        </p>
+      </div>
 
-  <input
-    type="text"
-    placeholder="Precio"
-    value={nuevoProducto.precio}
-    onChange={(e) =>
-      setNuevoProducto({
-        ...nuevoProducto,
-        precio: e.target.value,
-      })
-    }
-    className="border p-3 rounded-xl"
-  />
+      <div>
+        <h5 className="font-bold mb-3">Enlaces</h5>
+        <ul className="space-y-2">
+          <li>Inicio</li>
+          <li>Productos</li>
+          <li>Ofertas</li>
+          <li>Contacto</li>
+        </ul>
+      </div>
 
-  <input
-    type="text"
-    placeholder="URL Imagen"
-    value={nuevoProducto.imagen}
-    onChange={(e) =>
-      setNuevoProducto({
-        ...nuevoProducto,
-        imagen: e.target.value,
-      })
-    }
-    className="border p-3 rounded-xl"
-  />
-</div>
+      <div>
+        <h5 className="font-bold mb-3">Contacto</h5>
+        <p className="text-gray-300">WhatsApp: 51921883870</p>
+        <p className="text-gray-300">bricohogarperu@hotmail.com</p>
+        <p className="text-gray-300">Lima, Perú</p>
+      </div>
 
-<button
-  onClick={agregarProducto}
-  className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-xl font-bold"
->
-  Guardar Producto
-</button>
-            <button
-  onClick={agregarProducto}
-  className="bg-green-500 hover:bg-green-600 text-white px-5 py-2 rounded-xl"
->
-  Agregar Producto
-</button>
-            <button className="bg-black text-white px-5 py-2 rounded-xl">
-              Ver Todos
-            </button>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {productos.map((producto) => (
-              <div
-                key={producto.nombre}
-                className="bg-gray-50 rounded-3xl overflow-hidden shadow-lg hover:scale-105 transition"
-              >
-                <img
-                  src={producto.imagen}
-                  alt={producto.nombre}
-                  className="h-60 w-full object-cover"
-                />
-
-                <div className="p-5">
-                  <h4 className="font-bold text-xl">{producto.nombre}</h4>
-                  <p className="text-gray-600 mt-2">
-  {producto.descripcion}
-</p>
-                  <p className="text-yellow-600 text-2xl font-extrabold mt-2">
-                    {producto.precio}
-                  </p>
-
-                  <button className="mt-5 w-full bg-yellow-400 hover:bg-yellow-500 text-black py-3 rounded-2xl font-bold">
-                    Agregar al carrito
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="bg-yellow-400 py-12">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <h3 className="text-4xl font-extrabold">
-            Ofertas Exclusivas Todos los Días
-          </h3>
-          <p className="mt-4 text-lg">
-            Descuentos especiales en herramientas y materiales.
-          </p>
-        </div>
-      </section>
-
-      <footer className="bg-black text-white py-10">
-  <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-8 px-6">
-    
-    <div>
-      <h4 className="font-bold mb-3">FERREMÁS</h4>
-      <p className="text-gray-300">
-        Todo en herramientas y materiales para construcción.
-      </p>
     </div>
 
-    <div>
-      <h5 className="font-bold mb-3">Enlaces</h5>
-      <ul className="space-y-2">
-        <li>Inicio</li>
-        <li>Productos</li>
-        <li>Ofertas</li>
-        <li>Contacto</li>
-      </ul>
-    </div>
-
-    <div>
-      <h5 className="font-bold mb-3">Contacto</h5>
-      <p className="text-gray-300">WhatsApp: 51921883870</p>
-      <p className="text-gray-300">bricohogarperu@hotmail.com</p>
-      <p className="text-gray-300">Lima, Perú</p>
-    </div>
-
-  </div>
-
-  <a
-    href="https://wa.me/51921883870"
-    target="_blank"
-    className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-2xl z-50 font-bold"
-  >
-    WhatsApp
-  </a>
-</footer>
-
+    <a
+      href="https://wa.me/51921883870"
+      target="_blank"
+      className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-2xl z-50 font-bold"
+    >
+      WhatsApp
+    </a>
+  </footer>
 </div>
 );
-}
 }
