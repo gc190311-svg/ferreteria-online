@@ -57,30 +57,8 @@ const agregarProducto = async () => {
     console.error(error);
     alert("Error al guardar");
   }
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    setAdminLogueado(true);
-    alert("Bienvenido administrador");
-  } catch (error) {
-    alert("Correo o contraseña incorrectos");
-  }
-};
-  return ( 
-     <>
-  <div className="min-h-screen flex items-center justify-center bg-gray-100">
-    <div className="bg-white p-8 rounded-xl shadow-lg w-96">
-      <h2 className="text-2xl font-bold mb-4 text-center">
-        Login Administrador
-      </h2>
-
-      />
-
-        Ingresar
-      </button>
-    </div>
-  </div>
-) : (
+  
+return (
     <div className="min-h-screen bg-gray-100 text-gray-900">
       <header className="bg-black text-white">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
