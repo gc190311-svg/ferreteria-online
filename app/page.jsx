@@ -1,7 +1,5 @@
 'use client';
 
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
 import { db } from "./firebase";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { useState, useEffect } from 'react';
@@ -42,10 +40,6 @@ const [nuevoProducto, setNuevoProducto] = useState({
   imagen: "",
 });
 
-const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
-const [adminLogueado, setAdminLogueado] = useState(false);
-
 const agregarProducto = async () => {
   if (!nuevoProducto.nombre) return;
 
@@ -63,8 +57,7 @@ const agregarProducto = async () => {
     console.error(error);
     alert("Error al guardar");
   }
-};
-  const loginAdmin = async () => {
+
   try {
     await signInWithEmailAndPassword(auth, email, password);
     setAdminLogueado(true);
@@ -75,7 +68,6 @@ const agregarProducto = async () => {
 };
   return ( 
      <>
-    {!adminLogueado ? (
   <div className="min-h-screen flex items-center justify-center bg-gray-100">
     <div className="bg-white p-8 rounded-xl shadow-lg w-96">
       <h2 className="text-2xl font-bold mb-4 text-center">
