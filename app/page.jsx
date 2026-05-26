@@ -268,9 +268,8 @@ return (
 >
   WhatsApp
 </a>
-        </div>
-      </footer>
-    </div>
+</footer>
+</div>
 );
 }
 
