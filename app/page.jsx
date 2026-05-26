@@ -311,7 +311,6 @@ const agregarProducto = async () => {
         </div>
       </footer>
     </div>
-  )}
 </>
 );
 }
