@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { db } from "../firebase";
+import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function ProductoDetalle({ params }) {
