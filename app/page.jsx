@@ -126,13 +126,12 @@ export default function FerreteriaPage() {
       S/ {producto.precio}
     </p>
 
-  <a
-  href={`https://wa.me/51921883870?text=Hola quiero informacion del producto ${producto.nombre}`}
+<a
+  href="https://wa.me/51921883870"
   target="_blank"
   className="block mt-5 bg-black hover:bg-gray-800 text-white text-center py-3 rounded-xl"
 >
   Pedir por WhatsApp
-    
 </a>
 
 </div>
