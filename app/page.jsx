@@ -105,7 +105,7 @@ export default function FerreteriaPage() {
               <img
                 src={producto.imagen}
                 alt={producto.nombre}
-                className="w-full h-56 object-cover"
+                className="w-full h-72 object-contain bg-white p-4"
               />
 
               <div className="p-5">
