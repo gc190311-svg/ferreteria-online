@@ -137,5 +137,10 @@ export default function FerreteriaPage() {
 </div>
 
 </div>
+
+))}
+
+</div>
+
 );
 }
