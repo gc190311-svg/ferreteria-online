@@ -98,56 +98,42 @@ export default function FerreteriaPage() {
           {productos.map((producto) => (
 
             <div
-              key={producto.id}
-              className="bg-white rounded-2xl shadow-lg overflow-hidden"
-            >
+  key={producto.id}
+  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition"
+>
 
-              <img
-                src={producto.imagen}
-                alt={producto.nombre}
-                className="w-full h-72 object-contain bg-white p-4"
-              />
+  <div className="bg-gray-100 h-72 flex items-center justify-center">
 
-              <div className="p-5">
+    <img
+      src={producto.imagen}
+      alt={producto.nombre}
+      className="max-h-64 object-contain"
+    />
 
-                <h4 className="text-2xl font-bold">
-                  {producto.nombre}
-                </h4>
+  </div>
 
-                <p className="text-gray-500 mt-2">
-                  {producto.descripcion}
-                </p>
+  <div className="p-5">
 
-                <p className="text-2xl font-bold text-green-600 mt-4">
-                  S/ {producto.precio}
-                </p>
+    <h4 className="text-2xl font-bold">
+      {producto.nombre}
+    </h4>
 
-                <a
-                  href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
-                  target="_blank"
-                  className="block mt-5 bg-black text-white text-center py-3 rounded-xl"
-                >
-                  Pedir por WhatsApp
-                </a>
+    <p className="text-gray-500 mt-2">
+      {producto.descripcion}
+    </p>
 
-              </div>
+    <p className="text-2xl font-bold text-green-600 mt-4">
+      S/ {producto.precio}
+    </p>
 
-            </div>
+    <a
+      href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
+      target="_blank"
+      className="block mt-5 bg-black hover:bg-gray-800 text-white text-center py-3 rounded-xl"
+    >
+      Pedir por WhatsApp
+    </a>
 
-          ))}
+  </div>
 
-        </div>
-
-      </section>
-
-      <a
-        href="https://wa.me/51921883870"
-        target="_blank"
-        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-2xl z-50 font-bold"
-      >
-        WhatsApp
-      </a>
-
-    </div>
-  );
-}
+</div>
