@@ -1,56 +1,123 @@
 'use client';
 
-import { useState } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../firebase';
+import { useState } from "react";
+import { db } from "../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 export default function AdminPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
-  const loginAdmin = async () => {
+  const [producto, setProducto] = useState({
+    nombre: "",
+    precio: "",
+    imagen: "",
+    descripcion: ""
+  });
+
+  const guardarProducto = async () => {
+
+    if (!producto.nombre) {
+      alert("Ingresa nombre");
+      return;
+    }
+
     try {
-      await signInWithEmailAndPassword(auth, email, password);
 
-      alert('Bienvenido administrador');
+      await addDoc(collection(db, "productos"), {
+        nombre: producto.nombre,
+        precio: producto.precio,
+        imagen: producto.imagen,
+        descripcion: producto.descripcion
+      });
 
-      window.location.href = '/';
+      alert("Producto agregado");
+
+      setProducto({
+        nombre: "",
+        precio: "",
+        imagen: "",
+        descripcion: ""
+      });
 
     } catch (error) {
-      alert('Correo o contraseña incorrectos');
+      console.log(error);
+      alert("Error al guardar");
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-xl shadow-lg w-96">
-        <h2 className="text-2xl font-bold mb-4 text-center">
-          Login Administrador
-        </h2>
 
-        <input
-          type="email"
-          placeholder="Correo"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full border p-3 rounded mb-4"
-        />
+    <div className="min-h-screen bg-gray-100 p-10">
 
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border p-3 rounded mb-4"
-        />
+      <div className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
 
-        <button
-          onClick={loginAdmin}
-          className="w-full bg-black text-white p-3 rounded"
-        >
-          Ingresar
-        </button>
+        <h1 className="text-3xl font-bold mb-8">
+          Panel Administrador
+        </h1>
+
+        <div className="space-y-4">
+
+          <input
+            type="text"
+            placeholder="Nombre del producto"
+            value={producto.nombre}
+            onChange={(e) =>
+              setProducto({
+                ...producto,
+                nombre: e.target.value
+              })
+            }
+            className="w-full border p-3 rounded-lg"
+          />
+
+          <input
+            type="text"
+            placeholder="Precio"
+            value={producto.precio}
+            onChange={(e) =>
+              setProducto({
+                ...producto,
+                precio: e.target.value
+              })
+            }
+            className="w-full border p-3 rounded-lg"
+          />
+
+          <input
+            type="text"
+            placeholder="URL de imagen"
+            value={producto.imagen}
+            onChange={(e) =>
+              setProducto({
+                ...producto,
+                imagen: e.target.value
+              })
+            }
+            className="w-full border p-3 rounded-lg"
+          />
+
+          <textarea
+            placeholder="Descripción"
+            value={producto.descripcion}
+            onChange={(e) =>
+              setProducto({
+                ...producto,
+                descripcion: e.target.value
+              })
+            }
+            className="w-full border p-3 rounded-lg h-32"
+          />
+
+          <button
+            onClick={guardarProducto}
+            className="bg-black text-white px-6 py-3 rounded-xl w-full"
+          >
+            Guardar Producto
+          </button>
+
+        </div>
+
       </div>
+
     </div>
   );
 }
