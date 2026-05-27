@@ -97,7 +97,8 @@ export default function FerreteriaPage() {
 
           {productos.map((producto) => (
 
-            <div
+          <a
+  href={`/producto/${producto.id}`}
   key={producto.id}
   className="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition"
 >
