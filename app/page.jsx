@@ -127,13 +127,15 @@ export default function FerreteriaPage() {
           S/ {producto.precio}
         </p>
 
-        <a
-          href="https://wa.me/51921883870"
-          target="_blank"
-          className="block mt-5 bg-black hover:bg-gray-800 text-white text-center py-3 rounded-xl"
-        >
-          Pedir por WhatsApp
-        </a>
+        <button
+  onClick={(e) => {
+    e.preventDefault();
+    window.open("https://wa.me/51921883870", "_blank");
+  }}
+  className="block w-full mt-5 bg-black hover:bg-gray-800 text-white text-center py-3 rounded-xl"
+>
+  Pedir por WhatsApp
+</button>
 
       </div>
 
