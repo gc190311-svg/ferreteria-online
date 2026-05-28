@@ -106,7 +106,7 @@ export default function FerreteriaPage() {
       <div className="bg-gray-100 h-72 flex items-center justify-center">
 
         <img
-          src={producto.imagen}
+          src={producto.imagenes?.[0]}
           alt={producto.nombre}
           className="max-h-64 object-contain"
         />
