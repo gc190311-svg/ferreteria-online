@@ -93,54 +93,56 @@ export default function FerreteriaPage() {
           Productos
         </h3>
 
-        <div className="grid md:grid-cols-3 gap-8">
+       <div className="grid md:grid-cols-3 gap-8">
 
-          {productos.map((producto) => (
+  {productos.map((producto) => (
 
-<a
-  href={`/producto/${producto.id}`}
-  key={producto.id}
-  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition"
->
+    <a
+      href={`/producto/${producto.id}`}
+      key={producto.id}
+      className="bg-white rounded-2xl shadow-lg overflow-hidden hover:scale-105 transition block"
+    >
 
-  <div className="bg-gray-100 h-72 flex items-center justify-center">
+      <div className="bg-gray-100 h-72 flex items-center justify-center">
 
-    <img
-      src={producto.imagen}
-      alt={producto.nombre}
-      className="max-h-64 object-contain"
-    />
+        <img
+          src={producto.imagen}
+          alt={producto.nombre}
+          className="max-h-64 object-contain"
+        />
 
+      </div>
 
-  <div className="p-5">
+      <div className="p-5">
 
-    <h4 className="text-2xl font-bold">
-      {producto.nombre}
-    </h4>
+        <h4 className="text-2xl font-bold">
+          {producto.nombre}
+        </h4>
 
-    <p className="text-gray-500 mt-2">
-      {producto.descripcion}
-    </p>
+        <p className="text-gray-500 mt-2">
+          {producto.descripcion}
+        </p>
 
-    <p className="text-2xl font-bold text-green-600 mt-4">
-      S/ {producto.precio}
-    </p>
+        <p className="text-2xl font-bold text-green-600 mt-4">
+          S/ {producto.precio}
+        </p>
 
-<a
-  href="https://wa.me/51921883870"
-  target="_blank"
-  className="block mt-5 bg-black hover:bg-gray-800 text-white text-center py-3 rounded-xl"
->
-  Pedir por WhatsApp
-</a>
+        <a
+          href="https://wa.me/51921883870"
+          target="_blank"
+          className="block mt-5 bg-black hover:bg-gray-800 text-white text-center py-3 rounded-xl"
+        >
+          Pedir por WhatsApp
+        </a>
+
+      </div>
+
+    </a>
+
+  ))}
+
 </div>
-
-</a>
-
-))}
-
-</div>
-
+        
 </section>
 
 </div>
