@@ -62,7 +62,7 @@ export default function FerreteriaPage() {
   <img
     src="https://i.postimg.cc/HL41FzbF/BRICO-HOGAR-PERU.png"
     alt="Logo"
-    className="h-16 object-contain"
+    className="h-28 object-contain"
   />
 
 </div>
