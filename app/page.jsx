@@ -60,7 +60,7 @@ export default function FerreteriaPage() {
           <div className="flex items-center gap-3">
 
   <img
-    src="https://i.postimg.cc/qvvKNDvs/Copia-de-TARJETA-PRESENTACION-BRICO.png"
+    src="https://i.postimg.cc/HL41FzbF/BRICO-HOGAR-PERU.png"
     alt="Logo"
     className="h-16 object-contain"
   />
