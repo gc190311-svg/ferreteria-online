@@ -57,15 +57,15 @@ export default function FerreteriaPage() {
 
           {/* LOGO */}
 
-          <div>
-            <h1 className="text-4xl font-extrabold text-yellow-500">
-              FERREMÁS
-            </h1>
+          <div className="flex items-center gap-3">
 
-            <p className="text-sm text-gray-500">
-              Todo en Ferretería
-            </p>
-          </div>
+  <img
+    src="https://i.postimg.cc/qvvKNDvs/Copia-de-TARJETA-PRESENTACION-BRICO.png"
+    alt="Logo"
+    className="h-16 object-contain"
+  />
+
+</div>
 
           {/* BUSCADOR */}
 
