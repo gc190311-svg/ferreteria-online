@@ -111,7 +111,6 @@ export default function FerreteriaPage() {
       className="max-h-64 object-contain"
     />
 
-</a>
 
   <div className="p-5">
 
@@ -137,7 +136,7 @@ export default function FerreteriaPage() {
 
 </div>
 
-</div>
+</a>
 
 ))}
 
