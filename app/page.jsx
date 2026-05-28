@@ -119,10 +119,6 @@ export default function FerreteriaPage() {
           {producto.nombre}
         </h4>
 
-        <p className="text-gray-500 mt-2">
-          {producto.descripcion}
-        </p>
-
         <p className="text-2xl font-bold text-green-600 mt-4">
           S/ {producto.precio}
         </p>
