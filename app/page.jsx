@@ -60,7 +60,7 @@ export default function FerreteriaPage() {
           <div className="flex items-center overflow-hidden w-52 h-20">
 
   <img
-    src="https://i.postimg.cc/x8jmL6Pc/BRICO-HOGAR-PERU-(1).png"
+    src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
     alt="Logo"
     className="w-full h-full object-contain scale-200"
   />
