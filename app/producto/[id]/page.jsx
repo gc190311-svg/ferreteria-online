@@ -29,8 +29,18 @@ export default function ProductoDetalle({ params }) {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gray-100 p-10">
+    return (
+  <div className="min-h-screen bg-gray-100 p-10">
+
+    <div className="max-w-4xl mx-auto mb-6">
+      <a
+        href="/"
+        className="inline-block bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-xl transition"
+      >
+        ← Volver al inicio
+      </a>
+    </div>
+    
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
         
        <div className="bg-white p-6 rounded-t-2xl">
