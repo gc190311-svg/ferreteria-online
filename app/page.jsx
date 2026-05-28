@@ -213,12 +213,12 @@ export default function FerreteriaPage() {
 
               <div className="bg-gray-100 h-72 flex items-center justify-center p-6">
 
-                <img
-                  src={
-                    Array.isArray(producto.imagen)
-                      ? producto.imagen[0]
-                      : producto.imagen
-                  }
+               src={
+  producto.imagenes?.[0] ||
+  producto.imagen?.[0] ||
+  producto.imagen ||
+  "/sin-imagen.png"
+}
                   alt={producto.nombre}
                   className="max-h-60 object-contain hover:scale-105 transition duration-300"
                 />
