@@ -34,11 +34,20 @@ export default function ProductoDetalle({ params }) {
         
        <div className="bg-gray-100 p-10 flex items-center justify-center rounded-t-2xl">
 
-  <img
-    src={producto.imagen}
-    alt={producto.nombre}
-    className="w-full max-w-md object-contain hover:scale-105 transition duration-300"
-  />
+  <div className="grid grid-cols-1 gap-4 w-full">
+
+  {producto.imagenes?.map((img, index) => (
+
+    <img
+      key={index}
+      src={img}
+      alt={producto.nombre}
+      className="w-full rounded-xl object-contain bg-white p-4 shadow hover:scale-105 transition duration-300"
+    />
+
+  ))}
+
+</div>
 
 </div>
 
