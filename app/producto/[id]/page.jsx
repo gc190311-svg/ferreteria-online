@@ -32,13 +32,15 @@ export default function ProductoDetalle({ params }) {
     <div className="min-h-screen bg-gray-100 p-10">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
         
-        <div className="bg-gray-100 h-96 flex items-center justify-center">
-          <img
-            src={producto.imagen}
-            alt={producto.nombre}
-            className="max-h-80 object-contain"
-          />
-        </div>
+       <div className="bg-gray-100 p-10 flex items-center justify-center rounded-t-2xl">
+
+  <img
+    src={producto.imagen}
+    alt={producto.nombre}
+    className="w-full max-w-md object-contain hover:scale-105 transition duration-300"
+  />
+
+</div>
 
         <div className="p-8">
           <h1 className="text-4xl font-bold">
