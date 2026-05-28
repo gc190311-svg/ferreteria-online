@@ -264,7 +264,7 @@ export default function FerreteriaPage() {
           <div>
 
             <h4 className="text-3xl font-bold text-yellow-500">
-              FERREMÁS
+              BRICO HOGAR PERÚ
             </h4>
 
             <p className="mt-4 text-gray-400">
