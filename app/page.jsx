@@ -132,7 +132,6 @@ export default function FerreteriaPage() {
   className="block mt-5 bg-black hover:bg-gray-800 text-white text-center py-3 rounded-xl"
 >
   Pedir por WhatsApp
-</a>
 
 </div>
 
