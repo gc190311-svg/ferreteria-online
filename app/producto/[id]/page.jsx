@@ -6,6 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
 
 export default function ProductoDetalle({ params }) {
   const [producto, setProducto] = useState(null);
+  const [imagenActiva, setImagenActiva] = useState(0);
 
   useEffect(() => {
     cargarProducto();
@@ -32,22 +33,47 @@ export default function ProductoDetalle({ params }) {
     <div className="min-h-screen bg-gray-100 p-10">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
         
-       <div className="bg-gray-100 p-10 flex items-center justify-center rounded-t-2xl">
+       <div className="bg-white p-6 rounded-t-2xl">
 
-  <div className="grid grid-cols-1 gap-4 w-full">
+  {/* Imagen principal */}
 
-  {producto.imagenes?.map((img, index) => (
+  <div className="border rounded-2xl bg-gray-50 p-6 flex items-center justify-center">
 
     <img
-      key={index}
-      src={img}
+      src={producto.imagenes?.[imagenActiva]}
       alt={producto.nombre}
-      className="w-full rounded-xl object-contain bg-white p-4 shadow hover:scale-105 transition duration-300"
+      className="max-h-[500px] object-contain"
     />
 
-  ))}
+  </div>
 
-</div>
+  {/* Miniaturas */}
+
+  <div className="flex gap-4 mt-4 overflow-x-auto">
+
+    {producto.imagenes?.map((img, index) => (
+
+      <button
+        key={index}
+        onClick={() => setImagenActiva(index)}
+        className={`border-2 rounded-xl p-2 min-w-[90px] bg-white ${
+          imagenActiva === index
+            ? "border-blue-500"
+            : "border-gray-200"
+        }`}
+      >
+
+        <img
+          src={img}
+          alt="miniatura"
+          className="h-20 w-20 object-contain"
+        />
+
+      </button>
+
+    ))}
+
+  </div>
 
 </div>
 
