@@ -82,9 +82,9 @@ export default function ProductoDetalle({ params }) {
             {producto.nombre}
           </h1>
 
-          <p className="text-gray-600 mt-4 text-lg">
-            {producto.descripcion}
-          </p>
+          <p className="text-gray-600 mt-4 text-lg whitespace-pre-line leading-8">
+  {producto.descripcion}
+</p>
 
           <p className="text-3xl font-bold text-green-600 mt-6">
             S/ {producto.precio}
