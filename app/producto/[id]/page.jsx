@@ -96,10 +96,25 @@ export default function ProductoDetalle({ params }) {
   {producto.descripcion}
 </p>
 
-          <p className="text-3xl font-bold text-green-600 mt-6">
-            S/ {producto.precio}
-          </p>
+          {producto.oferta ? (
+  <div>
+    <p className="text-gray-400 line-through text-lg">
+      S/ {producto.precio}
+    </p>
 
+    <p className="text-green-600 font-bold text-3xl">
+      S/ {producto.oferta}
+    </p>
+
+    <span className="bg-red-500 text-white px-2 py-1 rounded text-xs">
+      OFERTA
+    </span>
+  </div>
+) : (
+  <p className="text-green-600 font-bold text-3xl">
+    S/ {producto.precio}
+  </p>
+)}
           <a
             href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
             target="_blank"
