@@ -167,6 +167,7 @@ export default function FerreteriaPage() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
 
           {[
+            "Todos",
             "Herramientas",
             "Construcción",
             "Electricidad",
