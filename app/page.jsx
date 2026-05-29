@@ -8,6 +8,7 @@ export default function FerreteriaPage() {
 
   const [productos, setProductos] = useState([]);
   const [busqueda, setBusqueda] = useState("");
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos");
 
   useEffect(() => {
     cargarProductos();
@@ -167,12 +168,13 @@ export default function FerreteriaPage() {
             "Gasfitería",
           ].map((categoria, index) => (
 
-            <div
-              key={index}
-              className="bg-white rounded-2xl shadow hover:shadow-xl transition p-8 text-center font-bold text-lg hover:-translate-y-1"
-            >
-              {categoria}
-            </div>
+          <button
+            key={index}
+            onClick={() => setCategoriaSeleccionada(categoria)}
+            className="bg-white rounded-2xl shadow hover:shadow-xl transition p-8 text-center font-bold text-lg hover:-translate-y-1"
+              >
+          {categoria}
+          </button>
 
           ))}
 
