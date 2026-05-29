@@ -31,6 +31,12 @@ export default function FerreteriaPage() {
   };
 
   const productosFiltrados = productos.filter((producto) =>
+    const productosPorCategoria =
+  categoriaSeleccionada === "Todos"
+    ? productosFiltrados
+    : productosFiltrados.filter(
+        (producto) => producto.categoria === categoriaSeleccionada
+      );
     producto.nombre?.toLowerCase().includes(busqueda.toLowerCase())
   );
 
@@ -203,7 +209,7 @@ export default function FerreteriaPage() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-          {productosFiltrados.map((producto) => (
+          productosPorCategoria.map((producto) => (
 
             <a
               href={`/producto/${producto.id}`}
