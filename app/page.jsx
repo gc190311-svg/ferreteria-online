@@ -234,9 +234,25 @@ export default function FerreteriaPage() {
                   {producto.nombre}
                 </h4>
 
-                <p className="text-3xl font-extrabold text-green-600 mt-4">
-                  S/ {producto.precio}
-                </p>
+                {producto.oferta ? (
+               <div className="mt-4">
+               <p className="text-gray-400 line-through text-lg">
+               S/ {producto.precio}
+               </p>
+
+            <p className="text-green-600 font-bold text-2xl">
+            S/ {producto.oferta}
+             </p>
+
+            <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
+            OFERTA
+           </span>
+         </div>
+         ) : (
+         <p className="text-green-600 font-bold text-2xl">
+         S/ {producto.precio}
+        </p>
+          )}
 
                 <div className="mt-6">
 
