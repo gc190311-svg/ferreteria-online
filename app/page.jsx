@@ -31,14 +31,15 @@ export default function FerreteriaPage() {
   };
 
   const productosFiltrados = productos.filter((producto) =>
-    const productosPorCategoria =
+  producto.nombre?.toLowerCase().includes(busqueda.toLowerCase())
+);
+
+const productosPorCategoria =
   categoriaSeleccionada === "Todos"
     ? productosFiltrados
     : productosFiltrados.filter(
         (producto) => producto.categoria === categoriaSeleccionada
       );
-    producto.nombre?.toLowerCase().includes(busqueda.toLowerCase())
-  );
 
   return (
 
@@ -202,21 +203,23 @@ export default function FerreteriaPage() {
             Productos
           </h3>
 
-          <p className="text-gray-500">
-            {productosFiltrados.length} productos
-          </p>
+         <p className="text-gray-500">
+  {productosPorCategoria.length} productos
+</p>
 
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-          productosPorCategoria.map((producto) => (
+         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-            <a
-              href={`/producto/${producto.id}`}
-              key={producto.id}
-              className="bg-white rounded-3xl shadow hover:shadow-2xl overflow-hidden transition hover:-translate-y-2"
-            >
+  {productosPorCategoria.map((producto) => (
+
+    <a
+      href={`/producto/${producto.id}`}
+      key={producto.id}
+      className="bg-white rounded-3xl shadow hover:shadow-2xl overflow-hidden transition hover:-translate-y-2"
+    >
 
               {/* IMAGEN */}
 
