@@ -231,7 +231,6 @@ export default function FerreteriaPage() {
 
 </div>
 
-      </section>
 
       {/* PRODUCTOS */}
 
