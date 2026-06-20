@@ -230,7 +230,8 @@ export default function FerreteriaPage() {
   ))}
 
 </div>
-
+      
+)}  
 
       {/* PRODUCTOS */}
 
