@@ -63,11 +63,11 @@ export default function FerreteriaPage() {
 
       <header className="bg-white shadow sticky top-0 z-50">
 
-        <div className="max-w-7xl mx-auto flex items-center justify-between gap-6 px-6 py-4">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4 py-4">
 
           {/* LOGO */}
 
-          <div className="flex items-center overflow-hidden w-52 h-20">
+          <div className="flex items-center overflow-hidden w-36 md:w-52 h-20">
 
             <img
               src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
@@ -79,11 +79,11 @@ export default function FerreteriaPage() {
 
           {/* BUSCADOR */}
 
-          <div className="flex-1">
+          <div className="w-full md:flex-1">
 
             <input
               type="text"
-              placeholder="Buscar productos..."
+              placeholder="Buscar productos..."'
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
               className="w-full border border-gray-300 rounded-2xl px-5 py-3 outline-none focus:border-black"
@@ -93,9 +93,9 @@ export default function FerreteriaPage() {
 
           {/* MENÚ */}
 
-          <div className="hidden md:flex gap-6 text-sm font-semibold">
-
-            <a href="#" className="hover:text-yellow-500 transition">
+          <div className="flex flex-wrap justify-center gap-4 text-sm font-semibold">
+            
+            <a href="#" className="hover:text-yellow-500 transition"> 
               Inicio
             </a>
 
@@ -121,11 +121,11 @@ export default function FerreteriaPage() {
 
       <section className="bg-gradient-to-r from-black to-blue-950 text-white">
 
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 px-6 py-20 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-6 py-16 items-center">
 
           <div>
 
-            <h2 className="text-6xl font-extrabold leading-tight">
+            <h2 className="text-4xl md:text-6xl font-extrabold leading-tight">
               Todo lo que necesitas
               <br />
               para tu obra
@@ -150,7 +150,7 @@ export default function FerreteriaPage() {
             <img
               src="https://images.unsplash.com/photo-1504307651254-35680f356dfd"
               alt="Construcción"
-              className="rounded-3xl shadow-2xl"
+              className="rounded-3xl shadow-2xl w-full"
             />
 
           </div>
@@ -166,7 +166,7 @@ export default function FerreteriaPage() {
           Categorías
         </h3>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4>
 
           {[
             "Todos",
@@ -235,7 +235,7 @@ export default function FerreteriaPage() {
                     "/sin-imagen.png"
                   }
                   alt={producto.nombre}
-                  className="max-h-60 object-contain hover:scale-105 transition duration-300"
+                  className="max-h-48 md:max-h-60 object-contain hover:scale-105 transition duration-300"
                 />
 
               </div>
@@ -296,7 +296,7 @@ export default function FerreteriaPage() {
 
       <footer className="bg-black text-white py-10">
 
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
 
           {/* EMPRESA */}
 
