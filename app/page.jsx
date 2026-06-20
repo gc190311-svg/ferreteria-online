@@ -99,25 +99,32 @@ export default function FerreteriaPage() {
 
           {/* MENÚ */}
 
-          <div className="flex flex-wrap justify-center gap-4 text-sm font-semibold">
+         <div className="flex flex-wrap justify-center items-center gap-6 text-sm font-semibold">
 
-            <a href="#">
-              Inicio
-            </a>
+  <button
+    onClick={() => setMostrarCategorias(true)}
+    className="bg-black text-white px-4 py-2 rounded-xl shadow hover:bg-gray-800 transition"
+  >
+    ☰ Categorías
+  </button>
 
-            <a href="#productos">
-              Productos
-            </a>
+  <a href="#">
+    Inicio
+  </a>
 
-            <a href="#">
-              Ofertas
-            </a>
+  <a href="#productos">
+    Productos
+  </a>
 
-            <a href="#">
-              Contacto
-            </a>
+  <a href="#">
+    Ofertas
+  </a>
 
-          </div>
+  <a href="#">
+    Contacto
+  </a>
+
+</div>
 
         </div>
 
@@ -164,17 +171,6 @@ export default function FerreteriaPage() {
         </div>
 
       </section>
-      
-      <section className="max-w-7xl mx-auto px-4 py-6">
-
-  <button
-    onClick={() => setMostrarCategorias(!mostrarCategorias)}
-    className="bg-black text-white px-6 py-3 rounded-2xl font-bold shadow-lg"
-  >
-    ☰ Categorías
-  </button>
-
-</section>
 
             {/* CATEGORÍAS */}
 
