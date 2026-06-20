@@ -50,13 +50,17 @@ export default function FerreteriaPage() {
 
       <div className="bg-black text-white text-sm py-2 px-6">
 
-        <div className="max-w-7xl mx-auto flex justify-between">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center md:justify-between text-center gap-2">
 
-          <p>📞 Atención al cliente: 921 883 870</p>
+  <p className="w-full md:w-auto">
+    📞 Atención al cliente: 921 883 870
+  </p>
 
-          <p>🚚 Delivery a todo Lima</p>
+  <p className="w-full md:w-auto">
+    🚚 Delivery a todo Lima
+  </p>
 
-        </div>
+</div>
 
       </div>
 
