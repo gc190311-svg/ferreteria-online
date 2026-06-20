@@ -9,6 +9,7 @@ export default function FerreteriaPage() {
   const [productos, setProductos] = useState([]);
   const [busqueda, setBusqueda] = useState("");
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("Todos");
+  const [mostrarCategorias, setMostrarCategorias] = useState(false);
 
   useEffect(() => {
     cargarProductos();
@@ -163,42 +164,74 @@ export default function FerreteriaPage() {
         </div>
 
       </section>
+      
+      <section className="max-w-7xl mx-auto px-4 py-6">
+
+  <button
+    onClick={() => setMostrarCategorias(!mostrarCategorias)}
+    className="bg-black text-white px-6 py-3 rounded-2xl font-bold shadow-lg"
+  >
+    ☰ Categorías
+  </button>
+
+</section>
 
             {/* CATEGORÍAS */}
 
-      <section className="max-w-7xl mx-auto px-6 py-14">
+      {mostrarCategorias && (
 
-        <h3 className="text-4xl font-bold mb-10">
-          Categorías
-        </h3>
+<div className="fixed top-0 left-0 h-full w-72 bg-white shadow-2xl z-50 p-6 overflow-y-auto">
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+  <div className="flex justify-between items-center mb-8">
 
-          {[
-            "Todos",
-            "Herramientas",
-            "Construcción",
-            "Electricidad",
-            "Pintura",
-            "Gasfitería",
-          ].map((categoria, index) => (
+    <h3 className="text-2xl font-bold">
+      Categorías
+    </h3>
 
-            <button
-              key={index}
-              onClick={() => setCategoriaSeleccionada(categoria)}
-              className={`rounded-2xl shadow p-6 text-center font-bold transition hover:-translate-y-1
-              ${
-                categoriaSeleccionada === categoria
-                  ? "bg-black text-white"
-                  : "bg-white hover:shadow-xl"
-              }`}
-            >
-              {categoria}
-            </button>
+    <button
+      onClick={() => setMostrarCategorias(false)}
+      className="text-2xl font-bold"
+    >
+      ×
+    </button>
 
-          ))}
+  </div>
 
-        </div>
+  {[
+    "Todos",
+    "Herramientas",
+    "Construcción",
+    "Electricidad",
+    "Pintura",
+    "Gasfitería",
+  ].map((categoria, index) => (
+
+    <button
+      key={index}
+      onClick={() => {
+        setCategoriaSeleccionada(categoria);
+        setMostrarCategorias(false);
+      }}
+      className={`w-full text-left p-4 rounded-xl mb-3 font-bold transition
+      ${
+        categoriaSeleccionada === categoria
+          ? "bg-black text-white"
+          : "bg-gray-100 hover:bg-yellow-400"
+      }`}
+    >
+      {categoria === "Herramientas" && "🔧 "}
+      {categoria === "Construcción" && "🧱 "}
+      {categoria === "Electricidad" && "⚡ "}
+      {categoria === "Pintura" && "🎨 "}
+      {categoria === "Gasfitería" && "🚿 "}
+      {categoria}
+    </button>
+
+  ))}
+
+</div>
+
+)}
 
       </section>
 
