@@ -31,15 +31,15 @@ export default function FerreteriaPage() {
   };
 
   const productosFiltrados = productos.filter((producto) =>
-  producto.nombre?.toLowerCase().includes(busqueda.toLowerCase())
-);
+    producto.nombre?.toLowerCase().includes(busqueda.toLowerCase())
+  );
 
-const productosPorCategoria =
-  categoriaSeleccionada === "Todos"
-    ? productosFiltrados
-    : productosFiltrados.filter(
-        (producto) => producto.categoria === categoriaSeleccionada
-      );
+  const productosPorCategoria =
+    categoriaSeleccionada === "Todos"
+      ? productosFiltrados
+      : productosFiltrados.filter(
+          (producto) => producto.categoria === categoriaSeleccionada
+        );
 
   return (
 
@@ -48,6 +48,7 @@ const productosPorCategoria =
       {/* BARRA SUPERIOR */}
 
       <div className="bg-black text-white text-sm py-2 px-6">
+
         <div className="max-w-7xl mx-auto flex justify-between">
 
           <p>📞 Atención al cliente: 921 883 870</p>
@@ -55,6 +56,7 @@ const productosPorCategoria =
           <p>🚚 Delivery a todo Lima</p>
 
         </div>
+
       </div>
 
       {/* HEADER */}
@@ -67,13 +69,13 @@ const productosPorCategoria =
 
           <div className="flex items-center overflow-hidden w-52 h-20">
 
-  <img
-    src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
-    alt="Logo"
-    className="w-full h-full object-contain scale-200"
-  />
+            <img
+              src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
+              alt="Logo"
+              className="w-full h-full object-contain scale-200"
+            />
 
-</div>
+          </div>
 
           {/* BUSCADOR */}
 
@@ -89,7 +91,7 @@ const productosPorCategoria =
 
           </div>
 
-          {/* BOTONES */}
+          {/* MENÚ */}
 
           <div className="hidden md:flex gap-6 text-sm font-semibold">
 
@@ -156,8 +158,7 @@ const productosPorCategoria =
         </div>
 
       </section>
-
-      {/* CATEGORÍAS */}
+            {/* CATEGORÍAS */}
 
       <section className="max-w-7xl mx-auto px-6 py-14">
 
@@ -176,13 +177,18 @@ const productosPorCategoria =
             "Gasfitería",
           ].map((categoria, index) => (
 
-          <button
-            key={index}
-            onClick={() => setCategoriaSeleccionada(categoria)}
-            className="bg-white rounded-2xl shadow hover:shadow-xl transition p-8 text-center font-bold text-lg hover:-translate-y-1"
-              >
-          {categoria}
-          </button>
+            <button
+              key={index}
+              onClick={() => setCategoriaSeleccionada(categoria)}
+              className={`rounded-2xl shadow p-8 text-center font-bold text-lg transition hover:-translate-y-1
+              ${
+                categoriaSeleccionada === categoria
+                  ? "bg-black text-white"
+                  : "bg-white hover:shadow-xl"
+              }`}
+            >
+              {categoria}
+            </button>
 
           ))}
 
@@ -203,33 +209,31 @@ const productosPorCategoria =
             Productos
           </h3>
 
-         <p className="text-gray-500">
-  {productosPorCategoria.length} productos
-</p>
+          <p className="text-gray-500">
+            {productosPorCategoria.length} productos
+          </p>
 
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
 
-  {productosPorCategoria.map((producto) => (
+          {productosPorCategoria.map((producto) => (
 
-    <a
-      href={`/producto/${producto.id}`}
-      key={producto.id}
-      className="bg-white rounded-3xl shadow hover:shadow-2xl overflow-hidden transition hover:-translate-y-2"
-    >
+            <a
+              href={`/producto/${producto.id}`}
+              key={producto.id}
+              className="bg-white rounded-3xl shadow hover:shadow-2xl overflow-hidden transition hover:-translate-y-2"
+            >
 
               {/* IMAGEN */}
 
               <div className="bg-gray-100 h-72 flex items-center justify-center p-6">
-                
-            <img
-               src={
+
+                <img
+                  src={
                     producto.imagenes?.[0] ||
-                    producto.imagen?.[0] ||
-                    producto.imagen ||
-                   "/sin-imagen.png"
-                }
+                    "/sin-imagen.png"
+                  }
                   alt={producto.nombre}
                   className="max-h-60 object-contain hover:scale-105 transition duration-300"
                 />
@@ -245,24 +249,30 @@ const productosPorCategoria =
                 </h4>
 
                 {producto.oferta ? (
-               <div className="mt-4">
-               <p className="text-gray-400 line-through text-lg">
-               S/ {producto.precio}
-               </p>
 
-            <p className="text-green-600 font-bold text-2xl">
-            S/ {producto.oferta}
-             </p>
+                  <div className="mt-4">
 
-            <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
-            OFERTA
-           </span>
-         </div>
-         ) : (
-         <p className="text-green-600 font-bold text-2xl">
-         S/ {producto.precio}
-        </p>
-          )}
+                    <p className="text-gray-400 line-through text-lg">
+                      S/ {producto.precio}
+                    </p>
+
+                    <p className="text-green-600 font-bold text-2xl">
+                      S/ {producto.oferta}
+                    </p>
+
+                    <span className="bg-red-500 text-white text-xs px-2 py-1 rounded">
+                      OFERTA
+                    </span>
+
+                  </div>
+
+                ) : (
+
+                  <p className="text-green-600 font-bold text-2xl mt-4">
+                    S/ {producto.precio}
+                  </p>
+
+                )}
 
                 <div className="mt-6">
 
@@ -273,20 +283,22 @@ const productosPorCategoria =
                 </div>
 
               </div>
-              </div>
+
             </a>
 
           ))}
 
         </div>
 
-      </section>
+      </section> 
 
-      {/* FOOTER */}
+            {/* FOOTER */}
 
       <footer className="bg-black text-white py-10">
 
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10">
+
+          {/* EMPRESA */}
 
           <div>
 
@@ -295,10 +307,12 @@ const productosPorCategoria =
             </h4>
 
             <p className="mt-4 text-gray-400">
-              Tu tienda online de herramientas y materiales.
+              Tu tienda online de herramientas y materiales para construcción, electricidad, pintura y gasfitería.
             </p>
 
           </div>
+
+          {/* CONTACTO */}
 
           <div>
 
@@ -307,20 +321,32 @@ const productosPorCategoria =
             </h5>
 
             <p>📞 921 883 870</p>
+
             <p>📍 Lima, Perú</p>
 
+            <p>📧 ventas@bricohogarperu.com</p>
+
           </div>
+
+          {/* HORARIO */}
 
           <div>
 
             <h5 className="font-bold mb-4">
-              Horarios
+              Horario de Atención
             </h5>
 
             <p>Lunes a Sábado</p>
+
             <p>8:00 am - 7:00 pm</p>
 
           </div>
+
+        </div>
+
+        <div className="border-t border-gray-700 mt-10 pt-6 text-center text-sm text-gray-400">
+
+          © 2026 BRICO HOGAR PERÚ. Todos los derechos reservados.
 
         </div>
 
@@ -329,4 +355,5 @@ const productosPorCategoria =
     </div>
 
   );
+
 }
