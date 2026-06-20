@@ -28,6 +28,7 @@ export default function FerreteriaPage() {
     });
 
     setProductos(lista);
+
   };
 
   const productosFiltrados = productos.filter((producto) =>
@@ -63,11 +64,11 @@ export default function FerreteriaPage() {
 
       <header className="bg-white shadow sticky top-0 z-50">
 
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-4 py-4">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 px-4 py-4">
 
           {/* LOGO */}
 
-          <div className="flex items-center overflow-hidden w-36 md:w-52 h-20">
+          <div className="flex items-center overflow-hidden w-40 md:w-52 h-20">
 
             <img
               src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
@@ -79,11 +80,11 @@ export default function FerreteriaPage() {
 
           {/* BUSCADOR */}
 
-          <div className="w-full md:flex-1">
+          <div className="w-full lg:flex-1">
 
             <input
               type="text"
-              placeholder="Buscar productos..."'
+              placeholder="Buscar productos..."
               value={busqueda}
               onChange={(e) => setBusqueda(e.target.value)}
               className="w-full border border-gray-300 rounded-2xl px-5 py-3 outline-none focus:border-black"
@@ -94,20 +95,20 @@ export default function FerreteriaPage() {
           {/* MENÚ */}
 
           <div className="flex flex-wrap justify-center gap-4 text-sm font-semibold">
-            
-            <a href="#" className="hover:text-yellow-500 transition"> 
+
+            <a href="#">
               Inicio
             </a>
 
-            <a href="#productos" className="hover:text-yellow-500 transition">
+            <a href="#productos">
               Productos
             </a>
 
-            <a href="#" className="hover:text-yellow-500 transition">
+            <a href="#">
               Ofertas
             </a>
 
-            <a href="#" className="hover:text-yellow-500 transition">
+            <a href="#">
               Contacto
             </a>
 
@@ -121,11 +122,11 @@ export default function FerreteriaPage() {
 
       <section className="bg-gradient-to-r from-black to-blue-950 text-white">
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 px-6 py-16 items-center">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 px-6 py-16 items-center">
 
           <div>
 
-            <h2 className="text-4xl md:text-6xl font-extrabold leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
               Todo lo que necesitas
               <br />
               para tu obra
@@ -138,7 +139,7 @@ export default function FerreteriaPage() {
 
             <a
               href="#productos"
-              className="inline-block mt-8 bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-8 py-4 rounded-2xl transition"
+              className="inline-block mt-8 bg-yellow-500 hover:bg-yellow-400 text-black font-bold px-8 py-4 rounded-2xl"
             >
               Ver Productos
             </a>
@@ -158,6 +159,7 @@ export default function FerreteriaPage() {
         </div>
 
       </section>
+
             {/* CATEGORÍAS */}
 
       <section className="max-w-7xl mx-auto px-6 py-14">
@@ -166,7 +168,7 @@ export default function FerreteriaPage() {
           Categorías
         </h3>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
 
           {[
             "Todos",
@@ -180,7 +182,7 @@ export default function FerreteriaPage() {
             <button
               key={index}
               onClick={() => setCategoriaSeleccionada(categoria)}
-              className={`rounded-2xl shadow p-8 text-center font-bold text-lg transition hover:-translate-y-1
+              className={`rounded-2xl shadow p-6 text-center font-bold transition hover:-translate-y-1
               ${
                 categoriaSeleccionada === categoria
                   ? "bg-black text-white"
@@ -215,7 +217,7 @@ export default function FerreteriaPage() {
 
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-8">
 
           {productosPorCategoria.map((producto) => (
 
@@ -232,6 +234,8 @@ export default function FerreteriaPage() {
                 <img
                   src={
                     producto.imagenes?.[0] ||
+                    producto.imagen?.[0] ||
+                    producto.imagen ||
                     "/sin-imagen.png"
                   }
                   alt={producto.nombre}
@@ -240,11 +244,11 @@ export default function FerreteriaPage() {
 
               </div>
 
-              {/* INFO */}
+              {/* INFORMACIÓN */}
 
               <div className="p-6">
 
-                <h4 className="text-xl font-bold min-h-[60px]">
+                <h4 className="text-xl font-bold min-h-[70px]">
                   {producto.nombre}
                 </h4>
 
@@ -256,7 +260,7 @@ export default function FerreteriaPage() {
                       S/ {producto.precio}
                     </p>
 
-                    <p className="text-green-600 font-bold text-2xl">
+                    <p className="text-green-600 font-bold text-3xl">
                       S/ {producto.oferta}
                     </p>
 
@@ -268,7 +272,7 @@ export default function FerreteriaPage() {
 
                 ) : (
 
-                  <p className="text-green-600 font-bold text-2xl mt-4">
+                  <p className="mt-4 text-green-600 font-bold text-3xl">
                     S/ {producto.precio}
                   </p>
 
@@ -277,7 +281,9 @@ export default function FerreteriaPage() {
                 <div className="mt-6">
 
                   <button className="w-full bg-black hover:bg-gray-800 text-white py-3 rounded-2xl font-semibold transition">
+
                     Ver Producto
+
                   </button>
 
                 </div>
@@ -290,13 +296,13 @@ export default function FerreteriaPage() {
 
         </div>
 
-      </section> 
+      </section>
 
             {/* FOOTER */}
 
       <footer className="bg-black text-white py-10">
 
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
 
           {/* EMPRESA */}
 
@@ -307,7 +313,8 @@ export default function FerreteriaPage() {
             </h4>
 
             <p className="mt-4 text-gray-400">
-              Tu tienda online de herramientas y materiales para construcción, electricidad, pintura y gasfitería.
+              Tu tienda online de herramientas, materiales de construcción,
+              electricidad, pintura y gasfitería.
             </p>
 
           </div>
@@ -351,6 +358,26 @@ export default function FerreteriaPage() {
         </div>
 
       </footer>
+
+      {/* BOTÓN FLOTANTE WHATSAPP */}
+
+      <a
+        href="https://wa.me/51921883870"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-2xl z-50 transition"
+      >
+
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-8 h-8"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M20.52 3.48A11.79 11.79 0 0 0 12.05 0C5.54 0 .24 5.3.24 11.82c0 2.08.54 4.1 1.57 5.88L0 24l6.47-1.7a11.75 11.75 0 0 0 5.58 1.42h.01c6.51 0 11.81-5.3 11.81-11.82 0-3.16-1.23-6.13-3.35-8.42ZM12.06 21.7h-.01a9.8 9.8 0 0 1-4.99-1.36l-.36-.21-3.84 1.01 1.03-3.75-.24-.39a9.82 9.82 0 1 1 8.41 4.7Zm5.39-7.36c-.29-.15-1.7-.84-1.96-.94-.26-.1-.45-.15-.64.15-.19.29-.73.94-.9 1.13-.16.19-.33.22-.62.07-.29-.15-1.21-.45-2.31-1.44-.85-.76-1.42-1.7-1.59-1.99-.17-.29-.02-.45.13-.6.13-.13.29-.33.44-.49.15-.16.19-.29.29-.49.1-.19.05-.36-.02-.51-.08-.15-.64-1.54-.88-2.11-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.49.07-.75.36-.26.29-.98.96-.98 2.33s1.01 2.69 1.15 2.88c.15.19 1.98 3.02 4.8 4.24.67.29 1.2.46 1.61.59.68.22 1.3.19 1.79.11.55-.08 1.7-.69 1.94-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.34Z" />
+        </svg>
+
+      </a>
 
     </div>
 
