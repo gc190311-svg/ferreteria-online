@@ -12,93 +12,89 @@ export default function Header() {
 
       <div className="max-w-7xl mx-auto px-6 py-5">
 
-        <div className="flex items-center">
+<div className="flex items-center justify-between">
 
-          {/* LOGO */}
-          <div className="w-[130px] flex-shrink-0">
+  {/* LOGO */}
+  <div className="w-[130px] flex-shrink-0">
 
-            <img
-              src="/logo.png"
-              alt="Brico Hogar"
-              className="w-full object-contain"
-            />
+    <img
+      src="/logo.png"
+      alt="Brico Hogar"
+      className="w-full object-contain"
+    />
 
-          </div>
+  </div>
 
-          {/* BUSCADOR */}
-          <div className="flex flex-1 justify-center px-20">
+  {/* BUSCADOR */}
+  <div className="flex w-full max-w-[700px] mx-auto">
 
-            <div className="flex w-full max-w-[650px]">
+    <input
+      type="text"
+      placeholder="Buscar productos..."
+      className="
+      flex-1
+      h-12
+      px-6
+      text-lg
+      text-black
+      bg-white
+      rounded-l-xl
+      outline-none
+      "
+    />
 
-              <input
-                type="text"
-                placeholder="Buscar productos..."
-                className="
-                  flex-1
-                  h-12
-                  px-6
-                  text-lg
-                  text-black
-                  bg-white
-                  rounded-l-xl
-                  outline-none
-                "
-              />
+    <button
+      className="
+      bg-yellow-500
+      hover:bg-yellow-400
+      text-black
+      font-bold
+      px-8
+      rounded-r-xl
+      flex
+      items-center
+      gap-2
+      "
+    >
 
-              <button
-                className="
-                  bg-yellow-500
-                  hover:bg-yellow-400
-                  text-black
-                  font-bold
-                  px-8
-                  rounded-r-xl
-                  flex
-                  items-center
-                  gap-2
-                  transition
-                "
-              >
-                <FaSearch />
+      <FaSearch />
 
-                Buscar
+      Buscar
 
-              </button>
+    </button>
 
-            </div>
+  </div>
 
-          </div>
+  {/* ICONOS */}
+  <div className="flex items-center gap-14 text-white">
 
-          {/* ICONOS */}
-          <div className="flex items-center gap-10 ml-auto text-white">
+    <div className="flex flex-col items-center">
 
-            <div className="flex flex-col items-center">
+      <FaUser className="text-2xl" />
 
-              <FaUser className="text-2xl" />
+      <span className="text-sm">
 
-              <span className="text-sm">
+        Mi cuenta
 
-                Mi cuenta
+      </span>
 
-              </span>
+    </div>
 
-            </div>
+    <div className="flex flex-col items-center">
 
-            <div className="flex flex-col items-center">
+      <FaShoppingCart className="text-2xl" />
 
-              <FaShoppingCart className="text-2xl" />
+      <span className="text-sm">
 
-              <span className="text-sm">
+        Carrito
 
-                Carrito
+      </span>
 
-              </span>
+    </div>
 
-            </div>
+  </div>
 
-          </div>
-
-        </div>
+</div>
 
       </div>
 
