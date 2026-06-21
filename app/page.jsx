@@ -3,7 +3,6 @@
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
-import SidebarCategorias from "../components/SidebarCategorias";
 import Hero from "../components/Hero";
 import Servicios from "../components/Servicios";
 import Productos from "../components/Productos";
@@ -19,7 +18,6 @@ export default function Home() {
       <TopBar />
       <Header />
       <Navbar />
-      <SidebarCategorias />
       <Hero />
       <Servicios />
       <Productos />
