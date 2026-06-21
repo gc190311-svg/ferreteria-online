@@ -19,7 +19,6 @@ export default function Home() {
       <TopBar />
       <Header />
       <Navbar />
-      
       <Hero />
       <Servicios />
       <Productos />
