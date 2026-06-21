@@ -4,21 +4,19 @@ export default function Header() {
 
   return (
 
-    <header className="bg-white shadow">
+    <header className="bg-black">
 
-      <div className="max-w-7xl mx-auto px-6 py-5">
+      <div className="max-w-7xl mx-auto px-6 py-8">
 
-        {/* FILA SUPERIOR */}
-
-        <div className="flex flex-col lg:flex-row items-center gap-6">
+        <div className="flex flex-col lg:flex-row items-center gap-8">
 
           {/* LOGO */}
 
-          <div className="w-48">
+          <div className="w-72 flex justify-center">
 
             <img
               src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
-              alt="BRICO HOGAR"
+              alt="Brico Hogar Perú"
               className="w-full object-contain"
             />
 
@@ -28,65 +26,43 @@ export default function Header() {
 
           <div className="flex-1 w-full">
 
-            <input
-              type="text"
-              placeholder="Buscar productos..."
-              className="w-full border-2 border-gray-300 rounded-2xl px-6 py-4 outline-none focus:border-yellow-500"
-            />
+            <div className="flex">
+
+              <input
+                type="text"
+                placeholder="Buscar productos..."
+                className="w-full px-6 py-4 rounded-l-2xl border-2 border-yellow-500 bg-black text-white outline-none"
+              />
+
+              <button
+                className="bg-yellow-500 hover:bg-yellow-400 text-black px-8 rounded-r-2xl font-bold transition"
+              >
+
+                Buscar
+
+              </button>
+
+            </div>
 
           </div>
 
           {/* ICONOS */}
 
-          <div className="flex gap-6 text-3xl">
+          <div className="flex gap-8 text-3xl text-white">
 
-            <button className="hover:scale-110 transition">
+            <button className="hover:text-yellow-500 transition">
 
               👤
 
             </button>
 
-            <button className="hover:scale-110 transition">
+            <button className="hover:text-yellow-500 transition">
 
               🛒
 
             </button>
 
           </div>
-
-        </div>
-
-        {/* MENÚ */}
-
-        <div className="flex flex-wrap justify-center gap-8 mt-8 font-semibold">
-
-          <a
-            href="/"
-            className="hover:text-yellow-500 transition"
-          >
-            Inicio
-          </a>
-
-          <a
-            href="#productos"
-            className="hover:text-yellow-500 transition"
-          >
-            Productos
-          </a>
-
-          <a
-            href="#ofertas"
-            className="hover:text-yellow-500 transition"
-          >
-            Ofertas
-          </a>
-
-          <a
-            href="#contacto"
-            className="hover:text-yellow-500 transition"
-          >
-            Contacto
-          </a>
 
         </div>
 
