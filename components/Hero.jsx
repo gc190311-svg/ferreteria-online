@@ -4,25 +4,23 @@ export default function Hero() {
 
       <div className="max-w-7xl mx-auto px-8 py-24">
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-20 items-center">
 
           {/* TEXTO */}
 
           <div>
 
-            <h1 className="text-6xl lg:text-7xl font-extrabold leading-tight">
+            <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight">
 
               Todo lo que
               <br />
-
               necesitas
               <br />
-
               para tu obra
 
             </h1>
 
-            <p className="mt-8 text-2xl text-gray-300 leading-relaxed">
+            <p className="mt-8 text-2xl text-gray-300">
 
               Herramientas, electricidad,
               construcción, pintura,
@@ -30,42 +28,38 @@ export default function Hero() {
 
             </p>
 
-            <div className="mt-10">
-
-              <a
-                href="#productos"
-                className="
-                inline-block
-                bg-yellow-500
-                hover:bg-yellow-400
-                text-black
-                font-bold
-                text-xl
-                px-10
-                py-5
-                rounded-2xl
-                transition
-                "
-              >
-                Ver Productos
-              </a>
-
-            </div>
+            <button
+              className="
+              mt-10
+              bg-yellow-500
+              hover:bg-yellow-400
+              text-black
+              font-bold
+              text-xl
+              px-10
+              py-5
+              rounded-2xl
+              transition
+              "
+            >
+              Ver Productos
+            </button>
 
           </div>
 
           {/* IMAGEN */}
 
-          <div>
+          <div className="flex justify-center">
 
             <img
               src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200"
               alt="Construcción"
               className="
-              w-full
-              rounded-3xl
-              shadow-2xl
-              object-cover
+                w-[600px]
+                h-[400px]
+                object-cover
+                rounded-3xl
+                shadow-2xl
               "
             />
 
