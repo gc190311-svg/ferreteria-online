@@ -1,6 +1,10 @@
 "use client";
 
-import { FaUser, FaShoppingCart } from "react-icons/fa";
+import {
+  FaSearch,
+  FaUser,
+  FaShoppingCart
+} from "react-icons/fa";
 
 export default function Header() {
   return (
@@ -11,6 +15,7 @@ export default function Header() {
         <div className="flex items-center">
 
           {/* LOGO */}
+
           <div className="w-[180px] flex justify-start">
 
             <img
@@ -22,6 +27,7 @@ export default function Header() {
           </div>
 
           {/* BUSCADOR */}
+
           <div className="flex-1 flex justify-center">
 
             <div className="flex w-full max-w-[700px]">
@@ -33,9 +39,9 @@ export default function Header() {
                   flex-1
                   h-14
                   px-6
+                  text-lg
                   bg-white
                   text-black
-                  text-lg
                   rounded-l-xl
                   outline-none
                 "
@@ -49,8 +55,13 @@ export default function Header() {
                   font-bold
                   px-8
                   rounded-r-xl
+                  flex
+                  items-center
+                  gap-2
+                  transition
                 "
               >
+                <FaSearch />
                 Buscar
               </button>
 
@@ -59,9 +70,10 @@ export default function Header() {
           </div>
 
           {/* ICONOS */}
+
           <div className="w-[180px] flex justify-end gap-10 text-white">
 
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
 
               <FaUser className="text-2xl" />
 
@@ -71,7 +83,7 @@ export default function Header() {
 
             </div>
 
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
 
               <FaShoppingCart className="text-2xl" />
 
@@ -90,3 +102,6 @@ export default function Header() {
     </header>
   );
 }
+        
+              
+       
