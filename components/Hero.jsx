@@ -1,11 +1,18 @@
 export default function Hero() {
   return (
-    <section className="bg-red-600 h-[500px] flex items-center justify-center">
-
-      <h1 className="text-7xl font-bold text-white">
-        HERO FUNCIONANDO
-      </h1>
-
-    </section>
+    <div
+      style={{
+        backgroundColor: "red",
+        height: "500px",
+        color: "yellow",
+        fontSize: "60px",
+        fontWeight: "bold",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center"
+      }}
+    >
+      HERO FUNCIONANDO
+    </div>
   );
 }
