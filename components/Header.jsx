@@ -4,9 +4,9 @@ import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
 
 export default function Header() {
   return (
-    <header className="bg-black">
+   <header className="bg-black py-4">
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-6">
 
         <div className="flex items-center gap-8">
 
@@ -24,7 +24,7 @@ export default function Header() {
 
           {/* BUSCADOR */}
 
-          <div className="flex flex-1 max-w-[900px]">
+        <div className="flex flex-1 max-w-[750px] mx-10">
 
             <input
               type="text"
