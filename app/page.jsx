@@ -19,7 +19,7 @@ export default function Home() {
       <TopBar />
       <Header />
       <Navbar />
-      <SidebarCategorias />
+      
       <Hero />
       <Servicios />
       <Productos />
