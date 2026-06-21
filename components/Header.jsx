@@ -12,7 +12,7 @@ export default function Header() {
 
           {/* LOGO */}
 
-          <div className="w-[220px] shrink-0">
+          <div className="w-[140px] shrink-0">
 
             <img
               src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
@@ -24,12 +24,12 @@ export default function Header() {
 
           {/* BUSCADOR */}
 
-          <div className="flex flex-1 max-w-[780px]">
+          <div className="flex flex-1 max-w-[900px]">
 
             <input
               type="text"
               placeholder="Buscar productos..."
-              className="flex-1 h-16 px-8 text-lg bg-white text-black rounded-l-xl outline-none"
+              className="flex-1 h-14 px-6 text-lg bg-white text-black rounded-l-xl outline-none"
             />
 
             <button className="bg-yellow-500 hover:bg-yellow-400 text-black px-10 rounded-r-xl font-bold text-xl flex items-center gap-3 transition">
