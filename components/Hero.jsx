@@ -1,8 +1,8 @@
 export default function Hero() {
   return (
-    <section className="bg-gradient-to-r from-black to-blue-950 text-white">
+    <section className="bg-gradient-to-r from-black to-blue-900 text-white">
 
-      <div className="max-w-7xl mx-auto px-8 py-24">
+      <div className="max-w-7xl mx-auto px-8 py-20">
 
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -53,7 +53,7 @@ export default function Hero() {
           <div>
 
             <img
-              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd"
+              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200"
               alt="Construcción"
               className="
                 w-full
