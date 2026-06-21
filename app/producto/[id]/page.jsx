@@ -5,14 +5,17 @@ import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 
 export default function ProductoDetalle({ params }) {
+
   const [producto, setProducto] = useState(null);
   const [imagenActiva, setImagenActiva] = useState(0);
+  const [cantidad, setCantidad] = useState(1);
 
   useEffect(() => {
     cargarProducto();
   }, []);
 
   const cargarProducto = async () => {
+
     const docRef = doc(db, "productos", params.id);
     const docSnap = await getDoc(docRef);
 
@@ -29,103 +32,211 @@ export default function ProductoDetalle({ params }) {
     );
   }
 
-    return (
-  <div className="min-h-screen bg-gray-100 p-10">
+  return (
 
-    <div className="max-w-4xl mx-auto mb-6">
-      <a
-        href="/"
-        className="inline-block bg-black hover:bg-gray-800 text-white px-6 py-3 rounded-xl transition"
-      >
-        ← Volver al inicio
-      </a>
-    </div>
-    
-      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
-        
-       <div className="bg-white p-6 rounded-t-2xl">
+<div className="min-h-screen bg-gray-100 py-10 px-4">
 
-  {/* Imagen principal */}
+<div className="max-w-7xl mx-auto">
 
-  <div className="border rounded-2xl bg-gray-50 p-6 flex items-center justify-center">
+<a
+href="/"
+className="inline-block bg-black text-white px-6 py-3 rounded-xl mb-8 hover:bg-gray-800"
+>
+← Volver al inicio
+</a>
 
-    <img
-      src={producto.imagenes?.[imagenActiva]}
-      alt={producto.nombre}
-      className="max-h-[500px] object-contain"
-    />
+<div className="bg-white rounded-3xl shadow-lg p-8">
 
-  </div>
+<div className="grid lg:grid-cols-3 gap-10">
 
-  {/* Miniaturas */}
+  {/* MINIATURAS */}
 
-  <div className="flex gap-4 mt-4 overflow-x-auto">
+<div className="order-2 lg:order-1">
 
-    {producto.imagenes?.map((img, index) => (
+<div className="flex lg:flex-col gap-4 overflow-x-auto">
 
-      <button
-        key={index}
-        onClick={() => setImagenActiva(index)}
-        className={`border-2 rounded-xl p-2 min-w-[90px] bg-white ${
-          imagenActiva === index
-            ? "border-blue-500"
-            : "border-gray-200"
-        }`}
-      >
+{producto.imagenes?.map((img,index)=>(
 
-        <img
-          src={img}
-          alt="miniatura"
-          className="h-20 w-20 object-contain"
-        />
+<button
+key={index}
+onClick={()=>setImagenActiva(index)}
+className={`border-2 rounded-xl p-2 bg-white
 
-      </button>
+${imagenActiva===index
+? "border-blue-500"
+: "border-gray-200"
+}`}
 
-    ))}
+>
 
-  </div>
+<img
+src={img}
+alt=""
+className="h-20 w-20 object-contain"
+/>
+
+</button>
+
+))}
 
 </div>
 
-        <div className="p-8">
-          <h1 className="text-4xl font-bold">
-            {producto.nombre}
-          </h1>
+</div>
 
-          <p className="text-gray-600 mt-4 text-lg whitespace-pre-line leading-8">
-  {producto.descripcion}
+{/* IMAGEN PRINCIPAL */}
+
+<div className="order-1 lg:order-2 flex items-center justify-center">
+
+<img
+src={producto.imagenes?.[imagenActiva]}
+alt={producto.nombre}
+className="max-h-[600px] object-contain"
+/>
+
+</div>
+
+{/* INFORMACIÓN */}
+
+<div className="order-3">
+
+<p className="text-gray-500 mb-2">
+
+{producto.categoria}
+
 </p>
 
-          {producto.oferta ? (
-  <div>
-    <p className="text-gray-400 line-through text-lg">
-      S/ {producto.precio}
-    </p>
+<h1 className="text-3xl font-bold">
 
-    <p className="text-green-600 font-bold text-3xl">
-      S/ {producto.oferta}
-    </p>
+{producto.nombre}
 
-    <span className="bg-red-500 text-white px-2 py-1 rounded text-xs">
-      OFERTA
-    </span>
-  </div>
+</h1>
+
+<div className="text-yellow-500 text-xl mt-3">
+
+★★★★★
+
+</div>
+
+<div className="mt-8">
+
+{producto.oferta ? (
+
+<div>
+
+<p className="text-gray-400 line-through text-xl">
+
+S/ {producto.precio}
+
+</p>
+
+<p className="text-green-600 font-bold text-5xl">
+
+S/ {producto.oferta}
+
+</p>
+
+<span className="bg-red-500 text-white px-3 py-1 rounded">
+
+OFERTA
+
+</span>
+
+</div>
+
 ) : (
-  <p className="text-green-600 font-bold text-3xl">
-    S/ {producto.precio}
-  </p>
+
+<p className="text-green-600 font-bold text-5xl">
+
+S/ {producto.precio}
+
+</p>
+
 )}
-          <a
-            href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
-            target="_blank"
-            className="block mt-8 bg-black hover:bg-gray-800 text-white text-center py-4 rounded-xl"
-          >
-            Pedir por WhatsApp
-          </a>
-        </div>
+  </div>
 
-      </div>
-    </div>
-  );
+<div className="flex items-center gap-5 mt-8">
+
+<button
+onClick={() =>
+setCantidad(cantidad > 1 ? cantidad - 1 : 1)
 }
+className="border w-12 h-12 rounded-xl"
+>
+-
+</button>
 
+<div className="text-2xl">
+
+{cantidad}
+
+</div>
+
+<button
+onClick={() => setCantidad(cantidad + 1)}
+className="border w-12 h-12 rounded-xl"
+>
++
+</button>
+
+</div>
+
+<a
+href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
+target="_blank"
+className="block mt-8 bg-blue-600 hover:bg-blue-700 text-white text-center py-4 rounded-xl text-xl font-bold"
+>
+
+Consultar por WhatsApp
+
+</a>
+
+<div className="mt-10">
+
+<h2 className="font-bold text-xl mb-5">
+
+Características
+
+</h2>
+
+<ul className="space-y-3 text-gray-600">
+
+<li>• Categoría: {producto.categoria}</li>
+
+<li>• Marca: {producto.marca}</li>
+
+<li>• Color: {producto.color}</li>
+
+<li>• Material: {producto.material}</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</div>
+
+<hr className="my-12"/>
+
+<h2 className="text-3xl font-bold mb-8">
+
+Descripción
+
+</h2>
+
+<p className="text-gray-600 whitespace-pre-line leading-8">
+
+{producto.descripcion}
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+);
+
+}
+   
