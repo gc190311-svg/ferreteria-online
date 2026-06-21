@@ -16,19 +16,12 @@ export default function Home() {
     <div className="min-h-screen bg-gray-100">
 
       <TopBar />
-
       <Header />
-
       <SidebarCategorias />
-
       <Hero />
-
       <Servicios />
-
       <Productos />
-
       <Footer />
-
       <WhatsAppButton />
 
     </div>
