@@ -12,7 +12,7 @@ export default function Header() {
 
           {/* LOGO */}
 
-          <div className="w-[90px] shrink-0">
+          <div className="w-[50px] shrink-0">
 
             <img
               src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
