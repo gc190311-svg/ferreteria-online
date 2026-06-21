@@ -16,10 +16,7 @@ export default function Home() {
       <Header />
       <Navbar />
       <Hero />
-      <Servicios />
-      <Productos />
-      <Footer />
-      <WhatsAppButton />
+    
 
     </div>
 
