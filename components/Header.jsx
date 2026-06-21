@@ -1,75 +1,59 @@
-"use client";
+import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
 
 export default function Header() {
-
   return (
+    <header className="bg-black border-t border-gray-800">
+      <div className="max-w-7xl mx-auto px-6 py-6">
 
-    <header className="bg-black">
-
-      <div className="max-w-7xl mx-auto px-6 py-8">
-
-        <div className="flex flex-col lg:flex-row items-center gap-8">
+        <div className="flex items-center justify-between gap-8">
 
           {/* LOGO */}
-
-          <div className="w-72 flex justify-center">
-
+          <div className="w-[220px] shrink-0">
             <img
               src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
-              alt="Brico Hogar Perú"
+              alt="Brico Hogar"
               className="w-full object-contain"
             />
-
           </div>
 
           {/* BUSCADOR */}
+          <div className="flex-1 flex max-w-[760px]">
 
-          <div className="flex-1 w-full">
+            <input
+              type="text"
+              placeholder="Buscar productos..."
+              className="flex-1 h-16 px-8 rounded-l-xl text-lg outline-none bg-white text-black"
+            />
 
-            <div className="flex">
+            <button className="bg-yellow-500 hover:bg-yellow-400 px-10 rounded-r-xl flex items-center gap-3 font-bold text-black text-xl transition">
 
-              <input
-                type="text"
-                placeholder="Buscar productos..."
-                className="w-full px-6 py-4 rounded-l-2xl border-2 border-yellow-500 bg-black text-white outline-none"
-              />
+              <FaSearch />
 
-              <button
-                className="bg-yellow-500 hover:bg-yellow-400 text-black px-8 rounded-r-2xl font-bold transition"
-              >
+              Buscar
 
-                Buscar
-
-              </button>
-
-            </div>
+            </button>
 
           </div>
 
           {/* ICONOS */}
+          <div className="flex gap-10 text-white">
 
-          <div className="flex gap-8 text-3xl text-white">
+            <div className="flex flex-col items-center text-sm">
+              <FaUser className="text-3xl mb-2" />
+              <span>Mi cuenta</span>
+            </div>
 
-            <button className="hover:text-yellow-500 transition">
-
-              👤
-
-            </button>
-
-            <button className="hover:text-yellow-500 transition">
-
-              🛒
-
-            </button>
+            <div className="flex flex-col items-center text-sm">
+              <FaShoppingCart className="text-3xl mb-2" />
+              <span>Carrito</span>
+            </div>
 
           </div>
 
         </div>
 
       </div>
-
     </header>
-
   );
-
 }
+  
