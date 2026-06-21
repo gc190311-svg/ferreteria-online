@@ -2,6 +2,7 @@
 
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
+import Navbar from "../components/Navbar";
 import SidebarCategorias from "../components/SidebarCategorias";
 import Hero from "../components/Hero";
 import Servicios from "../components/Servicios";
