@@ -1,13 +1,15 @@
 export default function Productos() {
   return (
-    <section className="bg-purple-600 h-[400px] flex items-center justify-center">
-
-      <h1 className="text-6xl font-bold text-white">
-
-        PRODUCTOS NUEVOS
-
-      </h1>
-
-    </section>
+    <div style={{
+      backgroundColor: "purple",
+      height: "400px",
+      color: "white",
+      fontSize: "60px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center"
+    }}>
+      PRODUCTOS NUEVOS
+    </div>
   );
 }
