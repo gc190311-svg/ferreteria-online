@@ -15,7 +15,7 @@ export default function Header() {
           <div className="w-[50px] shrink-0">
 
             <img
-              src="https://i.postimg.cc/m2Zkf2Ym/BRICO-HOGAR-PERU-(1000-x-300-px).png"
+              src="https://i.postimg.cc/fyJPmdn4/BRICO-HOGAR-PERU-(1000-x-300-px)-(52-916-x-52-916-cm)-(Sitio-web).png"
               alt="Brico Hogar"
               className="w-full object-contain"
             />
