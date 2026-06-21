@@ -8,34 +8,40 @@ export default function Navbar() {
 
         {/* BOTÓN CATEGORÍAS */}
 
-        <button
-          className="
-          bg-yellow-500
-          hover:bg-yellow-400
-          text-black
-          font-bold
-          text-lg
-          px-8
-          py-5
-          transition
-          "
-        >
-          ☰ CATEGORÍAS
-        </button>
+        <div className="w-[260px]">
 
-        {/* MENÚ */}
+          <button
+            className="
+            w-full
+            bg-yellow-500
+            hover:bg-yellow-400
+            text-black
+            font-bold
+            text-lg
+            py-5
+            transition
+            "
+          >
+            ☰ CATEGORÍAS
+          </button>
+
+        </div>
+
+        {/* MENÚ CENTRAL */}
 
         <div className="flex-1 flex justify-center">
 
-          <div className="flex gap-16 text-white font-bold text-lg">
+          <div className="flex gap-20">
 
             <a
               href="#"
               className="
+              text-yellow-500
+              font-bold
+              text-lg
               py-5
               border-b-4
               border-yellow-500
-              text-yellow-500
               "
             >
               INICIO
@@ -44,6 +50,9 @@ export default function Navbar() {
             <a
               href="#productos"
               className="
+              text-white
+              font-bold
+              text-lg
               py-5
               hover:text-yellow-500
               transition
@@ -55,6 +64,9 @@ export default function Navbar() {
             <a
               href="#"
               className="
+              text-white
+              font-bold
+              text-lg
               py-5
               hover:text-yellow-500
               transition
@@ -66,6 +78,9 @@ export default function Navbar() {
             <a
               href="#contacto"
               className="
+              text-white
+              font-bold
+              text-lg
               py-5
               hover:text-yellow-500
               transition
