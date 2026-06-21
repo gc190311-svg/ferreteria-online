@@ -1,21 +1,27 @@
 "use client";
 
-import { FaSearch, FaUser, FaShoppingCart } from "react-icons/fa";
+import {
+  FaSearch,
+  FaUser,
+  FaShoppingCart
+} from "react-icons/fa";
 
 export default function Header() {
+
   return (
-   <header className="bg-black py-4">
 
-      <div className="max-w-7xl mx-auto px-6">
+    <header className="bg-black">
 
-        <div className="flex items-center gap-8">
+      <div className="max-w-7xl mx-auto px-6 py-5">
+
+        <div className="flex items-center justify-between gap-8">
 
           {/* LOGO */}
 
-          <div className="w-[120px] shrink-0">
+          <div className="w-[180px] flex-shrink-0">
 
             <img
-              src="https://i.postimg.cc/SQfLfRQd/BRICO-HOGAR-PERU-(1000-x-300-px)-(52-916-x-52-916-cm)-(Sitio-web)-(300-x-200-px).png"
+              src="/logo.png"
               alt="Brico Hogar"
               className="w-full object-contain"
             />
@@ -24,15 +30,36 @@ export default function Header() {
 
           {/* BUSCADOR */}
 
-        <div className="flex flex-1 max-w-[750px] mx-10">
+          <div className="flex flex-1 max-w-[760px]">
 
             <input
               type="text"
               placeholder="Buscar productos..."
-              className="flex-1 h-14 px-6 text-lg bg-white text-black rounded-l-xl outline-none"
+              className="
+              flex-1
+              h-16
+              px-8
+              bg-white
+              text-black
+              text-lg
+              outline-none
+              rounded-l-xl"
             />
 
-            <button className="bg-yellow-500 hover:bg-yellow-400 text-black px-10 rounded-r-xl font-bold text-xl flex items-center gap-3 transition">
+            <button
+              className="
+              bg-yellow-500
+              hover:bg-yellow-400
+              px-10
+              rounded-r-xl
+              font-bold
+              text-black
+              text-xl
+              flex
+              items-center
+              gap-3
+              transition"
+            >
 
               <FaSearch />
 
@@ -44,7 +71,7 @@ export default function Header() {
 
           {/* MI CUENTA */}
 
-          <div className="flex flex-col items-center text-white min-w-[90px]">
+          <div className="flex flex-col items-center text-white">
 
             <FaUser className="text-4xl mb-2" />
 
@@ -58,7 +85,7 @@ export default function Header() {
 
           {/* CARRITO */}
 
-          <div className="flex flex-col items-center text-white min-w-[90px]">
+          <div className="flex flex-col items-center text-white">
 
             <FaShoppingCart className="text-4xl mb-2" />
 
@@ -75,7 +102,8 @@ export default function Header() {
       </div>
 
     </header>
-  );
-}
 
-    
+  );
+
+}
+     
