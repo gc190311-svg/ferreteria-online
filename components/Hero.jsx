@@ -1,62 +1,79 @@
 export default function Hero() {
-
   return (
+    <section className="bg-gradient-to-r from-black via-gray-900 to-blue-950 text-white">
 
-    <section className="bg-gradient-to-r from-black to-blue-950 text-white">
+      <div className="max-w-7xl mx-auto px-8 py-20">
 
-      <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center px-6 py-20">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-        {/* TEXTO */}
+          {/* TEXTO */}
 
-        <div>
+          <div>
 
-          <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight">
+            <h1 className="text-5xl lg:text-7xl font-extrabold leading-tight">
 
-            Todo lo que
-            <br />
+              Todo lo que
+              <br />
+              necesitas
+              <br />
+              para tu obra
 
-            necesitas
-            <br />
+            </h1>
 
-            para tu obra
+            <p className="mt-8 text-2xl text-gray-300 leading-relaxed">
 
-          </h1>
+              Herramientas, electricidad,
+              construcción, pintura,
+              gasfitería y mucho más.
 
-          <p className="mt-8 text-2xl text-gray-300">
+            </p>
 
-            Herramientas, electricidad,
-            construcción, pintura,
-            gasfitería y mucho más.
+            <div className="mt-10">
 
-          </p>
+              <a
+                href="#productos"
+                className="
+                inline-block
+                bg-yellow-500
+                hover:bg-yellow-400
+                text-black
+                font-bold
+                text-xl
+                px-10
+                py-5
+                rounded-2xl
+                transition
+                "
+              >
+                Ver Productos
+              </a>
 
-          <a
-            href="#productos"
-            className="inline-block mt-10 bg-yellow-500 hover:bg-yellow-400 text-black px-10 py-5 rounded-2xl text-xl font-bold transition"
-          >
+            </div>
 
-            Ver Productos
+          </div>
 
-          </a>
+          {/* IMAGEN */}
 
-        </div>
+          <div>
 
-        {/* IMAGEN */}
+            <img
+              src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1200"
+              alt="Construcción"
+              className="
+              w-full
+              rounded-3xl
+              shadow-2xl
+              object-cover
+              "
+            />
 
-        <div>
-
-          <img
-            src="https://images.unsplash.com/photo-1504307651254-35680f356dfd"
-            alt="Construcción"
-            className="rounded-3xl shadow-2xl w-full"
-          />
+          </div>
 
         </div>
 
       </div>
 
     </section>
-
   );
-
 }
+      
