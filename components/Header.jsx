@@ -12,10 +12,12 @@ export default function Header() {
 
       <div className="max-w-7xl mx-auto px-6 py-5">
 
-<div className="flex items-center justify-between">
+<div className="grid grid-cols-3 items-center">
 
-  {/* LOGO */}
-  <div className="w-[130px] flex-shrink-0">
+{/* LOGO */}
+<div className="flex justify-start">
+
+  <div className="w-[130px]">
 
     <img
       src="/logo.png"
@@ -25,8 +27,13 @@ export default function Header() {
 
   </div>
 
-  {/* BUSCADOR */}
-  <div className="flex w-full max-w-[700px] mx-auto">
+</div>
+
+{/* BUSCADOR */}
+
+<div className="flex justify-center">
+
+  <div className="flex w-full max-w-[650px]">
 
     <input
       type="text"
@@ -35,9 +42,8 @@ export default function Header() {
       flex-1
       h-12
       px-6
-      text-lg
-      text-black
       bg-white
+      text-black
       rounded-l-xl
       outline-none
       "
@@ -48,8 +54,8 @@ export default function Header() {
       bg-yellow-500
       hover:bg-yellow-400
       text-black
-      font-bold
       px-8
+      font-bold
       rounded-r-xl
       flex
       items-center
@@ -65,34 +71,37 @@ export default function Header() {
 
   </div>
 
-  {/* ICONOS */}
-  <div className="flex items-center gap-14 text-white">
+</div>
 
-    <div className="flex flex-col items-center">
+ {/* ICONOS */}
 
-      <FaUser className="text-2xl" />
+<div className="flex justify-end gap-14 text-white">
 
-      <span className="text-sm">
+  <div className="flex flex-col items-center">
 
-        Mi cuenta
+    <FaUser className="text-2xl" />
 
-      </span>
+    <span className="text-sm">
 
-    </div>
+      Mi cuenta
 
-    <div className="flex flex-col items-center">
-
-      <FaShoppingCart className="text-2xl" />
-
-      <span className="text-sm">
-
-        Carrito
-
-      </span>
-
-    </div>
+    </span>
 
   </div>
+
+  <div className="flex flex-col items-center">
+
+    <FaShoppingCart className="text-2xl" />
+
+    <span className="text-sm">
+
+      Carrito
+
+    </span>
+
+  </div>
+
+</div>
 
 </div>
 
