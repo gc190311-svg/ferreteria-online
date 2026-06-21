@@ -1,9 +1,6 @@
 "use client";
 
-import {
-  FaUser,
-  FaShoppingCart
-} from "react-icons/fa";
+import { FaUser, FaShoppingCart } from "react-icons/fa";
 
 export default function Header() {
   return (
@@ -11,10 +8,10 @@ export default function Header() {
 
       <div className="max-w-7xl mx-auto px-8">
 
-        <div className="grid grid-cols-3 items-center">
+        <div className="flex items-center">
 
           {/* LOGO */}
-          <div className="flex justify-start">
+          <div className="w-[180px] flex justify-start">
 
             <img
               src="/logo.png"
@@ -25,9 +22,9 @@ export default function Header() {
           </div>
 
           {/* BUSCADOR */}
-          <div className="flex justify-center">
+          <div className="flex-1 flex justify-center">
 
-            <div className="flex w-full max-w-[750px]">
+            <div className="flex w-full max-w-[700px]">
 
               <input
                 type="text"
@@ -62,16 +59,14 @@ export default function Header() {
           </div>
 
           {/* ICONOS */}
-          <div className="flex justify-end gap-12 text-white">
+          <div className="w-[180px] flex justify-end gap-10 text-white">
 
             <div className="flex flex-col items-center">
 
               <FaUser className="text-2xl" />
 
               <span className="text-sm">
-
                 Mi cuenta
-
               </span>
 
             </div>
@@ -81,9 +76,7 @@ export default function Header() {
               <FaShoppingCart className="text-2xl" />
 
               <span className="text-sm">
-
                 Carrito
-
               </span>
 
             </div>
