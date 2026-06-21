@@ -67,66 +67,66 @@ export default function FerreteriaPage() {
 
       {/* HEADER */}
 
-      <header className="bg-white shadow sticky top-0 z-50">
+<header className="bg-white shadow sticky top-0 z-50">
 
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-4 px-4 py-4">
+  <div className="max-w-7xl mx-auto px-4 py-4">
 
-          {/* LOGO */}
+    {/* FILA SUPERIOR */}
 
-          <div className="flex items-center overflow-hidden w-40 md:w-52 h-20">
+    <div className="flex flex-col lg:flex-row items-center gap-6">
 
-            <img
-              src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
-              alt="Logo"
-              className="w-full h-full object-contain scale-200"
-            />
+      {/* LOGO */}
 
-          </div>
+      <div className="flex items-center overflow-hidden w-40 md:w-52 h-20">
 
-          {/* BUSCADOR */}
+        <img
+          src="https://i.postimg.cc/7YYcLDSq/BRICO-HOGAR-PERU-(2).png"
+          alt="Logo"
+          className="w-full h-full object-contain scale-200"
+        />
 
-          <div className="w-full lg:flex-1">
+      </div>
 
-            <input
-              type="text"
-              placeholder="Buscar productos..."
-              value={busqueda}
-              onChange={(e) => setBusqueda(e.target.value)}
-              className="w-full border border-gray-300 rounded-2xl px-5 py-3 outline-none focus:border-black"
-            />
+      {/* BUSCADOR */}
 
-          </div>
+      <div className="w-full flex-1">
 
-          {/* MENÚ */}
+        <input
+          type="text"
+          placeholder="Buscar productos..."
+          value={busqueda}
+          onChange={(e) => setBusqueda(e.target.value)}
+          className="w-full border border-gray-300 rounded-2xl px-5 py-3 outline-none focus:border-black"
+        />
 
-         <div className="flex flex-wrap justify-center items-center gap-6 text-sm font-semibold">
+      </div>
 
-  <button
-    onClick={() => setMostrarCategorias(true)}
-    className="bg-black text-white px-4 py-2 rounded-xl shadow hover:bg-gray-800 transition"
-  >
-    ☰ Categorías
-  </button>
+    </div>
 
-  <a href="#">
-    Inicio
-  </a>
+    {/* FILA INFERIOR */}
 
-  <a href="#productos">
-    Productos
-  </a>
+    <div className="flex justify-center items-center gap-8 mt-5 text-sm font-semibold">
 
-  <a href="#">
-    Ofertas
-  </a>
+      <button
+        onClick={() => setMostrarCategorias(true)}
+        className="bg-black text-white px-5 py-2 rounded-xl shadow hover:bg-gray-800 transition"
+      >
+        ☰ Categorías
+      </button>
 
-  <a href="#">
-    Contacto
-  </a>
+      <a href="#">Inicio</a>
 
-</div>
+      <a href="#productos">Productos</a>
 
-        </div>
+      <a href="#">Ofertas</a>
+
+      <a href="#">Contacto</a>
+
+    </div>
+
+  </div>
+
+</header>
 
       </header>
 
