@@ -6,39 +6,28 @@ import {
   doc,
   getDoc,
   collection,
-  getDocs
+  getDocs,
 } from "firebase/firestore";
 
 export default function ProductoDetalle({ params }) {
-
   const [producto, setProducto] = useState(null);
-
   const [imagenActiva, setImagenActiva] = useState(0);
-
   const [cantidad, setCantidad] = useState(1);
-
   const [favorito, setFavorito] = useState(false);
-
   const [carrito, setCarrito] = useState(0);
-
   const [productosRelacionados, setProductosRelacionados] = useState([]);
 
   useEffect(() => {
-
     cargarProducto();
-
   }, []);
 
   const cargarProducto = async () => {
-
     const docRef = doc(db, "productos", params.id);
 
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-
       setProducto(docSnap.data());
-
     }
 
     const querySnapshot = await getDocs(
@@ -48,40 +37,26 @@ export default function ProductoDetalle({ params }) {
     const lista = [];
 
     querySnapshot.forEach((doc) => {
-
       if (doc.id !== params.id) {
-
         lista.push({
           id: doc.id,
-          ...doc.data()
+          ...doc.data(),
         });
-
       }
-
     });
 
-    setProductosRelacionados(
-      lista.slice(0, 4)
-    );
-
+    setProductosRelacionados(lista.slice(0, 4));
   };
 
   if (!producto) {
-
     return (
-
       <div className="min-h-screen flex items-center justify-center">
-
         Cargando...
-
       </div>
-
     );
-
   }
 
   return (
-
     <div className="min-h-screen bg-gray-100 py-10 px-4">
 
       <div className="max-w-7xl mx-auto">
@@ -90,7 +65,7 @@ export default function ProductoDetalle({ params }) {
 
         <div className="flex justify-end mb-6">
 
-          <div className="bg-black text-white px-5 py-3 rounded-2xl">
+          <div className="bg-black text-white px-5 py-3 rounded-2xl shadow">
 
             🛒 {carrito}
 
@@ -98,18 +73,18 @@ export default function ProductoDetalle({ params }) {
 
         </div>
 
-        {/* VOLVER */}
+        {/* BOTÓN VOLVER */}
 
         <a
           href="/"
-          className="inline-block bg-black text-white px-6 py-3 rounded-xl mb-6 hover:bg-gray-800"
+          className="inline-block bg-black text-white px-6 py-3 rounded-xl mb-6 hover:bg-gray-800 transition"
         >
           ← Volver al inicio
         </a>
 
         {/* BREADCRUMB */}
 
-        <div className="text-gray-500 text-sm mb-8">
+        <div className="text-sm text-gray-500 mb-8">
 
           <a
             href="/"
@@ -121,426 +96,477 @@ export default function ProductoDetalle({ params }) {
           {" > "}
 
           <span>
-
             {producto.categoria}
-
           </span>
 
           {" > "}
 
           <span className="font-semibold text-black">
-
             {producto.nombre}
-
           </span>
 
         </div>
 
+        {/* CONTENEDOR PRINCIPAL */}
+
         <div className="bg-white rounded-3xl shadow-lg p-8">
 
           <div className="grid lg:grid-cols-3 gap-10">
+                        {/* MINIATURAS */}
 
-                      {/* MINIATURAS */}
+            <div className="order-2 lg:order-1">
 
-          <div className="order-2 lg:order-1">
+              <div className="flex lg:flex-col gap-4 overflow-x-auto">
 
-            <div className="flex lg:flex-col gap-4 overflow-x-auto">
+                {producto.imagenes?.map((img, index) => (
 
-              {producto.imagenes?.map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setImagenActiva(index)}
+                    className={`border-2 rounded-xl p-2 bg-white transition
+                    ${
+                      imagenActiva === index
+                        ? "border-blue-500"
+                        : "border-gray-200"
+                    }`}
+                  >
+
+                    <img
+                      src={img}
+                      alt=""
+                      className="h-20 w-20 object-contain"
+                    />
+
+                  </button>
+
+                ))}
+
+              </div>
+
+            </div>
+
+            {/* IMAGEN PRINCIPAL */}
+
+            <div className="order-1 lg:order-2 flex items-center justify-center">
+
+              <div className="relative">
+
+                <img
+                  src={
+                    producto.imagenes?.[imagenActiva] ||
+                    producto.imagen ||
+                    "/sin-imagen.png"
+                  }
+                  alt={producto.nombre}
+                  className="max-h-[600px] object-contain hover:scale-110 transition duration-500 cursor-zoom-in"
+                />
+
+                {/* BOTÓN IZQUIERDO */}
 
                 <button
-                  key={index}
-                  onClick={() => setImagenActiva(index)}
-                  className={`border-2 rounded-xl p-2 bg-white
-                  ${
-                    imagenActiva === index
-                      ? "border-blue-500"
-                      : "border-gray-200"
-                  }`}
+                  onClick={() =>
+                    setImagenActiva(
+                      imagenActiva === 0
+                        ? producto.imagenes.length - 1
+                        : imagenActiva - 1
+                    )
+                  }
+                  className="absolute left-0 top-1/2 bg-white shadow-lg rounded-full px-4 py-2"
                 >
-
-                  <img
-                    src={img}
-                    alt=""
-                    className="h-20 w-20 object-contain"
-                  />
-
+                  ◀
                 </button>
 
-              ))}
+                {/* BOTÓN DERECHO */}
+
+                <button
+                  onClick={() =>
+                    setImagenActiva(
+                      imagenActiva === producto.imagenes.length - 1
+                        ? 0
+                        : imagenActiva + 1
+                    )
+                  }
+                  className="absolute right-0 top-1/2 bg-white shadow-lg rounded-full px-4 py-2"
+                >
+                  ▶
+                </button>
+
+              </div>
 
             </div>
 
-          </div>
+            {/* INFORMACIÓN DEL PRODUCTO */}
 
-          {/* IMAGEN PRINCIPAL */}
+            <div className="order-3">
 
-          <div className="order-1 lg:order-2 flex items-center justify-center">
+              <p className="text-gray-500 mb-2">
 
-            <div className="relative">
+                {producto.categoria}
 
-              <img
-                src={producto.imagenes?.[imagenActiva]}
-                alt={producto.nombre}
-                className="max-h-[600px] object-contain hover:scale-110 transition duration-500 cursor-zoom-in"
-              />
+              </p>
+
+              <h1 className="text-3xl font-bold">
+
+                {producto.nombre}
+
+              </h1>
+
+              {/* FAVORITO */}
 
               <button
-                onClick={() =>
-                  setImagenActiva(
-                    imagenActiva === 0
-                      ? producto.imagenes.length - 1
-                      : imagenActiva - 1
-                  )
-                }
-                className="absolute left-0 top-1/2 bg-white shadow rounded-full px-4 py-2"
+                onClick={() => setFavorito(!favorito)}
+                className="mt-3 text-3xl"
               >
-                ◀
+
+                {favorito ? "❤️" : "🤍"}
+
               </button>
 
-              <button
-                onClick={() =>
-                  setImagenActiva(
-                    imagenActiva === producto.imagenes.length - 1
-                      ? 0
-                      : imagenActiva + 1
-                  )
-                }
-                className="absolute right-0 top-1/2 bg-white shadow rounded-full px-4 py-2"
-              >
-                ▶
-              </button>
+              {/* ESTRELLAS */}
 
-            </div>
+              <div className="flex gap-1 text-yellow-500 text-2xl mt-4">
 
-          </div>
+                ★★★★★
 
-          {/* INFORMACIÓN */}
+                <span className="text-gray-400 text-base ml-2">
 
-          <div className="order-3">
+                  (5 opiniones)
 
-            <p className="text-gray-500 mb-2">
+                </span>
 
-              {producto.categoria}
+              </div>
+              {/* PRECIO */}
 
-            </p>
+              <div className="mt-8">
 
-            <h1 className="text-3xl font-bold">
+                {producto.oferta ? (
 
-              {producto.nombre}
+                  <div>
 
-            </h1>
+                    <p className="text-gray-400 line-through text-xl">
 
-            {/* FAVORITO */}
+                      S/ {producto.precio}
 
-            <button
-              onClick={() => setFavorito(!favorito)}
-              className="mt-3 text-3xl"
-            >
+                    </p>
 
-              {favorito ? "❤️" : "🤍"}
+                    <p className="text-green-600 font-bold text-5xl">
 
-            </button>
+                      S/ {producto.oferta}
 
-            {/* ESTRELLAS */}
+                    </p>
 
-            <div className="flex gap-1 text-yellow-500 text-2xl mt-4">
+                    <span className="bg-red-500 text-white px-3 py-1 rounded">
 
-              ★★★★★
+                      OFERTA
 
-              <span className="text-gray-400 text-base ml-2">
+                    </span>
 
-                (5 opiniones)
+                  </div>
 
-              </span>
+                ) : (
 
-            </div>
-
-            {/* PRECIO */}
-
-            <div className="mt-8">
-
-              {producto.oferta ? (
-
-                <div>
-
-                  <p className="text-gray-400 line-through text-xl">
+                  <p className="text-green-600 font-bold text-5xl">
 
                     S/ {producto.precio}
 
                   </p>
 
-                  <p className="text-green-600 font-bold text-5xl">
-
-                    S/ {producto.oferta}
-
-                  </p>
-
-                  <span className="bg-red-500 text-white px-3 py-1 rounded">
-
-                    OFERTA
-
-                  </span>
-
-                </div>
-
-              ) : (
-
-                <p className="text-green-600 font-bold text-5xl">
-
-                  S/ {producto.precio}
-
-                </p>
-
-              )}
-
-            </div>
-
-            {/* STOCK */}
-
-            <div className="mt-4">
-
-              <p className="text-green-600 font-semibold">
-
-                ✔ Stock disponible
-
-              </p>
-
-            </div>
-
-            {/* DELIVERY */}
-
-            <div className="mt-4 space-y-2 text-gray-600">
-
-              <p>
-
-                🚚 Delivery a todo Lima
-
-              </p>
-
-              <p>
-
-                📍 Retiro en tienda
-
-              </p>
-
-            </div>
-
-                        {/* CANTIDAD */}
-
-            <div className="flex items-center gap-5 mt-8">
-
-              <button
-                onClick={() =>
-                  setCantidad(
-                    cantidad > 1 ? cantidad - 1 : 1
-                  )
-                }
-                className="border w-12 h-12 rounded-xl"
-              >
-                -
-              </button>
-
-              <div className="text-2xl">
-
-                {cantidad}
+                )}
 
               </div>
 
-              <button
-                onClick={() =>
-                  setCantidad(cantidad + 1)
-                }
-                className="border w-12 h-12 rounded-xl"
-              >
-                +
-              </button>
+              {/* STOCK */}
 
-            </div>
+              <div className="mt-5">
 
-            {/* AGREGAR AL CARRITO */}
+                <p className="text-green-600 font-semibold">
 
-            <button
-              onClick={() =>
-                setCarrito(carrito + cantidad)
-              }
-              className="w-full mt-8 bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl text-xl font-bold"
-            >
-
-              🛒 Agregar al carrito
-
-            </button>
-
-            {/* WHATSAPP */}
-
-            <a
-              href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
-              target="_blank"
-              className="block mt-6 bg-green-600 hover:bg-green-700 text-white text-center py-4 rounded-xl text-xl font-bold"
-            >
-
-              Consultar por WhatsApp
-
-            </a>
-
-            {/* INFORMACIÓN EXTRA */}
-
-            <div className="mt-8 border-t pt-6 space-y-3">
-
-              <p>🔒 Compra segura</p>
-
-              <p>💳 Pago con tarjeta y Yape</p>
-
-              <p>🚚 Envíos rápidos</p>
-
-            </div>
-
-            {/* CARACTERÍSTICAS */}
-
-            <div className="mt-10">
-
-              <h2 className="font-bold text-xl mb-5">
-
-                Características
-
-              </h2>
-
-              <ul className="space-y-3 text-gray-600">
-
-                <li>• Categoría: {producto.categoria}</li>
-
-                <li>• Marca: {producto.marca}</li>
-
-                <li>• Color: {producto.color}</li>
-
-                <li>• Material: {producto.material}</li>
-
-              </ul>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* DESCRIPCIÓN */}
-
-        <hr className="my-12" />
-
-        <h2 className="text-3xl font-bold mb-8">
-
-          Descripción
-
-        </h2>
-
-        <p className="text-gray-600 whitespace-pre-line leading-8">
-
-          {producto.descripcion}
-
-        </p>
-
-        {/* OPINIONES */}
-
-        <div className="mt-16">
-
-          <h2 className="text-3xl font-bold mb-8">
-
-            Opiniones
-
-          </h2>
-
-          <div className="space-y-6">
-
-            <div className="border rounded-2xl p-6">
-
-              ★★★★★
-
-              <p className="mt-3">
-
-                Excelente producto y muy buena calidad.
-
-              </p>
-
-            </div>
-
-            <div className="border rounded-2xl p-6">
-
-              ★★★★★
-
-              <p className="mt-3">
-
-                Recomendado para trabajos profesionales.
-
-              </p>
-
-            </div>
-
-          </div>
-
-        </div>
-
-        {/* MEDIOS DE PAGO */}
-
-        <div className="mt-16">
-
-          <h2 className="text-3xl font-bold mb-8">
-
-            Medios de pago
-
-          </h2>
-
-          <div className="flex gap-6 text-5xl">
-
-            💳 🏦 💵 📱
-
-          </div>
-
-        </div>
-
-        {/* PRODUCTOS RELACIONADOS */}
-
-        <div className="mt-16">
-
-          <h2 className="text-3xl font-bold mb-8">
-
-            Productos relacionados
-
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
-            {productosRelacionados.map((item) => (
-
-              <a
-                href={`/producto/${item.id}`}
-                key={item.id}
-                className="bg-white rounded-2xl shadow p-4 hover:shadow-xl transition"
-              >
-
-                <img
-                  src={
-                    item.imagenes?.[0] ||
-                    item.imagen ||
-                    "/sin-imagen.png"
-                  }
-                  className="h-48 mx-auto object-contain"
-                />
-
-                <h3 className="font-bold mt-4">
-
-                  {item.nombre}
-
-                </h3>
-
-                <p className="text-green-600 text-2xl font-bold mt-3">
-
-                  S/ {item.oferta || item.precio}
+                  ✔ Stock disponible
 
                 </p>
 
+              </div>
+
+              {/* DELIVERY */}
+
+              <div className="mt-4 space-y-2 text-gray-600">
+
+                <p>
+
+                  🚚 Delivery a todo Lima
+
+                </p>
+
+                <p>
+
+                  📍 Retiro en tienda
+
+                </p>
+
+              </div>
+
+              {/* CANTIDAD */}
+
+              <div className="flex items-center gap-5 mt-8">
+
+                <button
+                  onClick={() =>
+                    setCantidad(
+                      cantidad > 1 ? cantidad - 1 : 1
+                    )
+                  }
+                  className="border w-12 h-12 rounded-xl"
+                >
+                  -
+                </button>
+
+                <div className="text-2xl">
+
+                  {cantidad}
+
+                </div>
+
+                <button
+                  onClick={() =>
+                    setCantidad(cantidad + 1)
+                  }
+                  className="border w-12 h-12 rounded-xl"
+                >
+                  +
+                </button>
+
+              </div>
+
+              {/* AGREGAR AL CARRITO */}
+
+              <button
+                onClick={() =>
+                  setCarrito(carrito + cantidad)
+                }
+                className="w-full mt-8 bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl text-xl font-bold transition"
+              >
+
+                🛒 Agregar al carrito
+
+              </button>
+
+              {/* WHATSAPP */}
+
+              <a
+                href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
+                target="_blank"
+                className="block mt-6 bg-green-600 hover:bg-green-700 text-white text-center py-4 rounded-xl text-xl font-bold transition"
+              >
+
+                Consultar por WhatsApp
+
               </a>
 
-            ))}
+              {/* INFORMACIÓN EXTRA */}
+
+              <div className="mt-8 border-t pt-6 space-y-3">
+
+                <p>🔒 Compra segura</p>
+
+                <p>💳 Pago con tarjeta y Yape</p>
+
+                <p>🚚 Envíos rápidos</p>
+
+              </div>
+
+              {/* CARACTERÍSTICAS */}
+
+              <div className="mt-10">
+
+                <h2 className="font-bold text-xl mb-5">
+
+                  Características
+
+                </h2>
+
+                <ul className="space-y-3 text-gray-600">
+
+                  <li>
+                    • Categoría: {producto.categoria}
+                  </li>
+
+                  <li>
+                    • Marca: {producto.marca || "No especificado"}
+                  </li>
+
+                  <li>
+                    • Color: {producto.color || "No especificado"}
+                  </li>
+
+                  <li>
+                    • Material: {producto.material || "No especificado"}
+                  </li>
+
+                </ul>
+
+              </div>
+
+            </div>
+
+          </div>
+
+                    {/* DESCRIPCIÓN */}
+
+          <hr className="my-12" />
+
+          <h2 className="text-3xl font-bold mb-8">
+
+            Descripción
+
+          </h2>
+
+          <div className="text-gray-600 whitespace-pre-line leading-8">
+
+            {producto.descripcion}
+
+          </div>
+
+          {/* OPINIONES */}
+
+          <div className="mt-16">
+
+            <h2 className="text-3xl font-bold mb-8">
+
+              Opiniones
+
+            </h2>
+
+            <div className="space-y-6">
+
+              <div className="border rounded-2xl p-6">
+
+                <div className="text-yellow-500 text-2xl">
+
+                  ★★★★★
+
+                </div>
+
+                <p className="mt-3">
+
+                  Excelente producto y muy buena calidad.
+
+                </p>
+
+              </div>
+
+              <div className="border rounded-2xl p-6">
+
+                <div className="text-yellow-500 text-2xl">
+
+                  ★★★★★
+
+                </div>
+
+                <p className="mt-3">
+
+                  Recomendado para trabajos profesionales.
+
+                </p>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          {/* MEDIOS DE PAGO */}
+
+          <div className="mt-16">
+
+            <h2 className="text-3xl font-bold mb-8">
+
+              Medios de pago
+
+            </h2>
+
+            <div className="flex gap-6 text-5xl">
+
+              💳 🏦 💵 📱
+
+            </div>
+
+          </div>
+
+          {/* FIN DEL CONTENEDOR PRINCIPAL */}
+
+        </div>
+
+      </div>
+
+                {/* PRODUCTOS RELACIONADOS */}
+
+          <div className="mt-16">
+
+            <h2 className="text-3xl font-bold mb-8">
+
+              Productos relacionados
+
+            </h2>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+              {productosRelacionados.map((item) => (
+
+                <a
+                  href={`/producto/${item.id}`}
+                  key={item.id}
+                  className="bg-white rounded-2xl shadow p-4 hover:shadow-xl transition hover:-translate-y-1"
+                >
+
+                  <img
+                    src={
+                      item.imagenes?.[0] ||
+                      item.imagen ||
+                      "/sin-imagen.png"
+                    }
+                    alt={item.nombre}
+                    className="h-48 mx-auto object-contain"
+                  />
+
+                  <h3 className="font-bold mt-4 min-h-[60px]">
+
+                    {item.nombre}
+
+                  </h3>
+
+                  {item.oferta ? (
+
+                    <div className="mt-3">
+
+                      <p className="text-gray-400 line-through">
+
+                        S/ {item.precio}
+
+                      </p>
+
+                      <p className="text-green-600 text-2xl font-bold">
+
+                        S/ {item.oferta}
+
+                      </p>
+
+                    </div>
+
+                  ) : (
+
+                    <p className="text-green-600 text-2xl font-bold mt-3">
+
+                      S/ {item.precio}
+
+                    </p>
+
+                  )}
+
+                </a>
+
+              ))}
+
+            </div>
 
           </div>
 
