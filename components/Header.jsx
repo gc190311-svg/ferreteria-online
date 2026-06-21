@@ -1,80 +1,99 @@
-<div className="grid grid-cols-3 items-center">
+"use client";
 
-  {/* LOGO */}
-  <div className="flex justify-start">
+import {
+  FaUser,
+  FaShoppingCart
+} from "react-icons/fa";
 
-    <img
-      src="/logo.png"
-      alt="Brico Hogar"
-      className="w-[130px]"
-    />
+export default function Header() {
+  return (
+    <header className="bg-black py-6">
 
-  </div>
+      <div className="max-w-7xl mx-auto px-8">
 
-  {/* BUSCADOR */}
-  <div className="flex justify-center">
+        <div className="grid grid-cols-3 items-center">
 
-    <div className="flex w-[700px]">
+          {/* LOGO */}
+          <div className="flex justify-start">
 
-      <input
-        type="text"
-        placeholder="Buscar productos..."
-        className="
-          flex-1
-          h-14
-          px-6
-          bg-white
-          text-black
-          rounded-l-xl
-          outline-none
-          text-lg
-        "
-      />
+            <img
+              src="/logo.png"
+              alt="Brico Hogar"
+              className="w-[130px]"
+            />
 
-      <button
-        className="
-          bg-yellow-500
-          hover:bg-yellow-400
-          px-8
-          rounded-r-xl
-          text-black
-          font-bold
-          flex
-          items-center
-          gap-2
-        "
-      >
-        <FaSearch />
-        Buscar
-      </button>
+          </div>
 
-    </div>
+          {/* BUSCADOR */}
+          <div className="flex justify-center">
 
-  </div>
+            <div className="flex w-full max-w-[750px]">
 
-  {/* ICONOS */}
-  <div className="flex justify-end gap-12 text-white">
+              <input
+                type="text"
+                placeholder="Buscar productos..."
+                className="
+                  flex-1
+                  h-14
+                  px-6
+                  bg-white
+                  text-black
+                  text-lg
+                  rounded-l-xl
+                  outline-none
+                "
+              />
 
-    <div className="flex flex-col items-center">
+              <button
+                className="
+                  bg-yellow-500
+                  hover:bg-yellow-400
+                  text-black
+                  font-bold
+                  px-8
+                  rounded-r-xl
+                "
+              >
+                Buscar
+              </button>
 
-      <FaUser className="text-2xl" />
+            </div>
 
-      <span className="text-sm">
-        Mi cuenta
-      </span>
+          </div>
 
-    </div>
+          {/* ICONOS */}
+          <div className="flex justify-end gap-12 text-white">
 
-    <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center">
 
-      <FaShoppingCart className="text-2xl" />
+              <FaUser className="text-2xl" />
 
-      <span className="text-sm">
-        Carrito
-      </span>
+              <span className="text-sm">
 
-    </div>
+                Mi cuenta
 
-  </div>
+              </span>
 
-</div>
+            </div>
+
+            <div className="flex flex-col items-center">
+
+              <FaShoppingCart className="text-2xl" />
+
+              <span className="text-sm">
+
+                Carrito
+
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+  );
+}
