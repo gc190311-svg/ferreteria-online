@@ -1,5 +1,6 @@
 "use client";
 
+import Marcas from "../components/Marcas";
 import TopBar from "../components/TopBar";
 import Header from "../components/Header";
 import Navbar from "../components/Navbar";
