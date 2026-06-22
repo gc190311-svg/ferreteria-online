@@ -16,7 +16,7 @@ export default function Header() {
 
           {/* LOGO */}
 
-          <div className="w-[180px] flex justify-start">
+          <div className="w-[220px] flex justify-start">
 
             <img
               src="/logo.png"
