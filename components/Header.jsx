@@ -21,7 +21,7 @@ export default function Header() {
             <img
               src="/logo.png"
               alt="Brico Hogar"
-              className="w-[180px]"
+              className="w-[220px]"
             />
 
           </div>
