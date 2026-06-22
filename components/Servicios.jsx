@@ -38,21 +38,22 @@ export default function Servicios() {
 
           {servicios.map((servicio, index) => (
             <div
-              key={index}
-              className="bg-white rounded-3xl shadow-lg p-8 text-center hover:-translate-y-2 duration-300"
-            >
-              <div className="text-5xl text-yellow-500 mb-6 flex justify-center">
-                {servicio.icono}
-              </div>
+             <div
+  key={index}
+  className="bg-white rounded-3xl shadow-lg p-8 text-center flex flex-col items-center justify-center hover:-translate-y-2 duration-300"
+>
+  <div className="text-5xl text-yellow-500 mb-6">
+    {servicio.icono}
+  </div>
 
-              <h3 className="text-2xl font-bold mb-4">
-                {servicio.titulo}
-              </h3>
+  <h3 className="text-2xl font-bold mb-4 text-center">
+    {servicio.titulo}
+  </h3>
 
-              <p className="text-gray-600">
-                {servicio.descripcion}
-              </p>
-            </div>
+  <p className="text-gray-600 text-center">
+    {servicio.descripcion}
+  </p>
+</div>
           ))}
 
         </div>
