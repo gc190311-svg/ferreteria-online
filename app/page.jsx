@@ -18,6 +18,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Servicios />
+      <Marcas />
       <Productos />
       <Footer />
       <WhatsAppButton />
