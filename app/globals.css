@@ -7,3 +7,22 @@ body {
   padding: 0;
   font-family: Arial, sans-serif;
 }
+@keyframes marcas {
+
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+
+}
+
+.animate-marcas {
+
+  width: max-content;
+
+  animation: marcas 25s linear infinite;
+
+}
