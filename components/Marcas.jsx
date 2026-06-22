@@ -4,13 +4,13 @@ export default function Marcas() {
 
   const marcas = [
     "/marcas/truper.png",
-    "/marcas/bosch.png",
-    "/marcas/dewalt.png",
-    "/marcas/makita.png",
+    "/marcas/anypsa.png",
+    "/marcas/cpp.png",
+    "/marcas/kamasa.png",
     "/marcas/stanley.png",
-    "/marcas/sika.png",
-    "/marcas/vistony.png",
-    "/marcas/pavco.png",
+    "/marcas/bticino.png",
+    "/marcas/indeco.png",
+   
   ];
 
   return (
