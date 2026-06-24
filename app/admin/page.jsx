@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState } from "react";
 import { db } from "../firebase";
@@ -8,15 +8,23 @@ export default function AdminPage() {
 
   const [producto, setProducto] = useState({
     nombre: "",
+    categoria: "herramientas",
     precio: "",
+    precioAnterior: "",
+    marca: "",
+    stock: "",
     imagen: "",
-    descripcion: ""
+    descripcion: "",
   });
 
   const guardarProducto = async () => {
 
-    if (!producto.nombre) {
-      alert("Ingresa nombre");
+    if (
+      !producto.nombre ||
+      !producto.precio ||
+      !producto.imagen
+    ) {
+      alert("Completa los campos obligatorios");
       return;
     }
 
@@ -24,33 +32,41 @@ export default function AdminPage() {
 
       await addDoc(collection(db, "productos"), {
         nombre: producto.nombre,
-        precio: producto.precio,
+        categoria: producto.categoria,
+        precio: Number(producto.precio),
+        precioAnterior: Number(producto.precioAnterior),
+        marca: producto.marca,
+        stock: Number(producto.stock),
         imagen: producto.imagen,
-        descripcion: producto.descripcion
+        descripcion: producto.descripcion,
+        fechaCreacion: new Date(),
       });
 
-      alert("Producto agregado");
+      alert("Producto agregado correctamente");
 
       setProducto({
         nombre: "",
+        categoria: "herramientas",
         precio: "",
+        precioAnterior: "",
+        marca: "",
+        stock: "",
         imagen: "",
-        descripcion: ""
+        descripcion: "",
       });
 
     } catch (error) {
-      console.log(error);
-      alert("Error al guardar");
+      console.error(error);
+      alert("Error al guardar producto");
     }
   };
 
   return (
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
 
-    <div className="min-h-screen bg-gray-100 p-10">
+      <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-8">
 
-      <div className="max-w-2xl mx-auto bg-white p-8 rounded-2xl shadow-xl">
-
-        <h1 className="text-3xl font-bold mb-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">
           Panel Administrador
         </h1>
 
@@ -63,23 +79,93 @@ export default function AdminPage() {
             onChange={(e) =>
               setProducto({
                 ...producto,
-                nombre: e.target.value
+                nombre: e.target.value,
               })
             }
-            className="w-full border p-3 rounded-lg"
+            className="w-full border p-3 rounded-xl"
           />
 
+          <select
+            value={producto.categoria}
+            onChange={(e) =>
+              setProducto({
+                ...producto,
+                categoria: e.target.value,
+              })
+            }
+            className="w-full border p-3 rounded-xl"
+          >
+            <option value="herramientas">
+              Herramientas
+            </option>
+
+            <option value="electricidad">
+              Electricidad
+            </option>
+
+            <option value="pintura">
+              Pintura
+            </option>
+
+            <option value="gasfiteria">
+              Gasfitería
+            </option>
+
+            <option value="construccion">
+              Construcción
+            </option>
+          </select>
+
           <input
-            type="text"
+            type="number"
             placeholder="Precio"
             value={producto.precio}
             onChange={(e) =>
               setProducto({
                 ...producto,
-                precio: e.target.value
+                precio: e.target.value,
               })
             }
-            className="w-full border p-3 rounded-lg"
+            className="w-full border p-3 rounded-xl"
+          />
+
+          <input
+            type="number"
+            placeholder="Precio anterior"
+            value={producto.precioAnterior}
+            onChange={(e) =>
+              setProducto({
+                ...producto,
+                precioAnterior: e.target.value,
+              })
+            }
+            className="w-full border p-3 rounded-xl"
+          />
+
+          <input
+            type="text"
+            placeholder="Marca"
+            value={producto.marca}
+            onChange={(e) =>
+              setProducto({
+                ...producto,
+                marca: e.target.value,
+              })
+            }
+            className="w-full border p-3 rounded-xl"
+          />
+
+          <input
+            type="number"
+            placeholder="Stock disponible"
+            value={producto.stock}
+            onChange={(e) =>
+              setProducto({
+                ...producto,
+                stock: e.target.value,
+              })
+            }
+            className="w-full border p-3 rounded-xl"
           />
 
           <input
@@ -89,11 +175,19 @@ export default function AdminPage() {
             onChange={(e) =>
               setProducto({
                 ...producto,
-                imagen: e.target.value
+                imagen: e.target.value,
               })
             }
-            className="w-full border p-3 rounded-lg"
+            className="w-full border p-3 rounded-xl"
           />
+
+          {producto.imagen && (
+            <img
+              src={producto.imagen}
+              alt="Vista previa"
+              className="w-48 h-48 object-contain border rounded-xl mx-auto"
+            />
+          )}
 
           <textarea
             placeholder="Descripción"
@@ -101,15 +195,24 @@ export default function AdminPage() {
             onChange={(e) =>
               setProducto({
                 ...producto,
-                descripcion: e.target.value
+                descripcion: e.target.value,
               })
             }
-            className="w-full border p-3 rounded-lg h-32"
+            className="w-full border p-3 rounded-xl h-32"
           />
 
           <button
             onClick={guardarProducto}
-            className="bg-black text-white px-6 py-3 rounded-xl w-full"
+            className="
+              w-full
+              bg-yellow-500
+              hover:bg-yellow-400
+              text-black
+              font-bold
+              py-4
+              rounded-xl
+              transition
+            "
           >
             Guardar Producto
           </button>
