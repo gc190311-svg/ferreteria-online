@@ -31,7 +31,8 @@ export default function Productos({
 
         });
 
-        setProductos(listaProductos);
+       const destacados = lista.slice(0, 4);
+setProductos(destacados);
 
       } catch (error) {
 
