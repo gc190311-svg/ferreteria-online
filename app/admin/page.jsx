@@ -64,7 +64,6 @@ export default function AdminPage() {
     " - " +
     error.message
   );
-}
   };
 
   return (
