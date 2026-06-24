@@ -55,10 +55,16 @@ export default function AdminPage() {
         descripcion: "",
       });
 
-    } catch (error) {
-      console.error(error);
-      alert("Error al guardar producto");
-    }
+   catch (error) {
+  console.error("ERROR FIREBASE:", error);
+
+  alert(
+    "Error: " +
+    error.code +
+    " - " +
+    error.message
+  );
+}
   };
 
   return (
