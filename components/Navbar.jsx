@@ -38,35 +38,35 @@ export default function Navbar() {
             "
           >
             <a
-              href="#herramientas"
+              href="#productos"
               className="block px-5 py-3 hover:bg-gray-100"
             >
               🔧 Herramientas
             </a>
 
             <a
-              href="#electricidad"
+              href="#productos"
               className="block px-5 py-3 hover:bg-gray-100"
             >
               ⚡ Electricidad
             </a>
 
             <a
-              href="#pintura"
+              href="#productos"
               className="block px-5 py-3 hover:bg-gray-100"
             >
               🎨 Pintura
             </a>
 
             <a
-              href="#gasfiteria"
+              href="#productos"
               className="block px-5 py-3 hover:bg-gray-100"
             >
               🚿 Gasfitería
             </a>
 
             <a
-              href="#construccion"
+              href="#productos"
               className="block px-5 py-3 hover:bg-gray-100"
             >
               🏗️ Construcción
