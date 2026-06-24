@@ -5,204 +5,247 @@ import { db } from "../app/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 export default function Productos({
-  categoriaSeleccionada,
+categoriaSeleccionada,
 }) {
 
-  const [productos, setProductos] = useState([]);
-  const [cargando, setCargando] = useState(true);
+const [productos, setProductos] = useState([]);
+const [cargando, setCargando] = useState(true);
 
-  useEffect(() => {
+useEffect(() => {
 
-    const cargarProductos = async () => {
+```
+const cargarProductos = async () => {
 
-      try {
+  try {
 
-        const querySnapshot =
-          await getDocs(collection(db, "productos"));
+    const querySnapshot =
+      await getDocs(collection(db, "productos"));
 
-        const listaProductos = [];
+    const listaProductos = [];
 
-        querySnapshot.forEach((doc) => {
+    querySnapshot.forEach((doc) => {
 
-          listaProductos.push({
-            id: doc.id,
-            ...doc.data(),
-          });
+      listaProductos.push({
+        id: doc.id,
+        ...doc.data(),
+      });
 
-        });
+    });
 
-       const destacados = lista.slice(0, 4);
-setProductos(destacados);
+    const destacados = listaProductos
+      .filter(
+        (producto) =>
+          producto.destacado === true
+      )
+      .slice(0, 4);
 
-      } catch (error) {
+    setProductos(destacados);
 
-        console.log(error);
+  } catch (error) {
 
-      } finally {
+    console.log(error);
 
-        setCargando(false);
+  } finally {
 
-      }
+    setCargando(false);
 
-    };
+  }
 
-    cargarProductos();
+};
 
-  }, []);
+cargarProductos();
+```
 
-  const productosFiltrados =
-    categoriaSeleccionada === "todos"
-      ? productos
-      : productos.filter(
-          (producto) =>
-            producto.categoria === categoriaSeleccionada
-        );
+}, []);
 
-  const tituloCategoria = {
-    todos: "Todos los productos",
-    herramientas: "Herramientas",
-    electricidad: "Electricidad",
-    pintura: "Pintura",
-    gasfiteria: "Gasfitería",
-    construccion: "Construcción",
-  };
+const productosFiltrados =
+categoriaSeleccionada === "todos"
+? productos
+: productos.filter(
+(producto) =>
+producto.categoria ===
+categoriaSeleccionada
+);
 
-  return (
-    <section
-      id="productos"
-      className="bg-gray-100 py-20"
-    >
-      <div className="max-w-7xl mx-auto px-6">
+const tituloCategoria = {
+todos: "Todos los productos",
+herramientas: "Herramientas",
+electricidad: "Electricidad",
+pintura: "Pintura",
+gasfiteria: "Gasfitería",
+construccion: "Construcción",
+};
 
-        <div className="flex justify-between items-center mb-10">
+return ( <section
+   id="productos"
+   className="bg-gray-100 py-20"
+ > <div className="max-w-7xl mx-auto px-6">
 
-          <div>
+```
+    <div className="flex justify-between items-center mb-10">
 
-            <h2 className="text-4xl font-bold">
-              Productos destacados
-            </h2>
+      <div>
 
-            <p className="text-yellow-600 font-semibold mt-2">
-              Categoría:{" "}
-              {tituloCategoria[categoriaSeleccionada]}
-            </p>
+        <h2 className="text-4xl font-bold">
+          Productos destacados
+        </h2>
 
-          </div>
+        <p className="text-yellow-600 font-semibold mt-2">
+          Categoría:{" "}
+          {tituloCategoria[
+            categoriaSeleccionada
+          ]}
+        </p>
 
-          <span className="text-gray-500 text-xl">
-            {productosFiltrados.length} productos
-          </span>
+      </div>
 
-        </div>
+      <span className="text-gray-500 text-xl">
+        {productosFiltrados.length}
+        {" "}productos
+      </span>
 
-        {cargando ? (
+    </div>
 
-          <div className="text-center py-20">
-            <p className="text-2xl font-semibold">
-              Cargando productos...
-            </p>
-          </div>
+    {cargando ? (
 
-        ) : productosFiltrados.length === 0 ? (
+      <div className="text-center py-20">
 
-          <div className="text-center py-20">
+        <p className="text-2xl font-semibold">
+          Cargando productos...
+        </p>
 
-            <h3 className="text-3xl font-bold mb-4">
-              No hay productos
-            </h3>
+      </div>
 
-            <p className="text-gray-500">
-              No se encontraron productos para esta categoría.
-            </p>
+    ) : productosFiltrados.length === 0 ? (
 
-          </div>
+      <div className="text-center py-20">
 
-        ) : (
+        <h3 className="text-3xl font-bold mb-4">
+          No hay productos
+        </h3>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <p className="text-gray-500">
+          No se encontraron productos
+          para esta categoría.
+        </p>
 
-            {productosFiltrados.map((producto) => (
+      </div>
 
-              <div
-                key={producto.id}
+    ) : (
+
+      <>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          {productosFiltrados.map(
+            (producto) => (
+
+            <div
+              key={producto.id}
+              className="
+                bg-white
+                rounded-3xl
+                shadow-lg
+                overflow-hidden
+                hover:shadow-2xl
+                duration-300
+              "
+            >
+
+              <img
+                src={
+                  producto.imagen ||
+                  "/sin-imagen.png"
+                }
+                alt={producto.nombre}
                 className="
-                  bg-white
-                  rounded-3xl
-                  shadow-lg
-                  overflow-hidden
-                  hover:shadow-2xl
-                  duration-300
+                  w-full
+                  h-72
+                  object-contain
+                  bg-gray-50
+                  p-6
                 "
-              >
+              />
 
-                <img
-                  src={
-                    producto.imagen ||
-                    "/sin-imagen.png"
-                  }
-                  alt={producto.nombre}
-                  className="
-                    w-full
-                    h-72
-                    object-contain
-                    bg-gray-50
-                    p-6
-                  "
-                />
+              <div className="p-6">
 
-                <div className="p-6">
+                <h3 className="font-bold text-xl min-h-[90px]">
+                  {producto.nombre}
+                </h3>
 
-                  <h3 className="font-bold text-xl min-h-[90px]">
-                    {producto.nombre}
-                  </h3>
+                {producto.marca && (
+                  <p className="text-gray-500 text-sm mb-2">
+                    Marca: {producto.marca}
+                  </p>
+                )}
 
-                  {producto.marca && (
-                    <p className="text-gray-500 text-sm mb-2">
-                      Marca: {producto.marca}
+                <div className="mt-4">
+
+                  {producto.precioAnterior > 0 && (
+                    <p className="text-gray-400 line-through text-lg">
+                      S/ {producto.precioAnterior}
                     </p>
                   )}
 
-                  <div className="mt-4">
-
-                    {producto.precioAnterior > 0 && (
-                      <p className="text-gray-400 line-through text-lg">
-                        S/ {producto.precioAnterior}
-                      </p>
-                    )}
-
-                    <p className="text-3xl font-bold text-green-600">
-                      S/ {producto.precio}
-                    </p>
-
-                  </div>
-
-                  <button
-                    className="
-                      mt-6
-                      w-full
-                      bg-yellow-500
-                      hover:bg-yellow-400
-                      text-black
-                      font-bold
-                      py-4
-                      rounded-xl
-                      duration-300
-                    "
-                  >
-                    Ver producto
-                  </button>
+                  <p className="text-3xl font-bold text-green-600">
+                    S/ {producto.precio}
+                  </p>
 
                 </div>
 
+                <a
+                  href={`/producto/${producto.id}`}
+                  className="
+                    mt-6
+                    w-full
+                    block
+                    text-center
+                    bg-yellow-500
+                    hover:bg-yellow-400
+                    text-black
+                    font-bold
+                    py-4
+                    rounded-xl
+                    duration-300
+                  "
+                >
+                  Ver producto
+                </a>
+
               </div>
 
-            ))}
+            </div>
 
-          </div>
+          ))}
 
-        )}
+        </div>
 
-      </div>
-    </section>
-  );
+        <div className="text-center mt-12">
+
+          <a
+            href="/productos"
+            className="
+              inline-block
+              bg-black
+              text-white
+              px-8
+              py-4
+              rounded-xl
+              font-bold
+              hover:bg-gray-800
+            "
+          >
+            Ver catálogo completo
+          </a>
+
+        </div>
+
+      </>
+
+    )}
+
+  </div>
+</section>
+```
+
+);
 }
