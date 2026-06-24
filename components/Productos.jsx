@@ -245,7 +245,6 @@ return ( <section
 
   </div>
 </section>
-```
 
 );
 }
