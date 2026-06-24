@@ -1,8 +1,11 @@
 "use client";
 
-export default function Navbar() {
+export default function Navbar({
+  setCategoriaSeleccionada,
+}) {
   return (
     <nav className="bg-black border-t border-gray-800 border-b border-gray-800">
+
       <div className="max-w-7xl mx-auto flex items-center">
 
         {/* CATEGORÍAS */}
@@ -37,40 +40,49 @@ export default function Navbar() {
               z-50
             "
           >
-            <a
-              href="#productos"
-              className="block px-5 py-3 hover:bg-gray-100"
+
+            <button
+              onClick={() => setCategoriaSeleccionada("herramientas")}
+              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
             >
               🔧 Herramientas
-            </a>
+            </button>
 
-            <a
-              href="#productos"
-              className="block px-5 py-3 hover:bg-gray-100"
+            <button
+              onClick={() => setCategoriaSeleccionada("electricidad")}
+              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
             >
               ⚡ Electricidad
-            </a>
+            </button>
 
-            <a
-              href="#productos"
-              className="block px-5 py-3 hover:bg-gray-100"
+            <button
+              onClick={() => setCategoriaSeleccionada("pintura")}
+              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
             >
               🎨 Pintura
-            </a>
+            </button>
 
-            <a
-              href="#productos"
-              className="block px-5 py-3 hover:bg-gray-100"
+            <button
+              onClick={() => setCategoriaSeleccionada("gasfiteria")}
+              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
             >
               🚿 Gasfitería
-            </a>
+            </button>
 
-            <a
-              href="#productos"
-              className="block px-5 py-3 hover:bg-gray-100"
+            <button
+              onClick={() => setCategoriaSeleccionada("construccion")}
+              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
             >
               🏗️ Construcción
-            </a>
+            </button>
+
+            <button
+              onClick={() => setCategoriaSeleccionada("todos")}
+              className="block w-full text-left px-5 py-3 bg-yellow-100 hover:bg-yellow-200 font-bold"
+            >
+              📦 Ver todos
+            </button>
+
           </div>
 
         </div>
@@ -78,6 +90,7 @@ export default function Navbar() {
         {/* MENÚ PRINCIPAL */}
 
         <div className="flex-1 flex justify-center">
+
           <div className="flex gap-20">
 
             <a
@@ -137,9 +150,11 @@ export default function Navbar() {
             </a>
 
           </div>
+
         </div>
 
       </div>
+
     </nav>
   );
 }
