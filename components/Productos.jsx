@@ -1,6 +1,8 @@
 "use client";
 
-export default function Productos() {
+export default function Productos({
+  categoriaSeleccionada,
+}) {
   const productos = [
     {
       id: 1,
