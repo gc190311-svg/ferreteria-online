@@ -42,11 +42,14 @@ export default function Navbar({
           >
 
             <button
-              onClick={() => setCategoriaSeleccionada("herramientas")}
-              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
-            >
-              🔧 Herramientas
-            </button>
+  onClick={() => {
+    console.log("Herramientas");
+    setCategoriaSeleccionada("herramientas");
+  }}
+  className="block w-full text-left px-5 py-3 hover:bg-gray-100"
+>
+  🔧 Herramientas
+</button>
 
             <button
               onClick={() => setCategoriaSeleccionada("electricidad")}
