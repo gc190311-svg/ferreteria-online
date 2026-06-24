@@ -28,7 +28,7 @@ export default function Hero() {
             </p>
 
             <a
-              href="#productos"
+              href="/productos"
               className="
                 inline-block
                 mt-10
