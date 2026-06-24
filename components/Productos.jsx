@@ -68,6 +68,10 @@ return ( <section
         <h2 className="text-4xl font-bold">
           Productos destacados
         </h2>
+         
+         <p className="text-red-600 font-bold text-xl">
+  {categoriaSeleccionada}
+</p>
 
         <p className="text-yellow-600 font-semibold mt-2">
           Categoría: {tituloCategoria[categoriaSeleccionada]}
