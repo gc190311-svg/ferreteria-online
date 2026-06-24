@@ -17,14 +17,16 @@ export default function Home() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] =
     useState("todos");
 
+  console.log("Categoría actual:", categoriaSeleccionada);
+
   return (
     <>
       <TopBar />
       <Header />
 
       <Navbar
-  setCategoriaSeleccionada={setCategoriaSeleccionada}
-/>
+        setCategoriaSeleccionada={setCategoriaSeleccionada}
+      />
 
       <Hero />
       <Servicios />
