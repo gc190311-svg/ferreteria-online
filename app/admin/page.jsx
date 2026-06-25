@@ -14,26 +14,44 @@ export default function AdminPage() {
 
   const [loading, setLoading] = useState(true);
 
+  const [producto, setProducto] = useState({
+    nombre: "",
+    categoria: "herramientas",
+    precio: "",
+    precioAnterior: "",
+    marca: "",
+    stock: "",
+    imagen: "",
+    descripcion: "",
+    destacado: false,
+  });
+
   useEffect(() => {
 
-    const unsubscribe =
-      onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (user) => {
 
-        if (
-  user.email !== "gc190311@gmail.com"
-) {
-  alert("No autorizado");
-  router.push("/");
-  return;
-}
+        console.log("Usuario:", user);
+
         if (!user) {
           router.push("/login");
-        } else {
-          console.log("Usuario:", user.email);
-          setLoading(false);
+          return;
         }
 
-      });
+        if (
+          user.email !==
+          "gc190311@gmail.com"
+        ) {
+          alert("No autorizado");
+          router.push("/");
+          return;
+        }
+
+        setLoading(false);
+
+      }
+    );
 
     return () => unsubscribe();
 
