@@ -47,10 +47,23 @@ export default function CatalogoProductos() {
             >
 
               <img
-                src={producto.imagen}
-                alt={producto.nombre}
-                className="w-full h-64 object-contain p-4"
-              />
+  src={
+    producto.imagenes?.[0] ||
+    producto.imagen ||
+    "/sin-imagen.png"
+  }
+  alt={producto.nombre}
+  onError={(e) => {
+    e.target.src = "/sin-imagen.png";
+  }}
+  className="
+    w-full
+    h-64
+    object-contain
+    bg-white
+    p-4
+  "
+/>
 
               <div className="p-5">
 
