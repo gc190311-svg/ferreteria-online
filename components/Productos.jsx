@@ -126,9 +126,10 @@ export default function Productos({ categoriaSeleccionada }) {
 
                   <img
                     src={
-                      producto.imagen ||
-                      "/sin-imagen.png"
-                    }
+  producto.imagenes?.[0] ||
+  producto.imagen ||
+  "/sin-imagen.png"
+}
                     alt={producto.nombre}
                     className="w-full h-72 object-contain bg-gray-50 p-6"
                   />
