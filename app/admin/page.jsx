@@ -3,37 +3,42 @@
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 export default function AdminPage() {
+
   const router = useRouter();
 
-useEffect(() => {
-  const unsubscribe = onAuthStateChanged(
-    auth,
-    (user) => {
-      if (!user) {
-        router.push("/login");
-      }
-    }
-  );
+  const [loading, setLoading] = useState(true);
 
-  return () => unsubscribe();
-}, [router]);
-  const [producto, setProducto] = useState({
-    nombre: "",
-    categoria: "herramientas",
-    precio: "",
-    precioAnterior: "",
-    marca: "",
-    stock: "",
-    imagen: "",
-    descripcion: "",
-    destacado: false,
-  });
+  useEffect(() => {
+
+    const unsubscribe =
+      onAuthStateChanged(auth, (user) => {
+
+        if (!user) {
+          router.push("/login");
+        } else {
+          console.log("Usuario:", user.email);
+          setLoading(false);
+        }
+
+      });
+
+    return () => unsubscribe();
+
+  }, [router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        Verificando acceso...
+      </div>
+    );
+  }
 
   const guardarProducto = async () => {
 
