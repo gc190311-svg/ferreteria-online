@@ -113,15 +113,14 @@ export default function ProductosAdmin() {
 
                 <>
     <img
-        src={producto.imagen}
-        className="w-20 h-20 object-contain border"
-        alt={producto.nombre}
-    />
-
-    <p className="text-xs text-red-500 break-all">
-        {producto.imagen}
-    </p>
-</>
+  src={producto.imagen}
+  alt={producto.nombre}
+  className="w-24 h-24 object-contain border"
+  onError={(e) => {
+    console.log("Imagen no encontrada:", producto.imagen);
+    e.target.src = "/sin-imagen.png";
+  }}
+/>
                 </td>
 
                 <td className="p-4 font-semibold">
