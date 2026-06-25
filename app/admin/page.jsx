@@ -19,6 +19,13 @@ export default function AdminPage() {
     const unsubscribe =
       onAuthStateChanged(auth, (user) => {
 
+        if (
+  user.email !== "gc190311@gmail.com"
+) {
+  alert("No autorizado");
+  router.push("/");
+  return;
+}
         if (!user) {
           router.push("/login");
         } else {
