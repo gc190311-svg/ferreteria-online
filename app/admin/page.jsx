@@ -1,10 +1,28 @@
 "use client";
 
+import { auth } from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { useState } from "react";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 
 export default function AdminPage() {
+  const router = useRouter();
+
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(
+    auth,
+    (user) => {
+      if (!user) {
+        router.push("/login");
+      }
+    }
+  );
+
+  return () => unsubscribe();
+}, [router]);
   const [producto, setProducto] = useState({
     nombre: "",
     categoria: "herramientas",
