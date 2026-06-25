@@ -111,11 +111,17 @@ export default function ProductosAdmin() {
 
                 <td className="p-4">
 
-                  <img
-                    src={producto.imagen}
-                    className="w-20 h-20 object-contain"
-                  />
+                <>
+    <img
+        src={producto.imagen}
+        className="w-20 h-20 object-contain border"
+        alt={producto.nombre}
+    />
 
+    <p className="text-xs text-red-500 break-all">
+        {producto.imagen}
+    </p>
+</>
                 </td>
 
                 <td className="p-4 font-semibold">
