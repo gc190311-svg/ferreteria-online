@@ -10,6 +10,10 @@ import { collection, addDoc } from "firebase/firestore";
 
 export default function AdminPage() {
 
+  const [archivo, setArchivo] = useState(null);
+
+const [subiendo, setSubiendo] = useState(false);
+  
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
@@ -239,6 +243,31 @@ alert(
             className="w-full border p-3 rounded-xl"
           />
 
+          <div className="space-y-3">
+
+<label className="font-semibold">
+
+Imagen del producto
+
+</label>
+
+<input
+
+type="file"
+
+accept="image/*"
+
+onChange={(e)=>{
+
+setArchivo(e.target.files[0]);
+
+}}
+
+className="w-full border rounded-xl p-3"
+
+/>
+
+</div>
          
 
           {producto.imagen && (
