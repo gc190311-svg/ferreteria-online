@@ -111,17 +111,21 @@ export default function ProductosAdmin() {
 
                 <td className="p-4">
 
-                <>
-    <img
-  src={producto.imagen}
-  alt={producto.nombre}
-  className="w-24 h-24 object-contain border"
-  onError={(e) => {
-    console.log("Imagen no encontrada:", producto.imagen);
-    e.target.src = "/sin-imagen.png";
-  }}
-/>
-                </td>
+  <img
+    src={
+      producto.imagen ||
+      producto.imagenes?.[0] ||
+      "/sin-imagen.png"
+    }
+    alt={producto.nombre}
+    className="w-24 h-24 object-contain border rounded-lg"
+    onError={(e) => {
+      e.currentTarget.src = "/sin-imagen.png";
+    }}
+  />
+
+</td>
+              
 
                 <td className="p-4 font-semibold">
                   {producto.nombre}
