@@ -1,110 +1,38 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { db } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import Header from "@/components/Header";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
+import BannerCatalogo from "@/components/catalogo/BannerCatalogo";
+import SidebarFiltros from "@/components/catalogo/SidebarFiltros";
+import BuscadorCatalogo from "@/components/catalogo/BuscadorCatalogo";
+import GridProductos from "@/components/catalogo/GridProductos";
 
 export default function CatalogoProductos() {
-  const [productos, setProductos] = useState([]);
-
-  useEffect(() => {
-    cargarProductos();
-  }, []);
-
-  const cargarProductos = async () => {
-    try {
-      const querySnapshot = await getDocs(
-        collection(db, "productos")
-      );
-
-      const lista = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-
-      setProductos(lista);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-6">
+    <>
+      <Header />
 
-      <div className="max-w-7xl mx-auto">
+      <Navbar />
 
-        <h1 className="text-4xl font-bold mb-10">
-          Catálogo Completo
-        </h1>
+      <BannerCatalogo />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto flex gap-8 py-10 px-4">
 
-          {productos.map((producto) => (
+        <SidebarFiltros />
 
-            <div
-              key={producto.id}
-              className="bg-white rounded-3xl shadow-lg overflow-hidden"
-            >
+        <div className="flex-1">
 
-              <img
-  src={
-    producto.imagenes?.[0] ||
-    producto.imagen ||
-    "/sin-imagen.png"
-  }
-  alt={producto.nombre}
-  onError={(e) => {
-    e.target.src = "/sin-imagen.png";
-  }}
-  className="
-    w-full
-    h-64
-    object-contain
-    bg-white
-    p-4
-  "
-/>
+          <BuscadorCatalogo />
 
-              <div className="p-5">
-
-                <h3 className="font-bold text-xl mb-3">
-                  {producto.nombre}
-                </h3>
-
-                <p className="text-gray-500">
-                  Marca: {producto.marca}
-                </p>
-
-                <p className="text-green-600 text-3xl font-bold mt-3">
-                  S/ {producto.precio}
-                </p>
-
-                <a
-                  href={`/producto/${producto.id}`}
-                  className="
-                    block
-                    text-center
-                    mt-4
-                    bg-yellow-500
-                    hover:bg-yellow-400
-                    py-3
-                    rounded-xl
-                    font-bold
-                  "
-                >
-                  Ver producto
-                </a>
-
-              </div>
-
-            </div>
-
-          ))}
+          <GridProductos />
 
         </div>
 
       </div>
 
-    </div>
+      <Footer />
+    </>
   );
 }
