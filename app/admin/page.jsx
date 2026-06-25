@@ -18,54 +18,71 @@ export default function AdminPage() {
   });
 
   const guardarProducto = async () => {
-    if (
-      !producto.nombre ||
-      !producto.precio ||
-      !producto.imagen
-    ) {
-      alert("Completa los campos obligatorios");
-      return;
-    }
 
-    try {
-      await addDoc(collection(db, "productos"), {
-        nombre: producto.nombre,
-        categoria: producto.categoria,
-        precio: Number(producto.precio),
-        precioAnterior: Number(producto.precioAnterior),
-        marca: producto.marca,
-        stock: Number(producto.stock),
-        imagen: producto.imagen,
-        descripcion: producto.descripcion,
-        destacado: producto.destacado,
-        fechaCreacion: new Date(),
-      });
+if (
+!producto.nombre ||
+!producto.precio ||
+!producto.imagen
+) {
+alert("Completa los campos obligatorios");
+return;
+}
 
-      alert("Producto agregado correctamente");
+try {
 
-      setProducto({
-        nombre: "",
-        categoria: "herramientas",
-        precio: "",
-        precioAnterior: "",
-        marca: "",
-        stock: "",
-        imagen: "",
-        descripcion: "",
-        destacado: false,
-      });
+```
+await addDoc(collection(db, "productos"), {
+  nombre: producto.nombre,
+  categoria: producto.categoria,
+  precio: Number(producto.precio),
+  precioAnterior: Number(producto.precioAnterior),
+  marca: producto.marca,
+  stock: Number(producto.stock),
 
-    } catch (error) {
-      console.error(error);
+  // Compatibilidad con catálogo antiguo
+  imagen: producto.imagen,
 
-      alert(
-        "Error: " +
-          error.code +
-          " - " +
-          error.message
-      );
-    }
-  };
+  // Compatibilidad con página de detalle
+  imagenes: [
+    producto.imagen
+  ],
+
+  descripcion: producto.descripcion,
+  destacado: producto.destacado,
+  fechaCreacion: new Date(),
+});
+
+alert("Producto agregado correctamente");
+
+setProducto({
+  nombre: "",
+  categoria: "herramientas",
+  precio: "",
+  precioAnterior: "",
+  marca: "",
+  stock: "",
+  imagen: "",
+  descripcion: "",
+  destacado: false,
+});
+```
+
+} catch (error) {
+
+```
+console.error(error);
+
+alert(
+  "Error: " +
+  error.code +
+  " - " +
+  error.message
+);
+```
+
+}
+};
+
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
