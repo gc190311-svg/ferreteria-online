@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import {
   FaSearch,
   FaUser,
@@ -69,30 +71,39 @@ export default function Header() {
 
           </div>
 
-          {/* ICONOS */}
+{/* ICONOS */}
 
-          <div className="w-[180px] flex justify-end gap-10 text-white">
+<div className="w-[180px] flex justify-end gap-10 text-white">
 
-            <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
+  <Link href="/login">
 
-              <FaUser className="text-2xl" />
+    <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
 
-              <span className="text-sm">
-                Mi cuenta
-              </span>
+      <FaUser className="text-2xl" />
 
-            </div>
-            </Link>
+      <span className="text-sm">
+        Mi cuenta
+      </span>
 
-            <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
+    </div>
 
-              <FaShoppingCart className="text-2xl" />
+  </Link>
 
-              <span className="text-sm">
-                Carrito
-              </span>
+  <Link href="/carrito">
 
-            </div>
+    <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
+
+      <FaShoppingCart className="text-2xl" />
+
+      <span className="text-sm">
+        Carrito
+      </span>
+
+    </div>
+
+  </Link>
+
+</div>
 
           </div>
 
