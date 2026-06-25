@@ -4,120 +4,168 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import {
-    FaHome,
-    FaBoxOpen,
-    FaClipboardList,
-    FaUsers,
-    FaChartBar,
-    FaCog,
-    FaSignOutAlt,
+  FaHome,
+  FaBoxOpen,
+  FaClipboardList,
+  FaUsers,
+  FaChartBar,
+  FaCog,
+  FaSignOutAlt,
+  FaBell,
+  FaPlus
 } from "react-icons/fa";
 
 const menu = [
-    {
-        nombre: "Dashboard",
-        ruta: "/admin",
-        icono: FaHome,
-    },
-    {
-        nombre: "Productos",
-        ruta: "/admin/productos",
-        icono: FaBoxOpen,
-    },
-    {
-        nombre: "Pedidos",
-        ruta: "/admin/pedidos",
-        icono: FaClipboardList,
-    },
-    {
-        nombre: "Clientes",
-        ruta: "/admin/clientes",
-        icono: FaUsers,
-    },
-    {
-        nombre: "Reportes",
-        ruta: "/admin/reportes",
-        icono: FaChartBar,
-    },
-    {
-        nombre: "Configuración",
-        ruta: "/admin/configuracion",
-        icono: FaCog,
-    },
+  {
+    nombre: "Dashboard",
+    ruta: "/admin",
+    icono: FaHome,
+  },
+  {
+    nombre: "Productos",
+    ruta: "/admin/productos",
+    icono: FaBoxOpen,
+  },
+  {
+    nombre: "Pedidos",
+    ruta: "/admin/pedidos",
+    icono: FaClipboardList,
+  },
+  {
+    nombre: "Clientes",
+    ruta: "/admin/clientes",
+    icono: FaUsers,
+  },
+  {
+    nombre: "Reportes",
+    ruta: "/admin/reportes",
+    icono: FaChartBar,
+  },
+  {
+    nombre: "Configuración",
+    ruta: "/admin/configuracion",
+    icono: FaCog,
+  },
 ];
 
 export default function Sidebar() {
 
-    const pathname = usePathname();
+  const pathname = usePathname();
 
-    return (
+  return (
 
-        <aside className="w-72 bg-zinc-900 text-white min-h-screen">
+    <aside className="w-72 bg-zinc-900 text-white min-h-screen flex flex-col">
 
-            <div className="text-center py-8">
+      {/* LOGO */}
 
-                <img
-                    src="/logo.png"
-                    className="h-20 mx-auto"
-                />
+      <div className="text-center py-8 border-b border-zinc-700">
 
-                <h2 className="mt-4 font-bold text-xl">
-                    Brico Hogar
-                </h2>
+        <img
+          src="/logo.png"
+          alt="Brico Hogar"
+          className="h-20 mx-auto"
+        />
 
-            </div>
+        <h2 className="mt-4 text-2xl font-bold">
+          Brico Hogar
+        </h2>
 
-            <nav className="mt-8">
+        <p className="text-zinc-400 text-sm">
+          Panel Administrativo
+        </p>
 
-                {menu.map((item) => {
+      </div>
 
-                    const Icono = item.icono;
+      {/* BOTÓN NUEVO PRODUCTO */}
 
-                    return (
+      <div className="p-5">
 
-                        <Link
-                            key={item.ruta}
-                            href={item.ruta}
-                        >
+        <Link
+          href="/admin"
+          className="flex items-center justify-center gap-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 rounded-xl transition"
+        >
 
-                            <div
-                                className={`flex items-center gap-4 px-8 py-4 transition hover:bg-yellow-500 hover:text-black ${
-                                    pathname === item.ruta
-                                        ? "bg-yellow-500 text-black"
-                                        : ""
-                                }`}
-                            >
+          <FaPlus />
 
-                                <Icono />
+          Nuevo Producto
 
-                                {item.nombre}
+        </Link>
 
-                            </div>
+      </div>
 
-                        </Link>
+      {/* MENÚ */}
 
-                    );
+      <nav className="flex-1">
 
-                })}
+        {menu.map((item) => {
 
-                <hr className="my-6 border-zinc-700" />
+          const Icono = item.icono;
 
-                <Link href="/login">
+          return (
 
-                    <div className="flex items-center gap-4 px-8 py-4 hover:bg-red-500 transition">
+            <Link
+              key={item.ruta}
+              href={item.ruta}
+            >
 
-                        <FaSignOutAlt />
+              <div
+                className={`flex items-center gap-4 px-8 py-4 transition
 
-                        Salir
+                ${
+                  pathname === item.ruta
+                    ? "bg-yellow-500 text-black font-bold"
+                    : "hover:bg-zinc-800"
+                }
 
-                    </div>
+                `}
+              >
 
-                </Link>
+                <Icono className="text-lg" />
 
-            </nav>
+                {item.nombre}
 
-        </aside>
+              </div>
 
-    );
+            </Link>
+
+          );
+
+        })}
+
+      </nav>
+
+      {/* PIE */}
+
+      <div className="border-t border-zinc-700">
+
+        <Link href="/">
+
+          <div className="flex items-center gap-4 px-8 py-4 hover:bg-zinc-800">
+
+            <FaBell />
+
+            Ir a la tienda
+
+          </div>
+
+        </Link>
+
+        <Link href="/login">
+
+          <div className="flex items-center gap-4 px-8 py-4 hover:bg-red-600">
+
+            <FaSignOutAlt />
+
+            Cerrar sesión
+
+          </div>
+
+        </Link>
+
+      </div>
+
+    </aside>
+
+  );
 
 }
