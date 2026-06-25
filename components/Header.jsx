@@ -82,6 +82,7 @@ export default function Header() {
               </span>
 
             </div>
+            </Link>
 
             <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
 
