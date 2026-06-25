@@ -5,7 +5,7 @@ import Link from "next/link";
 import {
   FaSearch,
   FaUser,
-  FaShoppingCart
+  FaShoppingCart,
 } from "react-icons/fa";
 
 export default function Header() {
@@ -20,11 +20,15 @@ export default function Header() {
 
           <div className="w-[220px] flex justify-start">
 
-            <img
-              src="/logo.png"
-              alt="Brico Hogar"
-              className="h-32 w-auto"
-            />
+            <Link href="/">
+
+              <img
+                src="/logo.png"
+                alt="Brico Hogar"
+                className="h-32 w-auto cursor-pointer"
+              />
+
+            </Link>
 
           </div>
 
@@ -63,47 +67,52 @@ export default function Header() {
                   transition
                 "
               >
+
                 <FaSearch />
+
                 Buscar
+
               </button>
 
             </div>
 
           </div>
 
-{/* ICONOS */}
+          {/* ICONOS */}
 
-<div className="w-[180px] flex justify-end gap-10 text-white">
+          <div className="w-[180px] flex justify-end gap-10 text-white">
 
-  <Link href="/login">
+            <Link href="/login">
 
-    <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
+              <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
 
-      <FaUser className="text-2xl" />
+                <FaUser className="text-2xl" />
 
-      <span className="text-sm">
-        Mi cuenta
-      </span>
+                <span className="text-sm">
 
-    </div>
+                  Mi Cuenta
 
-  </Link>
+                </span>
 
-  <Link href="/carrito">
+              </div>
 
-    <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
+            </Link>
 
-      <FaShoppingCart className="text-2xl" />
+            <Link href="/carrito">
 
-      <span className="text-sm">
-        Carrito
-      </span>
+              <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
 
-    </div>
+                <FaShoppingCart className="text-2xl" />
 
-  </Link>
+                <span className="text-sm">
 
-</div>
+                  Carrito
+
+                </span>
+
+              </div>
+
+            </Link>
 
           </div>
 
@@ -114,6 +123,3 @@ export default function Header() {
     </header>
   );
 }
-        
-              
-       
