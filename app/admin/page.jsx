@@ -1,60 +1,82 @@
 "use client";
 
-import { auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
-import { db } from "../firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+
+import { onAuthStateChanged } from "firebase/auth";
+
+import {
+  collection,
+  addDoc,
+} from "firebase/firestore";
 
 export default function AdminPage() {
 
-  const [archivo, setArchivo] = useState(null);
-
-const [subiendo, setSubiendo] = useState(false);
-  
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
 
+  const [subiendo, setSubiendo] = useState(false);
+
+  const [archivo, setArchivo] = useState(null);
+
   const [producto, setProducto] = useState({
+
     nombre: "",
+
     categoria: "herramientas",
+
     precio: "",
+
     precioAnterior: "",
+
     marca: "",
+
     stock: "",
-    imagen: "",
+
     descripcion: "",
+
     destacado: false,
+
   });
 
   useEffect(() => {
 
     const unsubscribe = onAuthStateChanged(
+
       auth,
+
       (user) => {
 
-        console.log("Usuario:", user);
-
         if (!user) {
+
           router.push("/login");
+
           return;
+
         }
 
         if (
           user.email !==
           "gc190311@gmail.com"
         ) {
+
           alert("No autorizado");
+
           router.push("/");
+
           return;
+
         }
+
+        console.log("Administrador:", user.email);
 
         setLoading(false);
 
       }
+
     );
 
     return () => unsubscribe();
@@ -62,81 +84,157 @@ const [subiendo, setSubiendo] = useState(false);
   }, [router]);
 
   if (loading) {
+
     return (
-      <div className="min-h-screen flex items-center justify-center">
+
+      <div className="min-h-screen flex items-center justify-center text-xl">
+
         Verificando acceso...
+
       </div>
+
     );
+
   }
+    const guardarProducto = async () => {
 
-  const guardarProducto = async () => {
+    if (!archivo) {
+      alert("Selecciona una imagen.");
+      return;
+    }
 
-if (
-!producto.nombre ||
-!producto.precio ||
-!producto.imagen
-) {
-alert("Completa los campos obligatorios");
-return;
-}
+    if (
+      !producto.nombre ||
+      !producto.precio
+    ) {
+      alert("Completa los campos obligatorios.");
+      return;
+    }
 
-try {
+    try {
 
-```
-await addDoc(collection(db, "productos"), {
-  nombre: producto.nombre,
-  categoria: producto.categoria,
-  precio: Number(producto.precio),
-  precioAnterior: Number(producto.precioAnterior),
-  marca: producto.marca,
-  stock: Number(producto.stock),
+      setSubiendo(true);
 
-  // Compatibilidad con catálogo antiguo
-  imagen: producto.imagen,
+      // Subir imagen a Cloudinary
+      const formData = new FormData();
 
-  // Compatibilidad con página de detalle
-  imagenes: [
-    producto.imagen
-  ],
+      formData.append("file", archivo);
 
-  descripcion: producto.descripcion,
-  destacado: producto.destacado,
-  fechaCreacion: new Date(),
-});
+      formData.append(
+        "upload_preset",
+        "productos_brico"
+      );
 
-alert("Producto agregado correctamente");
+      const respuesta = await fetch(
+        "https://api.cloudinary.com/v1_1/dl7tlwhoy/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-setProducto({
-  nombre: "",
-  categoria: "herramientas",
-  precio: "",
-  precioAnterior: "",
-  marca: "",
-  stock: "",
-  imagen: "",
-  descripcion: "",
-  destacado: false,
-});
-```
+      const datos = await respuesta.json();
 
-} catch (error) {
+      if (!datos.secure_url) {
 
-```
-console.error(error);
+        throw new Error(
+          "No se pudo subir la imagen."
+        );
 
-alert(
-  "Error: " +
-  error.code +
-  " - " +
-  error.message
-);
-```
+      }
 
-}
-};
+      // Guardar producto en Firestore
 
+      await addDoc(
+        collection(db, "productos"),
+        {
 
-  return (
+          nombre: producto.nombre,
+
+          categoria: producto.categoria,
+
+          precio: Number(producto.precio),
+
+          precioAnterior: Number(
+            producto.precioAnterior
+          ),
+
+          marca: producto.marca,
+
+          stock: Number(
+            producto.stock
+          ),
+
+          imagen: datos.secure_url,
+
+          imagenes: [
+            datos.secure_url,
+          ],
+
+          descripcion:
+            producto.descripcion,
+
+          destacado:
+            producto.destacado,
+
+          fechaCreacion:
+            new Date(),
+
+        }
+      );
+
+      alert(
+        "Producto agregado correctamente."
+      );
+
+      setProducto({
+
+        nombre: "",
+
+        categoria:
+          "herramientas",
+
+        precio: "",
+
+        precioAnterior: "",
+
+        marca: "",
+
+        stock: "",
+
+        descripcion: "",
+
+        destacado: false,
+
+      });
+
+      setArchivo(null);
+
+      const inputFile =
+        document.querySelector(
+          'input[type="file"]'
+        );
+
+      if (inputFile) {
+        inputFile.value = "";
+      }
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "Error al guardar el producto."
+      );
+
+    } finally {
+
+      setSubiendo(false);
+
+    }
+
+  };
+    return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
 
       <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-8">
@@ -145,16 +243,16 @@ alert(
           Panel Administrador
         </h1>
 
-        <div className="space-y-4">
+        <div className="space-y-5">
 
           <input
             type="text"
             placeholder="Nombre del producto"
             value={producto.nombre}
-            onChange={(e) =>
+            onChange={(e)=>
               setProducto({
                 ...producto,
-                nombre: e.target.value,
+                nombre:e.target.value
               })
             }
             className="w-full border p-3 rounded-xl"
@@ -162,14 +260,15 @@ alert(
 
           <select
             value={producto.categoria}
-            onChange={(e) =>
+            onChange={(e)=>
               setProducto({
                 ...producto,
-                categoria: e.target.value,
+                categoria:e.target.value
               })
             }
             className="w-full border p-3 rounded-xl"
           >
+
             <option value="herramientas">
               Herramientas
             </option>
@@ -189,16 +288,17 @@ alert(
             <option value="construccion">
               Construcción
             </option>
+
           </select>
 
           <input
             type="number"
             placeholder="Precio"
             value={producto.precio}
-            onChange={(e) =>
+            onChange={(e)=>
               setProducto({
                 ...producto,
-                precio: e.target.value,
+                precio:e.target.value
               })
             }
             className="w-full border p-3 rounded-xl"
@@ -208,10 +308,10 @@ alert(
             type="number"
             placeholder="Precio anterior"
             value={producto.precioAnterior}
-            onChange={(e) =>
+            onChange={(e)=>
               setProducto({
                 ...producto,
-                precioAnterior: e.target.value,
+                precioAnterior:e.target.value
               })
             }
             className="w-full border p-3 rounded-xl"
@@ -221,10 +321,10 @@ alert(
             type="text"
             placeholder="Marca"
             value={producto.marca}
-            onChange={(e) =>
+            onChange={(e)=>
               setProducto({
                 ...producto,
-                marca: e.target.value,
+                marca:e.target.value
               })
             }
             className="w-full border p-3 rounded-xl"
@@ -232,91 +332,117 @@ alert(
 
           <input
             type="number"
-            placeholder="Stock disponible"
+            placeholder="Stock"
             value={producto.stock}
-            onChange={(e) =>
+            onChange={(e)=>
               setProducto({
                 ...producto,
-                stock: e.target.value,
+                stock:e.target.value
               })
             }
             className="w-full border p-3 rounded-xl"
           />
 
-          <div className="space-y-3">
-
-<label className="font-semibold">
-
-Imagen del producto
-
-</label>
-
-<input
-
-type="file"
-
-accept="image/*"
-
-onChange={(e)=>{
-
-setArchivo(e.target.files[0]);
-
-}}
-
-className="w-full border rounded-xl p-3"
-
-/>
-
-</div>
-         
-
-          {producto.imagen && (
-            <img
-              src={producto.imagen}
-             
-              className="w-48 h-48 object-contain border rounded-xl mx-auto"
-            />
-          )}
-
           <textarea
             placeholder="Descripción"
             value={producto.descripcion}
-            onChange={(e) =>
+            onChange={(e)=>
               setProducto({
                 ...producto,
-                descripcion: e.target.value,
+                descripcion:e.target.value
               })
             }
             className="w-full border p-3 rounded-xl h-32"
           />
 
-          <label className="flex items-center gap-3 font-medium">
+          <div>
+
+            <label className="block mb-2 font-semibold">
+
+              Imagen del producto
+
+            </label>
+
+            <input
+              type="file"
+              accept="image/*"
+              onChange={(e)=>
+                setArchivo(
+                  e.target.files[0]
+                )
+              }
+              className="w-full border p-3 rounded-xl"
+            />
+
+          </div>
+
+          {archivo && (
+
+            <div className="text-center">
+
+              <img
+                src={URL.createObjectURL(archivo)}
+                alt="Vista previa"
+                className="w-56 h-56 object-contain border rounded-xl mx-auto"
+              />
+
+              <p className="mt-3 text-gray-500">
+
+                Vista previa
+
+              </p>
+
+            </div>
+
+          )}
+
+          <label className="flex items-center gap-3">
+
             <input
               type="checkbox"
               checked={producto.destacado}
-              onChange={(e) =>
+              onChange={(e)=>
                 setProducto({
                   ...producto,
-                  destacado: e.target.checked,
+                  destacado:e.target.checked
                 })
               }
             />
-            Mostrar en página principal
+
+            Mostrar en la página principal
+
           </label>
 
           <button
+
             onClick={guardarProducto}
+
+            disabled={subiendo}
+
             className="
               w-full
               bg-yellow-500
               hover:bg-yellow-400
+              disabled:bg-gray-400
               text-black
               font-bold
               py-4
               rounded-xl
+              transition
             "
+
           >
-            Guardar Producto
+
+            {
+
+              subiendo
+
+                ? "Subiendo imagen..."
+
+                : "Guardar Producto"
+
+            }
+
           </button>
 
         </div>
@@ -324,5 +450,7 @@ className="w-full border rounded-xl p-3"
       </div>
 
     </div>
+
   );
+
 }
