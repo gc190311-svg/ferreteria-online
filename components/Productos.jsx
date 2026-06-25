@@ -4,247 +4,192 @@ import { useEffect, useState } from "react";
 import { db } from "../app/firebase";
 import { collection, getDocs } from "firebase/firestore";
 
-export default function Productos({
-categoriaSeleccionada,
-}) {
+export default function Productos({ categoriaSeleccionada }) {
 
-const [productos, setProductos] = useState([]);
-const [cargando, setCargando] = useState(true);
+  const [productos, setProductos] = useState([]);
+  const [cargando, setCargando] = useState(true);
 
-useEffect(() => {
+  useEffect(() => {
 
-```
-const cargarProductos = async () => {
+    const cargarProductos = async () => {
 
-  try {
+      try {
 
-    const querySnapshot =
-      await getDocs(collection(db, "productos"));
+        const querySnapshot = await getDocs(
+          collection(db, "productos")
+        );
 
-    const listaProductos = [];
+        const listaProductos = [];
 
-    querySnapshot.forEach((doc) => {
+        querySnapshot.forEach((doc) => {
+          listaProductos.push({
+            id: doc.id,
+            ...doc.data(),
+          });
+        });
 
-      listaProductos.push({
-        id: doc.id,
-        ...doc.data(),
-      });
+        // Mostrar solo 4 productos destacados
+        const destacados = listaProductos.slice(0, 4);
 
-    });
+        setProductos(destacados);
 
-    const destacados = listaProductos
-      .filter(
-        (producto) =>
-          producto.destacado === true
-      )
-      .slice(0, 4);
+      } catch (error) {
 
-    setProductos(destacados);
+        console.error("Error cargando productos:", error);
 
-  } catch (error) {
+      } finally {
 
-    console.log(error);
+        setCargando(false);
 
-  } finally {
+      }
+    };
 
-    setCargando(false);
+    cargarProductos();
 
-  }
+  }, []);
 
-};
+  const productosFiltrados =
+    categoriaSeleccionada === "todos"
+      ? productos
+      : productos.filter(
+          (producto) =>
+            producto.categoria === categoriaSeleccionada
+        );
 
-cargarProductos();
-```
+  const tituloCategoria = {
+    todos: "Todos los productos",
+    herramientas: "Herramientas",
+    electricidad: "Electricidad",
+    pintura: "Pintura",
+    gasfiteria: "Gasfitería",
+    construccion: "Construcción",
+  };
 
-}, []);
+  return (
+    <section
+      id="productos"
+      className="bg-gray-100 py-20"
+    >
+      <div className="max-w-7xl mx-auto px-6">
 
-const productosFiltrados =
-categoriaSeleccionada === "todos"
-? productos
-: productos.filter(
-(producto) =>
-producto.categoria ===
-categoriaSeleccionada
-);
+        <div className="flex justify-between items-center mb-10">
 
-const tituloCategoria = {
-todos: "Todos los productos",
-herramientas: "Herramientas",
-electricidad: "Electricidad",
-pintura: "Pintura",
-gasfiteria: "Gasfitería",
-construccion: "Construcción",
-};
+          <div>
+            <h2 className="text-4xl font-bold">
+              Productos destacados
+            </h2>
 
-return ( <section
-   id="productos"
-   className="bg-gray-100 py-20"
- > <div className="max-w-7xl mx-auto px-6">
+            <p className="text-yellow-600 font-semibold mt-2">
+              Categoría:{" "}
+              {tituloCategoria[categoriaSeleccionada] ||
+                "Todos los productos"}
+            </p>
+          </div>
 
-```
-    <div className="flex justify-between items-center mb-10">
+          <span className="text-gray-500 text-xl">
+            {productosFiltrados.length} productos
+          </span>
 
-      <div>
+        </div>
 
-        <h2 className="text-4xl font-bold">
-          Productos destacados
-        </h2>
+        {cargando ? (
 
-        <p className="text-yellow-600 font-semibold mt-2">
-          Categoría:{" "}
-          {tituloCategoria[
-            categoriaSeleccionada
-          ]}
-        </p>
+          <div className="text-center py-20">
+            <p className="text-2xl font-semibold">
+              Cargando productos...
+            </p>
+          </div>
 
-      </div>
+        ) : productosFiltrados.length === 0 ? (
 
-      <span className="text-gray-500 text-xl">
-        {productosFiltrados.length}
-        {" "}productos
-      </span>
+          <div className="text-center py-20">
+            <h3 className="text-3xl font-bold mb-4">
+              No hay productos
+            </h3>
 
-    </div>
+            <p className="text-gray-500">
+              No se encontraron productos para esta categoría.
+            </p>
+          </div>
 
-    {cargando ? (
+        ) : (
 
-      <div className="text-center py-20">
+          <>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
 
-        <p className="text-2xl font-semibold">
-          Cargando productos...
-        </p>
+              {productosFiltrados.map((producto) => (
 
-      </div>
+                <div
+                  key={producto.id}
+                  className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl duration-300"
+                >
 
-    ) : productosFiltrados.length === 0 ? (
+                  <img
+                    src={
+                      producto.imagen ||
+                      "/sin-imagen.png"
+                    }
+                    alt={producto.nombre}
+                    className="w-full h-72 object-contain bg-gray-50 p-6"
+                  />
 
-      <div className="text-center py-20">
+                  <div className="p-6">
 
-        <h3 className="text-3xl font-bold mb-4">
-          No hay productos
-        </h3>
+                    <h3 className="font-bold text-xl min-h-[90px]">
+                      {producto.nombre}
+                    </h3>
 
-        <p className="text-gray-500">
-          No se encontraron productos
-          para esta categoría.
-        </p>
+                    {producto.marca && (
+                      <p className="text-gray-500 text-sm mb-2">
+                        Marca: {producto.marca}
+                      </p>
+                    )}
 
-      </div>
+                    <div className="mt-4">
 
-    ) : (
+                      {producto.precioAnterior > 0 && (
+                        <p className="text-gray-400 line-through text-lg">
+                          S/ {producto.precioAnterior}
+                        </p>
+                      )}
 
-      <>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                      <p className="text-3xl font-bold text-green-600">
+                        S/ {producto.precio}
+                      </p>
 
-          {productosFiltrados.map(
-            (producto) => (
+                    </div>
 
-            <div
-              key={producto.id}
-              className="
-                bg-white
-                rounded-3xl
-                shadow-lg
-                overflow-hidden
-                hover:shadow-2xl
-                duration-300
-              "
-            >
+                    <a
+                      href={`/producto/${producto.id}`}
+                      className="mt-6 w-full block text-center bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-4 rounded-xl"
+                    >
+                      Ver producto
+                    </a>
 
-              <img
-                src={
-                  producto.imagen ||
-                  "/sin-imagen.png"
-                }
-                alt={producto.nombre}
-                className="
-                  w-full
-                  h-72
-                  object-contain
-                  bg-gray-50
-                  p-6
-                "
-              />
-
-              <div className="p-6">
-
-                <h3 className="font-bold text-xl min-h-[90px]">
-                  {producto.nombre}
-                </h3>
-
-                {producto.marca && (
-                  <p className="text-gray-500 text-sm mb-2">
-                    Marca: {producto.marca}
-                  </p>
-                )}
-
-                <div className="mt-4">
-
-                  {producto.precioAnterior > 0 && (
-                    <p className="text-gray-400 line-through text-lg">
-                      S/ {producto.precioAnterior}
-                    </p>
-                  )}
-
-                  <p className="text-3xl font-bold text-green-600">
-                    S/ {producto.precio}
-                  </p>
+                  </div>
 
                 </div>
 
-                <a
-                  href={`/producto/${producto.id}`}
-                  className="
-                    mt-6
-                    w-full
-                    block
-                    text-center
-                    bg-yellow-500
-                    hover:bg-yellow-400
-                    text-black
-                    font-bold
-                    py-4
-                    rounded-xl
-                    duration-300
-                  "
-                >
-                  Ver producto
-                </a>
-
-              </div>
+              ))}
 
             </div>
 
-          ))}
+            <div className="text-center mt-12">
 
-        </div>
+              <a
+                href="/productos"
+                className="inline-block bg-black text-white px-8 py-4 rounded-xl font-bold hover:bg-gray-800"
+              >
+                Ver catálogo completo
+              </a>
 
-        <div className="text-center mt-12">
+            </div>
 
-          <a
-            href="/productos"
-            className="
-              inline-block
-              bg-black
-              text-white
-              px-8
-              py-4
-              rounded-xl
-              font-bold
-              hover:bg-gray-800
-            "
-          >
-            Ver catálogo completo
-          </a>
+          </>
 
-        </div>
+        )}
 
-      </>
-
-    )}
-
-  </div>
-</section>
-
-);
+      </div>
+    </section>
+  );
 }
