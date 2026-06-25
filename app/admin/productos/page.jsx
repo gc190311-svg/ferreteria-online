@@ -1,31 +1,32 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import {
-  collection,
-  getDocs,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 
-export default function AdminProductos() {
+export default function ProductosAdmin() {
 
   const [productos, setProductos] = useState([]);
+  const [busqueda, setBusqueda] = useState("");
+
+  useEffect(() => {
+    cargarProductos();
+  }, []);
 
   const cargarProductos = async () => {
 
-    const snapshot = await getDocs(
+    const querySnapshot = await getDocs(
       collection(db, "productos")
     );
 
     const lista = [];
 
-    snapshot.forEach((item) => {
+    querySnapshot.forEach((doc) => {
 
       lista.push({
-        id: item.id,
-        ...item.data(),
+        id: doc.id,
+        ...doc.data(),
       });
 
     });
@@ -34,103 +35,124 @@ export default function AdminProductos() {
 
   };
 
-  useEffect(() => {
-    cargarProductos();
-  }, []);
-
-  const eliminarProducto = async (id) => {
-
-    const confirmar = confirm(
-      "¿Eliminar producto?"
-    );
-
-    if (!confirmar) return;
-
-    await deleteDoc(
-      doc(db, "productos", id)
-    );
-
-    cargarProductos();
-
-  };
+  const productosFiltrados = productos.filter((producto) =>
+    producto.nombre
+      ?.toLowerCase()
+      .includes(busqueda.toLowerCase())
+  );
 
   return (
 
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="p-8">
 
-      <h1 className="text-4xl font-bold mb-8">
-        Administrar Productos
-      </h1>
+      <div className="flex justify-between items-center mb-8">
 
-      <div className="grid gap-6">
+        <h1 className="text-4xl font-bold">
+          Productos
+        </h1>
 
-        {productos.map((producto) => (
+        <Link
+          href="/admin"
+          className="bg-yellow-500 text-black px-6 py-3 rounded-xl font-bold hover:bg-yellow-400"
+        >
+          + Nuevo Producto
+        </Link>
 
-          <div
-            key={producto.id}
-            className="bg-white rounded-xl shadow p-4 flex gap-4 items-center"
-          >
+      </div>
 
-            <img
-              src={
-                producto.imagen ||
-                "/sin-imagen.png"
-              }
-              alt={producto.nombre}
-              className="w-24 h-24 object-contain border"
-            />
+      <input
+        type="text"
+        placeholder="Buscar producto..."
+        value={busqueda}
+        onChange={(e)=>setBusqueda(e.target.value)}
+        className="border p-3 rounded-xl w-full mb-6"
+      />
 
-            <div className="flex-1">
+      <div className="bg-white rounded-2xl shadow overflow-hidden">
 
-              <h2 className="font-bold text-xl">
-                {producto.nombre}
-              </h2>
+        <table className="w-full">
 
-              <p>
-                Precio:
-                S/ {producto.precio}
-              </p>
+          <thead className="bg-gray-100">
 
-              <p>
-                Stock:
-                {producto.stock}
-              </p>
+            <tr>
 
-            </div>
+              <th className="p-4 text-left">
+                Imagen
+              </th>
 
-            <a
-              href={`/admin/productos/${producto.id}`}
-              className="
-                bg-blue-600
-                text-white
-                px-4
-                py-2
-                rounded-lg
-              "
-            >
-              Editar
-            </a>
+              <th className="p-4 text-left">
+                Producto
+              </th>
 
-            <button
-              onClick={() =>
-                eliminarProducto(
-                  producto.id
-                )
-              }
-              className="
-                bg-red-600
-                text-white
-                px-4
-                py-2
-                rounded-lg
-              "
-            >
-              Eliminar
-            </button>
+              <th className="p-4">
+                Precio
+              </th>
 
-          </div>
+              <th className="p-4">
+                Stock
+              </th>
 
-        ))}
+              <th className="p-4">
+                Acciones
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            {productosFiltrados.map((producto)=>(
+
+              <tr
+                key={producto.id}
+                className="border-t hover:bg-gray-50"
+              >
+
+                <td className="p-4">
+
+                  <img
+                    src={producto.imagen}
+                    className="w-20 h-20 object-contain"
+                  />
+
+                </td>
+
+                <td className="p-4 font-semibold">
+                  {producto.nombre}
+                </td>
+
+                <td className="text-center">
+                  S/. {producto.precio}
+                </td>
+
+                <td className="text-center">
+                  {producto.stock}
+                </td>
+
+                <td className="text-center space-x-2">
+
+                  <button
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg"
+                  >
+                    Editar
+                  </button>
+
+                  <button
+                    className="bg-red-600 text-white px-4 py-2 rounded-lg"
+                  >
+                    Eliminar
+                  </button>
+
+                </td>
+
+              </tr>
+
+            ))}
+
+          </tbody>
+
+        </table>
 
       </div>
 
