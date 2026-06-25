@@ -239,23 +239,12 @@ alert(
             className="w-full border p-3 rounded-xl"
           />
 
-          <input
-            type="text"
-            placeholder="URL de imagen"
-            value={producto.imagen}
-            onChange={(e) =>
-              setProducto({
-                ...producto,
-                imagen: e.target.value,
-              })
-            }
-            className="w-full border p-3 rounded-xl"
-          />
+         
 
           {producto.imagen && (
             <img
               src={producto.imagen}
-              alt="Vista previa"
+             
               className="w-48 h-48 object-contain border rounded-xl mx-auto"
             />
           )}
