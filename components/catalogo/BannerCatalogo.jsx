@@ -21,7 +21,7 @@ export default function BannerCatalogo() {
 
           <span className="mx-2">/</span>
 
-          <span className="font-semibold text-gray-800">
+          <span className="font-semibold text-gray-700">
             Productos
           </span>
 
@@ -29,54 +29,21 @@ export default function BannerCatalogo() {
 
         {/* Banner */}
 
-        <div
-          className="
-            relative
-            rounded-3xl
-            overflow-hidden
-            h-[220px]
-            md:h-[320px]
-            bg-cover
-            bg-center
-          "
-          style={{
-            backgroundImage: "url('/banner-catalogo.jpg')",
-          }}
-        >
+        <div className="overflow-hidden rounded-3xl shadow-lg">
 
-          {/* Oscurecer imagen */}
-
-          <div className="absolute inset-0 bg-black/55"></div>
-
-          {/* Contenido */}
-
-          <div className="relative z-10 h-full flex items-center">
-
-            <div className="px-8 md:px-14 max-w-2xl">
-
-              <span className="bg-yellow-500 text-black px-4 py-2 rounded-full font-bold text-sm">
-
-                BRICO HOGAR
-
-              </span>
-
-              <h1 className="text-4xl md:text-6xl font-extrabold text-white mt-5">
-
-                Catálogo de Productos
-
-              </h1>
-
-              <p className="text-white/90 mt-5 text-base md:text-xl">
-
-                Descubre herramientas profesionales,
-                materiales de construcción, electricidad,
-                pintura, gasfitería y mucho más.
-
-              </p>
-
-            </div>
-
-          </div>
+          <img
+            src="/banner-catalogo.jpg"
+            alt="Catálogo Brico Hogar"
+            className="
+              w-full
+              h-[180px]
+              md:h-[260px]
+              lg:h-[320px]
+              object-cover
+              hover:scale-105
+              duration-500
+            "
+          />
 
         </div>
 
