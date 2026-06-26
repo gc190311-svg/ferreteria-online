@@ -1,3 +1,7 @@
+"use client";
+
+import Link from "next/link";
+
 export default function Hero() {
   return (
     <section className="bg-gradient-to-r from-black to-blue-900 text-white">
@@ -11,23 +15,19 @@ export default function Hero() {
           <div>
 
             <h1 className="text-6xl font-extrabold leading-tight">
-
               Todo lo que
               <br />
               necesitas
               <br />
               para tu obra
-
             </h1>
 
             <p className="mt-8 text-2xl text-gray-300 leading-relaxed">
-
               Herramientas, electricidad, construcción,
               pintura, gasfitería y mucho más.
-
             </p>
 
-            <a
+            <Link
               href="/productos"
               className="
                 inline-block
@@ -44,7 +44,7 @@ export default function Hero() {
               "
             >
               Ver Productos
-            </a>
+            </Link>
 
           </div>
 
