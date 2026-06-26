@@ -1,69 +1,41 @@
 "use client";
 
-import Link from "next/link";
+import { FaSearch } from "react-icons/fa";
 
-export default function BannerCatalogo() {
+export default function BuscadorCatalogo() {
   return (
-    <section className="max-w-7xl mx-auto px-4 pt-8">
 
-      {/* Breadcrumb */}
+    <div className="bg-white rounded-2xl shadow p-5 mb-6">
 
-      <div className="text-sm text-gray-500 mb-4">
+      <div className="flex gap-3">
 
-        <Link href="/" className="hover:text-yellow-500">
-          Inicio
-        </Link>
+        <div className="relative flex-1">
 
-        <span className="mx-2">›</span>
+          <FaSearch
+            className="absolute left-4 top-4 text-gray-400"
+          />
 
-        <span className="font-semibold text-gray-700">
-          Catálogo
-        </span>
-
-      </div>
-
-      {/* Banner */}
-
-      <div
-        className="relative rounded-3xl overflow-hidden h-[280px] bg-cover bg-center"
-        style={{
-          backgroundImage:
-            "url('/banner-catalogo.jpg')",
-        }}
-      >
-
-        <div className="absolute inset-0 bg-black/55"></div>
-
-        <div className="relative z-10 h-full flex items-center px-12">
-
-          <div className="max-w-xl">
-
-            <h1 className="text-5xl font-extrabold text-white leading-tight">
-
-              Catálogo de
-
-              <span className="block text-yellow-400">
-
-                Productos
-
-              </span>
-
-            </h1>
-
-            <p className="mt-6 text-white text-lg">
-
-              Encuentra herramientas profesionales,
-              materiales de construcción, electricidad,
-              pintura, gasfitería y mucho más.
-
-            </p>
-
-          </div>
+          <input
+            type="text"
+            placeholder="Buscar productos..."
+            className="
+              w-full
+              border
+              rounded-xl
+              py-3
+              pl-12
+              pr-4
+              focus:outline-none
+              focus:ring-2
+              focus:ring-yellow-400
+            "
+          />
 
         </div>
 
       </div>
 
-    </section>
+    </div>
+
   );
 }
