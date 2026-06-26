@@ -1,42 +1,60 @@
 "use client";
 
-export default function SidebarFiltros() {
+import { FaSearch } from "react-icons/fa";
+
+export default function BuscadorCatalogo() {
+
   return (
-    <aside className="w-72 bg-white rounded-2xl shadow p-6 h-fit">
 
-      <h2 className="text-xl font-bold mb-6">
-        Filtros
-      </h2>
+    <div className="bg-white rounded-2xl shadow p-4 mb-6">
 
-      <div className="space-y-3">
+      <div className="flex gap-4">
 
-        <label className="flex items-center gap-2">
-          <input type="checkbox" />
-          Herramientas
-        </label>
+        <div className="relative flex-1">
 
-        <label className="flex items-center gap-2">
-          <input type="checkbox" />
-          Electricidad
-        </label>
+          <FaSearch
+            className="
+            absolute
+            left-5
+            top-1/2
+            -translate-y-1/2
+            text-gray-400
+            "
+          />
 
-        <label className="flex items-center gap-2">
-          <input type="checkbox" />
-          Construcción
-        </label>
+          <input
+            type="text"
+            placeholder="Buscar productos..."
+            className="
+            w-full
+            h-14
+            border
+            rounded-xl
+            pl-14
+            pr-4
+            outline-none
+            focus:border-yellow-500
+            "
+          />
 
-        <label className="flex items-center gap-2">
-          <input type="checkbox" />
-          Pintura
-        </label>
+        </div>
 
-        <label className="flex items-center gap-2">
-          <input type="checkbox" />
-          Gasfitería
-        </label>
+        <button
+          className="
+          bg-yellow-500
+          hover:bg-yellow-400
+          px-8
+          rounded-xl
+          font-bold
+          "
+        >
+          Buscar
+        </button>
 
       </div>
 
-    </aside>
+    </div>
+
   );
+
 }
