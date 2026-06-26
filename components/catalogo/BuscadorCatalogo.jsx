@@ -1,50 +1,41 @@
 "use client";
 
-import Link from "next/link";
+import { FaSearch } from "react-icons/fa";
 
-export default function BannerCatalogo() {
+export default function BuscadorCatalogo() {
   return (
-    <section className="max-w-7xl mx-auto px-4 pt-8">
 
-      <div className="text-sm text-gray-500 mb-4">
-        <Link href="/" className="hover:text-yellow-500">
-          Inicio
-        </Link>
+    <div className="bg-white rounded-2xl shadow p-5 mb-6">
 
-        <span className="mx-2">›</span>
+      <div className="flex gap-3">
 
-        <span className="font-semibold">
-          Catálogo
-        </span>
-      </div>
+        <div className="relative flex-1">
 
-      <div
-        className="relative h-[320px] rounded-3xl overflow-hidden bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/banner-catalogo.jpg')",
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60"></div>
+          <FaSearch
+            className="absolute left-4 top-4 text-gray-400"
+          />
 
-        <div className="relative z-10 h-full flex items-center px-12">
-
-          <div className="max-w-xl">
-
-            <h1 className="text-5xl font-bold text-white">
-              Todo para tu proyecto
-            </h1>
-
-            <p className="text-xl text-gray-200 mt-5">
-              Herramientas, electricidad, pintura,
-              gasfitería y construcción.
-            </p>
-
-          </div>
+          <input
+            type="text"
+            placeholder="Buscar productos..."
+            className="
+              w-full
+              border
+              rounded-xl
+              py-3
+              pl-12
+              pr-4
+              focus:outline-none
+              focus:ring-2
+              focus:ring-yellow-400
+            "
+          />
 
         </div>
 
       </div>
 
-    </section>
+    </div>
+
   );
 }
