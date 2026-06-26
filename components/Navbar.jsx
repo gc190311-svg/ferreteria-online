@@ -143,7 +143,7 @@ export default function Navbar({
   </Link>
 
 </div>
-            </a>
+      
 
           </div>
 
