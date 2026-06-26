@@ -1,51 +1,66 @@
 "use client";
 
-export default function OrdenarProductos() {
+export default function OrdenarProductos(){
 
-  return (
+    return(
 
-    <div className="flex justify-between items-center mb-8">
+        <div
+            className="
+            flex
+            justify-end
+            mb-6
+            "
+        >
 
-      <h2 className="text-2xl font-bold">
+            <select
+                className="
+                border
+                rounded-xl
+                p-3
+                bg-white
+                "
+            >
 
-        Todos los productos
+                <option>
 
-      </h2>
+                    Ordenar por
 
-      <select
-        className="
-          border
-          rounded-xl
-          px-5
-          py-3
-          bg-white
-        "
-      >
+                </option>
 
-        <option>
-          Ordenar por
-        </option>
+                <option>
 
-        <option>
-          Precio: Menor a mayor
-        </option>
+                    Precio menor
 
-        <option>
-          Precio: Mayor a menor
-        </option>
+                </option>
 
-        <option>
-          Más recientes
-        </option>
+                <option>
 
-        <option>
-          Destacados
-        </option>
+                    Precio mayor
 
-      </select>
+                </option>
 
-    </div>
+                <option>
 
-  );
+                    Nombre A-Z
+
+                </option>
+
+                <option>
+
+                    Nombre Z-A
+
+                </option>
+
+                <option>
+
+                    Más recientes
+
+                </option>
+
+            </select>
+
+        </div>
+
+    );
 
 }
