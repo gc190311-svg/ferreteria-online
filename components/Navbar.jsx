@@ -7,6 +7,8 @@ import { usePathname } from "next/navigation";
 import {
   FaBars,
   FaTimes,
+  FaChevronDown,
+  FaChevronUp,
   FaTools,
   FaBolt,
   FaPaintRoller,
@@ -19,6 +21,7 @@ export default function Navbar({ setCategoriaSeleccionada }) {
   const pathname = usePathname();
 
   const [menuAbierto, setMenuAbierto] = useState(false);
+  const [productosAbierto, setProductosAbierto] = useState(false);
 
   return (
 
