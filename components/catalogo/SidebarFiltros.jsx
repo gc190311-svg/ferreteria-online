@@ -1,78 +1,139 @@
 "use client";
 
-import { FaFilter } from "react-icons/fa";
-
 export default function SidebarFiltros() {
-  return (
-    <aside className="w-72 bg-white rounded-2xl shadow-lg p-6 h-fit">
 
-      <div className="flex items-center gap-3 mb-6">
-        <FaFilter className="text-yellow-500 text-xl" />
-        <h2 className="text-2xl font-bold">
-          Filtros
-        </h2>
-      </div>
+  return (
+
+    <aside
+      className="
+      w-72
+      bg-white
+      rounded-3xl
+      shadow-lg
+      p-6
+      h-fit
+      "
+    >
+
+      <h2 className="text-2xl font-bold mb-6">
+
+        Categorías
+
+      </h2>
 
       <div className="space-y-4">
 
-        <div>
-          <h3 className="font-bold mb-2">
-            Categorías
-          </h3>
+        <label className="flex items-center gap-3 cursor-pointer">
 
-          <div className="space-y-2">
+          <input type="checkbox" />
 
-            <label className="flex items-center gap-2">
-              <input type="checkbox" />
-              Herramientas
-            </label>
+          Herramientas
 
-            <label className="flex items-center gap-2">
-              <input type="checkbox" />
-              Electricidad
-            </label>
+        </label>
 
-            <label className="flex items-center gap-2">
-              <input type="checkbox" />
-              Construcción
-            </label>
+        <label className="flex items-center gap-3 cursor-pointer">
 
-            <label className="flex items-center gap-2">
-              <input type="checkbox" />
-              Pintura
-            </label>
+          <input type="checkbox" />
 
-            <label className="flex items-center gap-2">
-              <input type="checkbox" />
-              Gasfitería
-            </label>
+          Construcción
 
-          </div>
+        </label>
 
-        </div>
+        <label className="flex items-center gap-3 cursor-pointer">
 
-        <hr />
+          <input type="checkbox" />
 
-        <div>
+          Electricidad
 
-          <h3 className="font-bold mb-2">
-            Marcas
-          </h3>
+        </label>
 
-          <select className="w-full border rounded-xl p-3">
+        <label className="flex items-center gap-3 cursor-pointer">
 
-            <option>Todas</option>
-            <option>Truper</option>
-            <option>Makita</option>
-            <option>Bosch</option>
-            <option>DeWalt</option>
+          <input type="checkbox" />
 
-          </select>
+          Gasfitería
 
-        </div>
+        </label>
+
+        <label className="flex items-center gap-3 cursor-pointer">
+
+          <input type="checkbox" />
+
+          Pintura
+
+        </label>
+
+      </div>
+
+      <hr className="my-8" />
+
+      <h3 className="font-bold text-xl mb-4">
+
+        Marcas
+
+      </h3>
+
+      <div className="space-y-3">
+
+        <label className="flex gap-2">
+
+          <input type="checkbox" />
+
+          Truper
+
+        </label>
+
+        <label className="flex gap-2">
+
+          <input type="checkbox" />
+
+          Makita
+
+        </label>
+
+        <label className="flex gap-2">
+
+          <input type="checkbox" />
+
+          Bosch
+
+        </label>
+
+        <label className="flex gap-2">
+
+          <input type="checkbox" />
+
+          Stanley
+
+        </label>
+
+      </div>
+
+      <hr className="my-8" />
+
+      <h3 className="font-bold text-xl mb-4">
+
+        Precio
+
+      </h3>
+
+      <input
+        type="range"
+        min="0"
+        max="5000"
+        className="w-full"
+      />
+
+      <div className="flex justify-between mt-2 text-sm">
+
+        <span>S/0</span>
+
+        <span>S/5000</span>
 
       </div>
 
     </aside>
+
   );
+
 }
