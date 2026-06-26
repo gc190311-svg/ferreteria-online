@@ -1,60 +1,50 @@
 "use client";
 
-import { FaSearch } from "react-icons/fa";
+import Link from "next/link";
 
-export default function BuscadorCatalogo() {
-
+export default function BannerCatalogo() {
   return (
+    <section className="max-w-7xl mx-auto px-4 pt-8">
 
-    <div className="bg-white rounded-2xl shadow p-4 mb-6">
+      <div className="text-sm text-gray-500 mb-4">
+        <Link href="/" className="hover:text-yellow-500">
+          Inicio
+        </Link>
 
-      <div className="flex gap-4">
+        <span className="mx-2">›</span>
 
-        <div className="relative flex-1">
+        <span className="font-semibold">
+          Catálogo
+        </span>
+      </div>
 
-          <FaSearch
-            className="
-            absolute
-            left-5
-            top-1/2
-            -translate-y-1/2
-            text-gray-400
-            "
-          />
+      <div
+        className="relative h-[320px] rounded-3xl overflow-hidden bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/banner-catalogo.jpg')",
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
 
-          <input
-            type="text"
-            placeholder="Buscar productos..."
-            className="
-            w-full
-            h-14
-            border
-            rounded-xl
-            pl-14
-            pr-4
-            outline-none
-            focus:border-yellow-500
-            "
-          />
+        <div className="relative z-10 h-full flex items-center px-12">
+
+          <div className="max-w-xl">
+
+            <h1 className="text-5xl font-bold text-white">
+              Todo para tu proyecto
+            </h1>
+
+            <p className="text-xl text-gray-200 mt-5">
+              Herramientas, electricidad, pintura,
+              gasfitería y construcción.
+            </p>
+
+          </div>
 
         </div>
 
-        <button
-          className="
-          bg-yellow-500
-          hover:bg-yellow-400
-          px-8
-          rounded-xl
-          font-bold
-          "
-        >
-          Buscar
-        </button>
-
       </div>
 
-    </div>
-
+    </section>
   );
-
 }
