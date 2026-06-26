@@ -1,13 +1,13 @@
 "use client";
 
-import Header from "@/components/Header";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Header from "../../components/Header";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
-import BannerCatalogo from "@/components/catalogo/BannerCatalogo";
-import SidebarFiltros from "@/components/catalogo/SidebarFiltros";
-import BuscadorCatalogo from "@/components/catalogo/BuscadorCatalogo";
-import GridProductos from "@/components/catalogo/GridProductos";
+import BannerCatalogo from "../../components/catalogo/BannerCatalogo";
+import SidebarFiltros from "../../components/catalogo/SidebarFiltros";
+import BuscadorCatalogo from "../../components/catalogo/BuscadorCatalogo";
+import GridProductos from "../../components/catalogo/GridProductos";
 
 export default function CatalogoProductos() {
   return (
