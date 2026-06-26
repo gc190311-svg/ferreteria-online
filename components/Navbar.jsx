@@ -1,8 +1,14 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 export default function Navbar({
   setCategoriaSeleccionada,
 }) {
+
+  const pathname = usePathname();
+  
   return (
     <nav className="bg-black border-t border-gray-800 border-b border-gray-800">
 
@@ -44,7 +50,7 @@ export default function Navbar({
             <button
   onClick={() => {
     console.log("Herramientas");
-    setCategoriaSeleccionada("herramientas");
+    setCategoriaSeleccionada?.("herramientas");
   }}
   className="block w-full text-left px-5 py-3 hover:bg-gray-100"
 >
@@ -52,35 +58,35 @@ export default function Navbar({
 </button>
 
             <button
-              onClick={() => setCategoriaSeleccionada("electricidad")}
+              onClick={() => setCategoriaSeleccionada?.("electricidad")}
               className="block w-full text-left px-5 py-3 hover:bg-gray-100"
             >
               ⚡ Electricidad
             </button>
 
             <button
-              onClick={() => setCategoriaSeleccionada("pintura")}
+              onClick={() => setCategoriaSeleccionada?.("pintura")}
               className="block w-full text-left px-5 py-3 hover:bg-gray-100"
             >
               🎨 Pintura
             </button>
 
             <button
-              onClick={() => setCategoriaSeleccionada("gasfiteria")}
+              onClick={() => setCategoriaSeleccionada?.("gasfiteria")}
               className="block w-full text-left px-5 py-3 hover:bg-gray-100"
             >
               🚿 Gasfitería
             </button>
 
             <button
-              onClick={() => setCategoriaSeleccionada("construccion")}
+              onClick={() => setCategoriaSeleccionada?.("construccion")}
               className="block w-full text-left px-5 py-3 hover:bg-gray-100"
             >
               🏗️ Construcción
             </button>
 
             <button
-              onClick={() => setCategoriaSeleccionada("todos")}
+              onClick={() => setCategoriaSeleccionada?.("todos")}
               className="block w-full text-left px-5 py-3 bg-yellow-100 hover:bg-yellow-200 font-bold"
             >
               📦 Ver todos
@@ -96,60 +102,47 @@ export default function Navbar({
 
           <div className="flex gap-20">
 
-            <a
-              href="/"
-              className="
-                text-yellow-500
-                font-bold
-                text-lg
-                py-5
-                border-b-4
-                border-yellow-500
-              "
-            >
-              INICIO
-            </a>
+  <Link
+    href="/"
+    className={`font-bold text-lg py-5 border-b-4 transition ${
+      pathname === "/"
+        ? "text-yellow-500 border-yellow-500"
+        : "text-white border-transparent hover:text-yellow-500"
+    }`}
+  >
+    INICIO
+  </Link>
 
-            <a
-              href="#productos"
-              className="
-                text-white
-                font-bold
-                text-lg
-                py-5
-                hover:text-yellow-500
-                transition
-              "
-            >
-              PRODUCTOS
-            </a>
+  <Link
+    href="/productos"
+    className={`font-bold text-lg py-5 border-b-4 transition ${
+      pathname === "/productos"
+        ? "text-yellow-500 border-yellow-500"
+        : "text-white border-transparent hover:text-yellow-500"
+    }`}
+  >
+    PRODUCTOS
+  </Link>
 
-            <a
-              href="#ofertas"
-              className="
-                text-white
-                font-bold
-                text-lg
-                py-5
-                hover:text-yellow-500
-                transition
-              "
-            >
-              OFERTAS
-            </a>
+  <Link
+    href="/ofertas"
+    className={`font-bold text-lg py-5 border-b-4 transition ${
+      pathname === "/ofertas"
+        ? "text-yellow-500 border-yellow-500"
+        : "text-white border-transparent hover:text-yellow-500"
+    }`}
+  >
+    OFERTAS
+  </Link>
 
-            <a
-              href="#contacto"
-              className="
-                text-white
-                font-bold
-                text-lg
-                py-5
-                hover:text-yellow-500
-                transition
-              "
-            >
-              CONTACTO
+  <Link
+    href="/#contacto"
+    className="text-white font-bold text-lg py-5 hover:text-yellow-500 transition"
+  >
+    CONTACTO
+  </Link>
+
+</div>
             </a>
 
           </div>
