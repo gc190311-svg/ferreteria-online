@@ -234,34 +234,132 @@ export default function Navbar({ setCategoriaSeleccionada }) {
 
           </div>
 
-          <div className="p-4 space-y-2">
+         <div className="p-4 space-y-2">
 
-            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
-              <FaTools />
-              Herramientas
-            </button>
+  <Link
+    href="/"
+    onClick={() => setMenuAbierto(false)}
+    className="block p-3 rounded-lg hover:bg-gray-100 font-semibold"
+  >
+    🏠 Inicio
+  </Link>
 
-            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
-              <FaBolt />
-              Electricidad
-            </button>
+  <div className="border rounded-lg">
 
-            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
-              <FaPaintRoller />
-              Pintura
-            </button>
+    <button
+      onClick={() => setProductosAbierto(!productosAbierto)}
+      className="w-full flex justify-between items-center p-3 hover:bg-gray-100 font-semibold"
+    >
+      <span>📦 Productos</span>
 
-            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
-              <FaFaucet />
-              Gasfitería
-            </button>
+      {productosAbierto ? (
+        <FaChevronUp />
+      ) : (
+        <FaChevronDown />
+      )}
+    </button>
 
-            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
-              <FaHardHat />
-              Construcción
-            </button>
+    {productosAbierto && (
 
-          </div>
+      <div className="pl-6 pb-3">
+
+        <button
+          onClick={() => {
+            setCategoriaSeleccionada?.("herramientas");
+            setMenuAbierto(false);
+          }}
+          className="block py-2 hover:text-yellow-500"
+        >
+          🔧 Herramientas
+        </button>
+
+        <button
+          onClick={() => {
+            setCategoriaSeleccionada?.("electricidad");
+            setMenuAbierto(false);
+          }}
+          className="block py-2 hover:text-yellow-500"
+        >
+          ⚡ Electricidad
+        </button>
+
+        <button
+          onClick={() => {
+            setCategoriaSeleccionada?.("pintura");
+            setMenuAbierto(false);
+          }}
+          className="block py-2 hover:text-yellow-500"
+        >
+          🎨 Pintura
+        </button>
+
+        <button
+          onClick={() => {
+            setCategoriaSeleccionada?.("gasfiteria");
+            setMenuAbierto(false);
+          }}
+          className="block py-2 hover:text-yellow-500"
+        >
+          🚿 Gasfitería
+        </button>
+
+        <button
+          onClick={() => {
+            setCategoriaSeleccionada?.("construccion");
+            setMenuAbierto(false);
+          }}
+          className="block py-2 hover:text-yellow-500"
+        >
+          🏗 Construcción
+        </button>
+
+        <Link
+          href="/productos"
+          onClick={() => setMenuAbierto(false)}
+          className="block py-3 font-bold text-yellow-600"
+        >
+          Ver todo el catálogo →
+        </Link>
+
+      </div>
+
+    )}
+
+  </div>
+
+  <Link
+    href="/ofertas"
+    onClick={() => setMenuAbierto(false)}
+    className="block p-3 rounded-lg hover:bg-gray-100 font-semibold"
+  >
+    🔥 Ofertas
+  </Link>
+
+  <Link
+    href="/#contacto"
+    onClick={() => setMenuAbierto(false)}
+    className="block p-3 rounded-lg hover:bg-gray-100 font-semibold"
+  >
+    📞 Contacto
+  </Link>
+
+  <Link
+    href="/login"
+    onClick={() => setMenuAbierto(false)}
+    className="block p-3 rounded-lg hover:bg-gray-100 font-semibold"
+  >
+    👤 Mi Cuenta
+  </Link>
+
+  <Link
+    href="/carrito"
+    onClick={() => setMenuAbierto(false)}
+    className="block p-3 rounded-lg hover:bg-gray-100 font-semibold"
+  >
+    🛒 Carrito
+  </Link>
+
+</div>
 
         </div>
 
