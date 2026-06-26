@@ -1,116 +1,262 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
+
+import {
+  FaBars,
+  FaTimes,
+  FaTools,
+  FaBolt,
+  FaPaintRoller,
+  FaFaucet,
+  FaHardHat,
+} from "react-icons/fa";
 
 export default function Navbar({ setCategoriaSeleccionada }) {
 
   const pathname = usePathname();
 
+  const [menuAbierto, setMenuAbierto] = useState(false);
+
   return (
-    <nav className="bg-black border-t border-gray-800 border-b border-gray-800">
 
-      <div className="max-w-7xl mx-auto flex items-center">
+    <>
 
-        {/* CATEGORÍAS */}
-        <div className="relative group w-[250px]">
+      <nav className="bg-black border-y border-gray-800">
 
-          <button className="w-full bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-lg py-5 transition">
-            ☰ CATEGORÍAS
-          </button>
+        <div className="max-w-7xl mx-auto">
 
-          <div className="absolute left-0 top-full hidden group-hover:block bg-white shadow-xl w-full z-50">
+          <div className="flex items-center justify-between">
+
+            {/* BOTÓN HAMBURGUESA */}
 
             <button
-              onClick={() => setCategoriaSeleccionada?.("herramientas")}
-              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
+              onClick={() => setMenuAbierto(true)}
+              className="
+                lg:hidden
+                text-white
+                text-3xl
+                px-5
+                py-4
+              "
             >
-              🔧 Herramientas
+              <FaBars />
             </button>
 
-            <button
-              onClick={() => setCategoriaSeleccionada?.("electricidad")}
-              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
-            >
-              ⚡ Electricidad
-            </button>
+            {/* CATEGORÍAS ESCRITORIO */}
 
-            <button
-              onClick={() => setCategoriaSeleccionada?.("pintura")}
-              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
-            >
-              🎨 Pintura
-            </button>
+            <div className="hidden lg:block relative group w-[250px]">
 
-            <button
-              onClick={() => setCategoriaSeleccionada?.("gasfiteria")}
-              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
-            >
-              🚿 Gasfitería
-            </button>
+              <button
+                className="
+                  w-full
+                  bg-yellow-500
+                  hover:bg-yellow-400
+                  text-black
+                  font-bold
+                  py-5
+                "
+              >
+                ☰ CATEGORÍAS
+              </button>
 
-            <button
-              onClick={() => setCategoriaSeleccionada?.("construccion")}
-              className="block w-full text-left px-5 py-3 hover:bg-gray-100"
-            >
-              🏗️ Construcción
-            </button>
+              <div
+                className="
+                  absolute
+                  hidden
+                  group-hover:block
+                  bg-white
+                  shadow-xl
+                  w-full
+                  z-50
+                "
+              >
 
-            <button
-              onClick={() => setCategoriaSeleccionada?.("todos")}
-              className="block w-full text-left px-5 py-3 bg-yellow-100 hover:bg-yellow-200 font-bold"
-            >
-              📦 Ver todos
-            </button>
+                <button
+                  onClick={() =>
+                    setCategoriaSeleccionada?.("herramientas")
+                  }
+                  className="block w-full text-left px-5 py-3 hover:bg-gray-100"
+                >
+                  🔧 Herramientas
+                </button>
+
+                <button
+                  onClick={() =>
+                    setCategoriaSeleccionada?.("electricidad")
+                  }
+                  className="block w-full text-left px-5 py-3 hover:bg-gray-100"
+                >
+                  ⚡ Electricidad
+                </button>
+
+                <button
+                  onClick={() =>
+                    setCategoriaSeleccionada?.("pintura")
+                  }
+                  className="block w-full text-left px-5 py-3 hover:bg-gray-100"
+                >
+                  🎨 Pintura
+                </button>
+
+                <button
+                  onClick={() =>
+                    setCategoriaSeleccionada?.("gasfiteria")
+                  }
+                  className="block w-full text-left px-5 py-3 hover:bg-gray-100"
+                >
+                  🚿 Gasfitería
+                </button>
+
+                <button
+                  onClick={() =>
+                    setCategoriaSeleccionada?.("construccion")
+                  }
+                  className="block w-full text-left px-5 py-3 hover:bg-gray-100"
+                >
+                  🏗 Construcción
+                </button>
+
+              </div>
+
+            </div>
+
+            {/* MENÚ */}
+
+            <div className="flex-1">
+
+              <div className="flex justify-center gap-6 md:gap-12 lg:gap-20">
+
+                <Link
+                  href="/"
+                  className={`font-bold py-5 ${
+                    pathname === "/"
+                      ? "text-yellow-500"
+                      : "text-white"
+                  }`}
+                >
+                  INICIO
+                </Link>
+
+                <Link
+                  href="/productos"
+                  className={`font-bold py-5 ${
+                    pathname === "/productos"
+                      ? "text-yellow-500"
+                      : "text-white"
+                  }`}
+                >
+                  PRODUCTOS
+                </Link>
+
+                <Link
+                  href="/ofertas"
+                  className="hidden md:block text-white font-bold py-5"
+                >
+                  OFERTAS
+                </Link>
+
+                <Link
+                  href="/#contacto"
+                  className="hidden lg:block text-white font-bold py-5"
+                >
+                  CONTACTO
+                </Link>
+
+              </div>
+
+            </div>
 
           </div>
 
         </div>
 
-        {/* MENÚ */}
-        <div className="flex-1 flex justify-center">
+      </nav>
 
-          <div className="flex gap-20">
+      {/* MENÚ LATERAL */}
 
-            <Link
-              href="/"
-              className={`font-bold text-lg py-5 border-b-4 transition ${
-                pathname === "/"
-                  ? "text-yellow-500 border-yellow-500"
-                  : "text-white border-transparent hover:text-yellow-500"
-              }`}
+      <div
+        className={`
+          fixed
+          inset-0
+          z-50
+          transition
+          ${menuAbierto ? "visible" : "invisible"}
+        `}
+      >
+
+        <div
+          onClick={() => setMenuAbierto(false)}
+          className={`
+            absolute
+            inset-0
+            bg-black/50
+            transition
+            ${menuAbierto ? "opacity-100" : "opacity-0"}
+          `}
+        />
+
+        <div
+          className={`
+            absolute
+            left-0
+            top-0
+            h-full
+            w-72
+            bg-white
+            shadow-xl
+            transition-transform
+            ${
+              menuAbierto
+                ? "translate-x-0"
+                : "-translate-x-full"
+            }
+          `}
+        >
+
+          <div className="flex justify-between items-center p-5 border-b">
+
+            <h2 className="font-bold text-xl">
+              Categorías
+            </h2>
+
+            <button
+              onClick={() => setMenuAbierto(false)}
+              className="text-2xl"
             >
-              INICIO
-            </Link>
+              <FaTimes />
+            </button>
 
-            <Link
-              href="/productos"
-              className={`font-bold text-lg py-5 border-b-4 transition ${
-                pathname === "/productos"
-                  ? "text-yellow-500 border-yellow-500"
-                  : "text-white border-transparent hover:text-yellow-500"
-              }`}
-            >
-              PRODUCTOS
-            </Link>
+          </div>
 
-            <Link
-              href="/ofertas"
-              className={`font-bold text-lg py-5 border-b-4 transition ${
-                pathname === "/ofertas"
-                  ? "text-yellow-500 border-yellow-500"
-                  : "text-white border-transparent hover:text-yellow-500"
-              }`}
-            >
-              OFERTAS
-            </Link>
+          <div className="p-4 space-y-2">
 
-            <Link
-              href="/#contacto"
-              className="text-white font-bold text-lg py-5 hover:text-yellow-500 transition"
-            >
-              CONTACTO
-            </Link>
+            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
+              <FaTools />
+              Herramientas
+            </button>
+
+            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
+              <FaBolt />
+              Electricidad
+            </button>
+
+            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
+              <FaPaintRoller />
+              Pintura
+            </button>
+
+            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
+              <FaFaucet />
+              Gasfitería
+            </button>
+
+            <button className="flex items-center gap-3 w-full text-left p-3 rounded hover:bg-gray-100">
+              <FaHardHat />
+              Construcción
+            </button>
 
           </div>
 
@@ -118,6 +264,8 @@ export default function Navbar({ setCategoriaSeleccionada }) {
 
       </div>
 
-    </nav>
+    </>
+
   );
+
 }
