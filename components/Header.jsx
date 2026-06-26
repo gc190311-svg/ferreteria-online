@@ -10,42 +10,67 @@ import {
 
 export default function Header() {
   return (
-    <header className="bg-black py-6">
+    <header className="bg-black py-4">
 
-      <div className="max-w-7xl mx-auto px-8">
+      <div className="max-w-7xl mx-auto px-4">
 
-        <div className="flex items-center">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-4">
 
-          {/* LOGO */}
+          {/* PRIMERA FILA */}
 
-          <div className="w-[220px] flex justify-start">
+          <div className="flex items-center justify-between lg:w-auto">
+
+            {/* LOGO */}
 
             <Link href="/">
 
               <img
                 src="/logo.png"
                 alt="Brico Hogar"
-                className="h-32 w-auto cursor-pointer"
+                className="
+                  h-16
+                  md:h-20
+                  lg:h-28
+                  w-auto
+                  cursor-pointer
+                "
               />
 
             </Link>
+
+            {/* ICONOS CELULAR */}
+
+            <div className="flex lg:hidden gap-6 text-white">
+
+              <Link href="/login">
+                <FaUser className="text-2xl hover:text-yellow-400" />
+              </Link>
+
+              <Link href="/carrito">
+                <FaShoppingCart className="text-2xl hover:text-yellow-400" />
+              </Link>
+
+            </div>
 
           </div>
 
           {/* BUSCADOR */}
 
-          <div className="flex-1 flex justify-center">
+          <div className="flex-1">
 
-            <div className="flex w-full max-w-[700px]">
+            <div className="flex w-full">
 
               <input
                 type="text"
                 placeholder="Buscar productos..."
                 className="
                   flex-1
-                  h-14
-                  px-6
-                  text-lg
+                  h-12
+                  lg:h-14
+                  px-4
+                  lg:px-6
+                  text-base
+                  lg:text-lg
                   bg-white
                   text-black
                   rounded-l-xl
@@ -59,7 +84,8 @@ export default function Header() {
                   hover:bg-yellow-400
                   text-black
                   font-bold
-                  px-8
+                  px-5
+                  lg:px-8
                   rounded-r-xl
                   flex
                   items-center
@@ -70,7 +96,9 @@ export default function Header() {
 
                 <FaSearch />
 
-                Buscar
+                <span className="hidden md:block">
+                  Buscar
+                </span>
 
               </button>
 
@@ -78,20 +106,26 @@ export default function Header() {
 
           </div>
 
-          {/* ICONOS */}
+          {/* ICONOS ESCRITORIO */}
 
-          <div className="w-[180px] flex justify-end gap-10 text-white">
+          <div
+            className="
+              hidden
+              lg:flex
+              items-center
+              gap-10
+              text-white
+            "
+          >
 
             <Link href="/login">
 
-              <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
+              <div className="flex flex-col items-center hover:text-yellow-400 transition">
 
                 <FaUser className="text-2xl" />
 
                 <span className="text-sm">
-
                   Mi Cuenta
-
                 </span>
 
               </div>
@@ -100,14 +134,12 @@ export default function Header() {
 
             <Link href="/carrito">
 
-              <div className="flex flex-col items-center cursor-pointer hover:text-yellow-400 transition">
+              <div className="flex flex-col items-center hover:text-yellow-400 transition">
 
                 <FaShoppingCart className="text-2xl" />
 
                 <span className="text-sm">
-
                   Carrito
-
                 </span>
 
               </div>
