@@ -8,6 +8,7 @@ import BannerCatalogo from "../../components/catalogo/BannerCatalogo";
 import SidebarFiltros from "../../components/catalogo/SidebarFiltros";
 import BuscadorCatalogo from "../../components/catalogo/BuscadorCatalogo";
 import GridProductos from "../../components/catalogo/GridProductos";
+import OrdenarProductos from "../../components/catalogo/OrdenarProductos";
 
 export default function CatalogoProductos() {
   return (
@@ -25,6 +26,8 @@ export default function CatalogoProductos() {
         <div className="flex-1">
 
           <BuscadorCatalogo />
+
+          <OrdenarProductos />
 
           <GridProductos />
 
