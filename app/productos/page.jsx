@@ -19,6 +19,10 @@ export default function CatalogoProductos() {
       <Navbar />
 
       <BannerCatalogo />
+      
+      <div className="max-w-7xl mx-auto px-4 pt-10">
+    <CabeceraCatalogo />
+</div>
 
       <div className="max-w-7xl mx-auto flex gap-8 py-10 px-4">
 
