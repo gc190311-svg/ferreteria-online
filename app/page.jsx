@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
 
 import TopBar from "../components/TopBar";
@@ -18,19 +17,21 @@ export default function Home() {
   const [categoriaSeleccionada, setCategoriaSeleccionada] =
     useState("todos");
 
-  console.log("Categoría actual:", categoriaSeleccionada);
-
   return (
     <>
       <TopBar />
+
       <Header />
 
       <Navbar
+        categoriaSeleccionada={categoriaSeleccionada}
         setCategoriaSeleccionada={setCategoriaSeleccionada}
       />
 
       <Hero />
+
       <Servicios />
+
       <Marcas />
 
       <Productos
@@ -38,6 +39,7 @@ export default function Home() {
       />
 
       <Footer />
+
       <WhatsAppButton />
     </>
   );
