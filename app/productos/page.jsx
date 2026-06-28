@@ -11,6 +11,7 @@ import SidebarFiltros from "../../components/catalogo/SidebarFiltros";
 import BuscadorCatalogo from "../../components/catalogo/BuscadorCatalogo";
 import GridProductos from "../../components/catalogo/GridProductos";
 import OrdenarProductos from "../../components/catalogo/OrdenarProductos";
+import { CatalogoProvider } from "../../components/context/CatalogoContext";
 
 export default function CatalogoProductos() {
 
@@ -18,7 +19,7 @@ export default function CatalogoProductos() {
     useState("todos");
 
   return (
-    <>
+    <CatalogoProvider>
       <Header />
 
       <Navbar
@@ -52,5 +53,6 @@ export default function CatalogoProductos() {
       <Footer />
 
     </>
+  <CatalogoProvider>
   );
 }
