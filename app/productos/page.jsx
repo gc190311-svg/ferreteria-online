@@ -1,7 +1,5 @@
 "use client";
 
-import { useState } from "react";
-
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -11,30 +9,24 @@ import SidebarFiltros from "../../components/catalogo/SidebarFiltros";
 import BuscadorCatalogo from "../../components/catalogo/BuscadorCatalogo";
 import GridProductos from "../../components/catalogo/GridProductos";
 import OrdenarProductos from "../../components/catalogo/OrdenarProductos";
+
 import { CatalogoProvider } from "../../components/context/CatalogoContext";
 
 export default function CatalogoProductos() {
 
-  const [categoriaSeleccionada, setCategoriaSeleccionada] =
-    useState("todos");
-
   return (
+
     <CatalogoProvider>
+
       <Header />
 
-      <Navbar
-        categoriaSeleccionada={categoriaSeleccionada}
-        setCategoriaSeleccionada={setCategoriaSeleccionada}
-      />
+      <Navbar />
 
       <BannerCatalogo />
 
       <div className="max-w-7xl mx-auto flex gap-8 py-10 px-4">
 
-        <SidebarFiltros
-          categoriaSeleccionada={categoriaSeleccionada}
-          setCategoriaSeleccionada={setCategoriaSeleccionada}
-        />
+        <SidebarFiltros />
 
         <div className="flex-1">
 
@@ -42,9 +34,7 @@ export default function CatalogoProductos() {
 
           <OrdenarProductos />
 
-          <GridProductos
-            categoriaSeleccionada={categoriaSeleccionada}
-          />
+          <GridProductos />
 
         </div>
 
@@ -52,7 +42,8 @@ export default function CatalogoProductos() {
 
       <Footer />
 
-    </>
-  <CatalogoProvider>
+    </CatalogoProvider>
+
   );
+
 }
