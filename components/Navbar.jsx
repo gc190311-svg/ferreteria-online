@@ -128,55 +128,107 @@ export default function Navbar({ setCategoriaSeleccionada }) {
 
             {/* MENÚ */}
 
-            <div className="flex-1">
+           {/* MENÚ */}
 
-              <div className="flex justify-center gap-6 md:gap-12 lg:gap-20">
+<div className="flex-1">
 
-                <Link
-                  href="/"
-                  className={`font-bold py-5 ${
-                    pathname === "/"
-                      ? "text-yellow-500"
-                      : "text-white"
-                  }`}
-                >
-                  INICIO
-                </Link>
+  {pathname === "/productos" ? (
 
-                <Link
-                  href="/productos"
-                  className={`font-bold py-5 ${
-                    pathname === "/productos"
-                      ? "text-yellow-500"
-                      : "text-white"
-                  }`}
-                >
-                  PRODUCTOS
-                </Link>
+    /* MENÚ DEL CATÁLOGO */
 
-                <Link
-                  href="/ofertas"
-                  className="hidden md:block text-white font-bold py-5"
-                >
-                  OFERTAS
-                </Link>
+    <div className="flex justify-center gap-4 md:gap-8 lg:gap-10 overflow-x-auto whitespace-nowrap px-4">
 
-                <Link
-                  href="/#contacto"
-                  className="hidden lg:block text-white font-bold py-5"
-                >
-                  CONTACTO
-                </Link>
+      <button
+        onClick={() => setCategoriaSeleccionada?.("todos")}
+        className="text-yellow-500 font-bold py-5 hover:text-yellow-400 transition"
+      >
+        TODOS
+      </button>
 
-              </div>
+      <button
+        onClick={() => setCategoriaSeleccionada?.("herramientas")}
+        className="text-white font-bold py-5 hover:text-yellow-500 transition"
+      >
+        HERRAMIENTAS
+      </button>
 
-            </div>
+      <button
+        onClick={() => setCategoriaSeleccionada?.("construccion")}
+        className="text-white font-bold py-5 hover:text-yellow-500 transition"
+      >
+        CONSTRUCCIÓN
+      </button>
 
-          </div>
+      <button
+        onClick={() => setCategoriaSeleccionada?.("electricidad")}
+        className="text-white font-bold py-5 hover:text-yellow-500 transition"
+      >
+        ELECTRICIDAD
+      </button>
 
-        </div>
+      <button
+        onClick={() => setCategoriaSeleccionada?.("pintura")}
+        className="text-white font-bold py-5 hover:text-yellow-500 transition"
+      >
+        PINTURA
+      </button>
 
-      </nav>
+      <button
+        onClick={() => setCategoriaSeleccionada?.("gasfiteria")}
+        className="text-white font-bold py-5 hover:text-yellow-500 transition"
+      >
+        GASFITERÍA
+      </button>
+
+    </div>
+
+  ) : (
+
+    /* MENÚ PRINCIPAL */
+
+    <div className="flex justify-center gap-6 md:gap-12 lg:gap-20">
+
+      <Link
+        href="/"
+        className={`font-bold py-5 ${
+          pathname === "/"
+            ? "text-yellow-500"
+            : "text-white hover:text-yellow-500"
+        }`}
+      >
+        INICIO
+      </Link>
+
+      <Link
+        href="/productos"
+        className={`font-bold py-5 ${
+          pathname === "/productos"
+            ? "text-yellow-500"
+            : "text-white hover:text-yellow-500"
+        }`}
+      >
+        PRODUCTOS
+      </Link>
+
+      <Link
+        href="/ofertas"
+        className="hidden md:block text-white font-bold py-5 hover:text-yellow-500"
+      >
+        OFERTAS
+      </Link>
+
+      <Link
+        href="/#contacto"
+        className="hidden lg:block text-white font-bold py-5 hover:text-yellow-500"
+      >
+        CONTACTO
+      </Link>
+
+    </div>
+
+  )}
+
+</div>
 
       {/* MENÚ LATERAL */}
 
