@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useSearchParams } from "next/navigation";
 
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
@@ -15,18 +14,11 @@ import OrdenarProductos from "../../components/catalogo/OrdenarProductos";
 
 export default function CatalogoProductos() {
 
-  const searchParams = useSearchParams();
-
-  const categoriaInicial =
-    searchParams.get("categoria") || "todos";
-
   const [categoriaSeleccionada, setCategoriaSeleccionada] =
-    useState(categoriaInicial);
+    useState("todos");
 
   return (
-
     <>
-
       <Header />
 
       <Navbar
@@ -60,7 +52,5 @@ export default function CatalogoProductos() {
       <Footer />
 
     </>
-
   );
-
 }
