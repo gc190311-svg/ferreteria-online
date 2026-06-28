@@ -24,8 +24,8 @@ export default function Home() {
       <Header />
 
       <Navbar
-        categoriaSeleccionada={categoriaSeleccionada}
         setCategoriaSeleccionada={setCategoriaSeleccionada}
+        categoriaSeleccionada={categoriaSeleccionada}
       />
 
       <Hero />
