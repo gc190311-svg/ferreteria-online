@@ -29,6 +29,10 @@ export function CatalogoProvider({ children }) {
   const [textoBusqueda, setTextoBusqueda] =
     useState("");
 
+  // NUEVO ESTADO
+  const [busquedaRealizada, setBusquedaRealizada] =
+    useState(false);
+
   useEffect(() => {
 
     cargarProductos();
@@ -61,6 +65,7 @@ export function CatalogoProvider({ children }) {
     setCategoriaSeleccionada("todos");
     setMarcaSeleccionada("");
     setTextoBusqueda("");
+    setBusquedaRealizada(false);
 
   }
 
@@ -78,20 +83,12 @@ export function CatalogoProvider({ children }) {
         setMarcaSeleccionada,
 
         textoBusqueda,
-        const [busquedaRealizada, setBusquedaRealizada] =
-  useState(false);
         setTextoBusqueda,
 
+        busquedaRealizada,
+        setBusquedaRealizada,
+
         limpiarFiltros,
-
-          function limpiarFiltros() {
-
-  setCategoriaSeleccionada("todos");
-  setMarcaSeleccionada("");
-  setTextoBusqueda("");
-  setBusquedaRealizada(false);
-
-}
 
       }}
     >
@@ -108,4 +105,4 @@ export function useCatalogo() {
 
   return useContext(CatalogoContext);
 
-}
+}vvvvvvvvvvvvvvvvvvvvvv
