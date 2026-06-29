@@ -8,10 +8,7 @@ import SidebarFiltros from "../../components/catalogo/SidebarFiltros";
 import GridProductos from "../../components/catalogo/GridProductos";
 import CabeceraCatalogo from "../../components/catalogo/CabeceraCatalogo";
 
-import {
-  CatalogoProvider,
-  useCatalogo,
-} from "../../components/context/CatalogoContext";
+import { useCatalogo } from "../../components/context/CatalogoContext";
 
 function CatalogoContenido() {
 
@@ -44,14 +41,13 @@ function CatalogoContenido() {
       </div>
 
       <Footer />
+
     </>
   );
 }
 
 export default function CatalogoProductos() {
-  return (
-    <CatalogoProvider>
-      <CatalogoContenido />
-    </CatalogoProvider>
-  );
+
+  return <CatalogoContenido />;
+
 }
