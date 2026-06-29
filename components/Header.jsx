@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+
 
 import {
   FaSearch,
@@ -14,17 +15,20 @@ import { useCatalogo } from "./context/CatalogoContext";
 export default function Header() {
 
   const router = useRouter();
+  const pathname = usePathname();
 
   const {
   textoBusqueda,
   setTextoBusqueda,
-  setBusquedaRealizada,
+  
 } = useCatalogo();
 
   function buscarProducto() {
 
+  // Elimina espacios al inicio y final
   const texto = textoBusqueda.trim();
 
+  // Si no escribió nada, ir al catálogo
   if (texto === "") {
 
     router.push("/productos");
@@ -33,10 +37,16 @@ export default function Header() {
 
   }
 
- // Indicamos que existe una búsqueda activa
-  setBusquedaRealizada(true);
+  // Si ya estamos en la página de productos,
+  // NO hacemos nada.
+  if (pathname === "/productos") {
 
-  // Ir al catálogo
+    return;
+
+  }
+
+  // Solo si estamos en Inicio
+  // navegamos al catálogo.
   router.push("/productos");
 
 }
