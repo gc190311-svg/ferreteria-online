@@ -38,6 +38,7 @@ export default function Header() {
 
 // Borra inmediatamente el contenido del input
 setTextoBusqueda("");
+    }
 
   return (
 
