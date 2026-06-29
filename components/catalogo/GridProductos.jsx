@@ -28,15 +28,26 @@ export default function GridProductos() {
     // Filtro por buscador
     const texto = textoBusqueda.toLowerCase();
 
-    const coincideBusqueda =
-      producto.nombre.toLowerCase().includes(texto) ||
-      producto.descripcion.toLowerCase().includes(texto);
+    const termino = textoBusqueda.trim().toLowerCase();
 
-    return (
-      coincideCategoria &&
-      coincideMarca &&
-      coincideBusqueda
-    );
+const coincideBusqueda =
+  termino === "" ||
+
+  producto.nombre?.toLowerCase().includes(termino) ||
+
+  producto.descripcion?.toLowerCase().includes(termino) ||
+
+  producto.marca?.toLowerCase().includes(termino) ||
+
+  producto.categoria?.toLowerCase().includes(termino);
+
+   return (
+
+    coincideCategoria &&
+    coincideMarca &&
+    coincideBusqueda
+
+);
 
   });
 
