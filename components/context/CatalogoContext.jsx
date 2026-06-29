@@ -105,4 +105,4 @@ export function useCatalogo() {
 
   return useContext(CatalogoContext);
 
-}vvvvvvvvvvvvvvvvvvvvvv
+}
