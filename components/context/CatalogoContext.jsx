@@ -1,8 +1,16 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+} from "firebase/firestore";
 
 import { db } from "../../app/firebase";
 
@@ -48,10 +56,19 @@ export function CatalogoProvider({ children }) {
 
   }
 
+  function limpiarFiltros() {
+
+    setCategoriaSeleccionada("todos");
+    setMarcaSeleccionada("");
+    setTextoBusqueda("");
+
+  }
+
   return (
 
     <CatalogoContext.Provider
       value={{
+
         productos,
 
         categoriaSeleccionada,
@@ -62,6 +79,9 @@ export function CatalogoProvider({ children }) {
 
         textoBusqueda,
         setTextoBusqueda,
+
+        limpiarFiltros,
+
       }}
     >
 
