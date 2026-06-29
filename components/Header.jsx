@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 import {
   FaSearch,
@@ -14,6 +15,27 @@ export default function Header({
   setTextoBusqueda,
 }) {
   const [busquedaLocal, setBusquedaLocal] = useState("");
+  const router = useRouter();
+  const [busqueda, setBusqueda] = useState("");
+
+
+  function buscarProducto() {
+
+  const texto = busqueda.trim();
+
+  if (!texto) {
+
+    router.push("/productos");
+
+    return;
+
+  }
+
+  router.push(
+    `/productos?buscar=${encodeURIComponent(texto)}`
+  );
+
+}
   return (
     <header className="bg-black py-4">
 
@@ -65,16 +87,19 @@ export default function Header({
 
             <div className="flex w-full">
 
-            <input
+           <input
   type="text"
   placeholder="Buscar productos..."
-  value={setTextoBusqueda ? textoBusqueda : busquedaLocal}
-  onChange={(e) => {
-    if (setTextoBusqueda) {
-      setTextoBusqueda(e.target.value);
-    } else {
-      setBusquedaLocal(e.target.value);
+  value={busqueda}
+  onChange={(e) => setBusqueda(e.target.value)}
+  onKeyDown={(e) => {
+
+    if (e.key === "Enter") {
+
+      buscarProducto();
+
     }
+
   }}
   className="
     flex-1
@@ -91,6 +116,7 @@ export default function Header({
   "
 />
               <button
+  onClick={buscarProducto}
                 className="
                   bg-yellow-500
                   hover:bg-yellow-400
