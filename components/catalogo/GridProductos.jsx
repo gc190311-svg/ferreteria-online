@@ -26,20 +26,19 @@ export default function GridProductos() {
       producto.marca === marcaSeleccionada;
 
     // Filtro por buscador
-    const texto = textoBusqueda.toLowerCase();
-
     const termino = textoBusqueda.trim().toLowerCase();
+
+const nombre = String(producto.nombre || "").toLowerCase();
+const descripcion = String(producto.descripcion || "").toLowerCase();
+const marca = String(producto.marca || "").toLowerCase();
+const categoria = String(producto.categoria || "").toLowerCase();
 
 const coincideBusqueda =
   termino === "" ||
-
-  producto.nombre?.toLowerCase().includes(termino) ||
-
-  producto.descripcion?.toLowerCase().includes(termino) ||
-
-  producto.marca?.toLowerCase().includes(termino) ||
-
-  producto.categoria?.toLowerCase().includes(termino);
+  nombre.includes(termino) ||
+  descripcion.includes(termino) ||
+  marca.includes(termino) ||
+  categoria.includes(termino);
 
    return (
 
