@@ -11,44 +11,31 @@ import {
 } from "react-icons/fa";
 
 export default function Header() {
-  
-  const [busqueda, setBusqueda] = useState("");
 
+  const router = useRouter();
+
+  const [busqueda, setBusqueda] = useState("");
 
   function buscarProducto() {
 
-  const texto = busqueda.trim();
+    const texto = busqueda.trim();
 
-  if (!texto) {
+    // Más adelante enviaremos el texto al catálogo
     router.push("/productos");
-    return;
-  }
-
-  router.push(`/productos?q=${encodeURIComponent(texto)}`);
-
-}
-
-    return;
 
   }
 
-  router.push(
-    `/productos?buscar=${encodeURIComponent(texto)}`
-  );
-
-}
   return (
+
     <header className="bg-black py-4">
 
       <div className="max-w-7xl mx-auto px-4">
 
         <div className="flex flex-col lg:flex-row lg:items-center gap-4">
 
-          {/* PRIMERA FILA */}
+          {/* LOGO */}
 
           <div className="flex items-center justify-between lg:w-auto">
-
-            {/* LOGO */}
 
             <Link href="/">
 
@@ -88,36 +75,37 @@ export default function Header() {
 
             <div className="flex w-full">
 
-           <input
-  type="text"
-  placeholder="Buscar productos..."
-  value={busqueda}
-  onChange={(e) => setBusqueda(e.target.value)}
-  onKeyDown={(e) => {
+              <input
+                type="text"
+                placeholder="Buscar productos..."
+                value={busqueda}
+                onChange={(e) => setBusqueda(e.target.value)}
+                onKeyDown={(e) => {
 
-    if (e.key === "Enter") {
+                  if (e.key === "Enter") {
 
-      buscarProducto();
+                    buscarProducto();
 
-    }
+                  }
 
-  }}
-  className="
-    flex-1
-    h-12
-    lg:h-14
-    px-4
-    lg:px-6
-    text-base
-    lg:text-lg
-    bg-white
-    text-black
-    rounded-l-xl
-    outline-none
-  "
-/>
+                }}
+                className="
+                  flex-1
+                  h-12
+                  lg:h-14
+                  px-4
+                  lg:px-6
+                  text-base
+                  lg:text-lg
+                  bg-white
+                  text-black
+                  rounded-l-xl
+                  outline-none
+                "
+              />
+
               <button
-  onClick={buscarProducto}
+                onClick={buscarProducto}
                 className="
                   bg-yellow-500
                   hover:bg-yellow-400
@@ -164,7 +152,9 @@ export default function Header() {
                 <FaUser className="text-2xl" />
 
                 <span className="text-sm">
+
                   Mi Cuenta
+
                 </span>
 
               </div>
@@ -178,7 +168,9 @@ export default function Header() {
                 <FaShoppingCart className="text-2xl" />
 
                 <span className="text-sm">
+
                   Carrito
+
                 </span>
 
               </div>
@@ -192,5 +184,7 @@ export default function Header() {
       </div>
 
     </header>
+
   );
+
 }
