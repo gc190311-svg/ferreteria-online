@@ -16,9 +16,10 @@ export default function Header() {
   const router = useRouter();
 
   const {
-    textoBusqueda,
-    setTextoBusqueda,
-  } = useCatalogo();
+  textoBusqueda,
+  setTextoBusqueda,
+  setBusquedaRealizada,
+} = useCatalogo();
 
   function buscarProducto() {
 
@@ -32,13 +33,13 @@ export default function Header() {
 
   }
 
-  router.push(
-  `/productos?buscar=${encodeURIComponent(texto)}`
-);
+ // Indicamos que existe una búsqueda activa
+  setBusquedaRealizada(true);
 
-// Borra inmediatamente el contenido del input
-setTextoBusqueda("");
-    }
+  // Ir al catálogo
+  router.push("/productos");
+
+}
 
   return (
 
