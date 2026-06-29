@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import {
   FaSearch,
@@ -12,6 +13,7 @@ export default function Header({
   textoBusqueda = "",
   setTextoBusqueda,
 }) {
+  const [busquedaLocal, setBusquedaLocal] = useState("");
   return (
     <header className="bg-black py-4">
 
@@ -63,13 +65,17 @@ export default function Header({
 
             <div className="flex w-full">
 
-             <input
+            <input
   type="text"
   placeholder="Buscar productos..."
-  value={textoBusqueda}
-  onChange={(e) =>
-    setTextoBusqueda?.(e.target.value)
-  }
+  value={setTextoBusqueda ? textoBusqueda : busquedaLocal}
+  onChange={(e) => {
+    if (setTextoBusqueda) {
+      setTextoBusqueda(e.target.value);
+    } else {
+      setBusquedaLocal(e.target.value);
+    }
+  }}
   className="
     flex-1
     h-12
