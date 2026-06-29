@@ -7,7 +7,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 import SidebarFiltros from "../../components/catalogo/SidebarFiltros";
-import BuscadorCatalogo from "../../components/catalogo/BuscadorCatalogo";
+
 import GridProductos from "../../components/catalogo/GridProductos";
 import CabeceraCatalogo from "../../components/catalogo/CabeceraCatalogo";
 
@@ -36,7 +36,7 @@ export default function CatalogoProductos() {
 
   <CabeceraCatalogo />
 
-  <BuscadorCatalogo />
+
 
   <GridProductos
     categoriaSeleccionada={categoriaSeleccionada}
