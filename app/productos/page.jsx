@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
 import Header from "../../components/Header";
@@ -58,6 +58,7 @@ function CatalogoContenido() {
       </div>
 
       <Footer />
+
     </>
   );
 }
@@ -65,10 +66,17 @@ function CatalogoContenido() {
 export default function CatalogoProductos() {
 
   return (
+
     <CatalogoProvider>
 
-      <CatalogoContenido />
+      <Suspense fallback={<div className="py-20 text-center">Cargando catálogo...</div>}>
+
+        <CatalogoContenido />
+
+      </Suspense>
 
     </CatalogoProvider>
+
   );
+
 }
