@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 import {
@@ -10,17 +9,20 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 
+import { useCatalogo } from "./context/CatalogoContext";
+
 export default function Header() {
 
   const router = useRouter();
 
-  const [busqueda, setBusqueda] = useState("");
+  const {
+    textoBusqueda,
+    setTextoBusqueda,
+  } = useCatalogo();
 
   function buscarProducto() {
 
-    const texto = busqueda.trim();
-
-    // Más adelante enviaremos el texto al catálogo
+    // Ir al catálogo
     router.push("/productos");
 
   }
@@ -78,8 +80,10 @@ export default function Header() {
               <input
                 type="text"
                 placeholder="Buscar productos..."
-                value={busqueda}
-                onChange={(e) => setBusqueda(e.target.value)}
+                value={textoBusqueda}
+                onChange={(e) =>
+                  setTextoBusqueda(e.target.value)
+                }
                 onKeyDown={(e) => {
 
                   if (e.key === "Enter") {
@@ -124,7 +128,9 @@ export default function Header() {
                 <FaSearch />
 
                 <span className="hidden md:block">
+
                   Buscar
+
                 </span>
 
               </button>
