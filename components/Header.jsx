@@ -22,7 +22,9 @@ export default function Header() {
 
   function buscarProducto() {
 
-  if (textoBusqueda.trim() === "") {
+  const texto = textoBusqueda.trim();
+
+  if (texto === "") {
 
     router.push("/productos");
 
@@ -30,9 +32,10 @@ export default function Header() {
 
   }
 
-  router.push("/productos");
+  router.push(
+    `/productos?buscar=${encodeURIComponent(texto)}`
+  );
 
-  // Limpiar el buscador después de navegar
   setTimeout(() => {
 
     setTextoBusqueda("");
@@ -91,53 +94,22 @@ export default function Header() {
 
             <div className="flex w-full">
 
-              <input
-                type="text"
-                placeholder="Buscar productos..."
-                value={textoBusqueda}
-                onChange={(e) =>
-                  setTextoBusqueda(e.target.value)
-                }
-                onKeyDown={(e) => {
+             <input
+  type="text"
+  value={textoBusqueda}
+  onChange={(e)=>setTextoBusqueda(e.target.value)}
+  onKeyDown={(e)=>{
 
-                  if (e.key === "Enter") {
+    if(e.key==="Enter"){
 
-                    buscarProducto();
+      buscarProducto();
 
-                  }
+    }
 
-                }}
-                className="
-                  flex-1
-                  h-12
-                  lg:h-14
-                  px-4
-                  lg:px-6
-                  text-base
-                  lg:text-lg
-                  bg-white
-                  text-black
-                  rounded-l-xl
-                  outline-none
-                "
-              />
+  }}
+/>
 
-              <button
-                onClick={buscarProducto}
-                className="
-                  bg-yellow-500
-                  hover:bg-yellow-400
-                  text-black
-                  font-bold
-                  px-5
-                  lg:px-8
-                  rounded-r-xl
-                  flex
-                  items-center
-                  gap-2
-                  transition
-                "
-              >
+              <button onClick={buscarProducto}>
 
                 <FaSearch />
 
