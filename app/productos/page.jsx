@@ -34,11 +34,15 @@ export default function CatalogoProductos() {
 
         <div className="flex-1">
 
-          <BuscadorCatalogo />
+  <CabeceraCatalogo />
 
-          <GridProductos
-            categoriaSeleccionada={categoriaSeleccionada}
-          />
+  <BuscadorCatalogo />
+
+  <GridProductos
+    categoriaSeleccionada={categoriaSeleccionada}
+  />
+
+</div>
 
         </div>
 
