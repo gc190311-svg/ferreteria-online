@@ -22,10 +22,24 @@ export default function Header() {
 
   function buscarProducto() {
 
-    // Ir al catálogo
+  if (textoBusqueda.trim() === "") {
+
     router.push("/productos");
 
+    return;
+
   }
+
+  router.push("/productos");
+
+  // Limpiar el buscador después de navegar
+  setTimeout(() => {
+
+    setTextoBusqueda("");
+
+  }, 100);
+
+}
 
   return (
 
