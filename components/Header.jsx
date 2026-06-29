@@ -10,12 +10,8 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 
-export default function Header({
-  textoBusqueda = "",
-  setTextoBusqueda,
-}) {
-  const [busquedaLocal, setBusquedaLocal] = useState("");
-  const router = useRouter();
+export default function Header() {
+  
   const [busqueda, setBusqueda] = useState("");
 
 
@@ -24,8 +20,13 @@ export default function Header({
   const texto = busqueda.trim();
 
   if (!texto) {
-
     router.push("/productos");
+    return;
+  }
+
+  router.push(`/productos?q=${encodeURIComponent(texto)}`);
+
+}
 
     return;
 
