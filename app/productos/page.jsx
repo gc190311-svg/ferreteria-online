@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -21,15 +20,13 @@ const {
   setTextoBusqueda,
 } = useCatalogo();
 
-  const searchParams = useSearchParams();
+ 
 
 useEffect(() => {
 
   const buscar = searchParams.get("buscar") || "";
 
-  setTextoBusqueda(buscar);
-
-}, [searchParams, setTextoBusqueda]);
+  
 
   return (
     <>
