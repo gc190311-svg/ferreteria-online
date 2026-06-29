@@ -1,20 +1,21 @@
 "use client";
 
-import { useState } from "react";
-
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 import SidebarFiltros from "../../components/catalogo/SidebarFiltros";
-
 import GridProductos from "../../components/catalogo/GridProductos";
 import CabeceraCatalogo from "../../components/catalogo/CabeceraCatalogo";
 
-export default function CatalogoProductos() {
+import { CatalogoProvider, useCatalogo } from "../../components/context/CatalogoContext";
 
-  const [categoriaSeleccionada, setCategoriaSeleccionada] =
-    useState("todos");
+function CatalogoContenido() {
+
+  const {
+    categoriaSeleccionada,
+    setCategoriaSeleccionada,
+  } = useCatalogo();
 
   return (
     <>
@@ -27,29 +28,33 @@ export default function CatalogoProductos() {
 
       <div className="max-w-7xl mx-auto flex gap-8 py-10 px-4">
 
-        <SidebarFiltros
-          categoriaSeleccionada={categoriaSeleccionada}
-          setCategoriaSeleccionada={setCategoriaSeleccionada}
-        />
+        <SidebarFiltros />
 
         <div className="flex-1">
 
-  <CabeceraCatalogo />
+          <CabeceraCatalogo />
 
+          <GridProductos />
 
-
-  <GridProductos
-    categoriaSeleccionada={categoriaSeleccionada}
-  />
-
-</div>
-
+        </div>
 
       </div>
 
       <Footer />
-
     </>
+  );
+}
+
+export default function CatalogoProductos() {
+
+  return (
+
+    <CatalogoProvider>
+
+      <CatalogoContenido />
+
+    </CatalogoProvider>
+
   );
 
 }
