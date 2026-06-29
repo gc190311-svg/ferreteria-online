@@ -1,134 +1,134 @@
 "use client";
 
+import { useCatalogo } from "../context/CatalogoContext";
+
 export default function SidebarFiltros() {
+
+  const {
+    productos,
+    categoriaSeleccionada,
+    marcaSeleccionada,
+    setMarcaSeleccionada,
+  } = useCatalogo();
+
+  // Filtrar productos según la categoría seleccionada
+  const productosCategoria =
+    categoriaSeleccionada === "todos"
+      ? productos
+      : productos.filter(
+          (producto) =>
+            producto.categoria === categoriaSeleccionada
+        );
+
+  // Obtener marcas con contador
+  const marcas = {};
+
+  productosCategoria.forEach((producto) => {
+
+    if (!producto.marca) return;
+
+    if (!marcas[producto.marca]) {
+
+      marcas[producto.marca] = 1;
+
+    } else {
+
+      marcas[producto.marca]++;
+
+    }
+
+  });
+
+  const listaMarcas = Object.entries(marcas).sort();
 
   return (
 
     <aside
       className="
-      w-72
-      bg-white
-      rounded-3xl
-      shadow-lg
-      p-6
-      h-fit
+        w-72
+        bg-white
+        rounded-3xl
+        shadow-lg
+        p-6
+        h-fit
       "
     >
 
       <h2 className="text-2xl font-bold mb-6">
 
-        Categorías
+        Marcas
 
       </h2>
 
-      <div className="space-y-4">
-
-        <label className="flex items-center gap-3 cursor-pointer">
-
-          <input type="checkbox" />
-
-          Herramientas
-
-        </label>
-
-        <label className="flex items-center gap-3 cursor-pointer">
-
-          <input type="checkbox" />
-
-          Construcción
-
-        </label>
-
-        <label className="flex items-center gap-3 cursor-pointer">
-
-          <input type="checkbox" />
-
-          Electricidad
-
-        </label>
-
-        <label className="flex items-center gap-3 cursor-pointer">
-
-          <input type="checkbox" />
-
-          Gasfitería
-
-        </label>
-
-        <label className="flex items-center gap-3 cursor-pointer">
-
-          <input type="checkbox" />
-
-          Pintura
-
-        </label>
-
-      </div>
-
-      <hr className="my-8" />
-
-      <h3 className="font-bold text-xl mb-4">
-
-        Marcas
-
-      </h3>
-
       <div className="space-y-3">
 
-        <label className="flex gap-2">
+        <label
+          className="
+            flex
+            items-center
+            justify-between
+            cursor-pointer
+            font-medium
+          "
+        >
 
-          <input type="checkbox" />
+          <div className="flex items-center gap-2">
 
-          Truper
+            <input
+              type="radio"
+              name="marca"
+              checked={marcaSeleccionada === ""}
+              onChange={() => setMarcaSeleccionada("")}
+            />
+
+            Todas
+
+          </div>
+
+          <span className="text-gray-500">
+
+            ({productosCategoria.length})
+
+          </span>
 
         </label>
 
-        <label className="flex gap-2">
+        {listaMarcas.map(([marca, cantidad]) => (
 
-          <input type="checkbox" />
+          <label
+            key={marca}
+            className="
+              flex
+              items-center
+              justify-between
+              cursor-pointer
+            "
+          >
 
-          Makita
+            <div className="flex items-center gap-2">
 
-        </label>
+              <input
+                type="radio"
+                name="marca"
+                checked={marcaSeleccionada === marca}
+                onChange={() =>
+                  setMarcaSeleccionada(marca)
+                }
+              />
 
-        <label className="flex gap-2">
+              {marca}
 
-          <input type="checkbox" />
+            </div>
 
-          Bosch
+            <span className="text-gray-500">
 
-        </label>
+              ({cantidad})
 
-        <label className="flex gap-2">
+            </span>
 
-          <input type="checkbox" />
+          </label>
 
-          Stanley
-
-        </label>
-
-      </div>
-
-      <hr className="my-8" />
-
-      <h3 className="font-bold text-xl mb-4">
-
-        Precio
-
-      </h3>
-
-      <input
-        type="range"
-        min="0"
-        max="5000"
-        className="w-full"
-      />
-
-      <div className="flex justify-between mt-2 text-sm">
-
-        <span>S/0</span>
-
-        <span>S/5000</span>
+        ))}
 
       </div>
 
