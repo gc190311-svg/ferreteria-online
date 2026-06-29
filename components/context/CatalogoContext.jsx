@@ -78,9 +78,20 @@ export function CatalogoProvider({ children }) {
         setMarcaSeleccionada,
 
         textoBusqueda,
+        const [busquedaRealizada, setBusquedaRealizada] =
+  useState(false);
         setTextoBusqueda,
 
         limpiarFiltros,
+
+          function limpiarFiltros() {
+
+  setCategoriaSeleccionada("todos");
+  setMarcaSeleccionada("");
+  setTextoBusqueda("");
+  setBusquedaRealizada(false);
+
+}
 
       }}
     >
