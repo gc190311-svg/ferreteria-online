@@ -12,7 +12,9 @@ import Productos from "../components/Productos";
 import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
 
-export default function Home() {
+import { CatalogoProvider } from "../components/context/CatalogoContext";
+
+function HomeContenido() {
 
   const [categoriaSeleccionada, setCategoriaSeleccionada] =
     useState("todos");
@@ -24,8 +26,8 @@ export default function Home() {
       <Header />
 
       <Navbar
-        setCategoriaSeleccionada={setCategoriaSeleccionada}
         categoriaSeleccionada={categoriaSeleccionada}
+        setCategoriaSeleccionada={setCategoriaSeleccionada}
       />
 
       <Hero />
@@ -43,4 +45,19 @@ export default function Home() {
       <WhatsAppButton />
     </>
   );
+
+}
+
+export default function Home() {
+
+  return (
+
+    <CatalogoProvider>
+
+      <HomeContenido />
+
+    </CatalogoProvider>
+
+  );
+
 }
