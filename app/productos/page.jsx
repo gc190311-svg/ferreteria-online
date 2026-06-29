@@ -12,14 +12,19 @@ import { CatalogoProvider, useCatalogo } from "../../components/context/Catalogo
 
 function CatalogoContenido() {
 
-  const {
-    categoriaSeleccionada,
-    setCategoriaSeleccionada,
-  } = useCatalogo();
+const {
+  categoriaSeleccionada,
+  setCategoriaSeleccionada,
+  textoBusqueda,
+  setTextoBusqueda,
+} = useCatalogo();
 
   return (
     <>
-      <Header />
+     <Header
+  textoBusqueda={textoBusqueda}
+  setTextoBusqueda={setTextoBusqueda}
+/>
 
       <Navbar
         categoriaSeleccionada={categoriaSeleccionada}
