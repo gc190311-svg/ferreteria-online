@@ -1,70 +1,68 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
-import {
-    collection,
-    getDocs
-} from "firebase/firestore";
-
-import { db } from "../../app/firebase";
-
 import CardProducto from "./CardProducto";
+
+import { useCatalogo } from "../context/CatalogoContext";
 
 export default function GridProductos() {
 
-    const [productos,setProductos]=useState([]);
+  const {
+    productos,
+    categoriaSeleccionada,
+    marcaSeleccionada,
+    textoBusqueda,
+  } = useCatalogo();
 
-    useEffect(()=>{
+  const productosFiltrados = productos.filter((producto) => {
 
-        cargarProductos();
+    // Filtro por categoría
+    const coincideCategoria =
+      categoriaSeleccionada === "todos" ||
+      producto.categoria === categoriaSeleccionada;
 
-    },[]);
+    // Filtro por marca
+    const coincideMarca =
+      !marcaSeleccionada ||
+      producto.marca === marcaSeleccionada;
 
-    async function cargarProductos(){
+    // Filtro por buscador
+    const texto = textoBusqueda.toLowerCase();
 
-        const querySnapshot=await getDocs(
-            collection(db,"productos")
-        );
+    const coincideBusqueda =
+      producto.nombre.toLowerCase().includes(texto) ||
+      producto.descripcion.toLowerCase().includes(texto);
 
-        const lista=[];
-
-        querySnapshot.forEach((doc)=>{
-
-            lista.push({
-                id:doc.id,
-                ...doc.data()
-            });
-
-        });
-
-        setProductos(lista);
-
-    }
-
-    return(
-
-        <div
-            className="
-            grid
-            md:grid-cols-2
-            lg:grid-cols-3
-            xl:grid-cols-4
-            gap-8
-            "
-        >
-
-            {productos.map((producto)=>(
-
-                <CardProducto
-                    key={producto.id}
-                    producto={producto}
-                />
-
-            ))}
-
-        </div>
-
+    return (
+      coincideCategoria &&
+      coincideMarca &&
+      coincideBusqueda
     );
+
+  });
+
+  return (
+
+    <div
+      className="
+        grid
+        grid-cols-2
+        md:grid-cols-3
+        xl:grid-cols-4
+        gap-8
+      "
+    >
+
+      {productosFiltrados.map((producto) => (
+
+        <CardProducto
+          key={producto.id}
+          producto={producto}
+        />
+
+      ))}
+
+    </div>
+
+  );
 
 }
