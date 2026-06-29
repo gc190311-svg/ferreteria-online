@@ -33,16 +33,11 @@ export default function Header() {
   }
 
   router.push(
-    `/productos?buscar=${encodeURIComponent(texto)}`
-  );
+  `/productos?buscar=${encodeURIComponent(texto)}`
+);
 
-  setTimeout(() => {
-
-    setTextoBusqueda("");
-
-  }, 100);
-
-}
+// Borra inmediatamente el contenido del input
+setTextoBusqueda("");
 
   return (
 
