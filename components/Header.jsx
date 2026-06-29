@@ -8,7 +8,10 @@ import {
   FaShoppingCart,
 } from "react-icons/fa";
 
-export default function Header() {
+export default function Header({
+  textoBusqueda = "",
+  setTextoBusqueda,
+}) {
   return (
     <header className="bg-black py-4">
 
@@ -60,24 +63,27 @@ export default function Header() {
 
             <div className="flex w-full">
 
-              <input
-                type="text"
-                placeholder="Buscar productos..."
-                className="
-                  flex-1
-                  h-12
-                  lg:h-14
-                  px-4
-                  lg:px-6
-                  text-base
-                  lg:text-lg
-                  bg-white
-                  text-black
-                  rounded-l-xl
-                  outline-none
-                "
-              />
-
+             <input
+  type="text"
+  placeholder="Buscar productos..."
+  value={textoBusqueda}
+  onChange={(e) =>
+    setTextoBusqueda?.(e.target.value)
+  }
+  className="
+    flex-1
+    h-12
+    lg:h-14
+    px-4
+    lg:px-6
+    text-base
+    lg:text-lg
+    bg-white
+    text-black
+    rounded-l-xl
+    outline-none
+  "
+/>
               <button
                 className="
                   bg-yellow-500
