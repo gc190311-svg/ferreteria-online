@@ -4,14 +4,19 @@ import CardProducto from "./CardProducto";
 
 import { useCatalogo } from "../context/CatalogoContext";
 
+import { useEffect } from "react";
+
 export default function GridProductos() {
 
-  const {
-    productos,
-    categoriaSeleccionada,
-    marcaSeleccionada,
-    textoBusqueda,
-  } = useCatalogo();
+ const {
+  productos,
+  categoriaSeleccionada,
+  marcaSeleccionada,
+  textoBusqueda,
+  setTextoBusqueda,
+  busquedaRealizada,
+  setBusquedaRealizada,
+} = useCatalogo();
 
   const productosFiltrados = productos.filter((producto) => {
 
@@ -39,6 +44,24 @@ const coincideBusqueda =
   descripcion.includes(termino) ||
   marca.includes(termino) ||
   categoria.includes(termino);
+
+    useEffect(() => {
+
+  if (
+    busquedaRealizada &&
+    textoBusqueda !== ""
+  ) {
+
+    setTextoBusqueda("");
+
+    setBusquedaRealizada(false);
+
+  }
+
+}, [
+  busquedaRealizada,
+  textoBusqueda,
+]);
 
    return (
 
