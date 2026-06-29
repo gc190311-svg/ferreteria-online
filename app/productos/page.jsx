@@ -44,7 +44,6 @@ export default function CatalogoProductos() {
 
 </div>
 
-        </div>
 
       </div>
 
