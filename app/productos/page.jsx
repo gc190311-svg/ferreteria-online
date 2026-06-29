@@ -1,5 +1,8 @@
 "use client";
 
+import { useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+
 import Header from "../../components/Header";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
@@ -8,14 +11,28 @@ import SidebarFiltros from "../../components/catalogo/SidebarFiltros";
 import GridProductos from "../../components/catalogo/GridProductos";
 import CabeceraCatalogo from "../../components/catalogo/CabeceraCatalogo";
 
-import { useCatalogo } from "../../components/context/CatalogoContext";
+import {
+  CatalogoProvider,
+  useCatalogo,
+} from "../../components/context/CatalogoContext";
 
 function CatalogoContenido() {
+
+  const searchParams = useSearchParams();
 
   const {
     categoriaSeleccionada,
     setCategoriaSeleccionada,
+    setTextoBusqueda,
   } = useCatalogo();
+
+  useEffect(() => {
+
+    const buscar = searchParams.get("buscar") || "";
+
+    setTextoBusqueda(buscar);
+
+  }, [searchParams, setTextoBusqueda]);
 
   return (
     <>
@@ -41,13 +58,17 @@ function CatalogoContenido() {
       </div>
 
       <Footer />
-
     </>
   );
 }
 
 export default function CatalogoProductos() {
 
-  return <CatalogoContenido />;
+  return (
+    <CatalogoProvider>
 
+      <CatalogoContenido />
+
+    </CatalogoProvider>
+  );
 }
