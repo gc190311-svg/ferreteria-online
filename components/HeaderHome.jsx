@@ -24,23 +24,24 @@ export default function HeaderHome() {
 
   function buscarProducto() {
 
-  const texto = textoInput.trim();
+    const texto = textoInput.trim();
 
-  if (texto === "") {
+    if (texto === "") {
 
-    router.push("/productos");
-    return;
+        router.push("/productos");
+        return;
 
-  }
+    }
 
-  router.push(
-    `/productos?buscar=${encodeURIComponent(texto)}`
-  );
+ // Guarda el filtro
+setTextoBusqueda(texto);
 
-  setTextoInput("");
+// Limpia el cuadro de búsqueda del Inicio
+setTextoInput("");
 
-}
-
+// Envía también la búsqueda por la URL
+router.push(`/productos?buscar=${encodeURIComponent(texto)}`);
+    
   return (
 
     <header className="bg-black py-4">
