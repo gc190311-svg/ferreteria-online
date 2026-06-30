@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import MenuCategorias from "./MenuCategorias";
 import { useCatalogo } from "../context/CatalogoContext";
 
@@ -10,16 +10,37 @@ export default function NavbarDesktop({
 }) {
 
   const pathname = usePathname();
+  const router = useRouter();
 
   const { setTextoBusqueda } = useCatalogo();
 
+  // Detecta si estamos en el catálogo
+  const esCatalogo =
+    pathname === "/productos" ||
+    pathname.startsWith("/categorias");
+
   function cambiarCategoria(categoria) {
 
-    // Limpia el buscador
+    // Limpiar buscador
     setTextoBusqueda("");
 
-    // Cambia la categoría
+    // Cambiar categoría en el contexto
     setCategoriaSeleccionada?.(categoria);
+
+    // Si estamos en rutas limpias, navegar
+    if (pathname.startsWith("/categorias")) {
+
+      if (categoria === "todos") {
+
+        router.push("/productos");
+
+      } else {
+
+        router.push(`/categorias/${categoria}`);
+
+      }
+
+    }
 
   }
 
@@ -29,13 +50,11 @@ export default function NavbarDesktop({
 
       <div className="max-w-7xl mx-auto flex items-center">
 
-        <MenuCategorias
-          setCategoriaSeleccionada={setCategoriaSeleccionada}
-        />
+        <MenuCategorias />
 
         <div className="flex-1">
 
-          {pathname === "/productos" ? (
+          {esCatalogo ? (
 
             <div className="flex justify-center gap-10">
 
@@ -100,11 +119,7 @@ export default function NavbarDesktop({
 
               <Link
                 href="/productos"
-                className={`font-bold py-5 transition ${
-                  pathname === "/productos"
-                    ? "text-yellow-500"
-                    : "text-white hover:text-yellow-500"
-                }`}
+                className="text-white hover:text-yellow-500 font-bold py-5 transition"
               >
                 PRODUCTOS
               </Link>
