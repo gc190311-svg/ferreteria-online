@@ -307,40 +307,31 @@ export default function Productos({ categoriaSeleccionada }) {
 
             )}
 
-            <div
-              className="
-                flex
-                items-end
-                gap-1
-              "
-            >
+<div className="flex items-end gap-1 mt-2">
 
-              <span
-                className="
-                  text-2xl
-                  font-bold
-                  text-emerald-700
-                "
-              >
+  <span
+    className="
+      text-lg
+      font-semibold
+      text-emerald-700
+      mb-1
+    "
+  >
+    S/
+  </span>
 
-                S/
+  <span
+    className="
+      text-4xl
+      font-bold
+      leading-none
+      text-emerald-700
+    "
+  >
+    {producto.precio}
+  </span>
 
-              </span>
-
-              <span
-                className="
-                  text-5xl
-                  font-extrabold
-                  leading-none
-                  text-emerald-700
-                "
-              >
-
-                {producto.precio}
-
-              </span>
-
-            </div>
+</div>
 
           </div>
 
