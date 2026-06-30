@@ -1,50 +1,52 @@
 "use client";
 
+import Link from "next/link";
+
 import HeaderHome from "../../components/HeaderHome";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
+const categorias = [
+
+  {
+    nombre: "Herramientas",
+    imagen: "/categorias/herramientas.jpg",
+    ruta: "/productos?categoria=herramientas",
+  },
+
+  {
+    nombre: "Construcción",
+    imagen: "/categorias/construccion.jpg",
+    ruta: "/productos?categoria=construccion",
+  },
+
+  {
+    nombre: "Electricidad",
+    imagen: "/categorias/electricidad.jpg",
+    ruta: "/productos?categoria=electricidad",
+  },
+
+  {
+    nombre: "Pintura",
+    imagen: "/categorias/pintura.jpg",
+    ruta: "/productos?categoria=pintura",
+  },
+
+  {
+    nombre: "Gasfitería",
+    imagen: "/categorias/gasfiteria.jpg",
+    ruta: "/productos?categoria=gasfiteria",
+  },
+
+  {
+    nombre: "Iluminación",
+    imagen: "/categorias/iluminacion.jpg",
+    ruta: "/productos?categoria=iluminacion",
+  },
+
+];
+
 export default function CategoriasPage() {
-
-  const categorias = [
-
-    {
-      nombre: "Herramientas",
-      imagen: "/categorias/herramientas.jpg",
-      url: "/productos?categoria=herramientas",
-    },
-
-    {
-      nombre: "Construcción",
-      imagen: "/categorias/construccion.jpg",
-      url: "/productos?categoria=construccion",
-    },
-
-    {
-      nombre: "Electricidad",
-      imagen: "/categorias/electricidad.jpg",
-      url: "/productos?categoria=electricidad",
-    },
-
-    {
-      nombre: "Pintura",
-      imagen: "/categorias/pintura.jpg",
-      url: "/productos?categoria=pintura",
-    },
-
-    {
-      nombre: "Gasfitería",
-      imagen: "/categorias/gasfiteria.jpg",
-      url: "/productos?categoria=gasfiteria",
-    },
-
-    {
-      nombre: "Iluminación",
-      imagen: "/categorias/iluminacion.jpg",
-      url: "/productos?categoria=iluminacion",
-    },
-
-  ];
 
   return (
 
@@ -57,74 +59,110 @@ export default function CategoriasPage() {
       {/* Banner */}
 
       <section
-        className="relative h-72 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/banner-catalogo.jpg')",
-        }}
+        className="relative h-[300px] overflow-hidden"
       >
 
-        <div className="absolute inset-0 bg-green-900/70"></div>
+        <img
+          src="/banner-categorias.jpg"
+          className="absolute inset-0 w-full h-full object-cover"
+          alt=""
+        />
 
-        <div className="relative h-full flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/55"></div>
 
-          <h1 className="text-5xl font-bold text-white">
+        <div className="relative h-full flex flex-col items-center justify-center">
+
+          <h1 className="text-white text-5xl font-bold">
 
             Categorías
 
           </h1>
 
+          <p className="text-gray-200 mt-5 text-xl">
+
+            Encuentra todo lo que necesitas para tu proyecto
+
+          </p>
+
         </div>
 
       </section>
 
-      {/* Grid */}
+      {/* GRID */}
 
-      <section className="max-w-7xl mx-auto py-16 px-4">
+      <section className="max-w-7xl mx-auto py-16 px-5">
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div
+          className="
+            grid
+            grid-cols-1
+            md:grid-cols-2
+            lg:grid-cols-3
+            gap-8
+          "
+        >
 
           {categorias.map((categoria) => (
 
-            <a
+            <Link
 
               key={categoria.nombre}
 
-              href={categoria.url}
+              href={categoria.ruta}
 
-              className="group relative overflow-hidden rounded-xl shadow-xl"
+              className="
+                group
+                rounded-xl
+                overflow-hidden
+                shadow-xl
+                bg-white
+                transition
+                duration-300
+                hover:-translate-y-2
+              "
 
             >
 
-              <img
+              <div className="relative overflow-hidden">
 
-                src={categoria.imagen}
+                <img
 
-                alt={categoria.nombre}
+                  src={categoria.imagen}
 
-                className="
-                  h-72
-                  w-full
-                  object-cover
-                  transition
-                  duration-500
-                  group-hover:scale-110
-                "
+                  className="
+                    h-72
+                    w-full
+                    object-cover
+                    transition
+                    duration-500
+                    group-hover:scale-110
+                  "
 
-              />
+                  alt={categoria.nombre}
 
-              <div className="absolute inset-0 bg-black/35"></div>
+                />
 
-              <div className="absolute bottom-0 left-0 right-0 bg-black/60 py-5">
+                <div className="absolute inset-0 bg-black/25"></div>
 
-                <h2 className="text-center text-white text-2xl font-bold">
+              </div>
+
+              <div className="bg-white p-6">
+
+                <h2 className="text-2xl font-bold">
 
                   {categoria.nombre}
 
                 </h2>
 
+                <p className="text-gray-500 mt-2">
+
+                  Ver productos →
+
+                </p>
+
               </div>
 
-            </a>
+            </Link>
 
           ))}
 
