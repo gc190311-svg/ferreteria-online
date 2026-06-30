@@ -1,77 +1,68 @@
 "use client";
 
 import CardProducto from "./CardProducto";
-
 import { useCatalogo } from "../context/CatalogoContext";
-
-import { useEffect } from "react";
 
 export default function GridProductos() {
 
- const {
-  productos,
-  categoriaSeleccionada,
-  marcaSeleccionada,
-  textoBusqueda,
-  setTextoBusqueda,
-  busquedaRealizada,
-  setBusquedaRealizada,
-} = useCatalogo();
+  const {
+    productos,
+    categoriaSeleccionada,
+    marcaSeleccionada,
+    textoBusqueda,
+  } = useCatalogo();
+
+  const termino = textoBusqueda.trim().toLowerCase();
 
   const productosFiltrados = productos.filter((producto) => {
 
-    // Filtro por categoría
+    const nombre = String(producto.nombre || "").toLowerCase();
+    const descripcion = String(producto.descripcion || "").toLowerCase();
+    const marca = String(producto.marca || "").toLowerCase();
+    const categoria = String(producto.categoria || "").toLowerCase();
+
     const coincideCategoria =
       categoriaSeleccionada === "todos" ||
-      producto.categoria === categoriaSeleccionada;
+      categoria === categoriaSeleccionada.toLowerCase();
 
-    // Filtro por marca
     const coincideMarca =
-      !marcaSeleccionada ||
-      producto.marca === marcaSeleccionada;
+      marcaSeleccionada === "" ||
+      marca === marcaSeleccionada.toLowerCase();
 
-    // Filtro por buscador
-    const termino = textoBusqueda.trim().toLowerCase();
+    const coincideBusqueda =
+      termino === "" ||
+      nombre.includes(termino) ||
+      descripcion.includes(termino) ||
+      marca.includes(termino) ||
+      categoria.includes(termino);
 
-const nombre = String(producto.nombre || "").toLowerCase();
-const descripcion = String(producto.descripcion || "").toLowerCase();
-const marca = String(producto.marca || "").toLowerCase();
-const categoria = String(producto.categoria || "").toLowerCase();
-
-const coincideBusqueda =
-  termino === "" ||
-  nombre.includes(termino) ||
-  descripcion.includes(termino) ||
-  marca.includes(termino) ||
-  categoria.includes(termino);
-
-    useEffect(() => {
-
-  if (
-    busquedaRealizada &&
-    textoBusqueda !== ""
-  ) {
-
-    setTextoBusqueda("");
-
-    setBusquedaRealizada(false);
-
-  }
-
-}, [
-  busquedaRealizada,
-  textoBusqueda,
-]);
-
-   return (
-
-    coincideCategoria &&
-    coincideMarca &&
-    coincideBusqueda
-
-);
+    return (
+      coincideCategoria &&
+      coincideMarca &&
+      coincideBusqueda
+    );
 
   });
+
+  if (productosFiltrados.length === 0) {
+
+    return (
+
+      <div className="text-center py-20">
+
+        <h2 className="text-2xl font-bold">
+          No se encontraron productos
+        </h2>
+
+        <p className="text-gray-500 mt-3">
+          Intenta con otra palabra o cambia los filtros.
+        </p>
+
+      </div>
+
+    );
+
+  }
 
   return (
 
