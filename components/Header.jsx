@@ -2,8 +2,6 @@
 
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-
-
 import {
   FaSearch,
   FaUser,
@@ -18,40 +16,40 @@ export default function Header() {
   const pathname = usePathname();
 
   const {
-  textoInput,
-  setTextoInput,
-  textoBusqueda,
-  setTextoBusqueda,
-} = useCatalogo();
+    textoInput,
+    setTextoInput,
+    textoBusqueda,
+    setTextoBusqueda,
+  } = useCatalogo();
 
- function buscarProducto() {
+  function buscarProducto() {
 
-  const texto = textoInput.trim();
+    const texto = textoInput.trim();
 
-  if (texto === "") {
+    if (texto === "") {
+
+      router.push("/productos");
+      return;
+
+    }
+
+    // Copia el texto al filtro
+    setTextoBusqueda(texto);
+
+    // Limpia el input
+    setTextoInput("");
+
+    // Si ya estamos en productos,
+    // no navegamos.
+    if (pathname === "/productos") {
+
+      return;
+
+    }
 
     router.push("/productos");
-    return;
 
   }
-
-  // Copiamos el texto al filtro del catálogo
-  setTextoBusqueda(texto);
-
-  // Limpiamos el input
-  setTextoInput("");
-
-  // Si ya estamos en productos no navegamos
-  if (pathname === "/productos") {
-
-    return;
-
-  }
-
-  // Desde cualquier otra página vamos al catálogo
-  router.push("/productos");
-
-}
 
   return (
 
@@ -70,18 +68,10 @@ export default function Header() {
               <img
                 src="/logo.png"
                 alt="Brico Hogar"
-                className="
-                  h-16
-                  md:h-20
-                  lg:h-28
-                  w-auto
-                  cursor-pointer
-                "
+                className="h-16 md:h-20 lg:h-28 w-auto cursor-pointer"
               />
 
             </Link>
-
-            {/* ICONOS CELULAR */}
 
             <div className="flex lg:hidden gap-6 text-white">
 
@@ -103,21 +93,51 @@ export default function Header() {
 
             <div className="flex w-full">
 
-             value={textoInput}
+              <input
+                type="text"
+                placeholder="Buscar productos..."
+                value={textoInput}
+                onChange={(e) => setTextoInput(e.target.value)}
+                onKeyDown={(e) => {
 
-onChange={(e)=>setTextoInput(e.target.value)}
-  onKeyDown={(e)=>{
+                  if (e.key === "Enter") {
 
-    if(e.key==="Enter"){
+                    buscarProducto();
 
-      buscarProducto();
+                  }
 
-    }
+                }}
+                className="
+                  flex-1
+                  h-12
+                  lg:h-14
+                  px-4
+                  lg:px-6
+                  text-base
+                  lg:text-lg
+                  bg-white
+                  text-black
+                  rounded-l-xl
+                  outline-none
+                "
+              />
 
-  }}
-/>
-
-              <button onClick={buscarProducto}>
+              <button
+                onClick={buscarProducto}
+                className="
+                  bg-yellow-500
+                  hover:bg-yellow-400
+                  text-black
+                  font-bold
+                  px-5
+                  lg:px-8
+                  rounded-r-xl
+                  flex
+                  items-center
+                  gap-2
+                  transition
+                "
+              >
 
                 <FaSearch />
 
@@ -135,15 +155,7 @@ onChange={(e)=>setTextoInput(e.target.value)}
 
           {/* ICONOS ESCRITORIO */}
 
-          <div
-            className="
-              hidden
-              lg:flex
-              items-center
-              gap-10
-              text-white
-            "
-          >
+          <div className="hidden lg:flex items-center gap-10 text-white">
 
             <Link href="/login">
 
