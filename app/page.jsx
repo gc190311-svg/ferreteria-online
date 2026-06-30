@@ -23,7 +23,7 @@ function HomeContenido() {
     <>
       <TopBar />
 
-      <Header />
+    <HeaderHome />
 
       <Navbar
         categoriaSeleccionada={categoriaSeleccionada}
