@@ -18,35 +18,37 @@ export default function Header() {
   const pathname = usePathname();
 
   const {
+  textoInput,
+  setTextoInput,
   textoBusqueda,
   setTextoBusqueda,
-  
 } = useCatalogo();
 
-  function buscarProducto() {
+ function buscarProducto() {
 
-  // Elimina espacios al inicio y final
-  const texto = textoBusqueda.trim();
+  const texto = textoInput.trim();
 
-  // Si no escribió nada, ir al catálogo
   if (texto === "") {
 
     router.push("/productos");
-
     return;
 
   }
 
-  // Si ya estamos en la página de productos,
-  // NO hacemos nada.
+  // Copiamos el texto al filtro del catálogo
+  setTextoBusqueda(texto);
+
+  // Limpiamos el input
+  setTextoInput("");
+
+  // Si ya estamos en productos no navegamos
   if (pathname === "/productos") {
 
     return;
 
   }
 
-  // Solo si estamos en Inicio
-  // navegamos al catálogo.
+  // Desde cualquier otra página vamos al catálogo
   router.push("/productos");
 
 }
@@ -101,10 +103,9 @@ export default function Header() {
 
             <div className="flex w-full">
 
-             <input
-  type="text"
-  value={textoBusqueda}
-  onChange={(e)=>setTextoBusqueda(e.target.value)}
+             value={textoInput}
+
+onChange={(e)=>setTextoInput(e.target.value)}
   onKeyDown={(e)=>{
 
     if(e.key==="Enter"){
