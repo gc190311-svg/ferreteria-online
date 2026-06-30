@@ -24,49 +24,50 @@ import {
 function CatalogoContenido() {
 
   const searchParams = useSearchParams();
-
   const router = useRouter();
-
   const pathname = usePathname();
 
   const {
-
     categoriaSeleccionada,
-
     setCategoriaSeleccionada,
-
     setTextoBusqueda,
+  } = useCatalogo();
 
   useEffect(() => {
 
-  const buscar = searchParams.get("buscar");
-  const categoria = searchParams.get("categoria");
+    const buscar = searchParams.get("buscar");
+    const categoria = searchParams.get("categoria");
 
-  if (buscar) {
+    if (buscar) {
+      setTextoBusqueda(buscar);
+    }
 
-    setTextoBusqueda(buscar);
+    if (categoria) {
+      setCategoriaSeleccionada(categoria);
+    }
 
-  }
+    if (buscar || categoria) {
+      router.replace(pathname);
+    }
 
-  if (categoria) {
+  }, [
+    searchParams,
+    pathname,
+    router,
+    setTextoBusqueda,
+    setCategoriaSeleccionada,
+  ]);
 
-    setCategoriaSeleccionada(categoria);
+  return (
 
-  }
+    <>
 
-  if (buscar || categoria) {
+      <HeaderCatalogo />
 
-    router.replace(pathname);
-
-  }
-
-}, [
-  searchParams,
-  pathname,
-  router,
-  setTextoBusqueda,
-  setCategoriaSeleccionada,
-]);
+      <Navbar
+        categoriaSeleccionada={categoriaSeleccionada}
+        setCategoriaSeleccionada={setCategoriaSeleccionada}
+      />
 
       <div className="max-w-7xl mx-auto flex gap-8 py-10 px-4">
 
@@ -97,17 +98,11 @@ export default function CatalogoProductos() {
     <CatalogoProvider>
 
       <Suspense
-
         fallback={
-
           <div className="py-20 text-center">
-
             Cargando catálogo...
-
           </div>
-
         }
-
       >
 
         <CatalogoContenido />
