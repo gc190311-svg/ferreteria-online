@@ -1,9 +1,10 @@
 "use client";
 
-import { FaShoppingCart } from "react-icons/fa";
 import { useEffect, useState } from "react";
-import { db } from "../app/firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { FaShoppingCart } from "react-icons/fa";
+
+import { db } from "../app/firebase";
 
 export default function Productos({ categoriaSeleccionada }) {
 
@@ -16,27 +17,30 @@ export default function Productos({ categoriaSeleccionada }) {
 
       try {
 
-        const querySnapshot = await getDocs(
+        const snapshot = await getDocs(
           collection(db, "productos")
         );
 
-        const listaProductos = [];
+        const lista = [];
 
-        querySnapshot.forEach((doc) => {
+        snapshot.forEach((doc) => {
 
-          listaProductos.push({
+          lista.push({
+
             id: doc.id,
+
             ...doc.data(),
+
           });
 
         });
 
-        // Mostrar solo los primeros 4 productos
-        setProductos(listaProductos.slice(0, 4));
+        // Mostrar únicamente los primeros productos
+        setProductos(lista.slice(0, 4));
 
       } catch (error) {
 
-        console.error("Error cargando productos:", error);
+        console.error(error);
 
       } finally {
 
@@ -62,22 +66,36 @@ export default function Productos({ categoriaSeleccionada }) {
 
     <section
       id="productos"
-      className="bg-gray-100 py-20"
+      className="bg-[#f7f8fa] py-24"
     >
 
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* TÍTULO */}
+        {/* CABECERA */}
 
-        <div className="mb-12">
+        <div className="mb-14">
 
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+          <div className="w-16 h-1 rounded-full bg-yellow-500 mb-5"></div>
+
+          <h2
+            className="
+              text-5xl
+              font-extrabold
+              text-gray-900
+            "
+          >
 
             Productos más vendidos
 
           </h2>
 
-          <p className="text-gray-500 text-lg mt-3">
+          <p
+            className="
+              mt-4
+              text-xl
+              text-gray-500
+            "
+          >
 
             Descubre los productos preferidos por nuestros clientes.
 
@@ -89,7 +107,7 @@ export default function Productos({ categoriaSeleccionada }) {
 
         {cargando ? (
 
-          <div className="text-center py-20">
+          <div className="py-24 text-center">
 
             <p className="text-2xl font-semibold">
 
@@ -101,17 +119,17 @@ export default function Productos({ categoriaSeleccionada }) {
 
         ) : productosFiltrados.length === 0 ? (
 
-          <div className="text-center py-20">
+          <div className="py-24 text-center">
 
-            <h3 className="text-3xl font-bold mb-4">
+            <h3 className="text-3xl font-bold">
 
-              No hay productos
+              No hay productos disponibles
 
             </h3>
 
-            <p className="text-gray-500">
+            <p className="mt-3 text-gray-500">
 
-              No se encontraron productos para esta categoría.
+              Intenta nuevamente más tarde.
 
             </p>
 
@@ -121,7 +139,7 @@ export default function Productos({ categoriaSeleccionada }) {
 
           <>
 
-            {/* PRODUCTOS */}
+ {/* GRID DE PRODUCTOS */}
 
 <div
   className="
@@ -131,172 +149,266 @@ export default function Productos({ categoriaSeleccionada }) {
     lg:grid-cols-4
     gap-10
     items-stretch
-"
->
-              {productosFiltrados.map((producto) => (
-
-<div
-  key={producto.id}
-  className="
-    group
-    relative
-    flex
-    flex-col
-    bg-white
-    rounded-[26px]
-    overflow-hidden
-    border
-    border-gray-200
-    shadow-md
-    hover:shadow-2xl
-    hover:-translate-y-2
-    transition-all
-    duration-500
-    min-h-[720px]
-"
+  "
 >
 
-  {/* OFERTA */}
+  {productosFiltrados.map((producto) => {
 
-  {producto.precioAnterior > producto.precio && (
+    const tieneOferta =
+      Number(producto.precioAnterior || 0) >
+      Number(producto.precio || 0);
 
-    <div className="absolute top-4 left-4 z-20">
+    return (
 
-      <span className="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-lg">
-
-        OFERTA
-
-      </span>
-
-    </div>
-
-  )}
-
-  {/* IMAGEN */}
-
-  <div className="bg-gray-50 p-8">
-
-    <img
-      src={
-        producto.imagenes?.[0] ||
-        producto.imagen ||
-        "/sin-imagen.png"
-      }
-      alt={producto.nombre}
-      className="
-        w-full
-        h-72
-        object-contain
-        transition
-        duration-500
-        group-hover:scale-110
-      "
-    />
-
-  </div>
-
-  {/* INFORMACIÓN */}
-
-  <div className="flex flex-col flex-1 p-6">
-
-    <h3
-      className="
-        text-xl
-        font-bold
-        text-gray-900
-        leading-7
-        line-clamp-3
-        min-h-[90px]
-      "
-    >
-
-      {producto.nombre}
-
-    </h3>
-
-    {producto.marca && (
-
-      <span
+      <div
+        key={producto.id}
         className="
-          mt-3
-          text-xs
-          uppercase
-          tracking-[2px]
-          text-gray-500
-          font-semibold
+          group
+          relative
+          flex
+          flex-col
+          bg-white
+          rounded-[26px]
+          border
+          border-gray-200
+          overflow-hidden
+          shadow-md
+          hover:shadow-2xl
+          hover:-translate-y-2
+          transition-all
+          duration-500
         "
       >
 
-        {producto.marca}
+        {/* BADGE OFERTA */}
 
-      </span>
+        {tieneOferta && (
 
-    )}
+          <div className="absolute top-5 left-5 z-20">
 
-    <div className="mt-6">
+            <span
+              className="
+                bg-red-600
+                text-white
+                text-xs
+                font-bold
+                px-3
+                py-1
+                rounded-full
+                shadow
+              "
+            >
 
-      {producto.precioAnterior > producto.precio && (
+              OFERTA
 
-        <p className="text-gray-400 line-through text-lg">
+            </span>
 
-          S/ {producto.precioAnterior}
+          </div>
 
-        </p>
+        )}
 
-      )}
+        {/* IMAGEN */}
 
-      <div className="flex items-end gap-1 mt-1">
+        <div
+          className="
+            bg-gray-50
+            h-[320px]
+            flex
+            items-center
+            justify-center
+            overflow-hidden
+          "
+        >
 
-        <span className="text-2xl font-bold text-emerald-700">
+          <img
+            src={
+              producto.imagenes?.[0] ||
+              producto.imagen ||
+              "/sin-imagen.png"
+            }
+            alt={producto.nombre}
+            className="
+              w-[85%]
+              h-[85%]
+              object-contain
+              transition-transform
+              duration-500
+              group-hover:scale-110
+            "
+          />
 
-          S/
+        </div>
 
-        </span>
+        {/* CONTENIDO */}
 
-        <span className="text-5xl font-extrabold text-emerald-700 leading-none">
+        <div
+          className="
+            flex
+            flex-col
+            flex-1
+            p-6
+          "
+        >
 
-          {producto.precio}
+          {/* MARCA */}
 
-        </span>
+          {producto.marca && (
+
+            <span
+              className="
+                uppercase
+                tracking-[3px]
+                text-xs
+                text-gray-400
+                font-semibold
+              "
+            >
+
+              {producto.marca}
+
+            </span>
+
+          )}
+
+          {/* NOMBRE */}
+
+          <h3
+            className="
+              mt-3
+              text-[20px]
+              font-semibold
+              text-gray-900
+              leading-7
+              min-h-[88px]
+            "
+          >
+
+            {producto.nombre}
+
+          </h3>
+
+          {/* PRECIOS */}
+
+          <div className="mt-5">
+
+            {tieneOferta && (
+
+              <p
+                className="
+                  text-gray-400
+                  line-through
+                  text-lg
+                "
+              >
+
+                S/ {producto.precioAnterior}
+
+              </p>
+
+            )}
+
+            <div
+              className="
+                flex
+                items-end
+                gap-1
+              "
+            >
+
+              <span
+                className="
+                  text-2xl
+                  font-bold
+                  text-emerald-700
+                "
+              >
+
+                S/
+
+              </span>
+
+              <span
+                className="
+                  text-5xl
+                  font-extrabold
+                  leading-none
+                  text-emerald-700
+                "
+              >
+
+                {producto.precio}
+
+              </span>
+
+            </div>
+
+          </div>
+
+          {/* BOTÓN */}
+
+          <a
+            href={`/producto/${producto.id}`}
+            className="
+              mt-auto
+              flex
+              items-center
+              justify-center
+              gap-3
+              bg-yellow-400
+              hover:bg-yellow-500
+              text-black
+              font-bold
+              py-4
+              rounded-xl
+              transition-all
+              duration-300
+            "
+          >
+
+            <FaShoppingCart />
+
+            Ver producto
+
+          </a>
+
+        </div>
 
       </div>
 
-    </div>
+    );
 
-    <a
-      href={`/producto/${producto.id}`}
-      className="
-        mt-auto
-        flex
-        items-center
-        justify-center
-        gap-3
-        bg-yellow-400
-        hover:bg-yellow-500
-        text-black
-        font-bold
-        py-4
-        rounded-xl
-        transition
-      "
-    >
+  })}
 
-      <FaShoppingCart />
+</div>    
+{/* BOTÓN VER MÁS */}
 
-      Ver producto
+<div className="text-center mt-16">
 
-    </a>
+  <a
+    href="/productos"
+    className="
+      inline-flex
+      items-center
+      justify-center
+      px-10
+      py-4
+      bg-black
+      hover:bg-gray-900
+      text-white
+      font-bold
+      rounded-xl
+      transition-all
+      duration-300
+      shadow-lg
+      hover:shadow-xl
+    "
+  >
 
-  </div>
+    Ver más productos
+
+  </a>
 
 </div>
-
-
-            
-
-              </a>
-
-            </div>
 
           </>
 
@@ -309,3 +421,4 @@ export default function Productos({ categoriaSeleccionada }) {
   );
 
 }
+            
