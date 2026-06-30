@@ -11,37 +11,37 @@ const categorias = [
   {
     nombre: "Herramientas",
     imagen: "/categorias/herramientas.jpg",
-    ruta: "/categoria/herramientas",
+    ruta: "/categorias/herramientas",
   },
 
   {
     nombre: "Construcción",
     imagen: "/categorias/construccion.jpg",
-    ruta: "/categoria/construccion",
+    ruta: "/categorias/construccion",
   },
 
   {
     nombre: "Electricidad",
     imagen: "/categorias/electricidad.jpg",
-    ruta: "/categoria/electricidad",
+    ruta: "/categorias/electricidad",
   },
 
   {
     nombre: "Pintura",
     imagen: "/categorias/pintura.jpg",
-    ruta: "/categoria/pintura",
+    ruta: "/categorias/pintura",
   },
 
   {
     nombre: "Gasfitería",
     imagen: "/categorias/gasfiteria.jpg",
-    ruta: "/categoria/gasfiteria",
+    ruta: "/categorias/gasfiteria",
   },
 
   {
     nombre: "Iluminación",
     imagen: "/categorias/iluminacion.jpg",
-    ruta: "/categoria/iluminacion",
+    ruta: "/categorias/iluminacion",
   },
 
 ];
