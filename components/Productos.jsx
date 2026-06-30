@@ -126,10 +126,22 @@ export default function Productos({ categoriaSeleccionada }) {
 
               {productosFiltrados.map((producto) => (
 
-                <div
-                  key={producto.id}
-                  className="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition duration-300"
-                >
+               <div
+  key={producto.id}
+  className="
+    group
+    bg-white
+    rounded-3xl
+    overflow-hidden
+    border
+    border-gray-100
+    shadow-md
+    hover:shadow-2xl
+    hover:-translate-y-2
+    transition-all
+    duration-300
+  "
+>
 
                   <img
                     src={
