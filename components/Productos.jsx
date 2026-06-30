@@ -76,14 +76,8 @@ export default function Productos({ categoriaSeleccionada }) {
 
           <div>
             <h2 className="text-4xl font-bold">
-              Productos destacados
+                Productos más vendidos
             </h2>
-
-            <p className="text-yellow-600 font-semibold mt-2">
-              Categoría:{" "}
-              {tituloCategoria[categoriaSeleccionada] ||
-                "Todos los productos"}
-            </p>
           </div>
 
           <span className="text-gray-500 text-xl">
