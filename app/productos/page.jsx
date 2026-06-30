@@ -37,45 +37,36 @@ function CatalogoContenido() {
 
     setTextoBusqueda,
 
-  } = useCatalogo();
-
   useEffect(() => {
 
-    const buscar = searchParams.get("buscar");
+  const buscar = searchParams.get("buscar");
+  const categoria = searchParams.get("categoria");
 
-    if (!buscar) return;
+  if (buscar) {
 
-    // Guardar el texto para filtrar
     setTextoBusqueda(buscar);
 
-    // Eliminar ?buscar= de la URL
+  }
+
+  if (categoria) {
+
+    setCategoriaSeleccionada(categoria);
+
+  }
+
+  if (buscar || categoria) {
+
     router.replace(pathname);
 
-  }, [
+  }
 
-    searchParams,
-
-    pathname,
-
-    router,
-
-    setTextoBusqueda,
-
-  ]);
-
-  return (
-
-    <>
-
-      <HeaderCatalogo />
-
-      <Navbar
-
-        categoriaSeleccionada={categoriaSeleccionada}
-
-        setCategoriaSeleccionada={setCategoriaSeleccionada}
-
-      />
+}, [
+  searchParams,
+  pathname,
+  router,
+  setTextoBusqueda,
+  setCategoriaSeleccionada,
+]);
 
       <div className="max-w-7xl mx-auto flex gap-8 py-10 px-4">
 
