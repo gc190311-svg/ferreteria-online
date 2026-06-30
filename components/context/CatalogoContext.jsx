@@ -26,12 +26,13 @@ export function CatalogoProvider({ children }) {
   const [marcaSeleccionada, setMarcaSeleccionada] =
     useState("");
 
-  const [textoBusqueda, setTextoBusqueda] =
+  // Texto que el usuario escribe
+  const [textoInput, setTextoInput] =
     useState("");
 
-  // NUEVO ESTADO
-  const [busquedaRealizada, setBusquedaRealizada] =
-    useState(false);
+  // Texto que realmente filtra el catálogo
+  const [textoBusqueda, setTextoBusqueda] =
+    useState("");
 
   useEffect(() => {
 
@@ -64,8 +65,9 @@ export function CatalogoProvider({ children }) {
 
     setCategoriaSeleccionada("todos");
     setMarcaSeleccionada("");
+
+    setTextoInput("");
     setTextoBusqueda("");
-    setBusquedaRealizada(false);
 
   }
 
@@ -82,11 +84,11 @@ export function CatalogoProvider({ children }) {
         marcaSeleccionada,
         setMarcaSeleccionada,
 
+        textoInput,
+        setTextoInput,
+
         textoBusqueda,
         setTextoBusqueda,
-
-        busquedaRealizada,
-        setBusquedaRealizada,
 
         limpiarFiltros,
 
