@@ -11,37 +11,37 @@ const categorias = [
   {
     nombre: "Herramientas",
     imagen: "/categorias/herramientas.jpg",
-    ruta: "/productos?categoria=herramientas",
+    ruta: "/categoria/herramientas",
   },
 
   {
     nombre: "Construcción",
     imagen: "/categorias/construccion.jpg",
-    ruta: "/productos?categoria=construccion",
+    ruta: "/categoria/construccion",
   },
 
   {
     nombre: "Electricidad",
     imagen: "/categorias/electricidad.jpg",
-    ruta: "/productos?categoria=electricidad",
+    ruta: "/categoria/electricidad",
   },
 
   {
     nombre: "Pintura",
     imagen: "/categorias/pintura.jpg",
-    ruta: "/productos?categoria=pintura",
+    ruta: "/categoria/pintura",
   },
 
   {
     nombre: "Gasfitería",
     imagen: "/categorias/gasfiteria.jpg",
-    ruta: "/productos?categoria=gasfiteria",
+    ruta: "/categoria/gasfiteria",
   },
 
   {
     nombre: "Iluminación",
     imagen: "/categorias/iluminacion.jpg",
-    ruta: "/productos?categoria=iluminacion",
+    ruta: "/categoria/iluminacion",
   },
 
 ];
