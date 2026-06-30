@@ -31,8 +31,8 @@ export function CatalogoProvider({ children }) {
     useState("");
 
   // Texto que realmente filtra el catálogo
-  const [textoBusqueda, setTextoBusqueda] =
-    useState("");
+  const [textoBusqueda, setTextoBusqueda] = useState("");
+const [textoInput, setTextoInput] = useState("");
 
   useEffect(() => {
 
@@ -88,7 +88,10 @@ export function CatalogoProvider({ children }) {
         setTextoInput,
 
         textoBusqueda,
-        setTextoBusqueda,
+setTextoBusqueda,
+
+textoInput,
+setTextoInput,
 
         limpiarFiltros,
 
