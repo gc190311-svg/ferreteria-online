@@ -1,5 +1,6 @@
 "use client";
 
+import { FaShoppingCart } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { db } from "../app/firebase";
 import { collection, getDocs } from "firebase/firestore";
@@ -127,20 +128,20 @@ export default function Productos({ categoriaSeleccionada }) {
               {productosFiltrados.map((producto) => (
 
                <div
-  key={producto.id}
-  className="
-    group
-    bg-white
-    rounded-3xl
-    overflow-hidden
-    border
-    border-gray-100
-    shadow-md
-    hover:shadow-2xl
-    hover:-translate-y-2
-    transition-all
-    duration-300
-  "
+key={producto.id}
+className="
+group
+bg-white
+rounded-[28px]
+overflow-hidden
+shadow-md
+hover:shadow-2xl
+transition-all
+duration-500
+hover:-translate-y-2
+border
+border-gray-100
+"
 >
 
                   <div className="bg-gray-50 overflow-hidden">
