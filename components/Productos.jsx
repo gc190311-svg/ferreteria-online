@@ -143,31 +143,56 @@ export default function Productos({ categoriaSeleccionada }) {
   "
 >
 
-                  <img
-                    src={
-                      producto.imagenes?.[0] ||
-                      producto.imagen ||
-                      "/sin-imagen.png"
-                    }
-                    alt={producto.nombre}
-                    className="w-full h-72 object-contain bg-gray-50 p-6"
-                  />
+                  <div className="bg-gray-50 overflow-hidden">
 
-                  <div className="p-6">
+  <img
+    src={
+      producto.imagenes?.[0] ||
+      producto.imagen ||
+      "/sin-imagen.png"
+    }
+    alt={producto.nombre}
+    className="
+      w-full
+      h-72
+      object-contain
+      p-6
+      transition-transform
+      duration-500
+      group-hover:scale-110
+    "
+  />
 
-                    <h3 className="font-bold text-xl min-h-[90px]">
+</div>
 
-                      {producto.nombre}
+                  <div className="p-6 flex flex-col h-[260px]">
 
-                    </h3>
+                  <h3
+  className="
+    text-[21px]
+    font-semibold
+    text-gray-900
+    leading-7
+    min-h-[90px]
+  "
+>
+  {producto.nombre}
+</h3>
 
                     {producto.marca && (
 
-                      <p className="text-gray-500 text-sm mb-3">
-
-                        Marca: {producto.marca}
-
-                      </p>
+                     <p
+  className="
+    text-xs
+    uppercase
+    tracking-wider
+    text-gray-500
+    font-semibold
+    mt-2
+  "
+>
+  {producto.marca}
+</p>
 
                     )}
 
@@ -183,11 +208,19 @@ export default function Productos({ categoriaSeleccionada }) {
 
                       )}
 
-                      <p className="text-3xl font-bold text-green-600">
-
-                        S/ {producto.precio}
-
-                      </p>
+                      <p
+  className="
+    mt-4
+    text-4xl
+    font-extrabold
+    text-emerald-600
+  "
+>
+  S/
+  <span className="ml-1">
+    {producto.precio}
+  </span>
+</p>
 
                     </div>
 
@@ -217,7 +250,7 @@ export default function Productos({ categoriaSeleccionada }) {
                 className="inline-block bg-black hover:bg-gray-800 text-white px-10 py-4 rounded-xl font-bold transition"
               >
 
-                Ver catálogo completo
+                Ver mas productos
 
               </a>
 
