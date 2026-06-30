@@ -2,14 +2,9 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-
-import {
-  FaUser,
-  FaShoppingCart,
-} from "react-icons/fa";
+import { FaUser, FaShoppingCart } from "react-icons/fa";
 
 import SearchInput from "./SearchInput";
-
 import { useCatalogo } from "./context/CatalogoContext";
 
 export default function HeaderHome() {
@@ -28,20 +23,22 @@ export default function HeaderHome() {
 
     if (texto === "") {
 
-        router.push("/productos");
-        return;
+      router.push("/productos");
+      return;
 
     }
 
- // Guarda el filtro
-setTextoBusqueda(texto);
+    // Guarda el filtro
+    setTextoBusqueda(texto);
 
-// Limpia el cuadro de búsqueda del Inicio
-setTextoInput("");
+    // Limpia el input
+    setTextoInput("");
 
-// Envía también la búsqueda por la URL
-router.push(`/productos?buscar=${encodeURIComponent(texto)}`);
-    
+    // Navega al catálogo
+    router.push(`/productos?buscar=${encodeURIComponent(texto)}`);
+
+  }
+
   return (
 
     <header className="bg-black py-4">
@@ -69,15 +66,11 @@ router.push(`/productos?buscar=${encodeURIComponent(texto)}`);
             <div className="flex lg:hidden gap-6 text-white">
 
               <Link href="/login">
-
                 <FaUser className="text-2xl hover:text-yellow-400" />
-
               </Link>
 
               <Link href="/carrito">
-
                 <FaShoppingCart className="text-2xl hover:text-yellow-400" />
-
               </Link>
 
             </div>
@@ -89,13 +82,9 @@ router.push(`/productos?buscar=${encodeURIComponent(texto)}`);
           <div className="flex-1">
 
             <SearchInput
-
               value={textoInput}
-
               onChange={setTextoInput}
-
               onSearch={buscarProducto}
-
             />
 
           </div>
@@ -108,7 +97,7 @@ router.push(`/productos?buscar=${encodeURIComponent(texto)}`);
 
               <div className="flex flex-col items-center hover:text-yellow-400">
 
-                <FaUser className="text-2xl"/>
+                <FaUser className="text-2xl" />
 
                 <span className="text-sm">
 
@@ -124,7 +113,7 @@ router.push(`/productos?buscar=${encodeURIComponent(texto)}`);
 
               <div className="flex flex-col items-center hover:text-yellow-400">
 
-                <FaShoppingCart className="text-2xl"/>
+                <FaShoppingCart className="text-2xl" />
 
                 <span className="text-sm">
 
