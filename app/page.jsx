@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import TopBar from "../components/TopBar";
-import Header from "../components/Header";
+import HeaderHome from "../components/HeaderHome";
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Servicios from "../components/Servicios";
