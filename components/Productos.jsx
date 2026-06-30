@@ -321,15 +321,15 @@ export default function Productos({ categoriaSeleccionada }) {
   </span>
 
   <span
-    className="
-      text-4xl
-      font-bold
-      leading-none
-      text-emerald-700
-    "
-  >
-    {producto.precio}
-  </span>
+  className="
+    text-3xl
+    font-bold
+    leading-none
+    text-emerald-700
+  "
+>
+  {producto.precio}
+</span>
 
 </div>
 
