@@ -1,7 +1,12 @@
 "use client";
 
 import { Suspense, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
+
+import {
+  useSearchParams,
+  useRouter,
+  usePathname,
+} from "next/navigation";
 
 import HeaderCatalogo from "../../components/HeaderCatalogo";
 import Navbar from "../../components/Navbar";
@@ -20,27 +25,56 @@ function CatalogoContenido() {
 
   const searchParams = useSearchParams();
 
+  const router = useRouter();
+
+  const pathname = usePathname();
+
   const {
+
     categoriaSeleccionada,
+
     setCategoriaSeleccionada,
+
     setTextoBusqueda,
+
   } = useCatalogo();
 
   useEffect(() => {
 
-    const buscar = searchParams.get("buscar") || "";
+    const buscar = searchParams.get("buscar");
 
+    if (!buscar) return;
+
+    // Guardar el texto para filtrar
     setTextoBusqueda(buscar);
 
-  }, [searchParams, setTextoBusqueda]);
+    // Eliminar ?buscar= de la URL
+    router.replace(pathname);
+
+  }, [
+
+    searchParams,
+
+    pathname,
+
+    router,
+
+    setTextoBusqueda,
+
+  ]);
 
   return (
+
     <>
+
       <HeaderCatalogo />
 
       <Navbar
+
         categoriaSeleccionada={categoriaSeleccionada}
+
         setCategoriaSeleccionada={setCategoriaSeleccionada}
+
       />
 
       <div className="max-w-7xl mx-auto flex gap-8 py-10 px-4">
@@ -60,7 +94,9 @@ function CatalogoContenido() {
       <Footer />
 
     </>
+
   );
+
 }
 
 export default function CatalogoProductos() {
@@ -69,7 +105,19 @@ export default function CatalogoProductos() {
 
     <CatalogoProvider>
 
-      <Suspense fallback={<div className="py-20 text-center">Cargando catálogo...</div>}>
+      <Suspense
+
+        fallback={
+
+          <div className="py-20 text-center">
+
+            Cargando catálogo...
+
+          </div>
+
+        }
+
+      >
 
         <CatalogoContenido />
 
