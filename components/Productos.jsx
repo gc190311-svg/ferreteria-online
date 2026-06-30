@@ -80,11 +80,7 @@ export default function Productos({ categoriaSeleccionada }) {
             </h2>
           </div>
 
-          <span className="text-gray-500 text-xl">
-            {productosFiltrados.length} productos
-          </span>
-
-        </div>
+        
 
         {cargando ? (
 
