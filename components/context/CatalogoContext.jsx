@@ -26,13 +26,13 @@ export function CatalogoProvider({ children }) {
   const [marcaSeleccionada, setMarcaSeleccionada] =
     useState("");
 
-  // Texto que el usuario escribe
+  // Lo que escribe el usuario
   const [textoInput, setTextoInput] =
     useState("");
 
-  // Texto que realmente filtra el catálogo
-  const [textoBusqueda, setTextoBusqueda] = useState("");
-const [textoInput, setTextoInput] = useState("");
+  // Lo que usa el catálogo para filtrar
+  const [textoBusqueda, setTextoBusqueda] =
+    useState("");
 
   useEffect(() => {
 
@@ -88,10 +88,7 @@ const [textoInput, setTextoInput] = useState("");
         setTextoInput,
 
         textoBusqueda,
-setTextoBusqueda,
-
-textoInput,
-setTextoInput,
+        setTextoBusqueda,
 
         limpiarFiltros,
 
