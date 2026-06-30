@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import MenuCategorias from "./MenuCategorias";
+import { useCatalogo } from "../context/CatalogoContext";
 
 export default function NavbarDesktop({
   setCategoriaSeleccionada,
@@ -10,19 +11,27 @@ export default function NavbarDesktop({
 
   const pathname = usePathname();
 
+  const { setTextoBusqueda } = useCatalogo();
+
+  function cambiarCategoria(categoria) {
+
+    // Limpia el buscador
+    setTextoBusqueda("");
+
+    // Cambia la categoría
+    setCategoriaSeleccionada?.(categoria);
+
+  }
+
   return (
 
     <nav className="bg-black border-y border-gray-800">
 
       <div className="max-w-7xl mx-auto flex items-center">
 
-        {/* MENÚ CATEGORÍAS */}
-
         <MenuCategorias
           setCategoriaSeleccionada={setCategoriaSeleccionada}
         />
-
-        {/* MENÚ CENTRAL */}
 
         <div className="flex-1">
 
@@ -31,54 +40,42 @@ export default function NavbarDesktop({
             <div className="flex justify-center gap-10">
 
               <button
-                onClick={() =>
-                  setCategoriaSeleccionada?.("todos")
-                }
+                onClick={() => cambiarCategoria("todos")}
                 className="text-yellow-500 font-bold py-5"
               >
                 TODOS
               </button>
 
               <button
-                onClick={() =>
-                  setCategoriaSeleccionada?.("herramientas")
-                }
+                onClick={() => cambiarCategoria("herramientas")}
                 className="text-white hover:text-yellow-500 py-5"
               >
                 HERRAMIENTAS
               </button>
 
               <button
-                onClick={() =>
-                  setCategoriaSeleccionada?.("construccion")
-                }
+                onClick={() => cambiarCategoria("construccion")}
                 className="text-white hover:text-yellow-500 py-5"
               >
                 CONSTRUCCIÓN
               </button>
 
               <button
-                onClick={() =>
-                  setCategoriaSeleccionada?.("electricidad")
-                }
+                onClick={() => cambiarCategoria("electricidad")}
                 className="text-white hover:text-yellow-500 py-5"
               >
                 ELECTRICIDAD
               </button>
 
               <button
-                onClick={() =>
-                  setCategoriaSeleccionada?.("pintura")
-                }
+                onClick={() => cambiarCategoria("pintura")}
                 className="text-white hover:text-yellow-500 py-5"
               >
                 PINTURA
               </button>
 
               <button
-                onClick={() =>
-                  setCategoriaSeleccionada?.("gasfiteria")
-                }
+                onClick={() => cambiarCategoria("gasfiteria")}
                 className="text-white hover:text-yellow-500 py-5"
               >
                 GASFITERÍA
