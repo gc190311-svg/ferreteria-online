@@ -24,18 +24,22 @@ export default function HeaderHome() {
 
   function buscarProducto() {
 
-    const texto = textoInput.trim();
+  const texto = textoInput.trim();
 
-    // Guardamos el texto para el catálogo
-    setTextoBusqueda(texto);
+  if (texto === "") {
 
-    // Limpiamos el input del Home
-    setTextoInput("");
-
-    // Abrimos la página de productos
     router.push("/productos");
+    return;
 
   }
+
+  router.push(
+    `/productos?buscar=${encodeURIComponent(texto)}`
+  );
+
+  setTextoInput("");
+
+}
 
   return (
 
