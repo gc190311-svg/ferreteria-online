@@ -123,135 +123,176 @@ export default function Productos({ categoriaSeleccionada }) {
 
             {/* PRODUCTOS */}
 
-            <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
-
+<div
+  className="
+    grid
+    grid-cols-1
+    sm:grid-cols-2
+    lg:grid-cols-4
+    gap-10
+    items-stretch
+"
+>
               {productosFiltrados.map((producto) => (
 
-               <div
-key={producto.id}
-className="
-group
-bg-white
-rounded-[28px]
-overflow-hidden
-shadow-md
-hover:shadow-2xl
-transition-all
-duration-500
-hover:-translate-y-2
-border
-border-gray-100
+<div
+  key={producto.id}
+  className="
+    group
+    relative
+    flex
+    flex-col
+    bg-white
+    rounded-[26px]
+    overflow-hidden
+    border
+    border-gray-200
+    shadow-md
+    hover:shadow-2xl
+    hover:-translate-y-2
+    transition-all
+    duration-500
+    min-h-[720px]
 "
 >
 
-                  <div className="bg-gray-50 overflow-hidden">
+  {/* OFERTA */}
 
-  <img
-    src={
-      producto.imagenes?.[0] ||
-      producto.imagen ||
-      "/sin-imagen.png"
-    }
-    alt={producto.nombre}
-    className="
-      w-full
-      h-72
-      object-contain
-      p-6
-      transition-transform
-      duration-500
-      group-hover:scale-110
-    "
-  />
+  {producto.precioAnterior > producto.precio && (
+
+    <div className="absolute top-4 left-4 z-20">
+
+      <span className="bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-lg">
+
+        OFERTA
+
+      </span>
+
+    </div>
+
+  )}
+
+  {/* IMAGEN */}
+
+  <div className="bg-gray-50 p-8">
+
+    <img
+      src={
+        producto.imagenes?.[0] ||
+        producto.imagen ||
+        "/sin-imagen.png"
+      }
+      alt={producto.nombre}
+      className="
+        w-full
+        h-72
+        object-contain
+        transition
+        duration-500
+        group-hover:scale-110
+      "
+    />
+
+  </div>
+
+  {/* INFORMACIÓN */}
+
+  <div className="flex flex-col flex-1 p-6">
+
+    <h3
+      className="
+        text-xl
+        font-bold
+        text-gray-900
+        leading-7
+        line-clamp-3
+        min-h-[90px]
+      "
+    >
+
+      {producto.nombre}
+
+    </h3>
+
+    {producto.marca && (
+
+      <span
+        className="
+          mt-3
+          text-xs
+          uppercase
+          tracking-[2px]
+          text-gray-500
+          font-semibold
+        "
+      >
+
+        {producto.marca}
+
+      </span>
+
+    )}
+
+    <div className="mt-6">
+
+      {producto.precioAnterior > producto.precio && (
+
+        <p className="text-gray-400 line-through text-lg">
+
+          S/ {producto.precioAnterior}
+
+        </p>
+
+      )}
+
+      <div className="flex items-end gap-1 mt-1">
+
+        <span className="text-2xl font-bold text-emerald-700">
+
+          S/
+
+        </span>
+
+        <span className="text-5xl font-extrabold text-emerald-700 leading-none">
+
+          {producto.precio}
+
+        </span>
+
+      </div>
+
+    </div>
+
+    <a
+      href={`/producto/${producto.id}`}
+      className="
+        mt-auto
+        flex
+        items-center
+        justify-center
+        gap-3
+        bg-yellow-400
+        hover:bg-yellow-500
+        text-black
+        font-bold
+        py-4
+        rounded-xl
+        transition
+      "
+    >
+
+      <FaShoppingCart />
+
+      Ver producto
+
+    </a>
+
+  </div>
 
 </div>
 
-                  <div className="p-6 flex flex-col h-[260px]">
 
-                  <h3
-  className="
-    text-[21px]
-    font-semibold
-    text-gray-900
-    leading-7
-    min-h-[90px]
-  "
->
-  {producto.nombre}
-</h3>
-
-                    {producto.marca && (
-
-                     <p
-  className="
-    text-xs
-    uppercase
-    tracking-wider
-    text-gray-500
-    font-semibold
-    mt-2
-  "
->
-  {producto.marca}
-</p>
-
-                    )}
-
-                    <div className="mt-4">
-
-                      {producto.precioAnterior > 0 && (
-
-                        <p className="text-gray-400 line-through text-lg">
-
-                          S/ {producto.precioAnterior}
-
-                        </p>
-
-                      )}
-
-                      <p
-  className="
-    mt-4
-    text-4xl
-    font-extrabold
-    text-emerald-600
-  "
->
-  S/
-  <span className="ml-1">
-    {producto.precio}
-  </span>
-</p>
-
-                    </div>
-
-                    <a
-                      href={`/producto/${producto.id}`}
-                      className="mt-6 w-full block text-center bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-4 rounded-xl transition"
-                    >
-
-                      Ver producto
-
-                    </a>
-
-                  </div>
-
-                </div>
-
-              ))}
-
-            </div>
-
-            {/* BOTÓN */}
-
-            <div className="text-center mt-14">
-
-              <a
-                href="/productos"
-                className="inline-block bg-black hover:bg-gray-800 text-white px-10 py-4 rounded-xl font-bold transition"
-              >
-
-                Ver mas productos
+            
 
               </a>
 
