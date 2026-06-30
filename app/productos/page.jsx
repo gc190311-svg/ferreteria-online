@@ -3,7 +3,7 @@
 import { Suspense, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
-import Header from "../../components/Header";
+import HeaderCatalogo from "../../components/HeaderCatalogo";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
@@ -36,7 +36,7 @@ function CatalogoContenido() {
 
   return (
     <>
-      <Header />
+      <HeaderCatalogo />
 
       <Navbar
         categoriaSeleccionada={categoriaSeleccionada}
