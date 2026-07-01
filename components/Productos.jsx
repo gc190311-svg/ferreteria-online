@@ -286,54 +286,47 @@ export default function Productos({ categoriaSeleccionada }) {
             {producto.nombre}
 
           </h3>
+{/* PRECIO */}
 
-          {/* PRECIOS */}
+<div className="mt-6 text-center">
 
-          <div className="mt-5">
+  {producto.precioAnterior > producto.precio && (
 
-            {tieneOferta && (
+    <p className="text-sm text-gray-400 line-through mb-1">
 
-              <p
-                className="
-                  text-gray-400
-                  line-through
-                  text-lg
-                "
-              >
+      S/ {Number(producto.precioAnterior).toFixed(2)}
 
-                S/ {producto.precioAnterior}
+    </p>
 
-              </p>
+  )}
 
-            )}
+  <div className="flex justify-center items-end gap-1">
 
-<div className="flex items-end gap-1 mt-2">
+    <span
+      className="
+        text-lg
+        font-semibold
+        text-emerald-700
+        mb-1
+      "
+    >
+      S/
+    </span>
 
-  <span
-    className="
-      text-lg
-      font-semibold
-      text-emerald-700
-      mb-1
-    "
-  >
-    S/
-  </span>
+    <span
+      className="
+        text-3xl
+        font-extrabold
+        text-emerald-700
+        leading-none
+      "
+    >
+      {Number(producto.precio).toFixed(2)}
+    </span>
 
-  <span
-  className="
-    text-3xl
-    font-bold
-    leading-none
-    text-emerald-700
-  "
->
-  {producto.precio}
-</span>
+  </div>
 
 </div>
-
-          </div>
 
           {/* BOTÓN */}
 
