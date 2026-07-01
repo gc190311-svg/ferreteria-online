@@ -304,10 +304,10 @@ export default function Productos({ categoriaSeleccionada }) {
 
     <span
       className="
-        text-lg
+        text-base
         font-semibold
         text-emerald-700
-        mb-1
+        mb-[2px]
       "
     >
       S/
@@ -315,10 +315,10 @@ export default function Productos({ categoriaSeleccionada }) {
 
     <span
       className="
-        text-3xl
-        font-extrabold
+        text-2xl
+        font-bold
         text-emerald-700
-        leading-none
+        tracking-tight
       "
     >
       {Number(producto.precio).toFixed(2)}
