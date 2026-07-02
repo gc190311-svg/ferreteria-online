@@ -132,7 +132,7 @@ export default function GridProductos() {
         className="
           block
           text-center
-          bg-green-700
+          bg-yellow-700
           hover:bg-yellow-800
           text-white
           font-semibold
