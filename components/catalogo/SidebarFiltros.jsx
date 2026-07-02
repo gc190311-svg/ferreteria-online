@@ -3,6 +3,7 @@
 import { useCatalogo } from "../context/CatalogoContext";
 
 export default function SidebarFiltros() {
+
   const {
     productos,
     categoriaSeleccionada,
@@ -10,7 +11,8 @@ export default function SidebarFiltros() {
     setMarcaSeleccionada,
   } = useCatalogo();
 
-  // Productos según la categoría
+  // Productos según categoría
+
   const productosCategoria =
     categoriaSeleccionada === "todos"
       ? productos
@@ -20,62 +22,104 @@ export default function SidebarFiltros() {
         );
 
   // Contador de marcas
+
   const marcas = {};
 
   productosCategoria.forEach((producto) => {
+
     if (!producto.marca) return;
 
     marcas[producto.marca] =
       (marcas[producto.marca] || 0) + 1;
+
   });
 
   const listaMarcas = Object.entries(marcas).sort();
 
   return (
-    <aside className="sticky top-32 w-64">
 
-      <h2 className="text-4xl font-bold mb-8">
+    <aside
+      className="
+        sticky
+        top-32
+        w-64
+        shrink-0
+      "
+    >
+
+      <h2
+        className="
+          text-4xl
+          font-bold
+          text-gray-900
+          mb-8
+        "
+      >
         Marcas
       </h2>
 
       {/* TODAS */}
 
       <div
+
         onClick={() => setMarcaSeleccionada("")}
+
         className={`
           flex
           items-center
           justify-between
+          px-4
           py-4
           border-b
           border-gray-200
           cursor-pointer
-          transition
+          transition-all
+          duration-300
+
           ${
             marcaSeleccionada === ""
-              ? "font-bold border-l-4 border-yellow-500 pl-3"
-              : "hover:text-yellow-600"
+              ? "bg-yellow-500 text-black rounded-lg"
+              : "hover:bg-gray-50 text-gray-800"
           }
         `}
       >
-        <span>Todas</span>
 
         <span
-          className="
-            bg-yellow-500
-            text-black
-            text-xs
-            font-bold
-            rounded-full
-            min-w-[32px]
+          className={`
+            ${
+              marcaSeleccionada === ""
+                ? "font-bold"
+                : ""
+            }
+          `}
+        >
+          Todas
+        </span>
+
+        <span
+
+          className={`
+            w-8
             h-8
+            rounded-full
             flex
             items-center
             justify-center
-          "
+            text-xs
+            font-bold
+
+            ${
+              marcaSeleccionada === ""
+                ? "bg-black text-yellow-400"
+                : "bg-yellow-500 text-black"
+            }
+          `}
         >
+
           {productosCategoria.length}
+
         </span>
+
       </div>
 
       {/* MARCAS */}
@@ -83,44 +127,69 @@ export default function SidebarFiltros() {
       {listaMarcas.map(([marca, cantidad]) => (
 
         <div
+
           key={marca}
-          onClick={() => setMarcaSeleccionada(marca)}
+
+          onClick={() =>
+            setMarcaSeleccionada(marca)
+          }
+
           className={`
             flex
             items-center
             justify-between
+            px-4
             py-4
             border-b
             border-gray-200
             cursor-pointer
-            transition
+            transition-all
+            duration-300
+
             ${
               marcaSeleccionada === marca
-                ? "font-bold border-l-4 border-yellow-500 pl-3"
-                : "hover:text-yellow-600"
+                ? "bg-yellow-500 text-black rounded-lg"
+                : "hover:bg-gray-50 text-gray-800"
             }
           `}
         >
 
-          <span>
+          <span
+            className={`
+              ${
+                marcaSeleccionada === marca
+                  ? "font-bold"
+                  : ""
+              }
+            `}
+          >
+
             {marca}
+
           </span>
 
           <span
-            className="
-              bg-yellow-500
-              text-black
-              text-xs
-              font-bold
-              rounded-full
-              min-w-[32px]
+
+            className={`
+              w-8
               h-8
+              rounded-full
               flex
               items-center
               justify-center
-            "
+              text-xs
+              font-bold
+
+              ${
+                marcaSeleccionada === marca
+                  ? "bg-black text-yellow-400"
+                  : "bg-yellow-500 text-black"
+              }
+            `}
           >
+
             {cantidad}
+
           </span>
 
         </div>
@@ -128,5 +197,7 @@ export default function SidebarFiltros() {
       ))}
 
     </aside>
+
   );
+
 }
