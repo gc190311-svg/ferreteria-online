@@ -152,20 +152,20 @@ export default function GridProductos() {
 
   <div className="p-5">
 
-      <h3
-        className="
-          text-lg
-          font-semibold
-          leading-7
-          text-center
-          line-clamp-2
-          min-h-[60px]
-        "
-      >
-
-        {producto.nombre}
-
-      </h3>
+    <h3
+  className="
+    mt-5
+    text-center
+    font-semibold
+    text-[20px]
+    leading-7
+    text-gray-900
+    line-clamp-2
+    min-h-[58px]
+  "
+>
+  {producto.nombre}
+</h3>
 
       {producto.sku && (
 
