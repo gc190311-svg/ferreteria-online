@@ -122,7 +122,6 @@ export default function SidebarFiltros() {
 
     <input
       type="radio"
-      ...
     />
 
     <span
