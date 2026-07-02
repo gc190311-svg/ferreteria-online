@@ -44,17 +44,11 @@ export default function SidebarFiltros() {
   return (
 
     <div
-      className="
-        bg-white
-        rounded-3xl
-        shadow-lg
-        border
-        border-gray-100
-        p-8
-        sticky
-        top-32
-      "
-    >
+  className="
+    sticky
+    top-32
+  "
+>
 
       <h2
         className="
