@@ -67,124 +67,108 @@ export default function SidebarFiltros() {
         Marcas
       </h2>
 
-      <div className="space-y-2">
+      <div>
 
         {/* TODAS */}
 
-        <label
-          className="
+        <div
+          onClick={() => setMarcaSeleccionada("")}
+          className={`
             flex
             items-center
             justify-between
-            py-3
-            px-2
-            rounded-lg
+            py-4
             cursor-pointer
-            hover:bg-gray-50
-            transition
             border-b
-            border-gray-100
-          "
+            border-gray-200
+            transition
+            ${
+              marcaSeleccionada === ""
+                ? "bg-yellow-50 font-semibold"
+                : "hover:bg-gray-50"
+            }
+          `}
         >
 
-          <div
-  onClick={() => setMarcaSeleccionada("")}
-  className={`
-    flex
-    items-center
-    justify-between
-    py-4
-    cursor-pointer
-    border-b
-    border-gray-200
-    transition
-    ${
-      marcaSeleccionada === ""
-        ? "bg-yellow-50 font-semibold"
-        : "hover:bg-gray-50"
-    }
-  `}
->
+          <span className="text-gray-800">
 
-  <span>
+            Todas
 
-    Todas
+          </span>
 
-  </span>
+          <span
+            className="
+              min-w-[30px]
+              h-7
+              flex
+              items-center
+              justify-center
+              rounded-full
+              bg-yellow-500
+              text-black
+              text-xs
+              font-bold
+            "
+          >
 
-  <span
-    className="
-      min-w-[30px]
-      h-7
-      flex
-      items-center
-      justify-center
-      rounded-full
-      bg-yellow-500
-      text-black
-      text-xs
-      font-bold
-    "
-  >
+            {productosCategoria.length}
 
-    {productosCategoria.length}
+          </span>
 
-  </span>
-
-</div>
+        </div>
 
         {/* MARCAS */}
 
-{listaMarcas.map(([marca, cantidad]) => (
+        {listaMarcas.map(([marca, cantidad]) => (
 
-  <div
-    key={marca}
-    onClick={() => setMarcaSeleccionada(marca)}
-    className={`
-      flex
-      items-center
-      justify-between
-      py-4
-      cursor-pointer
-      border-b
-      border-gray-200
-      transition
-      ${
-        marcaSeleccionada === marca
-          ? "bg-yellow-50 font-semibold"
-          : "hover:bg-gray-50"
-      }
-    `}
-  >
+          <div
+            key={marca}
+            onClick={() => setMarcaSeleccionada(marca)}
+            className={`
+              flex
+              items-center
+              justify-between
+              py-4
+              cursor-pointer
+              border-b
+              border-gray-200
+              transition
+              ${
+                marcaSeleccionada === marca
+                  ? "bg-yellow-50 font-semibold"
+                  : "hover:bg-gray-50"
+              }
+            `}
+          >
 
-    <span className="text-gray-800">
+            <span className="text-gray-800">
 
-      {marca}
+              {marca}
 
-    </span>
+            </span>
 
-    <span
-      className="
-        min-w-[30px]
-        h-7
-        flex
-        items-center
-        justify-center
-        rounded-full
-        bg-yellow-500
-        text-black
-        text-xs
-        font-bold
-      "
-    >
+            <span
+              className="
+                min-w-[30px]
+                h-7
+                flex
+                items-center
+                justify-center
+                rounded-full
+                bg-yellow-500
+                text-black
+                text-xs
+                font-bold
+              "
+            >
 
-      {cantidad}
+              {cantidad}
 
-    </span>
+            </span>
 
-  </div>
+          </div>
 
-))}
+        ))}
 
       </div>
 
