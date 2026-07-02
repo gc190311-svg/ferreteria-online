@@ -131,13 +131,20 @@ export default function GridProductos() {
       <a
         href={`/producto/${producto.id}`}
         className="
-          block
-          text-center
-          bg-yellow-700
-          hover:bg-yellow-800
-          text-white
-          font-semibold
-          py-4
+          absolute
+    left-0
+    right-0
+    bottom-0
+    bg-yellow-500
+    hover:bg-yellow-400
+    text-black
+    font-bold
+    py-4
+    text-center
+    translate-y-full
+    group-hover:translate-y-0
+    transition-all
+    duration-300
         "
       >
 
