@@ -150,7 +150,16 @@ export default function GridProductos() {
 
   {/* Información */}
 
-  <div className="p-5">
+  <div
+  className="
+    flex
+    flex-col
+    justify-between
+    flex-1
+    px-6
+    pb-6
+  "
+>
 
     <h3
   className="
