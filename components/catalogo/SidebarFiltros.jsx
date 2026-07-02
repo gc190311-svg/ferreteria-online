@@ -89,12 +89,11 @@ export default function SidebarFiltros() {
 
           <div className="flex items-center gap-3">
 
-            <input
-              type="radio"
-              name="marca"
-              checked={marcaSeleccionada === ""}
-              onChange={() => setMarcaSeleccionada("")}
-            />
+           <button
+  type="button"
+  onClick={() => setMarcaSeleccionada(marca)}
+  className="w-full flex items-center justify-between"
+>
 
             <span className="font-medium">
 
