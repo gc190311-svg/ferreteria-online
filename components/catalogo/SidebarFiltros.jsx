@@ -87,106 +87,104 @@ export default function SidebarFiltros() {
           "
         >
 
-          <div className="flex items-center gap-3">
-
-           <button
-  type="button"
-  onClick={() => setMarcaSeleccionada(marca)}
-  className="w-full flex items-center justify-between"
+          <div
+  onClick={() => setMarcaSeleccionada("")}
+  className={`
+    flex
+    items-center
+    justify-between
+    py-4
+    cursor-pointer
+    border-b
+    border-gray-200
+    transition
+    ${
+      marcaSeleccionada === ""
+        ? "bg-yellow-50 font-semibold"
+        : "hover:bg-gray-50"
+    }
+  `}
 >
 
-            <span className="font-medium">
+  <span>
 
-              Todas
+    Todas
 
-            </span>
+  </span>
 
-          </div>
+  <span
+    className="
+      min-w-[30px]
+      h-7
+      flex
+      items-center
+      justify-center
+      rounded-full
+      bg-yellow-500
+      text-black
+      text-xs
+      font-bold
+    "
+  >
 
-          <span
-            className="
-              bg-yellow-500
-              text-black
-              text-xs
-              font-bold
-              px-3
-              py-1
-              rounded-full
-              min-w-[34px]
-              text-center
-            "
-          >
+    {productosCategoria.length}
 
-            {productosCategoria.length}
+  </span>
 
-          </span>
-
-        </label>
+</div>
 
         {/* MARCAS */}
 
-        {listaMarcas.map(([marca, cantidad]) => (
+{listaMarcas.map(([marca, cantidad]) => (
 
-          <label
-            key={marca}
-            className="
-              flex
-              items-center
-              justify-between
-              py-3
-              px-2
-              rounded-lg
-              cursor-pointer
-              hover:bg-gray-50
-              transition
-              border-b
-              border-gray-100
-            "
-          >
+  <div
+    key={marca}
+    onClick={() => setMarcaSeleccionada(marca)}
+    className={`
+      flex
+      items-center
+      justify-between
+      py-4
+      cursor-pointer
+      border-b
+      border-gray-200
+      transition
+      ${
+        marcaSeleccionada === marca
+          ? "bg-yellow-50 font-semibold"
+          : "hover:bg-gray-50"
+      }
+    `}
+  >
 
-            <div className="flex items-center gap-3">
+    <span className="text-gray-800">
 
-              <input
-                type="radio"
-                name="marca"
-                checked={marcaSeleccionada === marca}
-                onChange={() => setMarcaSeleccionada(marca)}
-              />
+      {marca}
 
-              <span
-                className="
-                  text-gray-800
-                  font-medium
-                "
-              >
+    </span>
 
-                {marca}
+    <span
+      className="
+        min-w-[30px]
+        h-7
+        flex
+        items-center
+        justify-center
+        rounded-full
+        bg-yellow-500
+        text-black
+        text-xs
+        font-bold
+      "
+    >
 
-              </span>
+      {cantidad}
 
-            </div>
+    </span>
 
-            <span
-              className="
-                bg-yellow-500
-                text-black
-                text-xs
-                font-bold
-                px-3
-                py-1
-                rounded-full
-                min-w-[34px]
-                text-center
-              "
-            >
+  </div>
 
-              {cantidad}
-
-            </span>
-
-          </label>
-
-        ))}
+))}
 
       </div>
 
