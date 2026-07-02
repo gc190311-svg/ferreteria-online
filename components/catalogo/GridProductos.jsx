@@ -186,13 +186,17 @@ export default function GridProductos() {
 
       {producto.marca && (
 
-        <p
-          className="
-            text-gray-500
-            text-sm
-            text-center
-          "
-        >
+         <p
+    className="
+      mt-3
+      text-center
+      text-sm
+      uppercase
+      tracking-[2px]
+      text-gray-500
+      font-medium
+    "
+  >
 
           {producto.marca}
 
@@ -201,14 +205,14 @@ export default function GridProductos() {
       )}
 
       <p
-        className="
-          mt-4
-          text-center
-          text-3xl
-          font-bold
-          text-emerald-700
+        className="  
+        mt-6
+        text-center
+        text-[20px]
+        font-bold
+        text-emerald-700
         "
-      >
+        >
 
         S/ {Number(producto.precio).toFixed(2)}
 
