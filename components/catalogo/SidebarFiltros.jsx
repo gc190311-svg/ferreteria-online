@@ -3,7 +3,6 @@
 import { useCatalogo } from "../context/CatalogoContext";
 
 export default function SidebarFiltros() {
-
   const {
     productos,
     categoriaSeleccionada,
@@ -11,7 +10,7 @@ export default function SidebarFiltros() {
     setMarcaSeleccionada,
   } = useCatalogo();
 
-  // Productos según categoría
+  // Productos según la categoría
   const productosCategoria =
     categoriaSeleccionada === "todos"
       ? productos
@@ -24,151 +23,110 @@ export default function SidebarFiltros() {
   const marcas = {};
 
   productosCategoria.forEach((producto) => {
-
     if (!producto.marca) return;
 
-    if (!marcas[producto.marca]) {
-
-      marcas[producto.marca] = 1;
-
-    } else {
-
-      marcas[producto.marca]++;
-
-    }
-
+    marcas[producto.marca] =
+      (marcas[producto.marca] || 0) + 1;
   });
 
   const listaMarcas = Object.entries(marcas).sort();
 
   return (
+    <aside className="sticky top-32 w-64">
 
-    <div
-  className="
-    sticky
-    top-32
-  "
->
-
-     <h2
-  className="
-    text-4xl
-    font-bold
-    mb-8
-  "
->
-  Marcas
-</h2>
+      <h2 className="text-4xl font-bold mb-8">
         Marcas
       </h2>
 
-      <div>
+      {/* TODAS */}
 
-        {/* TODAS */}
+      <div
+        onClick={() => setMarcaSeleccionada("")}
+        className={`
+          flex
+          items-center
+          justify-between
+          py-4
+          border-b
+          border-gray-200
+          cursor-pointer
+          transition
+          ${
+            marcaSeleccionada === ""
+              ? "font-bold border-l-4 border-yellow-500 pl-3"
+              : "hover:text-yellow-600"
+          }
+        `}
+      >
+        <span>Todas</span>
+
+        <span
+          className="
+            bg-yellow-500
+            text-black
+            text-xs
+            font-bold
+            rounded-full
+            min-w-[32px]
+            h-8
+            flex
+            items-center
+            justify-center
+          "
+        >
+          {productosCategoria.length}
+        </span>
+      </div>
+
+      {/* MARCAS */}
+
+      {listaMarcas.map(([marca, cantidad]) => (
 
         <div
-          onClick={() => setMarcaSeleccionada("")}
+          key={marca}
+          onClick={() => setMarcaSeleccionada(marca)}
           className={`
             flex
             items-center
             justify-between
             py-4
-            cursor-pointer
             border-b
             border-gray-200
+            cursor-pointer
             transition
             ${
-              marcaSeleccionada === ""
-                ? "bg-yellow-50 font-semibold"
-                : "hover:bg-gray-50"
+              marcaSeleccionada === marca
+                ? "font-bold border-l-4 border-yellow-500 pl-3"
+                : "hover:text-yellow-600"
             }
           `}
         >
 
-          <span className="text-gray-800">
-
-            Todas
-
+          <span>
+            {marca}
           </span>
 
           <span
             className="
-              min-w-[30px]
-              h-7
-              flex
-              items-center
-              justify-center
-              rounded-full
               bg-yellow-500
               text-black
               text-xs
               font-bold
+              rounded-full
+              min-w-[32px]
+              h-8
+              flex
+              items-center
+              justify-center
             "
           >
-
-            {productosCategoria.length}
-
+            {cantidad}
           </span>
 
         </div>
 
-        {/* MARCAS */}
+      ))}
 
-        {listaMarcas.map(([marca, cantidad]) => (
-
-          <div
-            key={marca}
-            onClick={() => setMarcaSeleccionada(marca)}
-            className={`
-              flex
-              items-center
-              justify-between
-              py-4
-              cursor-pointer
-              border-b
-              border-gray-200
-              transition
-              ${
-                marcaSeleccionada === marca
-                  ? "bg-yellow-50 font-semibold"
-                  : "hover:bg-gray-50"
-              }
-            `}
-          >
-
-            <span className="text-gray-800">
-
-              {marca}
-
-            </span>
-
-            <span
-              className="
-                min-w-[30px]
-                h-7
-                flex
-                items-center
-                justify-center
-                rounded-full
-                bg-yellow-500
-                text-black
-                text-xs
-                font-bold
-              "
-            >
-
-              {cantidad}
-
-            </span>
-
-          </div>
-
-        ))}
-
-      </div>
-
-    </div>
-
+    </aside>
   );
-
 }
