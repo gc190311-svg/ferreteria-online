@@ -43,22 +43,29 @@ export default function SidebarFiltros() {
 
   return (
 
-    <aside
-      className="
-        w-72
-        bg-white
-        rounded-3xl
-        shadow-lg
-        p-6
-        h-fit
-      "
-    >
+    <div
+  className="
+    bg-white
+    rounded-3xl
+    shadow-lg
+    border
+    border-gray-100
+    p-8
+    sticky
+    top-32
+  "
+>
 
-      <h2 className="text-2xl font-bold mb-6">
-
-        Marcas
-
-      </h2>
+      <h2
+  className="
+    text-4xl
+    font-bold
+    text-gray-900
+    mb-8
+  "
+>
+  Marcas
+</h2>
 
       <div className="space-y-3">
 
@@ -95,38 +102,57 @@ export default function SidebarFiltros() {
 
         {listaMarcas.map(([marca, cantidad]) => (
 
-          <label
-            key={marca}
-            className="
-              flex
-              items-center
-              justify-between
-              cursor-pointer
-            "
-          >
+       <label
+  className="
+    flex
+    items-center
+    justify-between
+    py-3
+    cursor-pointer
+    border-b
+    border-gray-100
+    hover:bg-gray-50
+    transition
+    px-2
+    rounded-lg
+  "
+>
 
-            <div className="flex items-center gap-2">
+  <div className="flex items-center gap-3">
 
-              <input
-                type="radio"
-                name="marca"
-                checked={marcaSeleccionada === marca}
-                onChange={() =>
-                  setMarcaSeleccionada(marca)
-                }
-              />
+    <input
+      type="radio"
+      ...
+    />
 
-              {marca}
+    <span
+      className="
+        text-gray-800
+        font-medium
+      "
+    >
+      {marca}
+    </span>
 
-            </div>
+  </div>
 
-            <span className="text-gray-500">
+  <span
+    className="
+      bg-yellow-500
+      text-black
+      text-xs
+      font-bold
+      px-3
+      py-1
+      rounded-full
+      min-w-[34px]
+      text-center
+    "
+  >
+    {cantidad}
+  </span>
 
-              ({cantidad})
-
-            </span>
-
-          </label>
+</label>
 
         ))}
 
