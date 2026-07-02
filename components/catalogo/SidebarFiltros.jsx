@@ -47,6 +47,8 @@ export default function SidebarFiltros() {
       "
     >
 
+      {/* TITULO */}
+
       <h2
         className="
           text-4xl
@@ -64,7 +66,7 @@ export default function SidebarFiltros() {
 
         onClick={() => setMarcaSeleccionada("")}
 
-        className={`
+        className="
           flex
           items-center
           justify-between
@@ -73,47 +75,30 @@ export default function SidebarFiltros() {
           border-b
           border-gray-200
           cursor-pointer
+          hover:bg-gray-50
           transition-all
           duration-300
+        "
 
-          ${
-            marcaSeleccionada === ""
-              ? "bg-yellow-500 text-black rounded-lg"
-              : "hover:bg-gray-50 text-gray-800"
-          }
-        `}
       >
 
         <span
-          className={`
-            ${
-              marcaSeleccionada === ""
-                ? "font-bold"
-                : ""
-            }
-          `}
+          className="
+            text-gray-800
+            font-medium
+          "
         >
+
           Todas
+
         </span>
 
         <span
-
-          className={`
-            w-8
-            h-8
-            rounded-full
-            flex
-            items-center
-            justify-center
-            text-xs
+          className="
+            text-sm
             font-bold
-
-            ${
-              marcaSeleccionada === ""
-                ? "bg-yellow-500 text-black"
-                : "bg-yellow-500 text-black"
-            }
-          `}
+            text-gray-700
+          "
         >
 
           {productosCategoria.length}
@@ -130,9 +115,7 @@ export default function SidebarFiltros() {
 
           key={marca}
 
-          onClick={() =>
-            setMarcaSeleccionada(marca)
-          }
+          onClick={() => setMarcaSeleccionada(marca)}
 
           className={`
             flex
@@ -148,18 +131,19 @@ export default function SidebarFiltros() {
 
             ${
               marcaSeleccionada === marca
-                ? "bg-yellow-500 text-black rounded-lg"
-                : "hover:bg-gray-50 text-gray-800"
+                ? "bg-yellow-500 rounded-lg"
+                : "hover:bg-gray-50"
             }
           `}
+
         >
 
           <span
             className={`
               ${
                 marcaSeleccionada === marca
-                  ? "font-bold"
-                  : ""
+                  ? "font-bold text-black"
+                  : "text-gray-800"
               }
             `}
           >
@@ -168,29 +152,42 @@ export default function SidebarFiltros() {
 
           </span>
 
-          <span
+          {marcaSeleccionada === marca ? (
 
-            className={`
-              w-8
-              h-8
-              rounded-full
-              flex
-              items-center
-              justify-center
-              text-xs
-              font-bold
+            <span
+              className="
+                w-8
+                h-8
+                rounded-full
+                bg-yellow-600
+                text-black
+                text-xs
+                font-bold
+                flex
+                items-center
+                justify-center
+              "
+            >
 
-              ${
-                marcaSeleccionada === marca
-                  ? "bg-black text-yellow-400"
-                  : "bg-yellow-500 text-black"
-              }
-            `}
-          >
+              {cantidad}
 
-            {cantidad}
+            </span>
 
-          </span>
+          ) : (
+
+            <span
+              className="
+                text-sm
+                font-bold
+                text-gray-700
+              "
+            >
+
+              {cantidad}
+
+            </span>
+
+          )}
 
         </div>
 
