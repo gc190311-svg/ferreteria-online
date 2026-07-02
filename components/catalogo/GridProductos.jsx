@@ -133,7 +133,7 @@ export default function GridProductos() {
           block
           text-center
           bg-green-700
-          hover:bg-green-800
+          hover:bg-yellow-800
           text-white
           font-semibold
           py-4
