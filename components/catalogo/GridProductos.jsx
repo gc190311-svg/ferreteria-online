@@ -78,10 +78,145 @@ export default function GridProductos() {
 
       {productosFiltrados.map((producto) => (
 
-        <CardProducto
-          key={producto.id}
-          producto={producto}
-        />
+        <div
+  key={producto.id}
+  className="
+    bg-white
+    rounded-2xl
+    border
+    border-gray-200
+    overflow-hidden
+    shadow-sm
+    hover:shadow-xl
+    transition-all
+    duration-300
+  "
+>
+
+  {/* Imagen */}
+
+  <div className="relative group bg-[#f7f8f8]">
+
+    <img
+      src={
+        producto.imagenes?.[0] ||
+        producto.imagen ||
+        "/sin-imagen.png"
+      }
+      alt={producto.nombre}
+      className="
+        w-full
+        h-72
+        object-contain
+        p-6
+      "
+    />
+
+    {/* Botón que aparece al pasar el mouse */}
+
+    <div
+      className="
+        absolute
+        bottom-0
+        left-0
+        right-0
+        opacity-0
+        group-hover:opacity-100
+        transition
+        duration-300
+      "
+    >
+
+      <a
+        href={`/producto/${producto.id}`}
+        className="
+          block
+          text-center
+          bg-green-700
+          hover:bg-green-800
+          text-white
+          font-semibold
+          py-4
+        "
+      >
+
+        Ver producto
+
+      </a>
+
+    </div>
+
+  </div>
+
+  {/* Información */}
+
+  <div className="p-5">
+
+      <h3
+        className="
+          text-lg
+          font-semibold
+          leading-7
+          text-center
+          line-clamp-2
+          min-h-[60px]
+        "
+      >
+
+        {producto.nombre}
+
+      </h3>
+
+      {producto.sku && (
+
+        <p
+          className="
+            text-gray-500
+            text-sm
+            text-center
+            mt-2
+          "
+        >
+
+          SKU: {producto.sku}
+
+        </p>
+
+      )}
+
+      {producto.marca && (
+
+        <p
+          className="
+            text-gray-500
+            text-sm
+            text-center
+          "
+        >
+
+          {producto.marca}
+
+        </p>
+
+      )}
+
+      <p
+        className="
+          mt-4
+          text-center
+          text-3xl
+          font-bold
+          text-emerald-700
+        "
+      >
+
+        S/ {Number(producto.precio).toFixed(2)}
+
+      </p>
+
+  </div>
+
+</div>
 
       ))}
 
