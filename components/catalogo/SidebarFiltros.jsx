@@ -110,7 +110,7 @@ export default function SidebarFiltros() {
 
             ${
               marcaSeleccionada === ""
-                ? "bg-black text-yellow-400"
+                ? "bg-yellow-500 text-black"
                 : "bg-yellow-500 text-black"
             }
           `}
