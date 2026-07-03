@@ -373,7 +373,6 @@ mb-6
     text-emerald-700
     leading-none
   "
->
 
           {Number(producto.oferta).toFixed(2)}
 
