@@ -14,10 +14,11 @@ export default function NavbarDesktop({
 
   const { setTextoBusqueda } = useCatalogo();
 
-  // Detecta si estamos en el catálogo
-  const esCatalogo =
-    pathname === "/productos" ||
-    pathname.startsWith("/categorias");
+  // Detecta si estamos en catálogo o página de producto
+const esCatalogo =
+  pathname === "/productos" ||
+  pathname.startsWith("/categorias") ||
+  pathname.startsWith("/producto");
 
   function cambiarCategoria(categoria) {
 
@@ -27,22 +28,20 @@ export default function NavbarDesktop({
     // Cambiar categoría en el contexto
     setCategoriaSeleccionada?.(categoria);
 
-    // Si estamos en rutas limpias, navegar
-    if (pathname.startsWith("/categorias")) {
+    // Navegar desde cualquier página
+if (
+  pathname.startsWith("/categorias") ||
+  pathname.startsWith("/producto") ||
+  pathname === "/productos"
+) {
 
-      if (categoria === "todos") {
-
-        router.push("/productos");
-
-      } else {
-
-        router.push(`/categorias/${categoria}`);
-
-      }
-
-    }
-
+  if (categoria === "todos") {
+    router.push("/productos");
+  } else {
+    router.push(`/categorias/${categoria}`);
   }
+
+}
 
   return (
 
