@@ -175,7 +175,19 @@ export default function ProductoDetalle({ params }) {
 
           <div className="order-1 lg:order-2 flex items-center justify-center">
 
-            <div className="relative">
+            <div className="
+relative
+flex
+items-center
+justify-center
+bg-white
+rounded-2xl
+border
+border-gray-200
+overflow-hidden
+min-h-[650px]
+w-full
+">
 
               <img
                 src={
