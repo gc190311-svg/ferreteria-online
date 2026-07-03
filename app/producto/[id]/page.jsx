@@ -217,10 +217,12 @@ object-contain
                   "/sin-imagen.png"
                 }
                 alt={producto.nombre}
-               className="
+             className="
 object-contain
-max-h-[520px]
-max-w-[80%]
+w-auto
+h-auto
+max-w-[88%]
+max-h-[560px]
 transition-all
 duration-300
 "
