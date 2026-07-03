@@ -263,20 +263,18 @@ object-contain
 
           <div className="order-3">
 
-           <p
+          <p
   className="
     uppercase
-    tracking-[3px]
-    text-sm
+    tracking-[4px]
+    text-xs
     font-semibold
     text-gray-500
-    mb-3
+    mb-2
   "
 >
-
-              {producto.categoria}
-
-            </p>
+  {producto.categoria}
+</p>
 
        <h1
   className="
