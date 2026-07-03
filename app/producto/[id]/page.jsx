@@ -356,8 +356,7 @@ mb-6
           mt-2
         "
       >
-
-       <span
+<span
   className="
     text-xl
     font-bold
@@ -366,6 +365,8 @@ mb-6
 >
   S/
 </span>
+
+<span
   className="
     text-4xl
     lg:text-5xl
@@ -373,10 +374,9 @@ mb-6
     text-emerald-700
     leading-none
   "
-
-          {Number(producto.oferta).toFixed(2)}
-
-        </span>
+>
+  {Number(producto.oferta).toFixed(2)}
+</span>
 
       </div>
 
@@ -748,7 +748,7 @@ hover:shadow-xl
                 <p className="text-green-600 text-2xl font-bold mt-3">
 
                   S/ {item.precio}
-
+   
                 </p>
 
               )}
