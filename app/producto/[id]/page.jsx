@@ -138,7 +138,13 @@ export default function ProductoDetalle({ params }) {
                 <button
                   key={index}
                   onClick={() => setImagenActiva(index)}
-                  className={`border-2 rounded-xl p-2 bg-white transition
+                  className={`
+  border-2
+  rounded-2xl
+  p-3
+  bg-white
+  transition
+  duration-300
                   ${
                    imagenActiva === index
   ? "border-yellow-500 shadow-lg"
@@ -149,7 +155,12 @@ export default function ProductoDetalle({ params }) {
                   <img
                     src={img}
                     alt={`Imagen ${index + 1}`}
-                    className="h-20 w-20 object-contain"
+                    className="
+                    h-24
+                    w-24
+                    object-contain
+                    p-2
+                    "
                   />
 
                 </button>
@@ -173,7 +184,13 @@ export default function ProductoDetalle({ params }) {
                   "/sin-imagen.png"
                 }
                 alt={producto.nombre}
-                className="max-h-[600px] object-contain hover:scale-105 transition duration-300"
+                className="
+  w-full
+  max-h-[650px]
+  object-contain
+  transition
+  duration-300
+"
               />
 
               {/* FLECHA IZQUIERDA */}
