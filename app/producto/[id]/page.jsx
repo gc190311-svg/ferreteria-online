@@ -427,7 +427,23 @@ hover:shadow-xl
             <a
               href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
               target="_blank"
-              className="block mt-6 bg-green-600 hover:bg-green-700 text-white text-center py-4 rounded-xl text-xl font-bold"
+              className="
+block
+w-full
+mt-5
+bg-green-600
+hover:bg-green-700
+text-white
+text-center
+font-bold
+text-xl
+py-5
+rounded-2xl
+transition-all
+duration-300
+shadow-lg
+hover:shadow-xl
+"
             >
 
               Consultar por WhatsApp
