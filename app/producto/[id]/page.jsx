@@ -196,12 +196,12 @@ w-full
                   "/sin-imagen.png"
                 }
                 alt={producto.nombre}
-                className="
-  w-full
-  max-h-[650px]
-  object-contain
-  transition
-  duration-300
+               className="
+object-contain
+max-h-[520px]
+max-w-[80%]
+transition-all
+duration-300
 "
               />
 
