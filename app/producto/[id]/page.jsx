@@ -140,9 +140,9 @@ export default function ProductoDetalle({ params }) {
                   onClick={() => setImagenActiva(index)}
                   className={`border-2 rounded-xl p-2 bg-white transition
                   ${
-                    imagenActiva === index
-                      ? "border-blue-500"
-                      : "border-gray-200"
+                   imagenActiva === index
+  ? "border-yellow-500 shadow-lg"
+  : "border-gray-200 hover:border-yellow-300"
                   }`}
                 >
 
