@@ -40,7 +40,7 @@ if (
   } else {
     router.push(`/categorias/${categoria}`);
   }
-
+}
 }
 
   return (
