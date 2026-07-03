@@ -162,12 +162,11 @@ ${
                   <img
                     src={img}
                     alt={`Imagen ${index + 1}`}
-                    className="
-                    h-24
-                    w-24
-                    object-contain
-                    p-2
-                    "
+                  className="
+w-20
+h-20
+object-contain
+"
                   />
 
                 </button>
