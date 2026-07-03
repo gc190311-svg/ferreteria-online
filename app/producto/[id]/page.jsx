@@ -297,43 +297,123 @@ mb-6
 
                         {/* PRECIO */}
 
-            <div className="mt-8">
+<div className="mt-8">
 
-              {producto.oferta ? (
+  {producto.oferta ? (
 
-                <div>
+    <>
 
-                  <p className="text-gray-400 line-through text-xl">
+      <p
+        className="
+          text-gray-400
+          line-through
+          text-xl
+          font-medium
+        "
+      >
 
-                    S/ {producto.precio}
+        S/ {Number(producto.precio).toFixed(2)}
 
-                  </p>
+      </p>
 
-                  <p className="text-green-600 font-bold text-5xl">
+      <div
+        className="
+          flex
+          items-end
+          gap-2
+          mt-2
+        "
+      >
 
-                    S/ {producto.oferta}
+        <span
+          className="
+            text-2xl
+            font-bold
+            text-emerald-600
+          "
+        >
 
-                  </p>
+          S/
 
-                  <span className="bg-red-500 text-white px-3 py-1 rounded">
+        </span>
 
-                    OFERTA
+        <span
+          className="
+            text-5xl
+            lg:text-6xl
+            font-extrabold
+            text-emerald-600
+            leading-none
+          "
+        >
 
-                  </span>
+          {Number(producto.oferta).toFixed(2)}
 
-                </div>
+        </span>
 
-              ) : (
+      </div>
 
-                <p className="text-green-600 font-bold text-5xl">
+      <span
+        className="
+          inline-block
+          mt-4
+          bg-red-600
+          text-white
+          text-sm
+          font-bold
+          px-4
+          py-2
+          rounded-lg
+        "
+      >
 
-                  S/ {producto.precio}
+        OFERTA
 
-                </p>
+      </span>
 
-              )}
+    </>
 
-            </div>
+  ) : (
+
+    <div
+      className="
+        flex
+        items-end
+        gap-2
+      "
+    >
+
+      <span
+        className="
+          text-2xl
+          font-bold
+          text-emerald-600
+        "
+      >
+
+        S/
+
+      </span>
+
+      <span
+        className="
+          text-5xl
+          lg:text-6xl
+          font-extrabold
+          text-emerald-600
+          leading-none
+        "
+      >
+
+        {Number(producto.precio).toFixed(2)}
+
+      </span>
+
+    </div>
+
+  )}
+
+</div>
 
             {/* STOCK */}
 
