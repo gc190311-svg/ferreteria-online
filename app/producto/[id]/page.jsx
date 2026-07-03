@@ -1,5 +1,8 @@
 "use client";
 
+import HeaderCatalogo from "../../../components/HeaderCatalogo";
+import Navbar from "../../../components/Navbar";
+import Footer from "../../../components/Footer";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import {
