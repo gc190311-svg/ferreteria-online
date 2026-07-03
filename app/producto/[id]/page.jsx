@@ -207,7 +207,9 @@ object-contain
     rounded-2xl
     w-full
     h-[650px]
+    pt-6
   "
+>
 >
 
               <img
@@ -217,14 +219,13 @@ object-contain
                   "/sin-imagen.png"
                 }
                 alt={producto.nombre}
-             className="
+          className="
 object-contain
 w-auto
 h-auto
-max-w-[88%]
-max-h-[560px]
-transition-all
-duration-300
+max-w-[90%]
+max-h-[520px]
+mx-auto
 "
               />
 
