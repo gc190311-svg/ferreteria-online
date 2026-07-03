@@ -126,7 +126,14 @@ export default function ProductoDetalle({ params }) {
 
         <div className="bg-white rounded-3xl shadow-lg p-8">
 
-          <div className="grid lg:grid-cols-3 gap-10">
+          <div
+  className="
+    grid
+    lg:grid-cols-[120px_1.5fr_1fr]
+    gap-10
+    items-start
+  "
+>
             
                       {/* MINIATURAS */}
 
@@ -179,7 +186,16 @@ object-contain
 
           {/* IMAGEN PRINCIPAL */}
 
-          <div className="order-1 lg:order-2 flex items-center justify-center">
+          <div
+  className="
+    order-1
+    lg:order-2
+    flex
+    items-center
+    justify-center
+    h-full
+  "
+>
 
             <div className="
 relative
