@@ -283,9 +283,11 @@ mb-6
 
             {/* ESTRELLAS */}
 
-            <div className="flex gap-1 text-yellow-500 text-2xl mt-4">
+           <span className="text-yellow-500 text-xl">
 
-              ★★★★★
+★★★★★
+
+</span>
 
               <span className="text-gray-400 text-base ml-2">
 
