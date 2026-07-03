@@ -357,27 +357,23 @@ mb-6
         "
       >
 
-        <span
-          className="
-            text-2xl
-            font-bold
-            text-emerald-600
-          "
-        >
-
-          S/
-
-        </span>
-
-        <span
-          className="
-            text-5xl
-            lg:text-6xl
-            font-extrabold
-            text-emerald-600
-            leading-none
-          "
-        >
+       <span
+  className="
+    text-xl
+    font-bold
+    text-emerald-700
+  "
+>
+  S/
+</span>
+  className="
+    text-4xl
+    lg:text-5xl
+    font-bold
+    text-emerald-700
+    leading-none
+  "
+>
 
           {Number(producto.oferta).toFixed(2)}
 
