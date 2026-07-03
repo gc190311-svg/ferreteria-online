@@ -193,40 +193,37 @@ object-contain
     flex
     items-center
     justify-center
-    h-full
+    self-start
   "
 >
 
-            <div
+          <div
   className="
     relative
     flex
     items-center
     justify-center
-    bg-white
-    rounded-2xl
     w-full
-    h-[650px]
-    pt-6
+    aspect-square
+    max-h-[650px]
+    bg-white
   "
 >
-
-              <img
-                src={
-                  producto.imagenes?.[imagenActiva] ||
-                  producto.imagen ||
-                  "/sin-imagen.png"
-                }
-                alt={producto.nombre}
-          className="
-object-contain
-w-auto
-h-auto
-max-w-[90%]
-max-h-[520px]
-mx-auto
-"
-              />
+            
+<img
+  src={
+    producto.imagenes?.[imagenActiva] ||
+    producto.imagen ||
+    "/sin-imagen.png"
+  }
+  alt={producto.nombre}
+  className="
+    object-contain
+    w-full
+    h-full
+    p-10
+  "
+/>
 
               {/* FLECHA IZQUIERDA */}
 
