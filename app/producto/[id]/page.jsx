@@ -106,7 +106,7 @@ export default function ProductoDetalle({ params }) {
   </a>
 
   <span>›</span>
-
+         
   <a
     href={`/categorias/${producto.categoria}`}
     className="hover:text-yellow-500 transition capitalize"
@@ -401,7 +401,21 @@ mb-6
                   carrito + cantidad
                 )
               }
-              className="w-full mt-8 bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl text-xl font-bold"
+              className="
+w-full
+mt-8
+bg-yellow-500
+hover:bg-yellow-400
+text-black
+font-bold
+text-xl
+py-5
+rounded-2xl
+shadow-lg
+transition-all
+duration-300
+hover:shadow-xl
+"
             >
 
               🛒 Agregar al carrito
