@@ -278,14 +278,14 @@ object-contain
 
             </p>
 
-           <h1
+       <h1
   className="
-    text-3xl
-    lg:text-4xl
-    font-bold
-    leading-tight
+    text-2xl
+    lg:text-3xl
+    font-semibold
+    leading-snug
     text-gray-700
-    mb-5
+    mb-4
   "
 >
   {producto.nombre}
