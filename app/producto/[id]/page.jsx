@@ -327,107 +327,48 @@ mb-6
 
               </span>
 
-                        {/* PRECIO */}
+                       {/* PRECIO */}
 
 <div className="mt-8">
 
   {producto.oferta ? (
 
     <>
-
-      <p
-        className="
-          text-gray-400
-          line-through
-          text-xl
-          font-medium
-        "
-      >
-
+      <p className="text-gray-400 line-through text-lg font-medium">
         S/ {Number(producto.precio).toFixed(2)}
-
       </p>
 
-      <div className="flex items-end gap-1">
+      <div className="flex items-end gap-1 mt-2">
 
-  <span
-    className="
-      text-base
-      font-bold
-      text-emerald-700
-    "
-  >
-    S/
-  </span>
+        <span className="text-base font-bold text-emerald-700">
+          S/
+        </span>
 
-  <span
-    className="
-      text-xl
-      lg:text-2xl
-      font-bold
-      text-emerald-700
-      leading-none
-    "
-  >
-    {Number(producto.precio).toFixed(2)}
-  </span>
+        <span className="text-xl lg:text-2xl font-bold text-emerald-700 leading-none">
+          {Number(producto.oferta).toFixed(2)}
+        </span>
 
       </div>
 
-      <span
-        className="
-          inline-block
-          mt-4
-          bg-red-600
-          text-white
-          text-sm
-          font-bold
-          px-4
-          py-2
-          rounded-lg
-        "
-      >
-
+      <span className="inline-block mt-4 bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg">
         OFERTA
-
       </span>
 
     </>
 
   ) : (
 
-    <div
-      className="
-        flex
-        items-end
-        gap-2
-      "
-    >
-<div className="flex items-end gap-1">
+    <div className="flex items-end gap-1">
 
-  <span
-    className="
-      text-base
-      font-bold
-      text-emerald-700
-    "
-  >
-    S/
-  </span>
+      <span className="text-base font-bold text-emerald-700">
+        S/
+      </span>
 
-  <span
-    className="
-      text-xl
-      lg:text-2xl
-      font-bold
-      text-emerald-700
-      leading-none
-    "
-  >
-    {Number(producto.oferta).toFixed(2)}
-  </span>
+      <span className="text-xl lg:text-2xl font-bold text-emerald-700 leading-none">
+        {Number(producto.precio).toFixed(2)}
+      </span>
 
-</div>
+    </div>
 
   )}
 
