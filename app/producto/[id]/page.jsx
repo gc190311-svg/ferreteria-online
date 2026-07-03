@@ -85,43 +85,42 @@ export default function ProductoDetalle({ params }) {
 
         </div>
 
-        {/* VOLVER */}
-
-        <a
-          href="/"
-          className="inline-block bg-black text-white px-6 py-3 rounded-xl mb-6 hover:bg-gray-800"
-        >
-          ← Volver al inicio
-        </a>
-
         {/* BREADCRUMB */}
 
-        <div className="text-sm text-gray-500 mb-8">
+<nav
+  className="
+    flex
+    items-center
+    gap-2
+    text-sm
+    text-gray-500
+    mb-8
+  "
+>
 
-          <a
-            href="/"
-            className="hover:text-blue-600"
-          >
-            Inicio
-          </a>
+  <a
+    href="/"
+    className="hover:text-yellow-500 transition"
+  >
+    Inicio
+  </a>
 
-          {" > "}
+  <span>›</span>
 
-          <span>
+  <a
+    href={`/categorias/${producto.categoria}`}
+    className="hover:text-yellow-500 transition capitalize"
+  >
+    {producto.categoria}
+  </a>
 
-            {producto.categoria}
+  <span>›</span>
 
-          </span>
+  <span className="font-semibold text-gray-900 truncate">
+    {producto.nombre}
+  </span>
 
-          {" > "}
-
-          <span className="font-semibold text-black">
-
-            {producto.nombre}
-
-          </span>
-
-        </div>
+</nav>
 
         {/* CONTENEDOR PRINCIPAL */}
 
