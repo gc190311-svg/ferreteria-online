@@ -348,35 +348,29 @@ mb-6
 
       </p>
 
-      <div
-        className="
-          flex
-          items-end
-          gap-2
-          mt-2
-        "
-      >
-<span
-  className="
-    text-lg
-    font-bold
-    text-emerald-700
-  "
->
-  S/
-</span>
+      <div className="flex items-end gap-1">
 
-<span
-  className="
-    text-2xl
-    lg:text-3xl
-    font-bold
-    text-emerald-700
-    leading-none
-  "
->
-  {Number(producto.oferta).toFixed(2)}
-</span>
+  <span
+    className="
+      text-base
+      font-bold
+      text-emerald-700
+    "
+  >
+    S/
+  </span>
+
+  <span
+    className="
+      text-xl
+      lg:text-2xl
+      font-bold
+      text-emerald-700
+      leading-none
+    "
+  >
+    {Number(producto.precio).toFixed(2)}
+  </span>
 
       </div>
 
@@ -409,34 +403,31 @@ mb-6
         gap-2
       "
     >
+<div className="flex items-end gap-1">
 
-      <span
-        className="
-          text-2xl
-          font-bold
-          text-emerald-600
-        "
-      >
+  <span
+    className="
+      text-base
+      font-bold
+      text-emerald-700
+    "
+  >
+    S/
+  </span>
 
-        S/
+  <span
+    className="
+      text-xl
+      lg:text-2xl
+      font-bold
+      text-emerald-700
+      leading-none
+    "
+  >
+    {Number(producto.oferta).toFixed(2)}
+  </span>
 
-      </span>
-
-      <span
-        className="
-          text-5xl
-          lg:text-6xl
-          font-extrabold
-          text-emerald-600
-          leading-none
-        "
-      >
-
-        {Number(producto.precio).toFixed(2)}
-
-      </span>
-
-    </div>
+</div>
 
   )}
 
