@@ -197,19 +197,18 @@ object-contain
   "
 >
 
-            <div className="
-relative
-flex
-items-center
-justify-center
-bg-white
-rounded-2xl
-border
-border-gray-200
-overflow-hidden
-min-h-[650px]
-w-full
-">
+            <div
+  className="
+    relative
+    flex
+    items-center
+    justify-center
+    bg-white
+    rounded-2xl
+    w-full
+    h-[650px]
+  "
+>
 
               <img
                 src={
