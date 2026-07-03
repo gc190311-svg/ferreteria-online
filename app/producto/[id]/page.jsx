@@ -210,7 +210,6 @@ object-contain
     pt-6
   "
 >
->
 
               <img
                 src={
