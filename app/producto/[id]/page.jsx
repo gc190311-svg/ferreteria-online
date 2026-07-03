@@ -278,18 +278,18 @@ object-contain
 
             </p>
 
-            <h1 className="
-text-4xl
-lg:text-5xl
-font-extrabold
-leading-tight
-text-gray-900
-mb-5
-">
-
-              {producto.nombre}
-
-            </h1>
+           <h1
+  className="
+    text-3xl
+    lg:text-4xl
+    font-bold
+    leading-tight
+    text-gray-700
+    mb-5
+  "
+>
+  {producto.nombre}
+</h1>
 
             {/* FAVORITO */}
 
