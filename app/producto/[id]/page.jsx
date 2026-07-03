@@ -127,6 +127,7 @@ export default function ProductoDetalle({ params }) {
         <div className="bg-white rounded-3xl shadow-lg p-8">
 
           <div className="grid lg:grid-cols-3 gap-10">
+            
                       {/* MINIATURAS */}
 
           <div className="order-2 lg:order-1">
@@ -139,17 +140,23 @@ export default function ProductoDetalle({ params }) {
                   key={index}
                   onClick={() => setImagenActiva(index)}
                   className={`
-  border-2
-  rounded-2xl
-  p-3
-  bg-white
-  transition
-  duration-300
-                  ${
-                   imagenActiva === index
-  ? "border-yellow-500 shadow-lg"
-  : "border-gray-200 hover:border-yellow-300"
-                  }`}
+w-28
+h-28
+border-2
+rounded-xl
+bg-white
+flex
+items-center
+justify-center
+overflow-hidden
+transition-all
+duration-300
+${
+  imagenActiva === index
+    ? "border-yellow-500 shadow-md"
+    : "border-gray-200 hover:border-yellow-400"
+}
+`}
                 >
 
                   <img
