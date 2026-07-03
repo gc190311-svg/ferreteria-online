@@ -358,7 +358,7 @@ mb-6
       >
 <span
   className="
-    text-xl
+    text-lg
     font-bold
     text-emerald-700
   "
@@ -368,8 +368,8 @@ mb-6
 
 <span
   className="
-    text-4xl
-    lg:text-5xl
+    text-2xl
+    lg:text-3xl
     font-bold
     text-emerald-700
     leading-none
