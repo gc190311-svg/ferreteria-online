@@ -20,6 +20,7 @@ export default function ProductoDetalle({ params }) {
   const [favorito, setFavorito] = useState(false);
   const [carrito, setCarrito] = useState(0);
   const [productosRelacionados, setProductosRelacionados] = useState([]);
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
 
   useEffect(() => {
     cargarProducto();
@@ -70,9 +71,18 @@ export default function ProductoDetalle({ params }) {
 
   }
 
-  return (
+ return (
 
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+  <>
+
+    <HeaderCatalogo />
+
+    <Navbar
+      categoriaSeleccionada={categoriaSeleccionada}
+      setCategoriaSeleccionada={setCategoriaSeleccionada}
+    />
+
+    <div className="min-h-screen bg-gray-100 pb-10 px-4">
 
       <div className="max-w-7xl mx-auto">
 
@@ -692,10 +702,14 @@ hover:shadow-xl
 
         </div>
 
-      </div>
+           </div>
 
     </div>
 
-  );
+    <Footer />
+
+  </>
+
+);
 
 }
