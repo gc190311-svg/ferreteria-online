@@ -231,13 +231,29 @@ export default function ProductoDetalle({ params }) {
 
           <div className="order-3">
 
-            <p className="text-gray-500 mb-2">
+           <p
+  className="
+    uppercase
+    tracking-[3px]
+    text-sm
+    font-semibold
+    text-gray-500
+    mb-3
+  "
+>
 
               {producto.categoria}
 
             </p>
 
-            <h1 className="text-3xl font-bold">
+            <h1 className="
+text-4xl
+lg:text-5xl
+font-extrabold
+leading-tight
+text-gray-900
+mb-5
+">
 
               {producto.nombre}
 
@@ -247,7 +263,20 @@ export default function ProductoDetalle({ params }) {
 
             <button
               onClick={() => setFavorito(!favorito)}
-              className="mt-3 text-3xl"
+              className="
+w-12
+h-12
+rounded-full
+border
+border-gray-200
+flex
+items-center
+justify-center
+hover:bg-yellow-500
+hover:text-white
+transition
+mb-6
+"
             >
               {favorito ? "❤️" : "🤍"}
             </button>
