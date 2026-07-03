@@ -295,7 +295,6 @@ mb-6
 
               </span>
 
-            </div>
                         {/* PRECIO */}
 
             <div className="mt-8">
