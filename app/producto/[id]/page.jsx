@@ -18,10 +18,7 @@ export default function ProductoDetalle({ params }) {
   const [productosRelacionados, setProductosRelacionados] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
  const { agregarProducto,  totalItems,} = useCarrito();
-
-
-  useEffect(() => {
-    cargarProducto();
+ 
   }, []);
 
   const cargarProducto = async () => {
@@ -86,15 +83,15 @@ export default function ProductoDetalle({ params }) {
 
         {/* CARRITO */}
 
-        <div className="flex justify-end mb-6">
+<div className="flex justify-end mb-6">
 
-          <div className="bg-black text-white px-5 py-3 rounded-2xl shadow">
+  <div className="bg-black text-white px-5 py-3 rounded-2xl shadow">
 
-            🛒 {carrito}
+    🛒 {totalItems}
 
-          </div>
+  </div>
 
-        </div>
+</div>
 
         {/* BREADCRUMB */}
 
