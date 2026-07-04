@@ -473,7 +473,9 @@ hover:shadow-xl
 "
             >
 
-              🛒 {totalItems}
+             <>
+  🛒 Agregar al carrito
+</>
               
             </button>
 
