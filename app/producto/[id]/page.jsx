@@ -5,12 +5,8 @@ import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
-import {
-  doc,
-  getDoc,
-  collection,
-  getDocs,
-} from "firebase/firestore";
+import { doc,  getDoc,  collection, getDocs,} from "firebase/firestore";
+import { useCarrito } from "../../../components/context/CarritoContext";
 
 export default function ProductoDetalle({ params }) {
 
@@ -18,9 +14,12 @@ export default function ProductoDetalle({ params }) {
   const [imagenActiva, setImagenActiva] = useState(0);
   const [cantidad, setCantidad] = useState(1);
   const [favorito, setFavorito] = useState(false);
-  const [carrito, setCarrito] = useState(0);
+  
   const [productosRelacionados, setProductosRelacionados] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
+  const {
+  agregarProducto,
+} = useCarrito();
 
   useEffect(() => {
     cargarProducto();
@@ -447,10 +446,18 @@ mb-6
 
             <button
               onClick={() =>
-                setCarrito(
-                  carrito + cantidad
-                )
-              }
+  agregarProducto({
+    id: params.id,
+    nombre: producto.nombre,
+    precio: producto.precio,
+    oferta: producto.oferta,
+    imagen:
+      producto.imagenes?.[0] ||
+      producto.imagen ||
+      "/sin-imagen.png",
+    cantidad,
+  })
+}
               className="
 w-full
 mt-8
