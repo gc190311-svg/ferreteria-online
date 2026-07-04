@@ -83,17 +83,7 @@ useEffect(() => {
 
       <div className="max-w-7xl mx-auto">
 
-        {/* CARRITO */}
-
-<div className="flex justify-end mb-6">
-
-  <div className="bg-black text-white px-5 py-3 rounded-2xl shadow">
-
-    🛒 {totalItems}
-
-  </div>
-
-</div>
+      
 
         {/* BREADCRUMB */}
 
