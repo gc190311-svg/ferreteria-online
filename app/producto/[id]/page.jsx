@@ -18,7 +18,7 @@ export default function ProductoDetalle({ params }) {
   const [productosRelacionados, setProductosRelacionados] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
  const { agregarProducto,  totalItems,} = useCarrito();
-  const { totalItems } = useCarrito();
+
 
   useEffect(() => {
     cargarProducto();
