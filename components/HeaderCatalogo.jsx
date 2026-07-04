@@ -9,6 +9,8 @@ import {
 
 import SearchInput from "./SearchInput";
 import { useCatalogo } from "./context/CatalogoContext";
+import { useState } from "react";
+import CarritoDrawer from "./CarritoDrawer";
 
 export default function HeaderCatalogo() {
 
@@ -17,6 +19,8 @@ export default function HeaderCatalogo() {
     setTextoInput,
     setTextoBusqueda,
   } = useCatalogo();
+
+  const [carritoAbierto, setCarritoAbierto] = useState(false);
 
   function buscarProducto() {
 
@@ -98,21 +102,18 @@ export default function HeaderCatalogo() {
 
             </Link>
 
-            <Link href="/carrito">
+            <button
+  onClick={() => setCarritoAbierto(true)}
+  className="flex flex-col items-center hover:text-yellow-400 transition"
+>
 
-              <div className="flex flex-col items-center hover:text-yellow-400">
+  <FaShoppingCart className="text-2xl" />
 
-                <FaShoppingCart className="text-2xl"/>
+  <span className="text-sm">
+    Carrito
+  </span>
 
-                <span className="text-sm">
-
-                  Carrito
-
-                </span>
-
-              </div>
-
-            </Link>
+</button>
 
           </div>
 
