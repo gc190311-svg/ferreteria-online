@@ -17,8 +17,9 @@ export default function ProductoDetalle({ params }) {
   
   const [productosRelacionados, setProductosRelacionados] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
-  const {
-  agregarProducto,
+ const {
+    agregarProducto,
+    totalItems,
 } = useCarrito();
 
   useEffect(() => {
@@ -475,8 +476,8 @@ hover:shadow-xl
 "
             >
 
-              🛒 Agregar al carrito
-
+              🛒 {totalItems}
+              
             </button>
 
             {/* BOTÓN WHATSAPP */}
