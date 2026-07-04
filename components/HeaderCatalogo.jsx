@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 
 import {
   FaUser,
@@ -8,12 +9,15 @@ import {
 } from "react-icons/fa";
 
 import SearchInput from "./SearchInput";
+import CarritoDrawer from "./CarritoDrawer";
 import { useCatalogo } from "./context/CatalogoContext";
 import { useState } from "react";
 import CarritoDrawer from "./CarritoDrawer";
 
 export default function HeaderCatalogo() {
-
+  
+const [carritoAbierto, setCarritoAbierto] = useState(false);
+  
   const {
     textoInput,
     setTextoInput,
@@ -122,6 +126,13 @@ export default function HeaderCatalogo() {
       </div>
 
     </header>
+
+    <CarritoDrawer
+      abierto={carritoAbierto}
+      cerrar={() => setCarritoAbierto(false)}
+    />
+
+  </>
 
   );
 
