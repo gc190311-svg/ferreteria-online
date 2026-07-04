@@ -19,7 +19,9 @@ export default function ProductoDetalle({ params }) {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
  const { agregarProducto,  totalItems,} = useCarrito();
  
-  }, []);
+useEffect(() => {
+  cargarProducto();
+}, []);
 
   const cargarProducto = async () => {
 
