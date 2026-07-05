@@ -39,7 +39,7 @@ const [carritoAbierto, setCarritoAbierto] = useState(false);
   }
 
   return (
-
+  <>
     <header className="bg-black py-4">
 
       <div className="max-w-7xl mx-auto px-4">
@@ -66,9 +66,11 @@ const [carritoAbierto, setCarritoAbierto] = useState(false);
                 <FaUser className="text-2xl hover:text-yellow-400"/>
               </Link>
 
-              <Link href="/carrito">
+              <button
+                onClick={() => setCarritoAbierto(true)}
+              >
                 <FaShoppingCart className="text-2xl hover:text-yellow-400"/>
-              </Link>
+              </button>
 
             </div>
 
@@ -97,9 +99,7 @@ const [carritoAbierto, setCarritoAbierto] = useState(false);
                 <FaUser className="text-2xl"/>
 
                 <span className="text-sm">
-
                   Mi Cuenta
-
                 </span>
 
               </div>
@@ -107,17 +107,17 @@ const [carritoAbierto, setCarritoAbierto] = useState(false);
             </Link>
 
             <button
-  onClick={() => setCarritoAbierto(true)}
-  className="flex flex-col items-center hover:text-yellow-400 transition"
->
+              onClick={() => setCarritoAbierto(true)}
+              className="flex flex-col items-center hover:text-yellow-400 transition"
+            >
 
-  <FaShoppingCart className="text-2xl" />
+              <FaShoppingCart className="text-2xl" />
 
-  <span className="text-sm">
-    Carrito
-  </span>
+              <span className="text-sm">
+                Carrito
+              </span>
 
-</button>
+            </button>
 
           </div>
 
@@ -133,7 +133,4 @@ const [carritoAbierto, setCarritoAbierto] = useState(false);
     />
 
   </>
-
-  );
-
-}
+);
