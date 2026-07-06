@@ -177,19 +177,16 @@ export function CarritoProvider({ children }) {
 
   /* ============================= */
 
-  const total = carrito.reduce(
+  const total = carrito.reduce((acc, item) => {
 
-    (acc, item) =>
+  const precio =
+    Number(item.oferta) > 0
+      ? Number(item.oferta)
+      : Number(item.precio);
 
-      acc +
+  return acc + precio * Number(item.cantidad);
 
-      item.cantidad *
-
-        Number(item.oferta || item.precio),
-
-    0
-
-  );
+}, 0);
 
   return (
 
