@@ -2,6 +2,7 @@
 
 import { FaTrash, FaWhatsapp } from "react-icons/fa";
 import { useCarrito } from "./context/CarritoContext";
+import Link from "next/link";
 
 export default function CarritoDrawer({
 
@@ -430,28 +431,26 @@ transition
             Vaciar carrito
           </button>
 
-          <button
-            onClick={enviarWhatsApp}
-            className="
+         <Link
+  href="/checkout"
+  className="
 w-full
-mt-3
+block
+mt-4
 bg-green-600
 hover:bg-green-700
 text-white
+text-center
 font-bold
 py-4
 rounded-xl
-flex
-items-center
-justify-center
-gap-3
 transition
 "
-          >
-            <FaWhatsapp size={22} />
+>
 
-            Enviar pedido por WhatsApp
-          </button>
+  Finalizar pedido
+
+</Link>
 
         </div>
 
