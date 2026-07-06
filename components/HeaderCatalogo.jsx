@@ -11,8 +11,8 @@ import {
 import SearchInput from "./SearchInput";
 import CarritoDrawer from "./CarritoDrawer";
 import { useCatalogo } from "./context/CatalogoContext";
-import { useState } from "react";
-import CarritoDrawer from "./CarritoDrawer";
+
+
 
 export default function HeaderCatalogo() {
   
@@ -24,7 +24,6 @@ const [carritoAbierto, setCarritoAbierto] = useState(false);
     setTextoBusqueda,
   } = useCatalogo();
 
-  const [carritoAbierto, setCarritoAbierto] = useState(false);
 
   function buscarProducto() {
 
@@ -134,3 +133,4 @@ const [carritoAbierto, setCarritoAbierto] = useState(false);
 
   </>
 );
+  }
