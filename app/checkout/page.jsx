@@ -73,6 +73,70 @@ export default function CheckoutPage() {
 
     );
 
+    const numeroPedido =
+  "BR-" +
+  new Date().getFullYear() +
+  "-" +
+  docRef.id.substring(0, 6).toUpperCase();
+
+    let mensaje =
+`🟡 *NUEVO PEDIDO*
+
+Pedido: ${numeroPedido}
+
+Cliente:
+${nombre}
+
+Celular:
+${telefono}
+
+Dirección:
+${direccion}
+
+Distrito:
+${distrito}
+
+--------------------------------
+
+`;
+    carrito.forEach((item) => {
+
+  const precio =
+    Number(item.oferta) > 0
+      ? Number(item.oferta)
+      : Number(item.precio);
+
+  mensaje +=
+`${item.nombre}
+
+Cantidad: ${item.cantidad}
+
+Subtotal: S/ ${(precio * item.cantidad).toFixed(2)}
+
+--------------------------------
+
+`;
+
+      window.open(
+
+`https://wa.me/51921883870?text=${encodeURIComponent(mensaje)}`,
+
+"_blank"
+
+);
+      limpiarCarrito();
+
+});
+    mensaje +=
+`TOTAL
+
+S/ ${total.toFixed(2)}
+
+Observaciones:
+
+${observaciones}`;
+    
+
     alert(
       `Pedido registrado correctamente.\nCódigo: ${docRef.id}`
     );
