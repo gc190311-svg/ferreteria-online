@@ -2,6 +2,12 @@
 
 import { useState } from "react";
 import { useCarrito } from "../../components/context/CarritoContext";
+import { db } from "../firebase";
+import {
+  collection,
+  addDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 
 export default function CheckoutPage() {
 
@@ -13,6 +19,75 @@ export default function CheckoutPage() {
   const [distrito, setDistrito] = useState("");
   const [referencia, setReferencia] = useState("");
   const [observaciones, setObservaciones] = useState("");
+
+  async function confirmarPedido() {
+
+  if (
+    !nombre ||
+    !telefono ||
+    !direccion ||
+    !distrito
+  ) {
+
+    alert("Complete todos los datos obligatorios.");
+
+    return;
+
+  }
+
+  try {
+
+    const pedido = {
+
+      fecha: serverTimestamp(),
+
+      estado: "Pendiente",
+
+      cliente: {
+
+        nombre,
+
+        telefono,
+
+        direccion,
+
+        distrito,
+
+        referencia,
+
+        observaciones,
+
+      },
+
+      productos: carrito,
+
+      total,
+
+    };
+
+    const docRef = await addDoc(
+
+      collection(db, "pedidos"),
+
+      pedido
+
+    );
+
+    alert(
+      `Pedido registrado correctamente.\nCódigo: ${docRef.id}`
+    );
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Ocurrió un error al registrar el pedido.");
+
+  }
+
+}
+
+  
 
   return (
 
@@ -183,8 +258,9 @@ export default function CheckoutPage() {
 
     </div>
 
-    <button
-      className="
+   <button
+  onClick={confirmarPedido}
+  className="
 w-full
 mt-8
 bg-green-600
@@ -195,11 +271,11 @@ py-4
 rounded-xl
 transition
 "
-    >
+>
 
-      Confirmar pedido
+  Confirmar pedido
 
-    </button>
+</button>
 
   </div>
 
