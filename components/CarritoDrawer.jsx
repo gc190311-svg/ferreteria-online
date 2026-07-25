@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FaTrash, FaWhatsapp } from "react-icons/fa";
 import { useCarrito } from "./context/CarritoContext";
+import { useEffect } from "react";
 
 export default function CarritoDrawer({
   abierto,
@@ -16,6 +17,26 @@ export default function CarritoDrawer({
     actualizarCantidad,
     limpiarCarrito,
   } = useCarrito();
+
+  useEffect(() => {
+
+    if (abierto) {
+
+        document.body.style.overflow = "hidden";
+
+    } else {
+
+        document.body.style.overflow = "";
+
+    }
+
+    return () => {
+
+        document.body.style.overflow = "";
+
+    };
+
+}, [abierto]);
 
   function enviarWhatsApp() {
     if (carrito.length === 0) {
@@ -82,10 +103,10 @@ Forma de pago:
       {/* FONDO */}
 
       {abierto && (
-        <div
-          onClick={cerrar}
-          className="fixed inset-0 bg-black/40 z-40"
-        />
+       <div
+    onClick={cerrar}
+    className="fixed inset-0 bg-black/70 z-[9998]"
+/>
       )}
 
       {/* DRAWER */}
@@ -100,7 +121,7 @@ Forma de pago:
           max-w-full
           bg-white
           shadow-2xl
-          z-50
+          z-[9999]
           transition-all
           duration-300
           flex

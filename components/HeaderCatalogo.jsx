@@ -8,8 +8,6 @@ import {
 } from "react-icons/fa";
 
 import SearchInput from "./SearchInput";
-import CarritoDrawer from "./CarritoDrawer";
-
 import { useCatalogo } from "./context/CatalogoContext";
 import { useCarrito } from "./context/CarritoContext";
 
@@ -179,10 +177,6 @@ export default function HeaderCatalogo() {
 
       </header>
 
-      <CarritoDrawer
-        abierto={carritoAbierto}
-        cerrar={cerrarCarrito}
-      />
 
     </>
   );

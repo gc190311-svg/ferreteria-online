@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { useCatalogo } from "../context/CatalogoContext";
+import { useCarrito } from "../context/CarritoContext";
+
 
 export default function NavbarMobile({
   setCategoriaSeleccionada,
@@ -15,33 +17,33 @@ export default function NavbarMobile({
 
   const { setTextoBusqueda } = useCatalogo();
 
-  function cambiarCategoria(categoria) {
+  const { carritoAbierto } = useCarrito();
+
+ function cambiarCategoria(categoria){
 
     setTextoBusqueda("");
 
     setCategoriaSeleccionada?.(categoria);
 
-    if (
-      pathname.startsWith("/categorias") ||
-      pathname.startsWith("/producto") ||
-      pathname === "/productos"
-    ) {
+    setAbierto(false);
 
-      if (categoria === "todos") {
+    if(categoria==="todos"){
+
         router.push("/productos");
-      } else {
+
+    }else{
+
         router.push(`/categorias/${categoria}`);
-      }
 
     }
 
-    setAbierto(false);
+}
 
-  }
+if (carritoAbierto) return null;
 
   return (
 
-    <nav className="bg-black border-y border-gray-800 relative z-50">
+    <nav className="bg-black border-y border-gray-800 relative">
 
       <div className="h-16 flex items-center px-5">
 
