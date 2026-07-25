@@ -68,13 +68,13 @@ export default function GridProductos() {
 
   <div
   className="
-    grid
-    grid-cols-2
-    md:grid-cols-2
-    lg:grid-cols-3
-    gap-8
-    items-start
-  "
+grid
+grid-cols-1
+sm:grid-cols-2
+lg:grid-cols-3
+gap-5
+items-start
+"
 >
 
       {productosFiltrados.map((producto) => (
@@ -106,11 +106,14 @@ export default function GridProductos() {
       }
       alt={producto.nombre}
       className="
-        w-full
-        h-72
-        object-contain
-        p-6
-      "
+w-full
+h-56
+sm:h-64
+lg:h-72
+object-contain
+p-4
+sm:p-6
+"
     />
 
     {/* Botón que aparece al pasar el mouse */}
@@ -171,15 +174,17 @@ export default function GridProductos() {
 
     <h3
   className="
-    mt-5
-    text-center
-    font-semibold
-    text-[20px]
-    leading-7
-    text-gray-900
-    line-clamp-2
-    min-h-[58px]
-  "
+mt-4
+text-center
+font-semibold
+text-base
+sm:text-lg
+lg:text-xl
+leading-6
+text-gray-900
+line-clamp-2
+min-h-[52px]
+"
 >
   {producto.nombre}
 </h3>
@@ -225,7 +230,8 @@ export default function GridProductos() {
         className="  
         mt-6
         text-center
-        text-[20px]
+        text-xl
+        sm:text-2xl
         font-bold
         text-emerald-700
         "

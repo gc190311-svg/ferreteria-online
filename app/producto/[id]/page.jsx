@@ -134,13 +134,25 @@ useEffect(() => {
 
         {/* CONTENEDOR PRINCIPAL */}
 
-        <div className="bg-white rounded-3xl shadow-lg p-8">
+        <div
+  className="
+    bg-white
+    rounded-3xl
+    shadow-lg
+    p-4
+    sm:p-6
+    lg:p-8
+    overflow-hidden
+  "
+>
 
           <div
   className="
     grid
-    lg:grid-cols-[120px_1.5fr_1fr]
-    gap-10
+    grid-cols-1
+    lg:grid-cols-[110px_minmax(0,1.4fr)_minmax(0,1fr)]
+    gap-6
+    lg:gap-10
     items-start
   "
 >
@@ -154,34 +166,40 @@ useEffect(() => {
               {producto.imagenes?.map((img, index) => (
 
                 <button
-                  key={index}
-                  onClick={() => setImagenActiva(index)}
-                  className={`
-w-28
-h-28
-border-2
-rounded-xl
-bg-white
-flex
-items-center
-justify-center
-overflow-hidden
-transition-all
-duration-300
-${
-  imagenActiva === index
-    ? "border-yellow-500 shadow-md"
-    : "border-gray-200 hover:border-yellow-400"
-}
-`}
-                >
+  key={index}
+  onClick={() => setImagenActiva(index)}
+  className={`
+    w-20
+    h-20
+    sm:w-24
+    sm:h-24
+    lg:w-28
+    lg:h-28
+    border-2
+    rounded-xl
+    bg-white
+    flex
+    items-center
+    justify-center
+    overflow-hidden
+    transition-all
+    duration-300
+    ${
+      imagenActiva === index
+        ? "border-yellow-500 shadow-md"
+        : "border-gray-200 hover:border-yellow-400"
+    }
+  `}
+>
 
                   <img
                     src={img}
                     alt={`Imagen ${index + 1}`}
                   className="
-w-20
-h-20
+w-16
+h-16
+sm:w-20
+sm:h-20
 object-contain
 "
                   />
@@ -209,15 +227,13 @@ object-contain
 
           <div
   className="
-    relative
-    flex
-    items-center
-    justify-center
-    w-full
-    aspect-square
-    max-h-[650px]
-    bg-white
-  "
+w-full
+h-full
+object-contain
+p-4
+sm:p-6
+lg:p-10
+"
 >
             
 <img
@@ -271,7 +287,7 @@ object-contain
 
           {/* INFORMACIÓN */}
 
-          <div className="order-3">
+          <div className=" order-3 w-full min-w-0 ">
 
           <p
   className="
@@ -458,18 +474,13 @@ mb-6
 }
               className="
 w-full
-mt-8
-bg-yellow-500
-hover:bg-yellow-400
-text-black
+mt-6
+py-4
+text-base
+sm:text-lg
 font-bold
-text-xl
-py-5
 rounded-2xl
-shadow-lg
 transition-all
-duration-300
-hover:shadow-xl
 "
             >
 
@@ -485,21 +496,14 @@ hover:shadow-xl
               href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
               target="_blank"
               className="
-block
 w-full
-mt-5
-bg-green-600
-hover:bg-green-700
-text-white
-text-center
+mt-6
+py-4
+text-base
+sm:text-lg
 font-bold
-text-xl
-py-5
 rounded-2xl
 transition-all
-duration-300
-shadow-lg
-hover:shadow-xl
 "
             >
 

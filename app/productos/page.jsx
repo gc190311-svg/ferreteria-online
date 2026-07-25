@@ -69,19 +69,45 @@ function CatalogoContenido() {
         setCategoriaSeleccionada={setCategoriaSeleccionada}
       />
 
-      <div className="max-w-7xl mx-auto flex gap-8 py-10 px-4">
+      <div
+  className="
+    max-w-7xl
+    mx-auto
+    px-4
+    py-6
 
-        <SidebarFiltros />
+    flex
+    flex-col
+    lg:flex-row
 
-        <div className="flex-1">
+    gap-6
+    lg:gap-8
+  "
+>
 
-          <CabeceraCatalogo />
+  <aside
+    className="
+      w-full
+      lg:w-72
+      lg:flex-shrink-0
+    "
+  >
+    <SidebarFiltros />
+  </aside>
 
-          <GridProductos />
+  <main
+    className="
+      flex-1
+      min-w-0
+      w-full
+    "
+  >
+    <CabeceraCatalogo />
 
-        </div>
+    <GridProductos />
+  </main>
 
-      </div>
+</div>
 
       <Footer />
 

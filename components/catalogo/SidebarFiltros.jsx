@@ -39,13 +39,16 @@ export default function SidebarFiltros() {
   return (
 
     <aside
-      className="
-        sticky
-        top-32
-        w-64
-        shrink-0
-      "
-    >
+  className="
+    w-full
+    lg:w-64
+
+    lg:sticky
+    lg:top-32
+
+    lg:shrink-0
+  "
+>
 
       {/* TITULO */}
 

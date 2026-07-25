@@ -4,10 +4,7 @@ node_modules/
 # Next.js
 .next/
 out/
-
-# Variables de entorno
-.env
-.env.local
+git config --global --list
 .env.production
 .env.development
 
