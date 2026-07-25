@@ -76,23 +76,7 @@ export default function Sidebar() {
 
       </div>
 
-      {/* BOTÓN NUEVO PRODUCTO */}
-
-      <div className="p-5">
-
-        <Link
-          href="/admin"
-          className="flex items-center justify-center gap-3 bg-yellow-500 hover:bg-yellow-400 text-black font-bold py-3 rounded-xl transition"
-        >
-
-          <FaPlus />
-
-          Nuevo Producto
-
-        </Link>
-
-      </div>
-
+      
       {/* MENÚ */}
 
       <nav className="flex-1">

@@ -1,172 +1,150 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { db } from "../../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { useEffect, useMemo, useState } from "react";
+
+import HeaderProductos from "./components/HeaderProductos.jsx";
+import EstadisticasProductos from "./components/EstadisticasProductos";
+import FiltrosProductos from "./components/FiltrosProductos";
+import VistaListaProductos from "./components/VistaListaProductos";
+import TablaProductos from "./components/TablaProductos";
+
+import {
+    obtenerProductos,
+    eliminarProducto
+} from "./services/ProductosAdminService";
 
 export default function ProductosAdmin() {
 
-  const [productos, setProductos] = useState([]);
-  const [busqueda, setBusqueda] = useState("");
+    const [productos, setProductos] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
+    const [vista, setVista] = useState("lista");
+    const [cargando, setCargando] = useState(true);
 
-  useEffect(() => {
-    cargarProductos();
-  }, []);
+    useEffect(() => {
+        cargarProductos();
+    }, []);
 
-  const cargarProductos = async () => {
+    async function cargarProductos() {
 
-    const querySnapshot = await getDocs(
-      collection(db, "productos")
-    );
+        try {
 
-    const lista = [];
+            const lista = await obtenerProductos();
 
-    querySnapshot.forEach((doc) => {
+            setProductos(lista);
 
-      lista.push({
-        id: doc.id,
-        ...doc.data(),
-      });
+        } catch (error) {
 
-    });
+            console.error(error);
 
-    setProductos(lista);
+        } finally {
 
-  };
+            setCargando(false);
 
-  const productosFiltrados = productos.filter((producto) =>
-    producto.nombre
-      ?.toLowerCase()
-      .includes(busqueda.toLowerCase())
-  );
+        }
 
-  return (
-
-    <div className="p-8">
-
-      <div className="flex justify-between items-center mb-8">
-
-        <h1 className="text-4xl font-bold">
-          Productos
-        </h1>
-
-        <Link
-          href="/admin"
-          className="bg-yellow-500 text-black px-6 py-3 rounded-xl font-bold hover:bg-yellow-400"
-        >
-          + Nuevo Producto
-        </Link>
-
-      </div>
-
-      <input
-        type="text"
-        placeholder="Buscar producto..."
-        value={busqueda}
-        onChange={(e)=>setBusqueda(e.target.value)}
-        className="border p-3 rounded-xl w-full mb-6"
-      />
-
-      <div className="bg-white rounded-2xl shadow overflow-hidden">
-
-        <table className="w-full">
-
-          <thead className="bg-gray-100">
-
-            <tr>
-
-              <th className="p-4 text-left">
-                Imagen
-              </th>
-
-              <th className="p-4 text-left">
-                Producto
-              </th>
-
-              <th className="p-4">
-                Precio
-              </th>
-
-              <th className="p-4">
-                Stock
-              </th>
-
-              <th className="p-4">
-                Acciones
-              </th>
-
-            </tr>
-
-          </thead>
-
-          <tbody>
-
-            {productosFiltrados.map((producto)=>(
-
-              <tr
-                key={producto.id}
-                className="border-t hover:bg-gray-50"
-              >
-
-                <td className="p-4">
-
-  <img
-    src={
-      producto.imagen ||
-      producto.imagenes?.[0] ||
-      "/sin-imagen.png"
     }
-    alt={producto.nombre}
-    className="w-24 h-24 object-contain border rounded-lg"
-    onError={(e) => {
-      e.currentTarget.src = "/sin-imagen.png";
-    }}
-  />
 
-</td>
-              
+    async function eliminar(id) {
 
-                <td className="p-4 font-semibold">
-                  {producto.nombre}
-                </td>
+        const confirmar = confirm(
+            "¿Deseas eliminar este producto?"
+        );
 
-                <td className="text-center">
-                  S/. {producto.precio}
-                </td>
+        if (!confirmar) return;
 
-                <td className="text-center">
-                  {producto.stock}
-                </td>
+        try {
 
-                <td className="text-center space-x-2">
+            await eliminarProducto(id);
 
-                  <button
-                    className="bg-blue-600 text-white px-4 py-2 rounded-lg"
-                  >
-                    Editar
-                  </button>
+            cargarProductos();
 
-                  <button
-                    className="bg-red-600 text-white px-4 py-2 rounded-lg"
-                  >
-                    Eliminar
-                  </button>
+        } catch (error) {
 
-                </td>
+            console.error(error);
 
-              </tr>
+        }
 
-            ))}
+    }
 
-          </tbody>
+    const productosFiltrados = useMemo(() => {
 
-        </table>
+        return productos.filter((producto) => {
 
-      </div>
+            if (!busqueda) return true;
 
-    </div>
+            return (
+                producto.nombre
+                    ?.toLowerCase()
+                    .includes(busqueda.toLowerCase()) ||
 
-  );
+                producto.marca
+                    ?.toLowerCase()
+                    .includes(busqueda.toLowerCase()) ||
+
+                producto.categoria
+                    ?.toLowerCase()
+                    .includes(busqueda.toLowerCase())
+            );
+
+        });
+
+    }, [productos, busqueda]);
+
+    if (cargando) {
+
+        return (
+
+            <div className="p-10 text-center">
+
+                Cargando productos...
+
+            </div>
+
+        );
+
+    }
+
+    return (
+
+        <div className="p-8 space-y-6">
+
+            <HeaderProductos />
+
+            <EstadisticasProductos
+                productos={productos}
+            />
+
+            <FiltrosProductos
+                busqueda={busqueda}
+                setBusqueda={setBusqueda}
+                vista={vista}
+                setVista={setVista}
+            />
+
+            {
+                vista === "lista"
+
+                    ? (
+
+                        <VistaListaProductos
+                            productos={productosFiltrados}
+                            eliminar={eliminar}
+                        />
+
+                    )
+
+                    : (
+
+                        <TablaProductos
+                            productos={productosFiltrados}
+                            eliminar={eliminar}
+                        />
+
+                    )
+            }
+
+        </div>
+
+    );
 
 }

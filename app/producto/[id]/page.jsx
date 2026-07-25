@@ -30,8 +30,18 @@ useEffect(() => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      setProducto(docSnap.data());
-    }
+
+    const datos = docSnap.data();
+
+    datos.imagenes = datos.imagenes?.length
+        ? datos.imagenes
+        : datos.imagen
+            ? [datos.imagen]
+            : ["/sin-imagen.png"];
+
+    setProducto(datos);
+
+}
 
     const querySnapshot = await getDocs(
       collection(db, "productos")
@@ -433,16 +443,16 @@ mb-6
             {/* BOTÓN CARRITO */}
 
             <button
-              onClick={() =>
+         onClick={() =>
   agregarProducto({
     id: params.id,
     nombre: producto.nombre,
     precio: producto.precio,
     oferta: producto.oferta,
-    imagen:
-      producto.imagenes?.[0] ||
-      producto.imagen ||
-      "/sin-imagen.png",
+
+    imagen: producto.imagen,
+    imagenes: producto.imagenes,
+
     cantidad,
   })
 }

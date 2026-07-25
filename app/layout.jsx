@@ -2,6 +2,7 @@ import "./globals.css";
 
 import { CatalogoProvider } from "../components/context/CatalogoContext";
 import { CarritoProvider } from "../components/context/CarritoContext";
+import { CheckoutProvider } from "../components/context/CheckoutContext";
 
 export const metadata = {
   title: "Brico Hogar Peru",
@@ -16,15 +17,19 @@ export default function RootLayout({ children }) {
 
    <body>
 
-  <CarritoProvider>
+  <CheckoutProvider>
 
-    <CatalogoProvider>
+    <CarritoProvider>
 
-      {children}
+      <CatalogoProvider>
 
-    </CatalogoProvider>
+        {children}
 
-  </CarritoProvider>
+      </CatalogoProvider>
+
+    </CarritoProvider>
+
+  </CheckoutProvider>
 
 </body>
 

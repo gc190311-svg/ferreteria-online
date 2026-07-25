@@ -11,78 +11,69 @@ const CarritoContext = createContext();
 
 export function CarritoProvider({ children }) {
 
-  const [carrito, setCarrito] = useState([]);
+  /* ===========================
+     CARGAR DESDE LOCAL STORAGE
+  =========================== */
 
-  /* ============================= */
+  const [carrito, setCarrito] = useState(() => {
+    if (typeof window === "undefined") return [];
 
-  /* CARGAR DEL LOCAL STORAGE */
-
-  /* ============================= */
-
-  useEffect(() => {
-
-    const datos = localStorage.getItem("carrito");
-
-    if (datos) {
-
-      setCarrito(JSON.parse(datos));
-
+    try {
+      const datos = localStorage.getItem("carrito");
+      return datos ? JSON.parse(datos) : [];
+    } catch (error) {
+      console.error("Error leyendo carrito:", error);
+      return [];
     }
+  });
 
-  }, []);
+  /* ===========================
+     DRAWER
+  =========================== */
 
-  /* ============================= */
+  const [carritoAbierto, setCarritoAbierto] = useState(false);
 
-  /* GUARDAR */
+  function abrirCarrito() {
+    setCarritoAbierto(true);
+  }
 
-  /* ============================= */
+  function cerrarCarrito() {
+    setCarritoAbierto(false);
+  }
+
+  /* ===========================
+     GUARDAR EN LOCAL STORAGE
+  =========================== */
 
   useEffect(() => {
-
     localStorage.setItem(
-
       "carrito",
-
       JSON.stringify(carrito)
-
     );
-
   }, [carrito]);
 
-  /* ============================= */
-
-  /* AGREGAR PRODUCTO */
-
-  /* ============================= */
+  /* ===========================
+     AGREGAR PRODUCTO
+  =========================== */
 
   function agregarProducto(producto) {
 
     setCarrito((actual) => {
 
       const existe = actual.find(
-
         (p) => p.id === producto.id
-
       );
 
       if (existe) {
 
         return actual.map((p) =>
-
           p.id === producto.id
-
             ? {
-
                 ...p,
-
                 cantidad:
-
                   p.cantidad + producto.cantidad,
-
               }
-
             : p
-
         );
 
       }
@@ -91,65 +82,44 @@ export function CarritoProvider({ children }) {
 
     });
 
+    abrirCarrito();
+
   }
 
-  /* ============================= */
-
-  /* ELIMINAR */
-
-  /* ============================= */
+  /* ===========================
+     ELIMINAR
+  =========================== */
 
   function eliminarProducto(id) {
 
-    setCarrito(
-
-      carrito.filter((p) => p.id !== id)
-
+    setCarrito((actual) =>
+      actual.filter((p) => p.id !== id)
     );
 
   }
 
-  /* ============================= */
+  /* ===========================
+     ACTUALIZAR CANTIDAD
+  =========================== */
 
-  /* CAMBIAR CANTIDAD */
+  function actualizarCantidad(id, cantidad) {
 
-  /* ============================= */
-
-  function actualizarCantidad(
-
-    id,
-
-    cantidad
-
-  ) {
-
-    setCarrito(
-
-      carrito.map((p) =>
-
+    setCarrito((actual) =>
+      actual.map((p) =>
         p.id === id
-
           ? {
-
               ...p,
-
               cantidad,
-
             }
-
           : p
-
       )
-
     );
 
   }
 
-  /* ============================= */
-
-  /* LIMPIAR */
-
-  /* ============================= */
+  /* ===========================
+     LIMPIAR
+  =========================== */
 
   function limpiarCarrito() {
 
@@ -157,59 +127,50 @@ export function CarritoProvider({ children }) {
 
   }
 
-  /* ============================= */
-
-  /* TOTAL DE PRODUCTOS */
-
-  /* ============================= */
+  /* ===========================
+     TOTAL ITEMS
+  =========================== */
 
   const totalItems = carrito.reduce(
-
     (acc, item) => acc + item.cantidad,
-
     0
-
   );
 
-  /* ============================= */
-
-  /* TOTAL MONTO */
-
-  /* ============================= */
+  /* ===========================
+     TOTAL
+  =========================== */
 
   const total = carrito.reduce((acc, item) => {
 
-  const precio =
-    Number(item.oferta) > 0
-      ? Number(item.oferta)
-      : Number(item.precio);
+    const precio =
+      Number(item.oferta) > 0
+        ? Number(item.oferta)
+        : Number(item.precio);
 
-  return acc + precio * Number(item.cantidad);
+    return acc + precio * Number(item.cantidad);
 
-}, 0);
+  }, 0);
 
   return (
 
     <CarritoContext.Provider
-
       value={{
 
         carrito,
 
         agregarProducto,
-
         eliminarProducto,
-
         actualizarCantidad,
-
         limpiarCarrito,
 
         total,
-
         totalItems,
 
-      }}
+        carritoAbierto,
+        abrirCarrito,
+        cerrarCarrito,
 
+      }}
     >
 
       {children}
@@ -221,7 +182,5 @@ export function CarritoProvider({ children }) {
 }
 
 export function useCarrito() {
-
   return useContext(CarritoContext);
-
 }

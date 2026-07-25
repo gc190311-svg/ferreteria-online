@@ -52,11 +52,11 @@ export default function Home() {
 
   return (
 
-    <CatalogoProvider>
+    
 
       <HomeContenido />
 
-    </CatalogoProvider>
+    
 
   );
 
