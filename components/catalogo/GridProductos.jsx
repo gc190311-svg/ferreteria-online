@@ -6,43 +6,10 @@ import { useCatalogo } from "../context/CatalogoContext";
 export default function GridProductos() {
 
   const {
-    productos,
-    categoriaSeleccionada,
-    marcaSeleccionada,
-    textoBusqueda,
-  } = useCatalogo();
+  productosFiltrados,
+} = useCatalogo();
 
-  const termino = textoBusqueda.trim().toLowerCase();
-
-  const productosFiltrados = productos.filter((producto) => {
-
-    const nombre = String(producto.nombre || "").toLowerCase();
-    const descripcion = String(producto.descripcion || "").toLowerCase();
-    const marca = String(producto.marca || "").toLowerCase();
-    const categoria = String(producto.categoria || "").toLowerCase();
-
-    const coincideCategoria =
-      categoriaSeleccionada === "todos" ||
-      categoria === categoriaSeleccionada.toLowerCase();
-
-    const coincideMarca =
-      marcaSeleccionada === "" ||
-      marca === marcaSeleccionada.toLowerCase();
-
-    const coincideBusqueda =
-      termino === "" ||
-      nombre.includes(termino) ||
-      descripcion.includes(termino) ||
-      marca.includes(termino) ||
-      categoria.includes(termino);
-
-    return (
-      coincideCategoria &&
-      coincideMarca &&
-      coincideBusqueda
-    );
-
-  });
+  
 
   if (productosFiltrados.length === 0) {
 

@@ -15,6 +15,14 @@ import {
 
 import { db } from "../../app/firebase";
 
+function normalizar(texto = "") {
+  return String(texto)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase();
+}
+
 const CatalogoContext = createContext();
 
 export function CatalogoProvider({ children }) {
@@ -74,6 +82,40 @@ export function CatalogoProvider({ children }) {
 
   }
 
+  const productosFiltrados = useMemo(() => {
+  const termino = normalizar(textoBusqueda);
+
+  return productos.filter((producto) => {
+    const coincideCategoria =
+      categoriaSeleccionada === "todos" ||
+      normalizar(producto.categoria) ===
+        normalizar(categoriaSeleccionada);
+
+    const coincideMarca =
+      marcaSeleccionada === "" ||
+      normalizar(producto.marca) ===
+        normalizar(marcaSeleccionada);
+
+    const coincideBusqueda =
+      termino === "" ||
+      normalizar(producto.nombre).includes(termino) ||
+      normalizar(producto.descripcion).includes(termino) ||
+      normalizar(producto.marca).includes(termino) ||
+      normalizar(producto.categoria).includes(termino);
+
+    return (
+      coincideCategoria &&
+      coincideMarca &&
+      coincideBusqueda
+    );
+  });
+}, [
+  productos,
+  categoriaSeleccionada,
+  marcaSeleccionada,
+  textoBusqueda,
+]);
+
   function limpiarFiltros() {
 
     setCategoriaSeleccionada("todos");
@@ -88,9 +130,10 @@ export function CatalogoProvider({ children }) {
 
     <CatalogoContext.Provider
       value={{
-
-        productos,
-        categorias,
+        
+    productos,
+    productosFiltrados,
+    categorias,
 
         categoriaSeleccionada,
         setCategoriaSeleccionada,

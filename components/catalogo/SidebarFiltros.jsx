@@ -5,34 +5,21 @@ import { useCatalogo } from "../context/CatalogoContext";
 export default function SidebarFiltros() {
 
   const {
-    productos,
-    categoriaSeleccionada,
-    marcaSeleccionada,
-    setMarcaSeleccionada,
-  } = useCatalogo();
+  productosFiltrados,
+  marcaSeleccionada,
+  setMarcaSeleccionada,
+} = useCatalogo();
 
   // Productos según categoría
 
-  const productosCategoria =
-    categoriaSeleccionada === "todos"
-      ? productos
-      : productos.filter(
-          (producto) =>
-            producto.categoria === categoriaSeleccionada
-        );
+const marcas = {};
 
-  // Contador de marcas
+productosFiltrados.forEach((producto) => {
+  if (!producto.marca) return;
 
-  const marcas = {};
-
-  productosCategoria.forEach((producto) => {
-
-    if (!producto.marca) return;
-
-    marcas[producto.marca] =
-      (marcas[producto.marca] || 0) + 1;
-
-  });
+  marcas[producto.marca] =
+    (marcas[producto.marca] || 0) + 1;
+});
 
   const listaMarcas = Object.entries(marcas).sort();
 
@@ -104,7 +91,7 @@ export default function SidebarFiltros() {
           "
         >
 
-          {productosCategoria.length}
+          {productosFiltrados.length}
 
         </span>
 
