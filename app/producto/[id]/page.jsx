@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { doc,  getDoc,  collection, getDocs,} from "firebase/firestore";
 import { useCarrito } from "../../../components/context/CarritoContext";
+import ImageViewer from "../../../components/producto/ImageViewer";
 
 export default function ProductoDetalle({ params }) {
 
@@ -212,78 +213,23 @@ object-contain
 
           </div>
 
-          {/* IMAGEN PRINCIPAL */}
-
-          <div
-  className="
-    order-1
-    lg:order-2
-    flex
-    items-center
-    justify-center
-    self-start
-  "
+        <div
+    className="
+        order-1
+        lg:order-2
+        flex
+        items-center
+        justify-center
+        self-start
+    "
 >
-
-          <div
-  className="
-w-full
-h-full
-object-contain
-p-4
-sm:p-6
-lg:p-10
-"
->
-            
-<img
-  src={
-    producto.imagenes?.[imagenActiva] ||
-    producto.imagen ||
-    "/sin-imagen.png"
-  }
-  alt={producto.nombre}
-  className="
-    object-contain
-    w-full
-    h-full
-    p-10
-  "
-/>
-
-              {/* FLECHA IZQUIERDA */}
-
-              <button
-                onClick={() =>
-                  setImagenActiva(
-                    imagenActiva === 0
-                      ? producto.imagenes.length - 1
-                      : imagenActiva - 1
-                  )
-                }
-                className="absolute left-0 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full w-10 h-10"
-              >
-                ◀
-              </button>
-
-              {/* FLECHA DERECHA */}
-
-              <button
-                onClick={() =>
-                  setImagenActiva(
-                    imagenActiva === producto.imagenes.length - 1
-                      ? 0
-                      : imagenActiva + 1
-                  )
-                }
-                className="absolute right-0 top-1/2 -translate-y-1/2 bg-white shadow-lg rounded-full w-10 h-10"
-              >
-                ▶
-              </button>
-
-            </div>
-
-          </div>
+    <ImageViewer
+        imagenes={producto.imagenes}
+        nombre={producto.nombre}
+        imagenActiva={imagenActiva}
+        setImagenActiva={setImagenActiva}
+    />
+</div>
 
           {/* INFORMACIÓN */}
 

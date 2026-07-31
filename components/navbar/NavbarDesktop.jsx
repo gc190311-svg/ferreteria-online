@@ -2,46 +2,41 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+
 import MenuCategorias from "./MenuCategorias";
+import CategoryMenu from "../catalogo/CategoryMenu";
 import { useCatalogo } from "../context/CatalogoContext";
 
 export default function NavbarDesktop({
   setCategoriaSeleccionada,
 }) {
-
   const pathname = usePathname();
   const router = useRouter();
 
   const { setTextoBusqueda } = useCatalogo();
 
-  // Detecta si estamos en catálogo o página de producto
-const esCatalogo =
-  pathname === "/productos" ||
-  pathname.startsWith("/categorias") ||
-  pathname.startsWith("/producto");
+  // Detecta si estamos en el catálogo
+  const esCatalogo =
+    pathname === "/productos" ||
+    pathname.startsWith("/categorias") ||
+    pathname.startsWith("/producto");
 
   function cambiarCategoria(categoria) {
 
-    // Limpiar buscador
+    // Limpia el buscador
     setTextoBusqueda("");
 
-    // Cambiar categoría en el contexto
+    // Mantiene compatibilidad con el resto del proyecto
     setCategoriaSeleccionada?.(categoria);
 
-    // Navegar desde cualquier página
-if (
-  pathname.startsWith("/categorias") ||
-  pathname.startsWith("/producto") ||
-  pathname === "/productos"
-) {
+    // Navegación
+    if (categoria === "todos") {
+      router.push("/productos");
+      return;
+    }
 
-  if (categoria === "todos") {
-    router.push("/productos");
-  } else {
     router.push(`/categorias/${categoria}`);
   }
-}
-}
 
   return (
 
@@ -55,49 +50,11 @@ if (
 
           {esCatalogo ? (
 
-            <div className="flex justify-center gap-10">
+            <div className="flex justify-center items-center gap-6">
 
-              <button
-                onClick={() => cambiarCategoria("todos")}
-                className="text-yellow-500 font-bold py-5"
-              >
-                TODOS
-              </button>
-
-              <button
-                onClick={() => cambiarCategoria("herramientas")}
-                className="text-white hover:text-yellow-500 py-5"
-              >
-                HERRAMIENTAS
-              </button>
-
-              <button
-                onClick={() => cambiarCategoria("construccion")}
-                className="text-white hover:text-yellow-500 py-5"
-              >
-                CONSTRUCCIÓN
-              </button>
-
-              <button
-                onClick={() => cambiarCategoria("electricidad")}
-                className="text-white hover:text-yellow-500 py-5"
-              >
-                ELECTRICIDAD
-              </button>
-
-              <button
-                onClick={() => cambiarCategoria("pintura")}
-                className="text-white hover:text-yellow-500 py-5"
-              >
-                PINTURA
-              </button>
-
-              <button
-                onClick={() => cambiarCategoria("gasfiteria")}
-                className="text-white hover:text-yellow-500 py-5"
-              >
-                GASFITERÍA
-              </button>
+              <CategoryMenu
+                onCategoria={cambiarCategoria}
+              />
 
             </div>
 

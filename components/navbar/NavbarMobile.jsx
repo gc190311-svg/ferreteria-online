@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+
 import { useCatalogo } from "../context/CatalogoContext";
 import { useCarrito } from "../context/CarritoContext";
-
+import CategoryMenu from "../catalogo/CategoryMenu";
 
 export default function NavbarMobile({
   setCategoriaSeleccionada,
@@ -16,10 +17,14 @@ export default function NavbarMobile({
   const router = useRouter();
 
   const { setTextoBusqueda } = useCatalogo();
-
   const { carritoAbierto } = useCarrito();
 
- function cambiarCategoria(categoria){
+  const esCatalogo =
+    pathname === "/productos" ||
+    pathname.startsWith("/categorias") ||
+    pathname.startsWith("/producto");
+
+  function cambiarCategoria(categoria) {
 
     setTextoBusqueda("");
 
@@ -27,22 +32,19 @@ export default function NavbarMobile({
 
     setAbierto(false);
 
-    if(categoria==="todos"){
-
-        router.push("/productos");
-
-    }else{
-
-        router.push(`/categorias/${categoria}`);
-
+    if (categoria === "todos") {
+      router.push("/productos");
+      return;
     }
 
-}
+    router.push(`/categorias/${categoria}`);
+  }
 
-if (carritoAbierto) return null;
+  if (carritoAbierto) return null;
+
+  if (!esCatalogo) return null;
 
   return (
-
     <nav className="bg-black border-y border-gray-800 relative">
 
       <div className="h-16 flex items-center px-5">
@@ -58,56 +60,20 @@ if (carritoAbierto) return null;
 
       {abierto && (
 
-        <div className="absolute left-0 right-0 top-full bg-white shadow-xl">
+        <div className="absolute left-0 right-0 top-full bg-black shadow-xl z-50">
 
-          <button
-            onClick={() => cambiarCategoria("todos")}
-            className="block w-full text-left px-6 py-4 border-b hover:bg-yellow-100"
-          >
-            Todos
-          </button>
+          <div className="flex flex-col">
 
-          <button
-            onClick={() => cambiarCategoria("herramientas")}
-            className="block w-full text-left px-6 py-4 border-b hover:bg-yellow-100"
-          >
-            Herramientas
-          </button>
+            <CategoryMenu
+              onCategoria={cambiarCategoria}
+            />
 
-          <button
-            onClick={() => cambiarCategoria("construccion")}
-            className="block w-full text-left px-6 py-4 border-b hover:bg-yellow-100"
-          >
-            Construcción
-          </button>
-
-          <button
-            onClick={() => cambiarCategoria("electricidad")}
-            className="block w-full text-left px-6 py-4 border-b hover:bg-yellow-100"
-          >
-            Electricidad
-          </button>
-
-          <button
-            onClick={() => cambiarCategoria("pintura")}
-            className="block w-full text-left px-6 py-4 border-b hover:bg-yellow-100"
-          >
-            Pintura
-          </button>
-
-          <button
-            onClick={() => cambiarCategoria("gasfiteria")}
-            className="block w-full text-left px-6 py-4 hover:bg-yellow-100"
-          >
-            Gasfitería
-          </button>
+          </div>
 
         </div>
 
       )}
 
     </nav>
-
   );
-
 }

@@ -16,6 +16,14 @@ export default function NuevoProductoPage() {
 
 const [guardando, setGuardando] = useState(false);
 
+function normalizarCategoria(categoria) {
+    return categoria
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .toUpperCase();
+}
+
     function cambiar(e) {
 
         const { name, value, type, checked } = e.target;

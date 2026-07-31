@@ -5,6 +5,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useMemo,
 } from "react";
 
 import {
@@ -33,6 +34,18 @@ export function CatalogoProvider({ children }) {
   // Lo que usa el catálogo para filtrar
   const [textoBusqueda, setTextoBusqueda] =
     useState("");
+
+    const categorias = useMemo(() => {
+
+  return [
+    ...new Set(
+      productos
+        .map((p) => (p.categoria || "").trim())
+        .filter((c) => c !== "")
+    ),
+  ].sort((a, b) => a.localeCompare(b, "es"));
+
+}, [productos]);
 
   useEffect(() => {
 
@@ -77,6 +90,7 @@ export function CatalogoProvider({ children }) {
       value={{
 
         productos,
+        categorias,
 
         categoriaSeleccionada,
         setCategoriaSeleccionada,

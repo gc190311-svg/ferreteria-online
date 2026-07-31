@@ -19,6 +19,14 @@ export default function EditarProductoPage({ params }) {
 
     const router = useRouter();
 
+    function normalizarCategoria(categoria) {
+    return categoria
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .trim()
+        .toUpperCase();
+}
+
     useEffect(() => {
 
     cargarProducto();
@@ -93,6 +101,9 @@ const [guardando, setGuardando] = useState(false);
 
 const productoActualizado = {
     ...producto,
+
+     // Guardar siempre la categoría en MAYÚSCULAS
+    categoria: normalizarCategoria(producto.categoria),
 
     precio: Number(producto.precio),
     costo: Number(producto.costo),
@@ -270,18 +281,18 @@ const productoActualizado = {
     required
 >
     <option value="">Seleccione</option>
-<option value="Herramientas">Herramientas</option>
-<option value="Construcción">Construcción</option>
-<option value="Electricidad">Electricidad</option>
-<option value="Pintura">Pintura</option>
-<option value="Gasfitería">Gasfitería</option>
-<option value="Seguridad">Seguridad</option>
-<option value="Jardinería">Jardinería</option>
-<option value="Plomería">Plomería</option>
-<option value="Adhesivos">Adhesivos</option>
-<option value="Tornillería">Tornillería</option>
-<option value="Iluminación">Iluminación</option>
-<option value="Maquinaria">Maquinaria</option>
+<option value="HERRAMIENTAS">Herramientas</option>
+<option value="CONSTRUCCIÓN">Construcción</option>
+<option value="ELECTRICIDAD">Electricidad</option>
+<option value="PINTURA">Pintura</option>
+<option value="GASFITERÍA">Gasfitería</option>
+<option value="SEGURIDAD">Seguridad</option>
+<option value="JARDINERÍA">Jardinería</option>
+<option value="PLOMERÍA">Plomería</option>
+<option value="ADHESIVOS">Adhesivos</option>
+<option value="TORNERÍA">Tornillería</option>
+<option value="ILUMINACIÓN">Iluminación</option>
+<option value="MAQUINARIA">Maquinaria</option>
 
 </select>
 
