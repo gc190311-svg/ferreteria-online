@@ -47,17 +47,10 @@ export default function HeaderSticky({
         <>
 
             <div
-                className={`
-                    overflow-hidden
-                    transition-all
-                    duration-300
-                    ${
-                        sticky
-                            ? "max-h-0 opacity-0"
-                            : "max-h-[300px] opacity-100"
-                    }
-                `}
-            >
+    className={`
+        overflow-hidden
+    `}
+>
 
                 {top}
 
