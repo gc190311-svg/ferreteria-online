@@ -1,10 +1,6 @@
 "use client";
 
 import { useState } from "react";
-
-import TopBar from "../components/TopBar";
-import HeaderHome from "../components/HeaderHome";
-import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Servicios from "../components/Servicios";
 import Marcas from "../components/Marcas";
@@ -13,6 +9,7 @@ import Footer from "../components/Footer";
 import WhatsAppButton from "../components/WhatsAppButton";
 
 import { CatalogoProvider } from "../components/context/CatalogoContext";
+import HeaderCompleto from "../components/HeaderCompleto";
 
 function HomeContenido() {
 
@@ -20,17 +17,14 @@ function HomeContenido() {
     useState("todos");
 
   return (
+    
     <>
-      <TopBar />
+  <HeaderCompleto
+    categoriaSeleccionada={categoriaSeleccionada}
+    setCategoriaSeleccionada={setCategoriaSeleccionada}
+  />
 
-    <HeaderHome />
-
-      <Navbar
-        categoriaSeleccionada={categoriaSeleccionada}
-        setCategoriaSeleccionada={setCategoriaSeleccionada}
-      />
-
-      <Hero />
+  <Hero />
 
       <Servicios />
 
@@ -54,7 +48,8 @@ export default function Home() {
 
     
 
-      <HomeContenido />
+      <HomeContenido
+       />
 
     
 

@@ -8,13 +8,13 @@ import {
   usePathname,
 } from "next/navigation";
 
-import HeaderCatalogo from "../../components/HeaderCatalogo";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 import SidebarFiltros from "../../components/catalogo/SidebarFiltros";
 import GridProductos from "../../components/catalogo/GridProductos";
 import CabeceraCatalogo from "../../components/catalogo/CabeceraCatalogo";
+import HeaderCatalogoCompleto from "../../components/HeaderCatalogoCompleto";
 
 import {
   CatalogoProvider,
@@ -62,12 +62,10 @@ function CatalogoContenido() {
 
     <>
 
-      <HeaderCatalogo />
-
-      <Navbar
-        categoriaSeleccionada={categoriaSeleccionada}
-        setCategoriaSeleccionada={setCategoriaSeleccionada}
-      />
+      <HeaderCatalogoCompleto
+    categoriaSeleccionada={categoriaSeleccionada}
+    setCategoriaSeleccionada={setCategoriaSeleccionada}
+/>
 
       <div
   className="

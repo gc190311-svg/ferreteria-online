@@ -5,6 +5,7 @@ import { CarritoProvider } from "../components/context/CarritoContext";
 import { CheckoutProvider } from "../components/context/CheckoutContext";
 import CarritoGlobal from "../components/CarritoGlobal";
 
+
 export const metadata = {
   title: "Brico Hogar Peru",
   description: "Tienda online de ferretería",

@@ -4,6 +4,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import ProductoModel from "../../models/ProductoModel";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "../../../../firebase";
+
 
 import {
     obtenerProducto,
@@ -16,6 +19,8 @@ export default function EditarProductoPage({ params }) {
     const [producto, setProducto] = useState({
     ...ProductoModel
 });
+
+const [categorias, setCategorias] = useState([]);
 
     const router = useRouter();
 
@@ -62,6 +67,8 @@ export default function EditarProductoPage({ params }) {
     ]
 });
 
+
+
     } catch (error) {
 
         console.error(error);
@@ -69,6 +76,40 @@ export default function EditarProductoPage({ params }) {
         alert("Error al cargar el producto.");
 
     }
+
+}
+
+useEffect(() => {
+    cargarCategorias();
+}, []);
+
+async function cargarCategorias() {
+
+    const q = query(
+        collection(db, "categorias"),
+        orderBy("orden")
+    );
+
+    const snapshot = await getDocs(q);
+
+    const lista = [];
+
+    snapshot.forEach((doc) => {
+
+        const data = doc.data();
+
+        if (data.activo) {
+
+            lista.push({
+                id: doc.id,
+                ...data
+            });
+
+        }
+
+    });
+
+    setCategorias(lista);
 
 }
 
@@ -273,26 +314,22 @@ const productoActualizado = {
 
                             </label>
 
-                           <select
+                          <select
     name="categoria"
-    value={producto.categoria || ""}
+    value={producto.categoria}
     onChange={cambiar}
-    className="w-full border rounded-xl p-3"
-    required
+    className="w-full border rounded-lg p-3"
 >
     <option value="">Seleccione</option>
-<option value="HERRAMIENTAS">Herramientas</option>
-<option value="CONSTRUCCIÓN">Construcción</option>
-<option value="ELECTRICIDAD">Electricidad</option>
-<option value="PINTURA">Pintura</option>
-<option value="GASFITERÍA">Gasfitería</option>
-<option value="SEGURIDAD">Seguridad</option>
-<option value="JARDINERÍA">Jardinería</option>
-<option value="PLOMERÍA">Plomería</option>
-<option value="ADHESIVOS">Adhesivos</option>
-<option value="TORNERÍA">Tornillería</option>
-<option value="ILUMINACIÓN">Iluminación</option>
-<option value="MAQUINARIA">Maquinaria</option>
+
+    {categorias.map((categoria) => (
+        <option
+            key={categoria.id}
+            value={categoria.nombre}
+        >
+            {categoria.nombre}
+        </option>
+    ))}
 
 </select>
 

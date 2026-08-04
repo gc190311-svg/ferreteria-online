@@ -1,13 +1,13 @@
 "use client";
 
-import HeaderCatalogo from "../../../components/HeaderCatalogo";
-import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 import { useEffect, useState } from "react";
 import { db } from "../../firebase";
 import { doc,  getDoc,  collection, getDocs,} from "firebase/firestore";
 import { useCarrito } from "../../../components/context/CarritoContext";
 import ImageViewer from "../../../components/producto/ImageViewer";
+
+import HeaderCatalogoCompleto from "../../../components/HeaderCatalogoCompleto";
 
 export default function ProductoDetalle({ params }) {
 
@@ -83,12 +83,10 @@ useEffect(() => {
 
   <>
 
-    <HeaderCatalogo />
-
-    <Navbar
-      categoriaSeleccionada={categoriaSeleccionada}
-      setCategoriaSeleccionada={setCategoriaSeleccionada}
-    />
+    <HeaderCatalogoCompleto
+  categoriaSeleccionada={categoriaSeleccionada}
+  setCategoriaSeleccionada={setCategoriaSeleccionada}
+/>
 
     <div className="min-h-screen bg-gray-100 pb-10 px-4">
 

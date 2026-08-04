@@ -40,10 +40,19 @@ export default function NavbarDesktop({
 
   return (
 
-    <nav className="bg-black border-y border-gray-800">
+    <nav
+  className="
+    bg-black/95
+    backdrop-blur-md
+    border-y
+    border-gray-800
+    shadow-xl
+    transition-all
+    duration-300
+  "
+>
 
-      <div className="max-w-7xl mx-auto flex items-center">
-
+<div className="max-w-7xl mx-auto h-[72px] flex items-center">
         <MenuCategorias />
 
         <div className="flex-1">
@@ -62,16 +71,16 @@ export default function NavbarDesktop({
 
             <div className="flex justify-center gap-20">
 
-              <Link
-                href="/"
-                className={`font-bold py-5 transition ${
-                  pathname === "/"
-                    ? "text-yellow-500"
-                    : "text-white hover:text-yellow-500"
-                }`}
-              >
-                INICIO
-              </Link>
+             <Link
+  href="/nosotros"
+  className={`font-bold py-5 transition ${
+    pathname === "/nosotros"
+      ? "text-yellow-500"
+      : "text-white hover:text-yellow-500"
+  }`}
+>
+  NOSOTROS
+</Link>
 
               <Link
                 href="/productos"

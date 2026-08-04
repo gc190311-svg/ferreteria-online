@@ -4,8 +4,6 @@ import { Suspense, useEffect } from "react";
 
 import { useParams } from "next/navigation";
 
-import HeaderCatalogo from "../../../components/HeaderCatalogo";
-import Navbar from "../../../components/Navbar";
 import Footer from "../../../components/Footer";
 
 import SidebarFiltros from "../../../components/catalogo/SidebarFiltros";
@@ -16,6 +14,8 @@ import {
   CatalogoProvider,
   useCatalogo,
 } from "../../../components/context/CatalogoContext";
+
+import HeaderCatalogoCompleto from "../../../components/HeaderCatalogoCompleto";
 
 function CategoriaContenido() {
 
@@ -48,12 +48,10 @@ function CategoriaContenido() {
 
     <>
 
-      <HeaderCatalogo />
-
-      <Navbar
-        categoriaSeleccionada={categoriaSeleccionada}
-        setCategoriaSeleccionada={setCategoriaSeleccionada}
-      />
+      <HeaderCatalogoCompleto
+    categoriaSeleccionada={categoriaSeleccionada}
+    setCategoriaSeleccionada={setCategoriaSeleccionada}
+/>
 
       <div
   className="

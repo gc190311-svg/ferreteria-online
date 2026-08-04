@@ -26,3 +26,31 @@ body {
   animation: marcas 25s linear infinite;
 
 }
+
+/* =======================================
+   Header Sticky Animation
+======================================= */
+
+@keyframes slideDown {
+
+    from {
+
+        transform: translateY(-100%);
+        opacity: 0;
+
+    }
+
+    to {
+
+        transform: translateY(0);
+        opacity: 1;
+
+    }
+
+}
+
+.animate-slideDown{
+
+    animation: slideDown .35s ease forwards;
+
+}

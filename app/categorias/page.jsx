@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 
-import HeaderHome from "../../components/HeaderHome";
-import Navbar from "../../components/Navbar";
+
 import Footer from "../../components/Footer";
+import HeaderCompleto from "../../components/HeaderCompleto";
 
 const categorias = [
 
@@ -52,9 +52,7 @@ export default function CategoriasPage() {
 
     <>
 
-      <HeaderHome />
-
-      <Navbar />
+    <HeaderCompleto />
 
       {/* Banner */}
 

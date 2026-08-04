@@ -6,13 +6,13 @@ import { usePathname } from "next/navigation";
 import {
   FaHome,
   FaBoxOpen,
+  FaFolderOpen,
   FaClipboardList,
   FaUsers,
   FaChartBar,
   FaCog,
   FaSignOutAlt,
   FaBell,
-  FaPlus
 } from "react-icons/fa";
 
 const menu = [
@@ -27,6 +27,11 @@ const menu = [
     icono: FaBoxOpen,
   },
   {
+    nombre: "Categorías",
+    ruta: "/admin/categorias",
+    icono: FaFolderOpen,
+  },
+  {
     nombre: "Pedidos",
     ruta: "/admin/pedidos",
     icono: FaClipboardList,
@@ -35,6 +40,11 @@ const menu = [
     nombre: "Clientes",
     ruta: "/admin/clientes",
     icono: FaUsers,
+  },
+  {
+    nombre: "Libro de Reclamaciones",
+    ruta: "/admin/reclamos",
+    icono: FaClipboardList,
   },
   {
     nombre: "Reportes",
@@ -49,17 +59,13 @@ const menu = [
 ];
 
 export default function Sidebar() {
-
   const pathname = usePathname();
 
   return (
-
     <aside className="w-72 bg-zinc-900 text-white min-h-screen flex flex-col">
 
       {/* LOGO */}
-
       <div className="text-center py-8 border-b border-zinc-700">
-
         <img
           src="/logo.png"
           alt="Brico Hogar"
@@ -73,83 +79,52 @@ export default function Sidebar() {
         <p className="text-zinc-400 text-sm">
           Panel Administrativo
         </p>
-
       </div>
 
-      
       {/* MENÚ */}
-
       <nav className="flex-1">
-
         {menu.map((item) => {
-
           const Icono = item.icono;
 
           return (
-
             <Link
               key={item.ruta}
               href={item.ruta}
             >
-
               <div
-                className={`flex items-center gap-4 px-8 py-4 transition
-
-                ${
+                className={`flex items-center gap-4 px-8 py-4 transition-all duration-200 cursor-pointer ${
                   pathname === item.ruta
                     ? "bg-yellow-500 text-black font-bold"
                     : "hover:bg-zinc-800"
-                }
-
-                `}
+                }`}
               >
-
                 <Icono className="text-lg" />
-
-                {item.nombre}
-
+                <span>{item.nombre}</span>
               </div>
-
             </Link>
-
           );
-
         })}
-
       </nav>
 
       {/* PIE */}
-
       <div className="border-t border-zinc-700">
 
         <Link href="/">
-
-          <div className="flex items-center gap-4 px-8 py-4 hover:bg-zinc-800">
-
+          <div className="flex items-center gap-4 px-8 py-4 hover:bg-zinc-800 transition-all">
             <FaBell />
-
-            Ir a la tienda
-
+            <span>Ir a la tienda</span>
           </div>
-
         </Link>
 
         <Link href="/login">
-
-          <div className="flex items-center gap-4 px-8 py-4 hover:bg-red-600">
-
+          <div className="flex items-center gap-4 px-8 py-4 hover:bg-red-600 transition-all">
             <FaSignOutAlt />
-
-            Cerrar sesión
-
+            <span>Cerrar sesión</span>
           </div>
-
         </Link>
 
       </div>
 
     </aside>
-
   );
-
 }

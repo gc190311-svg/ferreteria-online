@@ -100,26 +100,7 @@ export default function ImageViewer({
                     )}
                 </div>
 
-                {/* Miniaturas */}
-                <div className="flex justify-center gap-3 mt-5 flex-wrap">
-                    {imagenes.map((img, index) => (
-                        <button
-                            key={index}
-                            onClick={() => setImagenActiva(index)}
-                            className={`border-2 rounded-lg overflow-hidden transition ${
-                                imagenActiva === index
-                                    ? "border-yellow-500"
-                                    : "border-gray-300"
-                            }`}
-                        >
-                            <img
-                                src={img}
-                                alt={`Miniatura ${index + 1}`}
-                                className="w-16 h-16 object-contain bg-white"
-                            />
-                        </button>
-                    ))}
-                </div>
+              
 
                 {/* Modal */}
                 {modalAbierto && (

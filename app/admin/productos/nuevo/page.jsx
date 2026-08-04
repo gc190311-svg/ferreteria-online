@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { crearProducto } from "../services/ProductosAdminService";
 import ProductoModel from "../models/ProductoModel";
+import { collection, getDocs, query, orderBy } from "firebase/firestore";
+import { db } from "../../../firebase";
 
 export default function NuevoProductoPage() {
 
@@ -15,6 +17,42 @@ export default function NuevoProductoPage() {
     const router = useRouter();
 
 const [guardando, setGuardando] = useState(false);
+
+const [categorias, setCategorias] = useState([]);
+
+useEffect(() => {
+    cargarCategorias();
+}, []);
+
+async function cargarCategorias() {
+
+    const q = query(
+        collection(db, "categorias"),
+        orderBy("orden")
+    );
+
+    const snapshot = await getDocs(q);
+
+    const lista = [];
+
+    snapshot.forEach((doc) => {
+
+        const data = doc.data();
+
+        if (data.activo) {
+
+            lista.push({
+                id: doc.id,
+                ...data
+            });
+
+        }
+
+    });
+
+    setCategorias(lista);
+
+}
 
 function normalizarCategoria(categoria) {
     return categoria
@@ -230,20 +268,20 @@ function normalizarCategoria(categoria) {
                                 className="w-full border rounded-xl p-3"
                                 required
                             >
-
                                 <option value="">Seleccione</option>
-<option value="Herramientas">Herramientas</option>
-<option value="Construcción">Construcción</option>
-<option value="Electricidad">Electricidad</option>
-<option value="Pintura">Pintura</option>
-<option value="Gasfitería">Gasfitería</option>
-<option value="Seguridad">Seguridad</option>
-<option value="Jardinería">Jardinería</option>
-<option value="Plomería">Plomería</option>
-<option value="Adhesivos">Adhesivos</option>
-<option value="Tornillería">Tornillería</option>
-<option value="Iluminación">Iluminación</option>
-<option value="Maquinaria">Maquinaria</option>
+
+{categorias.map((categoria) => (
+
+    <option
+        key={categoria.id}
+        value={categoria.nombre}
+    >
+
+        {categoria.nombre}
+
+    </option>
+
+))}
 
                             </select>
 
