@@ -144,13 +144,23 @@ export default function Hero() {
 
           <div className="relative overflow-hidden rounded-3xl group shadow-2xl">
 
-            <Image
-              src="/hero/hero-herramientas.jpg"
-              alt="Herramientas"
-              fill
-              priority
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
+           <Image
+    src="/hero/hero-herramientas.jpg"
+    alt="Herramientas"
+    fill
+    priority
+    className="
+        object-contain
+        object-top
+        md:object-cover
+        md:object-center
+        p-6
+        md:p-0
+        transition-transform
+        duration-700
+        group-hover:scale-105
+    "
+/>
 
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent">
             
@@ -214,15 +224,33 @@ export default function Hero() {
 </div>
           {/* TARJETA PINTURAS */}
 
-          <div className="relative overflow-hidden rounded-3xl group shadow-2xl">
+          <div className="
+relative
+overflow-hidden
+rounded-3xl
+h-[520px]
+md:h-[620px]
+group
+shadow-2xl
+">
 
             <Image
-              src="/hero/hero-pinturas.jpg"
-              alt="Pinturas"
-              fill
-              priority
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
-            />
+    src="/hero/hero-pinturas.jpg"
+    alt="Pinturas"
+    fill
+    priority
+    className="
+        object-contain
+        object-top
+        md:object-cover
+        md:object-center
+        p-6
+        md:p-0
+        transition-transform
+        duration-700
+        group-hover:scale-105
+    "
+/>
 
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent">
             
