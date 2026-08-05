@@ -145,7 +145,7 @@ export default function Hero() {
           <div className="relative overflow-hidden rounded-3xl group shadow-2xl">
 
             <Image
-              src="/hero/hero-herramientas.png"
+              src="/hero/hero-herramientas.jpg"
               alt="Herramientas"
               fill
               priority
@@ -217,7 +217,7 @@ export default function Hero() {
           <div className="relative overflow-hidden rounded-3xl group shadow-2xl">
 
             <Image
-              src="/hero/hero-pinturas.png"
+              src="/hero/hero-pinturas.jpg"
               alt="Pinturas"
               fill
               priority
