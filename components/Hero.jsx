@@ -138,28 +138,48 @@ export default function Hero() {
 
           {/* PANEL DERECHO */}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 h-[620px]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                       {/* TARJETA HERRAMIENTAS */}
 
-          <div className="relative overflow-hidden rounded-3xl group shadow-2xl">
+          <div className="
+relative
+overflow-hidden
+rounded-3xl
+h-[430px]
+sm:h-[480px]
+lg:h-[620px]
+group
+shadow-2xl
+">
 
-           <Image
-    src="/hero/hero-herramientas.jpg"
-    alt="Herramientas"
-    fill
-    priority
-    className="
-        object-contain
-        object-top
-        md:object-cover
-        md:object-center
-        p-6
-        md:p-0
-        transition-transform
-        duration-700
-        group-hover:scale-105
-    "
+           {/* Imagen PC */}
+<Image
+  src="/hero/hero-herramientas.jpg"
+  alt="Herramientas"
+  fill
+  priority
+  className="
+    hidden
+    lg:block
+    object-cover
+    transition-transform
+    duration-700
+    group-hover:scale-105
+  "
+/>
+
+{/* Imagen CELULAR */}
+<Image
+  src="/hero/hero-herramientas-mobile.jpg"
+  alt="Herramientas"
+  fill
+  priority
+  className="
+    block
+    lg:hidden
+    object-cover
+  "
 />
 
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent">
@@ -228,28 +248,40 @@ export default function Hero() {
 relative
 overflow-hidden
 rounded-3xl
-h-[520px]
-md:h-[620px]
+h-[430px]
+sm:h-[480px]
+lg:h-[620px]
 group
 shadow-2xl
 ">
 
-            <Image
-    src="/hero/hero-pinturas.jpg"
-    alt="Pinturas"
-    fill
-    priority
-    className="
-        object-contain
-        object-top
-        md:object-cover
-        md:object-center
-        p-6
-        md:p-0
-        transition-transform
-        duration-700
-        group-hover:scale-105
-    "
+            {/* Imagen PC */}
+<Image
+  src="/hero/hero-pinturas.jpg"
+  alt="Pinturas"
+  fill
+  priority
+  className="
+    hidden
+    lg:block
+    object-cover
+    transition-transform
+    duration-700
+    group-hover:scale-105
+  "
+/>
+
+{/* Imagen CELULAR */}
+<Image
+  src="/hero/hero-pinturas-mobile.jpg"
+  alt="Pinturas"
+  fill
+  priority
+  className="
+    block
+    lg:hidden
+    object-cover
+  "
 />
 
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent">
