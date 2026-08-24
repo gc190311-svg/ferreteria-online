@@ -18,17 +18,18 @@ export default function EditarProducto() {
 
   const [cargando, setCargando] = useState(true);
 
-  const [producto, setProducto] = useState({
-    nombre: "",
-    categoria: "herramientas",
-    precio: "",
-    precioAnterior: "",
-    marca: "",
-    stock: "",
-    imagen: "",
-    descripcion: "",
-    destacado: false,
-  });
+const [producto, setProducto] = useState({
+  nombre: "",
+  categoria: "herramientas",
+  precio: "",
+  precioAnterior: "",
+  marca: "",
+  stock: "",
+  imagen: "",
+  descripcion: "",
+  destacado: false,
+  masVendido: false,
+});
 
   useEffect(() => {
 
@@ -89,6 +90,7 @@ export default function EditarProducto() {
           imagenes: [producto.imagen],
           descripcion: producto.descripcion,
           destacado: producto.destacado,
+          masVendido: producto.masVendido,
         }
 
       );
@@ -255,22 +257,44 @@ export default function EditarProducto() {
             }
           />
 
-          <label className="flex gap-3 items-center">
+        <div className="flex flex-col gap-4">
 
-            <input
-              type="checkbox"
-              checked={producto.destacado}
-              onChange={(e)=>
-                setProducto({
-                  ...producto,
-                  destacado:e.target.checked
-                })
-              }
-            />
+  {/* PRODUCTO ACTIVO */}
+  <label className="flex items-center gap-3">
+    <input
+      type="checkbox"
+      checked={producto.activo}
+      onChange={(e) =>
+        setProducto({
+          ...producto,
+          activo: e.target.checked
+        })
+      }
+    />
 
-            Producto destacado
+    <span>Producto Activo</span>
+  </label>
 
-          </label>
+  {/* PRODUCTOS MÁS VENDIDOS */}
+  <label className="flex items-center gap-3">
+    <input
+      type="checkbox"
+      checked={producto.masVendido || false}
+      onChange={(e) =>
+        setProducto({
+          ...producto,
+          masVendido: e.target.checked
+        })
+      }
+    />
+
+    <span>
+  Producto Activo
+</span>
+
+  </label>
+
+</div>
 
           <div className="flex gap-4">
 

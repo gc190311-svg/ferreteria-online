@@ -1,687 +1,84 @@
-"use client";
-
-import Footer from "../../../components/Footer";
-import { useEffect, useState } from "react";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
-import { doc,  getDoc,  collection, getDocs,} from "firebase/firestore";
-import { useCarrito } from "../../../components/context/CarritoContext";
-import ImageViewer from "../../../components/producto/ImageViewer";
+import ProductoDetalleClient from "./ProductoDetalleClient";
 
-import HeaderCatalogoCompleto from "../../../components/HeaderCatalogoCompleto";
+const URL_BASE = "https://bricohogarperu.vercel.app";
 
-export default function ProductoDetalle({ params }) {
+export async function generateMetadata({ params }) {
+  const docRef = doc(db, "productos", params.id);
+  const docSnap = await getDoc(docRef);
 
-  const [producto, setProducto] = useState(null);
-  const [imagenActiva, setImagenActiva] = useState(0);
-  const [cantidad, setCantidad] = useState(1);
-  const [favorito, setFavorito] = useState(false);
-  
-  const [productosRelacionados, setProductosRelacionados] = useState([]);
-  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
- const { agregarProducto,  totalItems,} = useCarrito();
- 
-useEffect(() => {
-  cargarProducto();
-}, []);
-
-  const cargarProducto = async () => {
-
-    const docRef = doc(db, "productos", params.id);
-
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-
-    const datos = docSnap.data();
-
-    datos.imagenes = datos.imagenes?.length
-        ? datos.imagenes
-        : datos.imagen
-            ? [datos.imagen]
-            : ["/sin-imagen.png"];
-
-    setProducto(datos);
-
-}
-
-    const querySnapshot = await getDocs(
-      collection(db, "productos")
-    );
-
-    const lista = [];
-
-    querySnapshot.forEach((item) => {
-
-      if (item.id !== params.id) {
-
-        lista.push({
-          id: item.id,
-          ...item.data(),
-        });
-
-      }
-
-    });
-
-    setProductosRelacionados(lista.slice(0, 4));
-
-  };
-
-  if (!producto) {
-
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-
-        Cargando...
-
-      </div>
-    );
-
+  if (!docSnap.exists()) {
+    return {
+      title: "Producto no encontrado | Brico Hogar Perú",
+      description:
+        "Producto no encontrado en Brico Hogar Perú.",
+    };
   }
 
- return (
-
-  <>
-
-    <HeaderCatalogoCompleto
-  categoriaSeleccionada={categoriaSeleccionada}
-  setCategoriaSeleccionada={setCategoriaSeleccionada}
-/>
-
-    <div className="min-h-screen bg-gray-100 pb-10 px-4">
-
-      <div className="max-w-7xl mx-auto">
-
-      
-
-        {/* BREADCRUMB */}
-
-<nav
-  className="
-    flex
-    items-center
-    gap-2
-    text-sm
-    text-gray-500
-    mb-8
-  "
->
-
-  <a
-    href="/"
-    className="hover:text-yellow-500 transition"
-  >
-    Inicio
-  </a>
-
-  <span>›</span>
-         
-  <a
-    href={`/categorias/${producto.categoria}`}
-    className="hover:text-yellow-500 transition capitalize"
-  >
-    {producto.categoria}
-  </a>
-
-  <span>›</span>
-
-  <span className="font-semibold text-gray-900 truncate">
-    {producto.nombre}
-  </span>
-
-</nav>
-
-        {/* CONTENEDOR PRINCIPAL */}
-
-        <div
-  className="
-    bg-white
-    rounded-3xl
-    shadow-lg
-    p-4
-    sm:p-6
-    lg:p-8
-    overflow-hidden
-  "
->
-
-          <div
-  className="
-    grid
-    grid-cols-1
-    lg:grid-cols-[110px_minmax(0,1.4fr)_minmax(0,1fr)]
-    gap-6
-    lg:gap-10
-    items-start
-  "
->
-            
-                      {/* MINIATURAS */}
-
-          <div className="order-2 lg:order-1">
-
-            <div className="flex lg:flex-col gap-4 overflow-x-auto">
-
-              {producto.imagenes?.map((img, index) => (
-
-                <button
-  key={index}
-  onClick={() => setImagenActiva(index)}
-  className={`
-    w-20
-    h-20
-    sm:w-24
-    sm:h-24
-    lg:w-28
-    lg:h-28
-    border-2
-    rounded-xl
-    bg-white
-    flex
-    items-center
-    justify-center
-    overflow-hidden
-    transition-all
-    duration-300
-    ${
-      imagenActiva === index
-        ? "border-yellow-500 shadow-md"
-        : "border-gray-200 hover:border-yellow-400"
-    }
-  `}
->
-
-                  <img
-                    src={img}
-                    alt={`Imagen ${index + 1}`}
-                  className="
-w-16
-h-16
-sm:w-20
-sm:h-20
-object-contain
-"
-                  />
-
-                </button>
-
-              ))}
-
-            </div>
-
-          </div>
-
-        <div
-    className="
-        order-1
-        lg:order-2
-        flex
-        items-center
-        justify-center
-        self-start
-    "
->
-    <ImageViewer
-        imagenes={producto.imagenes}
-        nombre={producto.nombre}
-        imagenActiva={imagenActiva}
-        setImagenActiva={setImagenActiva}
-    />
-</div>
-
-          {/* INFORMACIÓN */}
-
-          <div className=" order-3 w-full min-w-0 ">
-
-          <p
-  className="
-    uppercase
-    tracking-[4px]
-    text-xs
-    font-semibold
-    text-gray-500
-    mb-2
-  "
->
-  {producto.categoria}
-</p>
-
-       <h1
-  className="
-    text-2xl
-    lg:text-3xl
-    font-semibold
-    leading-snug
-    text-gray-700
-    mb-4
-  "
->
-  {producto.nombre}
-</h1>
-
-            {/* FAVORITO */}
-
-            <button
-              onClick={() => setFavorito(!favorito)}
-              className="
-w-12
-h-12
-rounded-full
-border
-border-gray-200
-flex
-items-center
-justify-center
-hover:bg-yellow-500
-hover:text-white
-transition
-mb-6
-"
-            >
-              {favorito ? "❤️" : "🤍"}
-            </button>
-
-            {/* ESTRELLAS */}
-
-           <span className="text-yellow-500 text-xl">
-
-★★★★★
-
-</span>
-
-              <span className="text-gray-400 text-base ml-2">
-
-                (5 opiniones)
-
-              </span>
-
-                       {/* PRECIO */}
-
-<div className="mt-8">
-
-  {producto.oferta ? (
-
-    <>
-      <p className="text-gray-400 line-through text-lg font-medium">
-        S/ {Number(producto.precio).toFixed(2)}
-      </p>
-
-      <div className="flex items-end gap-1 mt-2">
-
-        <span className="text-base font-bold text-emerald-700">
-          S/
-        </span>
-
-        <span className="text-xl lg:text-2xl font-bold text-emerald-700 leading-none">
-          {Number(producto.oferta).toFixed(2)}
-        </span>
-
-      </div>
-
-      <span className="inline-block mt-4 bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg">
-        OFERTA
-      </span>
-
-    </>
-
-  ) : (
-
-    <div className="flex items-end gap-1">
-
-      <span className="text-base font-bold text-emerald-700">
-        S/
-      </span>
-
-      <span className="text-xl lg:text-2xl font-bold text-emerald-700 leading-none">
-        {Number(producto.precio).toFixed(2)}
-      </span>
-
-    </div>
-
-  )}
-
-</div>
-
-            {/* STOCK */}
-
-            <div className="mt-5">
-
-              <p className="text-green-600 font-semibold">
-
-                ✔ Stock disponible
-
-              </p>
-
-            </div>
-
-            {/* DELIVERY */}
-
-            <div className="mt-4 space-y-2 text-gray-600">
-
-              <p>🚚 Delivery a todo Lima</p>
-
-              <p>📍 Retiro en tienda</p>
-
-            </div>
-
-            {/* CANTIDAD */}
-
-            <div className="flex items-center gap-5 mt-8">
-
-              <button
-                onClick={() =>
-                  setCantidad(
-                    cantidad > 1
-                      ? cantidad - 1
-                      : 1
-                  )
-                }
-                className="border w-12 h-12 rounded-xl"
-              >
-                -
-              </button>
-
-              <div className="text-2xl">
-
-                {cantidad}
-
-              </div>
-
-              <button
-                onClick={() =>
-                  setCantidad(
-                    cantidad + 1
-                  )
-                }
-                className="border w-12 h-12 rounded-xl"
-              >
-                +
-              </button>
-
-            </div>
-
-            {/* BOTÓN CARRITO */}
-
-            <button
-         onClick={() =>
-  agregarProducto({
-    id: params.id,
-    nombre: producto.nombre,
-    precio: producto.precio,
-    oferta: producto.oferta,
-
-    imagen: producto.imagen,
-    imagenes: producto.imagenes,
-
-    cantidad,
-  })
+  const producto = docSnap.data();
+
+  const nombre = producto.nombre || "Producto";
+  const marca = producto.marca || "";
+  const sku = producto.sku || "";
+
+  const precio = Number(
+    producto.oferta || producto.precio || 0
+  ).toFixed(2);
+
+  const descripcion =
+    producto.descripcion ||
+    `Compra ${nombre}${
+      marca ? ` de la marca ${marca}` : ""
+    } en Brico Hogar Perú. Precio S/ ${precio}.`;
+
+  const imagen =
+    producto.imagenes?.[0] ||
+    producto.imagen ||
+    `${URL_BASE}/sin-imagen.png`;
+
+  return {
+    title: `${nombre}${marca ? ` | ${marca}` : ""} | Brico Hogar Perú`,
+
+    description: descripcion.slice(0, 160),
+
+    keywords: [
+      nombre,
+      marca,
+      sku,
+      "ferretería",
+      "herramientas",
+      "ferretería Lima",
+      "Brico Hogar Perú",
+    ].filter(Boolean),
+
+    alternates: {
+      canonical: `${URL_BASE}/producto/${params.id}`,
+    },
+
+    openGraph: {
+      title: `${nombre}${marca ? ` | ${marca}` : ""}`,
+      description: descripcion.slice(0, 160),
+      url: `${URL_BASE}/producto/${params.id}`,
+      siteName: "Brico Hogar Perú",
+      images: [
+        {
+          url: imagen,
+          alt: nombre,
+        },
+      ],
+      type: "website",
+    },
+
+    twitter: {
+      card: "summary_large_image",
+      title: `${nombre}${marca ? ` | ${marca}` : ""}`,
+      description: descripcion.slice(0, 160),
+      images: [imagen],
+    },
+  };
 }
-              className="
-w-full
-mt-8
-bg-yellow-500
-hover:bg-yellow-400
-text-black
-font-bold
-text-base
-sm:text-lg
-py-4
-rounded-2xl
-shadow-lg
-transition-all
-duration-300
-hover:shadow-xl
-flex
-items-center
-justify-center
-gap-2
-"
-            >
 
-             <>
-  🛒 Agregar al carrito
-</>
-              
-            </button>
-
-            {/* BOTÓN WHATSAPP */}
-
-            <a
-              href={`https://wa.me/51921883870?text=Hola,%20quiero%20información%20del%20producto:%20${producto.nombre}`}
-              target="_blank"
-              className="
-block
-w-full
-mt-4
-bg-green-600
-hover:bg-green-700
-text-white
-text-center
-font-bold
-text-base
-sm:text-lg
-py-4
-rounded-2xl
-shadow-lg
-transition-all
-duration-300
-"
-            >
-
-              Consultar por WhatsApp
-
-            </a>
-
-            {/* INFORMACIÓN EXTRA */}
-
-            <div className="mt-8 border-t pt-6 space-y-3">
-
-              <p>🔒 Compra segura</p>
-
-              <p>💳 Pago con tarjeta, Yape y Plin</p>
-
-              <p>🚚 Envíos rápidos</p>
-
-            </div>
-
-            {/* CARACTERÍSTICAS */}
-
-            <div className="mt-10">
-
-              <h2 className="font-bold text-xl mb-5">
-
-                Características
-
-              </h2>
-
-              <ul className="space-y-3 text-gray-600">
-
-                <li>
-                  • Categoría: {producto.categoria}
-                </li>
-
-                <li>
-                  • Marca: {producto.marca || "No especificado"}
-                </li>
-
-                <li>
-                  • Color: {producto.color || "No especificado"}
-                </li>
-
-                <li>
-                  • Material: {producto.material || "No especificado"}
-                </li>
-
-              </ul>
-
-            </div>
-
-          </div>
-
-        </div>
-                    {/* DESCRIPCIÓN */}
-
-          <hr className="my-12" />
-
-          <h2 className="text-3xl font-bold mb-8">
-
-            Descripción
-
-          </h2>
-
-          <div className="text-gray-600 whitespace-pre-line leading-8">
-
-            {producto.descripcion}
-
-          </div>
-
-          {/* OPINIONES */}
-
-          <div className="mt-16">
-
-            <h2 className="text-3xl font-bold mb-8">
-
-              Opiniones
-
-            </h2>
-
-            <div className="space-y-6">
-
-              <div className="border rounded-2xl p-6">
-
-                <div className="text-yellow-500 text-2xl">
-
-                  ★★★★★
-
-                </div>
-
-                <p className="mt-3">
-
-                  Excelente producto y muy buena calidad.
-
-                </p>
-
-              </div>
-
-              <div className="border rounded-2xl p-6">
-
-                <div className="text-yellow-500 text-2xl">
-
-                  ★★★★★
-
-                </div>
-
-                <p className="mt-3">
-
-                  Recomendado para trabajos profesionales.
-
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-          {/* MEDIOS DE PAGO */}
-
-          <div className="mt-16">
-
-            <h2 className="text-3xl font-bold mb-8">
-
-              Medios de pago
-
-            </h2>
-
-            <div className="flex gap-6 text-5xl">
-
-              💳 🏦 💵 📱
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-            {/* PRODUCTOS RELACIONADOS */}
-
-      <div className="max-w-7xl mx-auto mt-16">
-
-        <h2 className="text-3xl font-bold mb-8">
-
-          Productos relacionados
-
-        </h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-
-          {productosRelacionados.map((item) => (
-
-            <a
-              href={`/producto/${item.id}`}
-              key={item.id}
-              className="bg-white rounded-2xl shadow p-4 hover:shadow-xl transition hover:-translate-y-1"
-            >
-
-              <img
-                src={
-                  item.imagenes?.[0] ||
-                  item.imagen ||
-                  "/sin-imagen.png"
-                }
-                alt={item.nombre}
-                className="h-48 mx-auto object-contain"
-              />
-
-              <h3 className="font-bold mt-4 min-h-[60px]">
-
-                {item.nombre}
-
-              </h3>
-
-              {item.oferta ? (
-
-                <div className="mt-3">
-
-                  <p className="text-gray-400 line-through">
-
-                    S/ {item.precio}
-
-                  </p>
-
-                  <p className="text-green-600 text-2xl font-bold">
-
-                    S/ {item.oferta}
-
-                  </p>
-
-                </div>
-
-              ) : (
-
-                <p className="text-green-600 text-2xl font-bold mt-3">
-
-                  S/ {item.precio}
-   
-                </p>
-
-              )}
-
-            </a>
-
-          ))}
-
-        </div>
-
-           </div>
-
-    </div>
-
-    <Footer />
-
-  </>
-
-);
-
+export default function Page({ params }) {
+  return <ProductoDetalleClient params={params} />;
 }

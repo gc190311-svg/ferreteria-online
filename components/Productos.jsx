@@ -35,8 +35,12 @@ export default function Productos({ categoriaSeleccionada }) {
 
         });
 
-        // Mostrar únicamente los primeros productos
-        setProductos(lista.slice(0, 4));
+       // Mostrar únicamente los productos marcados como "Más vendidos"
+const productosMasVendidos = lista.filter(
+  (producto) => producto.masVendido === true
+);
+
+setProductos(productosMasVendidos.slice(0, 4));
 
       } catch (error) {
 
@@ -273,41 +277,47 @@ export default function Productos({ categoriaSeleccionada }) {
           {/* NOMBRE */}
 
           <h3
-            className="
-              mt-3
-              text-[20px]
-              font-semibold
-              text-gray-900
-              leading-7
-              min-h-[88px]
-            "
-          >
+  className="
+    mt-3
+    text-[20px]
+    font-semibold
+    text-gray-900
+    leading-7
+    min-h-[65px]
+    text-center
+    w-full
+  "
+>
+  {producto.nombre}
+</h3>
 
-            {producto.nombre}
+          {/* SKU */}
 
-          </h3>
+{producto.sku && (
+  <div className="mt-1 flex justify-center">
+    <p className="text-sm text-gray-500 font-semibold tracking-wide text-center">
+      SKU: <span className="text-gray-700">{producto.sku}</span>
+    </p>
+  </div>
+)}
+
 {/* PRECIO */}
 
-<div className="mt-6 text-center">
+<div className="mt-auto min-h-[65px] flex flex-col items-center justify-center text-center">
 
   {producto.precioAnterior > producto.precio && (
-
     <p className="text-sm text-gray-400 line-through mb-1">
-
       S/ {Number(producto.precioAnterior).toFixed(2)}
-
     </p>
-
   )}
 
-  <div className="flex justify-center items-end gap-1">
+  <div className="flex justify-center items-baseline gap-1">
 
     <span
       className="
         text-base
         font-semibold
         text-emerald-700
-        mb-[2px]
       "
     >
       S/
@@ -327,6 +337,8 @@ export default function Productos({ categoriaSeleccionada }) {
   </div>
 
 </div>
+
+
 
           {/* BOTÓN */}
 

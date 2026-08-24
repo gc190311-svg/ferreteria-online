@@ -466,43 +466,62 @@ const productoActualizado = {
 
                     <div className="grid md:grid-cols-2 gap-6">
 
-                        <div>
+    <div>
 
-                            <label className="block font-semibold mb-2">
+        <label className="block font-semibold mb-2">
+            Stock mínimo
+        </label>
 
-                                Stock mínimo
+        <input
+            type="number"
+            name="stockMinimo"
+            value={producto.stockMinimo}
+            onChange={cambiar}
+            className="w-full border rounded-xl p-3"
+            required
+        />
 
-                            </label>
+    </div>
 
-                            <input
-                                type="number"
-                                name="stockMinimo"
-                                value={producto.stockMinimo}
-                                onChange={cambiar}
-                                className="w-full border rounded-xl p-3"
-                                required
-                            />
+    <div className="flex flex-col gap-5 justify-center">
 
-                        </div>
+        {/* PRODUCTO ACTIVO */}
+        <label className="flex items-center gap-3 cursor-pointer">
 
-                        <div className="flex items-center gap-3 mt-8">
+            <input
+                type="checkbox"
+                name="activo"
+                checked={producto.activo || false}
+                onChange={cambiar}
+                className="w-5 h-5"
+            />
 
-                            <input
-                                type="checkbox"
-                                name="activo"
-                                checked={producto.activo}
-                                onChange={cambiar}
-                            />
+            <span>
+                Producto Activo
+            </span>
 
-                            <label>
+        </label>
 
-                                Producto Activo
+        {/* PRODUCTOS MÁS VENDIDOS */}
+        <label className="flex items-center gap-3 cursor-pointer">
 
-                            </label>
+            <input
+                type="checkbox"
+                name="masVendido"
+                checked={producto.masVendido || false}
+                onChange={cambiar}
+                className="w-5 h-5"
+            />
 
-                        </div>
+            <span>
+                Mostrar en "Productos más vendidos"
+            </span>
 
-                    </div>
+        </label>
+
+    </div>
+
+</div>
 
                  
 
