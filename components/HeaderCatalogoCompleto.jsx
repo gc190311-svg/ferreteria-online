@@ -1,6 +1,6 @@
 "use client";
 
-import TopBar from "./TopBar";
+import TopBannerSlider from "./TopBannerSlider";
 import HeaderCatalogo from "./HeaderCatalogo";
 import Navbar from "./Navbar";
 
@@ -10,29 +10,16 @@ export default function HeaderCatalogoCompleto({
     categoriaSeleccionada,
     setCategoriaSeleccionada,
 }) {
-
     return (
-
         <HeaderSticky
-
-            top={<TopBar />}
-
+            top={<TopBannerSlider />}
             header={<HeaderCatalogo />}
-
             navbar={
-
                 <Navbar
-
                     categoriaSeleccionada={categoriaSeleccionada}
-
                     setCategoriaSeleccionada={setCategoriaSeleccionada}
-
                 />
-
             }
-
         />
-
     );
-
 }

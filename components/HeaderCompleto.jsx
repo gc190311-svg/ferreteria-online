@@ -1,41 +1,24 @@
 "use client";
 
-import TopBar from "./TopBar";
 import HeaderHome from "./HeaderHome";
 import Navbar from "./Navbar";
-
 import HeaderSticky from "./layout/HeaderSticky";
+import TopBannerSlider from "./TopBannerSlider";
 
 export default function HeaderCompleto({
-
-    categoriaSeleccionada,
-
-    setCategoriaSeleccionada,
-
+  categoriaSeleccionada,
+  setCategoriaSeleccionada,
 }) {
-
-    return (
-
-        <HeaderSticky
-
-            top={<TopBar />}
-
-            header={<HeaderHome />}
-
-            navbar={
-
-                <Navbar
-
-                    categoriaSeleccionada={categoriaSeleccionada}
-
-                    setCategoriaSeleccionada={setCategoriaSeleccionada}
-
-                />
-
-            }
-
+  return (
+    <HeaderSticky
+      top={<TopBannerSlider />}
+      header={<HeaderHome />}
+      navbar={
+        <Navbar
+          categoriaSeleccionada={categoriaSeleccionada}
+          setCategoriaSeleccionada={setCategoriaSeleccionada}
         />
-
-    );
-
+      }
+    />
+  );
 }
