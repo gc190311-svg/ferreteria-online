@@ -23,6 +23,16 @@ function normalizar(texto = "") {
     .toLowerCase();
 }
 
+function normalizarCategoria(texto = "") {
+  return String(texto)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
 const CatalogoContext = createContext();
 
 export function CatalogoProvider({ children }) {
@@ -55,17 +65,16 @@ export function CatalogoProvider({ children }) {
 
 }, [productos]);
 
-  useEffect(() => {
-
-    cargarProductos();
-
-  }, []);
+ useEffect(() => {
+  cargarProductos();
+}, []);
 
   async function cargarProductos() {
 
-    const snapshot = await getDocs(
-      collection(db, "productos")
-    );
+  const snapshot = await getDocs(
+  collection(db, "productos")
+);
+
 
     const lista = [];
 
@@ -87,9 +96,9 @@ export function CatalogoProvider({ children }) {
 
   return productos.filter((producto) => {
     const coincideCategoria =
-      categoriaSeleccionada === "todos" ||
-      normalizar(producto.categoria) ===
-        normalizar(categoriaSeleccionada);
+  categoriaSeleccionada === "todos" ||
+  normalizarCategoria(producto.categoria) ===
+    normalizarCategoria(categoriaSeleccionada);
 
     const coincideMarca =
       marcaSeleccionada === "" ||

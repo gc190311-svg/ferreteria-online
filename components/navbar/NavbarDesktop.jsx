@@ -13,7 +13,10 @@ export default function NavbarDesktop({
   const pathname = usePathname();
   const router = useRouter();
 
-  const { setTextoBusqueda } = useCatalogo();
+  const {
+  setTextoBusqueda,
+  setMarcaSeleccionada,
+} = useCatalogo();
 
   // Detecta si estamos en el catálogo
   const esCatalogo =
@@ -22,21 +25,19 @@ export default function NavbarDesktop({
     pathname.startsWith("/producto");
 
   function cambiarCategoria(categoria) {
+  setTextoBusqueda("");
+  setMarcaSeleccionada("");
+  setCategoriaSeleccionada?.(categoria);
 
-    // Limpia el buscador
-    setTextoBusqueda("");
-
-    // Mantiene compatibilidad con el resto del proyecto
-    setCategoriaSeleccionada?.(categoria);
-
-    // Navegación
-    if (categoria === "todos") {
-      router.push("/productos");
-      return;
-    }
-
-    router.push(`/categorias/${categoria}`);
+  if (categoria === "todos") {
+    router.push("/productos");
+    return;
   }
+
+  router.push(
+    `/productos?categoria=${encodeURIComponent(categoria)}`
+  );
+}
 
   return (
 
