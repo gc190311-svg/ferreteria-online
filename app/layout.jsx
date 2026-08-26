@@ -4,6 +4,7 @@ import { CatalogoProvider } from "../components/context/CatalogoContext";
 import { CarritoProvider } from "../components/context/CarritoContext";
 import { CheckoutProvider } from "../components/context/CheckoutContext";
 import CarritoGlobal from "../components/CarritoGlobal";
+import { AuthProvider } from "../components/context/AuthContext";
 
 
 export const metadata = {
@@ -19,21 +20,16 @@ export default function RootLayout({ children }) {
 
    <body>
 
+  <AuthProvider>
   <CheckoutProvider>
-
     <CarritoProvider>
-
       <CatalogoProvider>
-
         {children}
-
         <CarritoGlobal />
-
       </CatalogoProvider>
-
     </CarritoProvider>
-
   </CheckoutProvider>
+</AuthProvider>
 
 </body> 
 

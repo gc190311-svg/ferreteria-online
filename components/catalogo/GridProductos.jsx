@@ -4,11 +4,30 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useCatalogo } from "../context/CatalogoContext";
 import { useCarrito } from "../context/CarritoContext";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/AuthContext";
 
 export default function GridProductos() {
   const { productosFiltrados } = useCatalogo();
 
   const { agregarProducto } = useCarrito();
+
+  const router = useRouter();
+
+const { usuario, cargando: cargandoAuth } = useAuth();
+
+const abrirProducto = (producto) => {
+  const destino = `/producto/${producto.id}`;
+
+  if (!usuario) {
+    router.push(
+      `/registro?redirect=${encodeURIComponent(destino)}`
+    );
+    return;
+  }
+
+  router.push(destino);
+};
 
   // ==========================================
   // CONFIGURACIÓN DE PAGINACIÓN
@@ -215,7 +234,11 @@ export default function GridProductos() {
               ================================== */}
 
               <Link
-                href={`/producto/${producto.id}`}
+                href={
+                  usuario
+                    ? `/producto/${producto.id}`
+                    : `/registro?redirect=${encodeURIComponent(`/producto/${producto.id}`)}`
+                }
                 className="
                   block
                   relative
@@ -294,7 +317,11 @@ export default function GridProductos() {
                   "
                 >
                   <Link
-                    href={`/producto/${producto.id}`}
+                    href={
+                      usuario
+                        ? `/producto/${producto.id}`
+                        : `/registro?redirect=${encodeURIComponent(`/producto/${producto.id}`)}`
+                    }
                     className="
                       hover:text-yellow-600
                       transition-colors
@@ -347,29 +374,31 @@ export default function GridProductos() {
                   </p>
                 )}
 
-                {/* PRECIO */}
+                {/* PRECIO - SOLO CLIENTES REGISTRADOS */}
 
-                <p
-                  className="
-                    mt-6
+                {usuario && (
+                  <p
+                    className="
+                      mt-6
 
-                    text-center
+                      text-center
 
-                    text-xl
-                    sm:text-2xl
+                      text-xl
+                      sm:text-2xl
 
-                    font-bold
+                      font-bold
 
-                    text-emerald-700
-                  "
-                >
-                  S/{" "}
-                  {Number(
-                    producto.oferta ||
-                      producto.precio ||
-                      0
-                  ).toFixed(2)}
-                </p>
+                      text-emerald-700
+                    "
+                  >
+                    S/{" "}
+                    {Number(
+                      producto.oferta ||
+                        producto.precio ||
+                        0
+                    ).toFixed(2)}
+                  </p>
+                )}
               </div>
 
               {/* ==================================
@@ -382,36 +411,37 @@ export default function GridProductos() {
                   permanece visible
               ================================== */}
 
-              <div
-                className="
-                  w-full
+              {usuario && (
+                <div
+                  className="
+                    w-full
 
-                  bg-white
+                    bg-white
 
-                  border-t
-                  border-gray-200
+                    border-t
+                    border-gray-200
 
-                  p-3
-                  sm:p-4
+                    p-3
+                    sm:p-4
 
-                  md:absolute
-                  md:left-0
-                  md:right-0
-                  md:bottom-0
+                    md:absolute
+                    md:left-0
+                    md:right-0
+                    md:bottom-0
 
-                  md:opacity-0
-                  md:translate-y-full
+                    md:opacity-0
+                    md:translate-y-full
 
-                  md:group-hover:opacity-100
-                  md:group-hover:translate-y-0
+                    md:group-hover:opacity-100
+                    md:group-hover:translate-y-0
 
-                  transition-all
-                  duration-300
-                  ease-out
+                    transition-all
+                    duration-300
+                    ease-out
 
-                  z-20
-                "
-              >
+                    z-20
+                  "
+                >
                 {/* ==================================
                     CONTROLES DE CANTIDAD
                 ================================== */}
@@ -587,7 +617,8 @@ export default function GridProductos() {
                     Añadir al carrito
                   </span>
                 </button>
-              </div>
+                </div>
+              )}
             </div>
           );
         })}

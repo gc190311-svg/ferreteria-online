@@ -8,6 +8,7 @@ import { useCarrito } from "../../../components/context/CarritoContext";
 import ImageViewer from "../../../components/producto/ImageViewer";
 
 import HeaderCatalogoCompleto from "../../../components/HeaderCatalogoCompleto";
+import { useAuth } from "../../../components/context/AuthContext";
 
 export default function ProductoDetalleClient({ params }) {
 
@@ -19,10 +20,18 @@ export default function ProductoDetalleClient({ params }) {
   const [productosRelacionados, setProductosRelacionados] = useState([]);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("");
  const { agregarProducto,  totalItems,} = useCarrito();
+ const { usuario, cargando: cargandoAuth } = useAuth();
  
 useEffect(() => {
   cargarProducto();
 }, []);
+
+const solicitarRegistro = () => {
+  const destino = `/producto/${params.id}`;
+
+  window.location.href =
+    `/registro?redirect=${encodeURIComponent(destino)}`;
+};
 
   const cargarProducto = async () => {
 
@@ -360,44 +369,68 @@ mb-6
 
 <div className="mt-8">
 
-  {producto.oferta ? (
+  {usuario ? (
 
-    <>
-      <p className="text-gray-400 line-through text-lg font-medium">
-        S/ {Number(producto.precio).toFixed(2)}
-      </p>
+    producto.oferta ? (
 
-      <div className="flex items-end gap-1 mt-2">
+      <>
+        <p className="text-gray-400 line-through text-lg font-medium">
+          S/ {Number(producto.precio).toFixed(2)}
+        </p>
 
+        <div className="flex items-end gap-1 mt-2">
+          <span className="text-base font-bold text-emerald-700">
+            S/
+          </span>
+
+          <span className="text-xl lg:text-2xl font-bold text-emerald-700 leading-none">
+            {Number(producto.oferta).toFixed(2)}
+          </span>
+        </div>
+
+        <span className="inline-block mt-4 bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg">
+          OFERTA
+        </span>
+      </>
+
+    ) : (
+
+      <div className="flex items-end gap-1">
         <span className="text-base font-bold text-emerald-700">
           S/
         </span>
 
         <span className="text-xl lg:text-2xl font-bold text-emerald-700 leading-none">
-          {Number(producto.oferta).toFixed(2)}
+          {Number(producto.precio).toFixed(2)}
         </span>
-
       </div>
 
-      <span className="inline-block mt-4 bg-red-600 text-white text-sm font-bold px-4 py-2 rounded-lg">
-        OFERTA
-      </span>
-
-    </>
+    )
 
   ) : (
 
-    <div className="flex items-end gap-1">
-
-      <span className="text-base font-bold text-emerald-700">
-        S/
-      </span>
-
-      <span className="text-xl lg:text-2xl font-bold text-emerald-700 leading-none">
-        {Number(producto.precio).toFixed(2)}
-      </span>
-
-    </div>
+    <button
+      type="button"
+      onClick={solicitarRegistro}
+      className="
+        w-full
+        bg-yellow-500
+        hover:bg-yellow-400
+        text-black
+        font-bold
+        text-base
+        sm:text-lg
+        py-4
+        px-6
+        rounded-2xl
+        shadow-lg
+        transition-all
+        duration-300
+        hover:shadow-xl
+      "
+    >
+      🔒 Registrate para consultar el precio
+    </button>
 
   )}
 
@@ -425,85 +458,81 @@ mb-6
 
             </div>
 
-            {/* CANTIDAD */}
+           {usuario && (
+  <>
+    {/* CANTIDAD */}
 
-            <div className="flex items-center gap-5 mt-8">
+    <div className="flex items-center gap-5 mt-8">
 
-              <button
-                onClick={() =>
-                  setCantidad(
-                    cantidad > 1
-                      ? cantidad - 1
-                      : 1
-                  )
-                }
-                className="border w-12 h-12 rounded-xl"
-              >
-                -
-              </button>
+      <button
+        onClick={() =>
+          setCantidad(
+            cantidad > 1
+              ? cantidad - 1
+              : 1
+          )
+        }
+        className="border w-12 h-12 rounded-xl"
+      >
+        -
+      </button>
 
-              <div className="text-2xl">
+      <div className="text-2xl">
+        {cantidad}
+      </div>
 
-                {cantidad}
+      <button
+        onClick={() =>
+          setCantidad(
+            cantidad + 1
+          )
+        }
+        className="border w-12 h-12 rounded-xl"
+      >
+        +
+      </button>
 
-              </div>
+    </div>
 
-              <button
-                onClick={() =>
-                  setCantidad(
-                    cantidad + 1
-                  )
-                }
-                className="border w-12 h-12 rounded-xl"
-              >
-                +
-              </button>
+    {/* BOTÓN CARRITO */}
 
-            </div>
-
-            {/* BOTÓN CARRITO */}
-
-            <button
-         onClick={() =>
-  agregarProducto({
-    id: params.id,
-    nombre: producto.nombre,
-    precio: producto.precio,
-    oferta: producto.oferta,
-
-    imagen: producto.imagen,
-    imagenes: producto.imagenes,
-
-    cantidad,
-  })
-}
-              className="
-w-full
-mt-8
-bg-yellow-500
-hover:bg-yellow-400
-text-black
-font-bold
-text-base
-sm:text-lg
-py-4
-rounded-2xl
-shadow-lg
-transition-all
-duration-300
-hover:shadow-xl
-flex
-items-center
-justify-center
-gap-2
-"
-            >
-
-             <>
-  🛒 Agregar al carrito
-</>
-              
-            </button>
+    <button
+      onClick={() =>
+        agregarProducto({
+          id: params.id,
+          nombre: producto.nombre,
+          precio: producto.precio,
+          oferta: producto.oferta,
+          imagen: producto.imagen,
+          imagenes: producto.imagenes,
+          cantidad,
+        })
+      }
+      className="
+        w-full
+        mt-8
+        bg-yellow-500
+        hover:bg-yellow-400
+        text-black
+        font-bold
+        text-base
+        sm:text-lg
+        py-4
+        rounded-2xl
+        shadow-lg
+        transition-all
+        duration-300
+        hover:shadow-xl
+        flex
+        items-center
+        justify-center
+        gap-2
+      "
+    >
+      🛒 Agregar al carrito
+    </button>
+  </>
+)}
 
             {/* BOTÓN WHATSAPP */}
 

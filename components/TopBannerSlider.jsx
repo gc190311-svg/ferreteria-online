@@ -1,40 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 
-const slides = [
+const banners = [
   {
     id: 1,
-    badge: "🔥 OFERTAS ESPECIALES",
-    title: "Precios especiales en productos seleccionados",
-    button: "Ver ofertas",
-    href: "/ofertas",
-    className: "from-[#111827] via-[#172554] to-[#0f172a]",
+    pc: "/banners/pc/envio-gratis-pc.png",
+    mobile: "/banners/mobile/envio-gratis-mobile.png",
+    enlace: "/productos",
+    alt: "Envío gratis en tu primera compra",
   },
   {
     id: 2,
-    badge: "🚚 DELIVERY EN LIMA",
-    title: "Recibe tus productos directamente en tu domicilio",
-    button: "Comprar ahora",
-    href: "/productos",
-    className: "from-[#111827] via-[#1e3a8a] to-[#0f172a]",
+    pc: "/banners/pc/ofertas-especiales-pc.png",
+    mobile: "/banners/mobile/ofertas-especiales-mobile.png",
+    enlace: "/productos",
+    alt: "Ofertas especiales",
   },
   {
     id: 3,
-    badge: "🔨 TODO PARA TU PROYECTO",
-    title: "Herramientas y materiales para construcción",
-    button: "Ver productos",
-    href: "/productos",
-    className: "from-[#111827] via-[#3f2a00] to-[#111827]",
-  },
-  {
-    id: 4,
-    badge: "🏆 BRICO HOGAR PERÚ",
-    title: "Calidad, variedad y buenos precios",
-    button: "Conócenos",
-    href: "/nosotros",
-    className: "from-[#111827] via-[#292524] to-[#0f172a]",
+    pc: "/banners/pc/whatsapp-pc.png",
+    mobile: "/banners/mobile/whatsapp-mobile.png",
+    enlace: "https://wa.me/51921883870",
+    alt: "Ventas por WhatsApp",
   },
 ];
 
@@ -42,65 +30,50 @@ export default function TopBannerSlider() {
   const [activo, setActivo] = useState(0);
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActivo((actual) => (actual + 1) % slides.length);
-    }, 4500);
+    const intervalo = setInterval(() => {
+      setActivo((actual) => (actual + 1) % banners.length);
+    }, 5000);
 
-    return () => clearInterval(timer);
+    return () => clearInterval(intervalo);
   }, []);
 
-  const slide = slides[activo];
-
   return (
-    <div className={`relative overflow-hidden bg-gradient-to-r ${slide.className} text-white`}>
-      <div className="max-w-7xl mx-auto px-4">
-        <div className="min-h-[58px] sm:min-h-[64px] flex items-center justify-center">
-          <div
-            key={slide.id}
-            className="w-full flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-5 text-center animate-[fadeIn_.45s_ease-out]"
-          >
-            <span className="text-[10px] sm:text-xs md:text-sm font-bold tracking-wide text-yellow-400">
-              {slide.badge}
-            </span>
-
-            <span className="hidden sm:block h-6 w-px bg-white/30" />
-
-            <span className="text-xs sm:text-sm md:text-base font-medium">
-              {slide.title}
-            </span>
-
-            <Link
-              href={slide.href}
-              className="text-[10px] sm:text-xs md:text-sm font-bold text-yellow-400 hover:text-yellow-300 transition-colors whitespace-nowrap"
-            >
-              {slide.button} →
-            </Link>
-          </div>
-        </div>
-
-        <div className="absolute bottom-1 left-0 right-0 flex justify-center gap-1.5">
-          {slides.map((item, index) => (
-            <button
-              key={item.id}
-              type="button"
-              aria-label={`Mostrar banner ${index + 1}`}
-              onClick={() => setActivo(index)}
-              className={`h-1 rounded-full transition-all ${
-                index === activo
-                  ? "w-6 bg-yellow-400"
-                  : "w-1.5 bg-white/40 hover:bg-white/70"
-              }`}
+    <section className="relative w-full h-[70px] overflow-hidden bg-black">
+      {banners.map((banner, index) => (
+        <a
+          key={banner.id}
+          href={banner.enlace}
+          className={`
+            absolute inset-0
+            block w-full h-full
+            transition-opacity duration-700 ease-in-out
+            ${
+              index === activo
+                ? "opacity-100 z-10"
+                : "opacity-0 z-0 pointer-events-none"
+            }
+          `}
+          aria-label={banner.alt}
+        >
+          <picture>
+            {/* IMAGEN PARA CELULAR */}
+            <source
+              media="(max-width: 767px)"
+              srcSet={banner.mobile}
             />
-          ))}
-        </div>
-      </div>
 
-      <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(4px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-    </div>
+            {/* IMAGEN PARA PC */}
+            <img
+              src={banner.pc}
+              alt={banner.alt}
+              className="block w-full h-full object-cover object-center"
+            />
+          </picture>
+        </a>
+      ))}
+
+      {/* INDICADORES */}
+      
+    </section>
   );
 }

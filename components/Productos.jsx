@@ -1,12 +1,17 @@
-"use client";
+
 
 import { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { FaShoppingCart } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { useAuth } from "./context/AuthContext";
 
 import { db } from "../app/firebase";
 
 export default function Productos({ categoriaSeleccionada }) {
+
+  const router = useRouter();
+  const { usuario, cargando: cargandoAuth } = useAuth();
 
   const [productos, setProductos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -65,6 +70,19 @@ setProductos(productosMasVendidos.slice(0, 4));
           (producto) =>
             producto.categoria === categoriaSeleccionada
         );
+
+  const abrirProducto = (producto) => {
+    const destino = `/producto/${producto.id}`;
+
+    if (!usuario) {
+      router.push(
+        `/registro?redirect=${encodeURIComponent(destino)}`
+      );
+      return;
+    }
+
+    router.push(destino);
+  };
 
   return (
 
@@ -342,8 +360,13 @@ setProductos(productosMasVendidos.slice(0, 4));
 
           {/* BOTÓN */}
 
-          <a
-            href={`/producto/${producto.id}`}
+          <button
+            type="button"
+            onClick={() => {
+              if (cargandoAuth) return;
+              abrirProducto(producto);
+            }}
+            disabled={cargandoAuth}
             className="
               mt-auto
               flex
@@ -358,6 +381,8 @@ setProductos(productosMasVendidos.slice(0, 4));
               rounded-xl
               transition-all
               duration-300
+              disabled:opacity-70
+              disabled:cursor-wait
             "
           >
 
@@ -365,7 +390,7 @@ setProductos(productosMasVendidos.slice(0, 4));
 
             Ver producto
 
-          </a>
+          </button>
 
         </div>
 
