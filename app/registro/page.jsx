@@ -1,6 +1,6 @@
-"use client";
 
-import { useState } from "react";
+
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -17,7 +17,7 @@ import {
 
 import { auth, db } from "../firebase";
 
-export default function RegistroPage() {
+function RegistroForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -300,3 +300,21 @@ export default function RegistroPage() {
     </main>
   );
 }
+
+function RegistroPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
+          <div className="text-gray-600 font-medium">
+            Cargando...
+          </div>
+        </main>
+      }
+    >
+      <RegistroForm />
+    </Suspense>
+  );
+}
+
+export default RegistroPage;
