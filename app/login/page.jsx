@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -12,7 +12,33 @@ import {
 
 import { auth } from "../firebase";
 
-export default function Login() {
+// =====================================================
+// COMPONENTE PRINCIPAL
+// =====================================================
+
+export default function LoginPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-gray-100 flex items-center justify-center px-4 py-12">
+          <div className="text-center">
+            <div className="text-gray-600 font-semibold">
+              Cargando...
+            </div>
+          </div>
+        </main>
+      }
+    >
+      <Login />
+    </Suspense>
+  );
+}
+
+// =====================================================
+// LOGIN
+// =====================================================
+
+function Login() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -56,7 +82,6 @@ export default function Login() {
 
       // Volver al lugar de donde vino el cliente
       router.replace(destino);
-
     } catch (error) {
       console.error(error);
 
@@ -85,7 +110,6 @@ export default function Login() {
           "No fue posible iniciar sesión. Intenta nuevamente."
         );
       }
-
     } finally {
       setCargando(false);
     }
@@ -104,9 +128,8 @@ export default function Login() {
 
       await signInWithPopup(auth, provider);
 
-      // Ya NO enviamos al usuario a /admin
+      // Volver al lugar de donde vino el cliente
       router.replace(destino);
-
     } catch (error) {
       console.error(error);
 
@@ -122,7 +145,6 @@ export default function Login() {
           "No fue posible iniciar sesión con Google."
         );
       }
-
     } finally {
       setCargando(false);
     }
