@@ -13,38 +13,36 @@ export default function SidebarFiltros() {
 
   const [mostrarFiltros, setMostrarFiltros] = useState(false);
 
-// ==========================================
-// NORMALIZAR TEXTO
-// ==========================================
+  // ==========================================
+  // NORMALIZAR TEXTO
+  // ==========================================
 
-const normalizar = (texto = "") => {
-  return String(texto)
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/&/g, " y ")
-    .replace(/[-_]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim()
-    .toLowerCase();
-};
+  const normalizar = (texto = "") => {
+    return String(texto)
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/&/g, " y ")
+      .replace(/[-_]+/g, " ")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  };
 
-// ==========================================
-// PRODUCTOS SEGÚN CATEGORÍA
-// ==========================================
+  // ==========================================
+  // PRODUCTOS SEGÚN CATEGORÍA
+  // ==========================================
 
-const productosCategoria =
-  !categoriaSeleccionada ||
-  normalizar(categoriaSeleccionada) === "todos"
-    ? productos
-    : productos.filter((producto) => {
-        const categoriaProducto = normalizar(producto.categoria);
-        const categoriaSeleccionadaNormalizada =
-          normalizar(categoriaSeleccionada);
+  const productosCategoria =
+    !categoriaSeleccionada ||
+    normalizar(categoriaSeleccionada) === "todos"
+      ? productos
+      : productos.filter((producto) => {
+          const categoriaProducto = normalizar(producto.categoria);
+          const categoriaSeleccionadaNormalizada =
+            normalizar(categoriaSeleccionada);
 
-        return (
-          categoriaProducto === categoriaSeleccionadaNormalizada
-        );
-      });
+          return categoriaProducto === categoriaSeleccionadaNormalizada;
+        });
 
   // ==========================================
   // CONTADOR DE MARCAS
@@ -72,13 +70,13 @@ const productosCategoria =
 
   return (
     <>
-      {/* =================================================
+      {/* =====================================================
           VERSIÓN MÓVIL
-          ================================================= */}
+          ===================================================== */}
 
       <div className="lg:hidden w-full mb-6">
 
-        {/* BOTÓN FILTROS */}
+        {/* BOTÓN PARA ABRIR FILTRO */}
 
         <button
           type="button"
@@ -127,56 +125,89 @@ const productosCategoria =
         )}
       </div>
 
-      {/* =================================================
-          PANEL MÓVIL
-          ================================================= */}
+      {/* =====================================================
+          PANEL LATERAL MÓVIL
+          ===================================================== */}
 
       {mostrarFiltros && (
         <div
           className="
             fixed
             inset-0
-            z-[9999]
-            bg-black/50
+            z-[99999]
+            bg-black/70
             lg:hidden
           "
           onClick={() => setMostrarFiltros(false)}
         >
+
+          {/* =================================================
+              PANEL DERECHO
+              ================================================= */}
+
           <div
             className="
               absolute
-              left-0
+              top-0
               right-0
               bottom-0
+
+              w-[88%]
+              max-w-[420px]
+
               bg-white
-              rounded-t-3xl
-              max-h-[85vh]
-              overflow-y-auto
+
               shadow-2xl
-              p-6
+
+              flex
+              flex-col
+
+              animate-[slideInRight_0.25s_ease-out]
             "
             onClick={(e) => e.stopPropagation()}
           >
 
-            {/* CABECERA */}
+            {/* =================================================
+                CABECERA
+                ================================================= */}
 
             <div
               className="
                 flex
                 items-center
                 justify-between
-                mb-6
+
+                bg-black
+                text-white
+
+                px-5
+                py-5
+
+                shrink-0
               "
             >
               <div>
-                <h2 className="text-2xl font-bold text-gray-900">
+                <h2
+                  className="
+                    text-xl
+                    font-bold
+                  "
+                >
                   Filtrar por marca
                 </h2>
 
-                <p className="text-sm text-gray-500 mt-1">
+                <p
+                  className="
+                    text-sm
+                    text-gray-300
+                    mt-1
+                  "
+                >
                   Selecciona una marca
                 </p>
               </div>
+
+              {/* BOTÓN X */}
 
               <button
                 type="button"
@@ -184,135 +215,203 @@ const productosCategoria =
                 className="
                   w-10
                   h-10
+
+                  flex
+                  items-center
+                  justify-center
+
                   rounded-full
-                  bg-gray-100
-                  text-gray-700
-                  text-xl
+
+                  bg-white/10
+                  hover:bg-white/20
+
+                  text-white
+                  text-2xl
                   font-bold
-                  hover:bg-gray-200
+
                   transition
                 "
+                aria-label="Cerrar filtros"
               >
                 ×
               </button>
             </div>
 
-            {/* TODAS */}
+            {/* =================================================
+                CONTENIDO DEL FILTRO
+                ================================================= */}
 
-            <button
-              type="button"
-              onClick={() => seleccionarMarca("")}
-              className={`
-                w-full
-                flex
-                items-center
-                justify-between
+            <div
+              className="
+                flex-1
+                overflow-y-auto
+
                 px-4
-                py-4
-                rounded-xl
-                mb-2
-                border
-                transition
-                ${
-                  marcaSeleccionada === ""
-                    ? "bg-yellow-500 border-yellow-500 font-bold"
-                    : "bg-white border-gray-200 hover:bg-gray-50"
-                }
-              `}
+                py-5
+              "
             >
-              <span>
-                Todas
-              </span>
 
-              <span className="font-bold">
-                {productosCategoria.length}
-              </span>
-            </button>
+              {/* TODAS */}
 
-            {/* MARCAS */}
+              <button
+                type="button"
+                onClick={() => seleccionarMarca("")}
+                className={`
+                  w-full
 
-            <div className="space-y-2">
+                  flex
+                  items-center
+                  justify-between
 
-              {listaMarcas.map(([marca, cantidad]) => (
-                <button
-                  type="button"
-                  key={marca}
-                  onClick={() => seleccionarMarca(marca)}
-                  className={`
-                    w-full
-                    flex
-                    items-center
-                    justify-between
-                    px-4
-                    py-4
-                    rounded-xl
-                    border
-                    transition
-                    ${
-                      marcaSeleccionada === marca
-                        ? "bg-yellow-500 border-yellow-500 font-bold"
-                        : "bg-white border-gray-200 hover:bg-gray-50"
-                    }
-                  `}
-                >
-                  <span>
-                    {marca}
-                  </span>
+                  px-4
+                  py-4
 
-                  <span
+                  rounded-xl
+
+                  mb-3
+
+                  border
+
+                  transition
+
+                  ${
+                    marcaSeleccionada === ""
+                      ? "bg-yellow-500 border-yellow-500 font-bold text-black"
+                      : "bg-white border-gray-200 text-gray-800 hover:bg-gray-50"
+                  }
+                `}
+              >
+                <span>
+                  Todas
+                </span>
+
+                <span className="font-bold">
+                  {productosCategoria.length}
+                </span>
+              </button>
+
+              {/* =================================================
+                  LISTA DE MARCAS
+                  ================================================= */}
+
+              <div className="space-y-3">
+
+                {listaMarcas.map(([marca, cantidad]) => (
+                  <button
+                    type="button"
+                    key={marca}
+                    onClick={() => seleccionarMarca(marca)}
                     className={`
-                      text-sm
-                      font-bold
+                      w-full
+
+                      flex
+                      items-center
+                      justify-between
+
+                      px-4
+                      py-4
+
+                      rounded-xl
+
+                      border
+
+                      transition
+
                       ${
                         marcaSeleccionada === marca
-                          ? "text-black"
-                          : "text-gray-600"
+                          ? "bg-yellow-500 border-yellow-500 font-bold text-black"
+                          : "bg-white border-gray-200 text-gray-800 hover:bg-gray-50"
                       }
                     `}
                   >
-                    {cantidad}
-                  </span>
-                </button>
-              ))}
 
+                    <span>
+                      {marca}
+                    </span>
+
+                    <span
+                      className={`
+                        text-sm
+                        font-bold
+
+                        ${
+                          marcaSeleccionada === marca
+                            ? "text-black"
+                            : "text-gray-600"
+                        }
+                      `}
+                    >
+                      {cantidad}
+                    </span>
+
+                  </button>
+                ))}
+
+              </div>
             </div>
 
-            {/* BOTÓN CERRAR */}
+            {/* =================================================
+                PIE DEL PANEL
+                ================================================= */}
 
-            <button
-              type="button"
-              onClick={() => setMostrarFiltros(false)}
+            <div
               className="
-                w-full
-                mt-6
-                bg-yellow-500
-                hover:bg-yellow-400
-                text-black
-                font-bold
+                shrink-0
+
+                border-t
+                border-gray-200
+
+                bg-white
+
+                px-4
                 py-4
-                rounded-xl
-                transition
               "
             >
-              Ver productos
-            </button>
+
+              <button
+                type="button"
+                onClick={() => setMostrarFiltros(false)}
+                className="
+                  w-full
+
+                  bg-yellow-500
+                  hover:bg-yellow-400
+
+                  text-black
+
+                  font-bold
+
+                  py-4
+
+                  rounded-xl
+
+                  transition
+                "
+              >
+                Ver productos
+              </button>
+
+            </div>
 
           </div>
         </div>
       )}
 
-      {/* =================================================
+      {/* =====================================================
           VERSIÓN PC
-          ================================================= */}
+          ===================================================== */}
 
       <aside
         className="
           hidden
           lg:block
+
           w-full
           lg:w-64
+
           lg:sticky
           lg:top-32
+
           lg:shrink-0
         "
       >
@@ -324,6 +423,7 @@ const productosCategoria =
             text-4xl
             font-bold
             text-gray-900
+
             mb-8
           "
         >
@@ -338,12 +438,17 @@ const productosCategoria =
             flex
             items-center
             justify-between
+
             px-4
             py-4
+
             border-b
             border-gray-200
+
             cursor-pointer
+
             hover:bg-gray-50
+
             transition-all
             duration-300
           "
@@ -378,11 +483,15 @@ const productosCategoria =
               flex
               items-center
               justify-between
+
               px-4
               py-4
+
               border-b
               border-gray-200
+
               cursor-pointer
+
               transition-all
               duration-300
 
@@ -411,11 +520,15 @@ const productosCategoria =
                 className="
                   w-8
                   h-8
+
                   rounded-full
+
                   bg-yellow-600
                   text-black
+
                   text-xs
                   font-bold
+
                   flex
                   items-center
                   justify-center

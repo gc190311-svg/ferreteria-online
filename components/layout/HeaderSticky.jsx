@@ -47,9 +47,11 @@ export default function HeaderSticky({
         <>
 
             <div
-    className={`
-        overflow-hidden
-    `}
+    className="
+        relative
+        z-[10000]
+        overflow-visible
+    "
 >
 
                 {top}

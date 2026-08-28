@@ -1,7 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { FaTrash, FaWhatsapp } from "react-icons/fa";
+import {
+  FaTrash,
+  FaWhatsapp,
+  FaShoppingCart,
+} from "react-icons/fa";
 import { useCarrito } from "./context/CarritoContext";
 import { useEffect } from "react";
 
@@ -18,25 +22,26 @@ export default function CarritoDrawer({
     limpiarCarrito,
   } = useCarrito();
 
+  /* ==========================================
+     BLOQUEAR SCROLL DE LA PÁGINA
+  ========================================== */
+
   useEffect(() => {
-
     if (abierto) {
-
-        document.body.style.overflow = "hidden";
-
+      document.body.style.overflow = "hidden";
     } else {
-
-        document.body.style.overflow = "";
-
+      document.body.style.overflow = "";
     }
 
     return () => {
-
-        document.body.style.overflow = "";
-
+      document.body.style.overflow = "";
     };
+  }, [abierto]);
 
-}, [abierto]);
+
+  /* ==========================================
+     PEDIDO POR WHATSAPP
+  ========================================== */
 
   function enviarWhatsApp() {
     if (carrito.length === 0) {
@@ -49,7 +54,6 @@ export default function CarritoDrawer({
 Hola, deseo realizar el siguiente pedido:
 
 --------------------------------
-
 `;
 
     carrito.forEach((item, index) => {
@@ -61,13 +65,10 @@ Hola, deseo realizar el siguiente pedido:
       mensaje += `${index + 1}. ${item.nombre}
 
 Cantidad: ${item.cantidad}
-
 Precio: S/ ${precio.toFixed(2)}
-
 Subtotal: S/ ${(precio * item.cantidad).toFixed(2)}
 
 --------------------------------
-
 `;
     });
 
@@ -78,15 +79,10 @@ S/ ${total.toFixed(2)}
 --------------------------------
 
 Nombre:
-
 Celular:
-
 Dirección:
-
 Distrito:
-
 Referencia:
-
 Forma de pago:
 `;
 
@@ -98,34 +94,57 @@ Forma de pago:
     );
   }
 
+
   return (
     <>
-      {/* FONDO */}
+      {/* ==========================================
+          FONDO OSCURO
+      ========================================== */}
 
       {abierto && (
-       <div
-    onClick={cerrar}
-    className="fixed inset-0 bg-black/70 z-[9998]"
-/>
+        <div
+          onClick={cerrar}
+          className="
+            fixed
+            inset-0
+            bg-black/70
+            z-[19999]
+          "
+        />
       )}
 
-      {/* DRAWER */}
 
-      <aside
+      {/* ==========================================
+          CARRITO COMPLETO
+          
+          IMPORTANTE:
+          TODO EL CONTENIDO ESTÁ DENTRO
+          DEL MISMO PANEL.
+      ========================================== */}
+
+      <div
         className={`
           fixed
-          top-0
+          inset-y-0
           right-0
-          h-full
+
           w-[430px]
-          max-w-full
+          max-w-[100vw]
+
           bg-white
-          shadow-2xl
-          z-[9999]
-          transition-all
-          duration-300
+
+          z-[20000]
+
           flex
           flex-col
+
+          shadow-2xl
+
+          transform
+          transition-transform
+          duration-300
+          ease-in-out
+
           ${
             abierto
               ? "translate-x-0"
@@ -133,325 +152,703 @@ Forma de pago:
           }
         `}
       >
-        {/* CABECERA */}
 
-        <div className="border-b p-6 flex justify-between items-center">
+        {/* ==========================================
+            CABECERA
+        ========================================== */}
 
-          <div>
+        <div
+          className="
+            flex-shrink-0
+            w-full
 
-            <h2 className="text-2xl font-bold">
-              🛒 Mi carrito
-            </h2>
+            bg-white
 
-            <p className="text-gray-500 mt-1">
-              {totalItems} productos
-            </p>
+            border-b
+            border-gray-200
+
+            px-5
+            py-4
+
+            flex
+            items-center
+            justify-between
+          "
+        >
+
+          {/* IZQUIERDA */}
+
+          <div className="flex items-center gap-3">
+
+            <div
+              className="
+                w-11
+                h-11
+
+                rounded-full
+
+                bg-yellow-400
+
+                flex
+                items-center
+                justify-center
+
+                text-black
+              "
+            >
+              <FaShoppingCart size={20} />
+            </div>
+
+
+            <div>
+
+              <h2
+                className="
+                  text-xl
+                  font-bold
+                  text-gray-900
+                  leading-tight
+                "
+              >
+                Mi carrito
+              </h2>
+
+              <p
+                className="
+                  text-sm
+                  text-gray-500
+                  mt-1
+                "
+              >
+                {totalItems}{" "}
+                {totalItems === 1
+                  ? "producto"
+                  : "productos"}
+              </p>
+
+            </div>
 
           </div>
 
+
+          {/* CERRAR */}
+
           <button
+            type="button"
             onClick={cerrar}
-            className="text-3xl hover:text-red-500"
+            className="
+              w-10
+              h-10
+
+              flex
+              items-center
+              justify-center
+
+              rounded-full
+
+              text-gray-600
+
+              text-2xl
+
+              hover:bg-gray-100
+              hover:text-red-500
+
+              transition
+            "
+            aria-label="Cerrar carrito"
           >
             ×
           </button>
 
         </div>
 
-        {/* PRODUCTOS */}
 
-        <div className="flex-1 overflow-y-auto p-5 space-y-4">
+        {/* ==========================================
+            ZONA DE PRODUCTOS
+
+            ESTA ZONA ES LA ÚNICA QUE TIENE SCROLL
+        ========================================== */}
+
+        <div
+          className="
+            flex-1
+            min-h-0
+
+            overflow-y-auto
+
+            bg-gray-50
+
+            p-4
+          "
+        >
 
           {carrito.length === 0 ? (
 
-            <div className="text-center mt-20">
+            /* ========================================
+               CARRITO VACÍO
+            ======================================== */
 
-              <p className="text-6xl">
-                🛒
-              </p>
+            <div
+              className="
+                h-full
 
-              <p className="mt-4 text-gray-500">
+                flex
+                flex-col
+                items-center
+                justify-center
+
+                text-center
+
+                px-6
+              "
+            >
+
+              <div
+                className="
+                  w-24
+                  h-24
+
+                  rounded-full
+
+                  bg-gray-100
+
+                  flex
+                  items-center
+                  justify-center
+
+                  mb-5
+                "
+              >
+                <FaShoppingCart
+                  size={38}
+                  className="text-gray-400"
+                />
+              </div>
+
+
+              <h3
+                className="
+                  text-lg
+                  font-bold
+                  text-gray-800
+                "
+              >
                 Tu carrito está vacío
+              </h3>
+
+
+              <p
+                className="
+                  text-sm
+                  text-gray-500
+
+                  mt-2
+                "
+              >
+                Agrega productos para comenzar
+                tu compra.
               </p>
 
             </div>
 
           ) : (
-            carrito.map((item) => {
 
-  const precio =
-    Number(item.oferta) > 0
-      ? Number(item.oferta)
-      : Number(item.precio);
+            /* ========================================
+               PRODUCTOS
+            ======================================== */
 
-  return (
+            <div className="space-y-4">
 
-    <div
-      key={item.id}
-      className="
-        border
-        rounded-2xl
-        p-4
-        shadow-sm
-        bg-white
-        hover:shadow-md
-        transition
-      "
-    >
+              {carrito.map((item) => {
 
-      <div className="flex items-start gap-4">
+                const precio =
+                  Number(item.oferta) > 0
+                    ? Number(item.oferta)
+                    : Number(item.precio);
 
-        {/* IMAGEN */}
+                const subtotal =
+                  precio * Number(item.cantidad);
 
-        <div
-          className="
-            w-24
-            h-24
-            border
-            rounded-xl
-            bg-white
-            flex
-            items-center
-            justify-center
-            overflow-hidden
-            flex-shrink-0
-          "
-        >
+                const imagen =
+                  item.imagen ||
+                  item.imagenes?.[0] ||
+                  "/sin-imagen.png";
 
-          <img
-            src={
-              item.imagenes?.[0] ||
-              item.imagen ||
-              "/sin-imagen.png"
-            }
-            alt={item.nombre}
-            className="
-              w-full
-              h-full
-              object-contain
-              p-2
-            "
-            onError={(e) => {
-              e.currentTarget.src = "/sin-imagen.png";
-            }}
-          />
 
-        </div>
+                return (
+                  <div
+                    key={item.id}
+                    className="
+                      bg-white
 
-        {/* INFORMACIÓN */}
+                      rounded-2xl
 
-        <div className="flex-1 min-w-0">
+                      border
+                      border-gray-200
 
-          <h3
-            className="
-              font-semibold
-              text-gray-800
-              leading-5
-              text-[15px]
-              line-clamp-3
-            "
-          >
-            {item.nombre}
-          </h3>
+                      shadow-sm
 
-          <div className="mt-3">
+                      p-4
+                    "
+                  >
 
-            {Number(item.oferta) > 0 && (
+                    {/* =================================
+                        PRODUCTO
+                    ================================= */}
 
-              <p className="text-sm text-gray-400 line-through">
+                    <div className="flex gap-4">
 
-                S/ {Number(item.precio).toFixed(2)}
+                      {/* IMAGEN */}
 
-              </p>
+                      <div
+                        className="
+                          w-24
+                          h-24
 
-            )}
+                          flex-shrink-0
 
-            <p className="text-3xl font-bold text-green-700">
+                          rounded-xl
 
-              S/ {precio.toFixed(2)}
+                          bg-gray-50
 
-            </p>
+                          border
+                          border-gray-100
 
-          </div>
+                          overflow-hidden
 
-          <p className="text-sm text-gray-500 mt-1">
+                          flex
+                          items-center
+                          justify-center
+                        "
+                      >
 
-            Subtotal:
+                        <img
+                          src={imagen}
+                          alt={item.nombre}
+                          className="
+                            w-full
+                            h-full
 
-            <span className="font-semibold ml-1">
+                            object-contain
 
-              S/ {(precio * item.cantidad).toFixed(2)}
+                            p-2
+                          "
+                        />
 
-            </span>
+                      </div>
 
-          </p>
 
-          {/* CONTROLES */}
+                      {/* INFORMACIÓN */}
 
-          <div className="flex justify-between items-center mt-4">
+                      <div
+                        className="
+                          flex-1
+                          min-w-0
+                        "
+                      >
 
-            <div
-              className="
-                flex
-                items-center
-                border
-                rounded-lg
-                overflow-hidden
-              "
-            >
+                        <h3
+                          className="
+                            text-sm
+                            font-semibold
+                            text-gray-900
 
-              <button
-                onClick={() =>
-                  actualizarCantidad(
-                    item.id,
-                    Math.max(1, item.cantidad - 1)
-                  )
-                }
-                className="
-                  w-10
-                  h-10
-                  hover:bg-gray-100
-                  text-lg
-                  font-bold
-                "
-              >
-                −
-              </button>
+                            leading-5
 
-              <span
-                className="
-                  w-10
-                  text-center
-                  font-bold
-                "
-              >
-                {item.cantidad}
-              </span>
+                            line-clamp-2
+                          "
+                        >
+                          {item.nombre}
+                        </h3>
 
-              <button
-                onClick={() =>
-                  actualizarCantidad(
-                    item.id,
-                    item.cantidad + 1
-                  )
-                }
-                className="
-                  w-10
-                  h-10
-                  hover:bg-gray-100
-                  text-lg
-                  font-bold
-                "
-              >
-                +
-              </button>
+
+                        {/* PRECIO */}
+
+                        <div className="mt-2">
+
+                          {Number(item.oferta) > 0 &&
+                            Number(item.precio) >
+                              Number(item.oferta) && (
+
+                              <span
+                                className="
+                                  block
+
+                                  text-xs
+                                  text-gray-400
+
+                                  line-through
+                                "
+                              >
+                                S/{" "}
+                                {Number(
+                                  item.precio
+                                ).toFixed(2)}
+                              </span>
+
+                            )}
+
+
+                          <span
+                            className="
+                              text-lg
+                              font-bold
+                              text-gray-900
+                            "
+                          >
+                            S/ {precio.toFixed(2)}
+                          </span>
+
+                        </div>
+
+                      </div>
+
+
+                      {/* ELIMINAR */}
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          eliminarProducto(item.id)
+                        }
+                        className="
+                          flex-shrink-0
+
+                          h-fit
+
+                          text-red-500
+
+                          hover:text-red-700
+
+                          transition
+                        "
+                        aria-label="Eliminar producto"
+                      >
+                        <FaTrash size={16} />
+                      </button>
+
+                    </div>
+
+
+                    {/* =================================
+                        CANTIDAD Y SUBTOTAL
+                    ================================= */}
+
+                    <div
+                      className="
+                        mt-4
+                        pt-4
+
+                        border-t
+                        border-gray-100
+
+                        flex
+                        items-center
+                        justify-between
+                      "
+                    >
+
+                      {/* CANTIDAD */}
+
+                      <div
+                        className="
+                          flex
+                          items-center
+
+                          border
+                          border-gray-300
+
+                          rounded-xl
+
+                          overflow-hidden
+                        "
+                      >
+
+                        <button
+                          type="button"
+                          onClick={() =>
+                            actualizarCantidad(
+                              item.id,
+                              Math.max(
+                                1,
+                                Number(
+                                  item.cantidad
+                                ) - 1
+                              )
+                            )
+                          }
+                          className="
+                            w-9
+                            h-9
+
+                            flex
+                            items-center
+                            justify-center
+
+                            font-bold
+
+                            hover:bg-gray-100
+                          "
+                        >
+                          −
+                        </button>
+
+
+                        <span
+                          className="
+                            w-10
+
+                            text-center
+
+                            font-semibold
+                          "
+                        >
+                          {item.cantidad}
+                        </span>
+
+
+                        <button
+                          type="button"
+                          onClick={() =>
+                            actualizarCantidad(
+                              item.id,
+                              Number(
+                                item.cantidad
+                              ) + 1
+                            )
+                          }
+                          className="
+                            w-9
+                            h-9
+
+                            flex
+                            items-center
+                            justify-center
+
+                            font-bold
+
+                            hover:bg-gray-100
+                          "
+                        >
+                          +
+                        </button>
+
+                      </div>
+
+
+                      {/* SUBTOTAL */}
+
+                      <div className="text-right">
+
+                        <p
+                          className="
+                            text-xs
+                            text-gray-500
+                          "
+                        >
+                          Subtotal
+                        </p>
+
+                        <p
+                          className="
+                            text-lg
+                            font-bold
+                            text-gray-900
+                          "
+                        >
+                          S/ {subtotal.toFixed(2)}
+                        </p>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+                );
+              })}
 
             </div>
 
-            <button
-              onClick={() =>
-                eliminarProducto(item.id)
-              }
-              className="
-                text-red-600
-                hover:text-red-700
-                transition
-              "
-            >
-
-              <FaTrash size={18} />
-
-            </button>
-
-          </div>
+          )}
 
         </div>
 
-      </div>
 
-    </div>
+        {/* ==========================================
+            RESUMEN INFERIOR
+        ========================================== */}
 
-  );
+        <div
+          className="
+            flex-shrink-0
 
-})
+            w-full
 
-)}
+            bg-white
 
-</div>
-        {/* RESUMEN */}
+            border-t
+            border-gray-200
 
-        <div className="border-t p-5 bg-gray-50">
+            p-5
 
-          <div className="flex justify-between text-gray-600">
+            shadow-[0_-5px_20px_rgba(0,0,0,0.08)]
+          "
+        >
 
-            <span>Productos</span>
+          {/* PRODUCTOS */}
 
-            <span>{carrito.length}</span>
+          <div
+            className="
+              flex
+              justify-between
 
-          </div>
+              text-sm
+              text-gray-600
+            "
+          >
 
-          <div className="flex justify-between text-gray-600 mt-2">
-
-            <span>Unidades</span>
-
-            <span>{totalItems}</span>
-
-          </div>
-
-          <div className="flex justify-between items-center mt-6">
-
-            <span className="text-xl font-bold">
-
-              TOTAL
-
+            <span>
+              Productos
             </span>
 
-            <span className="text-3xl font-extrabold text-green-700">
-
-              S/ {total.toFixed(2)}
-
+            <span>
+              {carrito.length}
             </span>
 
           </div>
 
-          {/* BOTONES */}
 
-          <div className="mt-6 space-y-3">
+          {/* UNIDADES */}
 
-            <button
-              onClick={limpiarCarrito}
+          <div
+            className="
+              flex
+              justify-between
+
+              text-sm
+              text-gray-600
+
+              mt-2
+            "
+          >
+
+            <span>
+              Unidades
+            </span>
+
+            <span>
+              {totalItems}
+            </span>
+
+          </div>
+
+
+          {/* TOTAL */}
+
+          <div
+            className="
+              flex
+              justify-between
+              items-center
+
+              mt-3
+              pt-3
+
+              border-t
+              border-gray-100
+            "
+          >
+
+            <span
               className="
-                w-full
-                border
-                border-red-500
-                text-red-600
-                font-semibold
-                py-3
-                rounded-xl
-                hover:bg-red-50
-                transition
+                text-xl
+                font-bold
+                text-gray-900
               "
             >
+              TOTAL
+            </span>
 
-              🗑 Vaciar carrito
 
-            </button>
+            <span
+              className="
+                text-2xl
+                font-extrabold
+                text-green-600
+              "
+            >
+              S/ {total.toFixed(2)}
+            </span>
+
+          </div>
+
+
+          {/* ========================================
+              BOTONES
+          ======================================== */}
+
+          <div className="mt-4 space-y-3">
+
+            {/* VACIAR */}
 
             <button
-              onClick={enviarWhatsApp}
+              type="button"
+              onClick={limpiarCarrito}
+              disabled={carrito.length === 0}
               className="
                 w-full
+                h-12
+
+                border
+                border-red-500
+
+                text-red-600
+
+                font-semibold
+
+                rounded-xl
+
+                hover:bg-red-50
+
+                transition
+
+                disabled:opacity-40
+                disabled:cursor-not-allowed
+              "
+            >
+              🗑 Vaciar carrito
+            </button>
+
+
+            {/* WHATSAPP */}
+
+            <button
+              type="button"
+              onClick={enviarWhatsApp}
+              disabled={carrito.length === 0}
+              className="
+                w-full
+                h-12
+
                 flex
                 items-center
                 justify-center
-                gap-3
+
+                gap-2
+
                 bg-green-500
                 hover:bg-green-600
+
                 text-white
+
                 font-bold
-                py-4
+
                 rounded-xl
+
                 transition
+
+                disabled:opacity-40
+                disabled:cursor-not-allowed
               "
             >
 
@@ -461,35 +858,46 @@ Forma de pago:
 
             </button>
 
+
+            {/* FINALIZAR PEDIDO */}
+
             <Link
               href="/checkout"
               onClick={cerrar}
-              className="
+              className={`
                 w-full
-                block
-                text-center
+                h-12
+
+                flex
+                items-center
+                justify-center
+
                 bg-blue-600
                 hover:bg-blue-700
+
                 text-white
+
                 font-bold
-                py-4
+
                 rounded-xl
+
                 transition
-              "
+
+                ${
+                  carrito.length === 0
+                    ? "pointer-events-none opacity-40"
+                    : ""
+                }
+              `}
             >
-
               Finalizar pedido
-
             </Link>
 
           </div>
 
         </div>
 
-      </aside>
-
+      </div>
     </>
-
   );
-
 }
