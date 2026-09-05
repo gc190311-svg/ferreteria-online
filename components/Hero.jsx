@@ -534,17 +534,25 @@ function CarruselProductos({
       {/* ===================================================== */}
 
       <div
-        className="
-          flex
-          gap-3
-          overflow-x-auto
-          px-4
-          pb-3
-          snap-x
-          snap-mandatory
-          scrollbar-hide
-        "
-      >
+  className="
+    flex
+    gap-3
+    overflow-x-auto
+    overflow-y-hidden
+    px-4
+    pb-3
+    snap-x
+    snap-mandatory
+    scrollbar-hide
+  "
+  style={{
+    scrollbarWidth: "none",
+    msOverflowStyle: "none",
+    touchAction: "pan-y",
+    WebkitOverflowScrolling: "touch",
+  }}
+>
+
 
         {productos.map((producto) => (
 
