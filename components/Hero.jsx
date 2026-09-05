@@ -548,7 +548,7 @@ function CarruselProductos({
   style={{
     scrollbarWidth: "none",
     msOverflowStyle: "none",
-    touchAction: "pan-y",
+    touchAction: "pan-x pan-y",
     WebkitOverflowScrolling: "touch",
   }}
 >
