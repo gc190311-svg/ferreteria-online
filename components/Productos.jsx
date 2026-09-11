@@ -73,20 +73,23 @@ setProductos(productosMasVendidos);
 
     <section
       id="productos"
-      className="bg-[#f7f8fa] py-24"
+      className="bg-[#f7f8fa] py-8 lg:py-24"
     >
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-3 lg:px-6">
 
         {/* CABECERA */}
 
-        <div className="mb-14">
+        <div className="mb-5 lg:mb-14">
 
-          <div className="w-16 h-1 rounded-full bg-yellow-500 mb-5"></div>
+          <div className="w-14 h-1 rounded-full bg-yellow-500 mb-3 lg:w-16 lg:mb-5"></div>
 
           <h2
             className="
-              text-5xl
+              text-[28px]
+              leading-[1.05]
+              lg:text-5xl
+              lg:leading-normal
               font-extrabold
               text-gray-900
             "
@@ -98,9 +101,13 @@ setProductos(productosMasVendidos);
 
           <p
             className="
-              mt-4
-              text-xl
+              mt-2
+              text-sm
+              leading-5
               text-gray-500
+              lg:mt-4
+              lg:text-xl
+              lg:leading-normal
             "
           >
 
@@ -151,10 +158,10 @@ setProductos(productosMasVendidos);
 <div
   className="
     flex
-    gap-3
+    gap-2
     overflow-x-auto
     overflow-y-hidden
-    pb-4
+    pb-2
     snap-x
     snap-mandatory
     scrollbar-hide
@@ -189,8 +196,8 @@ setProductos(productosMasVendidos);
           flex
           flex-col
           flex-none
-          w-[190px]
-          sm:w-[215px]
+          w-[160px]
+          sm:w-[180px]
           lg:w-auto
           lg:flex-1
           snap-start
@@ -239,7 +246,8 @@ setProductos(productosMasVendidos);
         <div
           className="
             bg-gray-50
-            h-[320px]
+            h-[145px]
+            lg:h-[320px]
             flex
             items-center
             justify-center
@@ -273,7 +281,8 @@ setProductos(productosMasVendidos);
             flex
             flex-col
             flex-1
-            p-6
+            p-3
+            lg:p-6
           "
         >
 
@@ -301,13 +310,16 @@ setProductos(productosMasVendidos);
 
           <h3
   className="
-    mt-2
-    text-[15px]
+    mt-1
+    text-[14px]
     lg:text-[20px]
     font-semibold
     text-gray-900
-    leading-7
-    min-h-[65px]
+    leading-5
+    min-h-[48px]
+    lg:mt-2
+    lg:leading-7
+    lg:min-h-[65px]
     text-center
     w-full
   "
@@ -327,7 +339,7 @@ setProductos(productosMasVendidos);
 
 {/* PRECIO */}
 
-<div className="mt-auto min-h-[65px] flex flex-col items-center justify-center text-center">
+<div className="mt-auto min-h-[48px] lg:min-h-[65px] flex flex-col items-center justify-center text-center">
 
   {producto.precioAnterior > producto.precio && (
     <p className="text-sm text-gray-400 line-through mb-1">
@@ -349,7 +361,7 @@ setProductos(productosMasVendidos);
 
     <span
       className="
-        text-xl
+        text-lg
         lg:text-2xl
         font-bold
         text-emerald-700
@@ -379,9 +391,10 @@ setProductos(productosMasVendidos);
               });
             }}
             className="
-              mt-3
+              mt-2
               w-full
               h-9
+              lg:mt-3
               rounded-lg
               bg-yellow-500
               hover:bg-yellow-400
@@ -409,7 +422,7 @@ setProductos(productosMasVendidos);
 </div>    
 {/* BOTÓN VER MÁS */}
 
-<div className="text-center mt-16">
+<div className="text-center mt-8 lg:mt-16">
 
   <a
     href="/productos"
@@ -417,8 +430,10 @@ setProductos(productosMasVendidos);
       inline-flex
       items-center
       justify-center
-      px-10
-      py-4
+      px-8
+      py-3
+      lg:px-10
+      lg:py-4
       bg-yellow-500
       hover:bg-yellow-400
       text-black
