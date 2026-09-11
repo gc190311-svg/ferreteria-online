@@ -32,10 +32,10 @@ export async function generateMetadata({ params }) {
   const precio = precioNumero.toFixed(2);
 
   const descripcion =
-    producto.descripcion ||
+    producto.descripcion?.trim() ||
     `Compra ${nombre}${
       marca ? ` de la marca ${marca}` : ""
-    } en Brico Hogar Perú. Precio S/ ${precio}.`;
+    } en Brico Hogar Perú. Precio S/ ${precio}. Delivery en Lima.`;
 
   const imagen =
     producto.imagenes?.[0] ||
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }) {
   const urlProducto = `${URL_BASE}/producto/${params.id}`;
 
   return {
-    title: `${nombre}${marca ? ` | ${marca}` : ""} | Brico Hogar Perú`,
+    title: `${nombre}${marca ? ` ${marca}` : ""} | Brico Hogar Perú`,
 
     description: descripcion.slice(0, 160),
 
@@ -65,7 +65,7 @@ export async function generateMetadata({ params }) {
     },
 
     openGraph: {
-      title: `${nombre}${marca ? ` | ${marca}` : ""} | Brico Hogar Perú`,
+      title: `${nombre}${marca ? ` ${marca}` : ""} | Brico Hogar Perú`,
       description: descripcion.slice(0, 160),
       url: urlProducto,
       siteName: "Brico Hogar Perú",
@@ -83,7 +83,7 @@ export async function generateMetadata({ params }) {
 
     twitter: {
       card: "summary_large_image",
-      title: `${nombre}${marca ? ` | ${marca}` : ""} | Brico Hogar Perú`,
+      title: `${nombre}${marca ? ` ${marca}` : ""} | Brico Hogar Perú`,
       description: descripcion.slice(0, 160),
       images: [imagen],
     },
@@ -120,10 +120,10 @@ export default async function Page({ params }) {
   const precio = precioNumero.toFixed(2);
 
   const descripcion =
-    producto.descripcion ||
+    producto.descripcion?.trim() ||
     `Compra ${nombre}${
       marca ? ` de la marca ${marca}` : ""
-    } en Brico Hogar Perú. Precio S/ ${precio}.`;
+    } en Brico Hogar Perú. Precio S/ ${precio}. Delivery en Lima.`;
 
   const imagenes = Array.isArray(producto.imagenes)
     ? producto.imagenes.filter(Boolean)

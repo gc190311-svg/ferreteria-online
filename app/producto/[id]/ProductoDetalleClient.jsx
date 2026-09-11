@@ -136,68 +136,10 @@ const agregarRelacionado = (item) => {
     );
 
   }
-  // ================================
-  // DATOS SEO PARA GOOGLE
-  // ================================
-
-  const precioSEO = Number(
-    producto.oferta || producto.precio || 0
-  ).toFixed(2);
-
-  const imagenSEO =
-    producto.imagenes?.[0] ||
-    producto.imagen ||
-    "https://bricohogarperu.vercel.app/sin-imagen.png";
-
-  const datosProductoGoogle = {
-    "@context": "https://schema.org",
-    "@type": "Product",
-
-    name: producto.nombre || "Producto",
-
-    image: [imagenSEO],
-
-    description:
-      producto.descripcion ||
-      `Compra ${producto.nombre || "este producto"} en Brico Hogar Perú.`,
-
-    sku: producto.sku || undefined,
-
-    brand: {
-      "@type": "Brand",
-      name: producto.marca || "Brico Hogar Perú",
-    },
-
-    offers: {
-      "@type": "Offer",
-
-      url: `https://bricohogarperu.vercel.app/producto/${params.id}`,
-
-      priceCurrency: "PEN",
-
-      price: precioSEO,
-
-      availability:
-        Number(producto.stock || 0) > 0
-          ? "https://schema.org/InStock"
-          : "https://schema.org/OutOfStock",
-
-      itemCondition:
-        "https://schema.org/NewCondition",
-    },
-  };
-
-
  return (
 
   <>
 
-  <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify(datosProductoGoogle),
-  }}
-/>
 
     <HeaderCatalogoCompleto
   categoriaSeleccionada={categoriaSeleccionada}
@@ -400,7 +342,12 @@ const agregarRelacionado = (item) => {
   <span>›</span>
          
   <a
-    href={`/categorias/${producto.categoria}`}
+    href={`/categorias/${String(producto.categoria || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-")}`}
     className="hover:text-yellow-500 transition capitalize"
   >
     {producto.categoria}
@@ -478,7 +425,7 @@ const agregarRelacionado = (item) => {
 
                   <img
                     src={img}
-                    alt={`Imagen ${index + 1}`}
+                    alt={`${producto.nombre} - imagen ${index + 1}`}
                   className="
 w-12
 h-12
@@ -659,12 +606,15 @@ mb-4
             {/* STOCK */}
 
             <div className="mt-4">
-
-              <p className="text-green-600 font-semibold">
-
-                ✔ Stock disponible
-
-              </p>
+              {Number(producto.stock || 0) > 0 ? (
+                <p className="text-green-600 font-semibold">
+                  ✔ Stock disponible
+                </p>
+              ) : (
+                <p className="text-red-600 font-semibold">
+                  ✘ Producto agotado
+                </p>
+              )}
 
             </div>
 
@@ -859,40 +809,13 @@ duration-300
 
             </h2>
 
-            <div className="space-y-4 sm:space-y-6">
-
-              <div className="border rounded-xl sm:rounded-2xl p-4 sm:p-6">
-
-                <div className="text-yellow-500 text-xl sm:text-2xl">
-
-                  ★★★★★
-
-                </div>
-
-                <p className="mt-3">
-
-                  Excelente producto y muy buena calidad.
-
-                </p>
-
-              </div>
-
-              <div className="border rounded-xl sm:rounded-2xl p-4 sm:p-6">
-
-                <div className="text-yellow-500 text-xl sm:text-2xl">
-
-                  ★★★★★
-
-                </div>
-
-                <p className="mt-3">
-
-                  Recomendado para trabajos profesionales.
-
-                </p>
-
-              </div>
-
+            <div className="border rounded-xl sm:rounded-2xl p-4 sm:p-6">
+              <p className="text-gray-600">
+                Aún no hay opiniones para este producto.
+              </p>
+              <p className="text-sm text-gray-500 mt-2">
+                Sé el primero en compartir tu experiencia con este producto.
+              </p>
             </div>
 
           </div>
