@@ -17,6 +17,7 @@ function normalizarSlug(texto = "") {
 
 export default function NavbarMobile({
   setCategoriaSeleccionada,
+  onAbrirFiltros,
 }) {
   const [abierto, setAbierto] = useState(false);
   const [otrosAbierto, setOtrosAbierto] = useState(false);
@@ -34,6 +35,15 @@ export default function NavbarMobile({
     pathname === "/productos" ||
     pathname.startsWith("/categorias") ||
     pathname.startsWith("/producto");
+
+  /*
+   * En /productos ocultamos únicamente la hamburguesa
+   * superior porque esa página ya tiene su propio botón
+   * de filtros.
+   */
+  const ocultarHamburguesa =
+  pathname === "/productos" ||
+  pathname.startsWith("/categorias");
 
   function cambiarCategoria(categoria) {
     const slug =
@@ -60,11 +70,18 @@ export default function NavbarMobile({
     window.location.href = `/categorias/${slug}`;
   }
 
+  /*
+   * Si el carrito está abierto, no mostramos este navbar.
+   */
   if (carritoAbierto) return null;
 
+  /*
+   * Solo se muestra dentro del catálogo.
+   */
   if (!esCatalogo) return null;
 
-  // Categorías principales que aparecerán directamente en el menú negro.
+  // Categorías principales que aparecerán directamente
+  // en el menú negro.
   const categoriasPrincipales = [
     "construccion",
     "gasfiteria",
@@ -91,40 +108,80 @@ export default function NavbarMobile({
         key: categoria?.id || slug || index,
       };
     })
-    .filter((categoria) => categoria.nombre && categoria.slug);
+    .filter(
+      (categoria) =>
+        categoria.nombre && categoria.slug
+    );
 
-  const categoriasPrincipalesDisponibles = categoriasPrincipales
-    .map((slug) =>
-      categoriasProcesadas.find((categoria) => categoria.slug === slug)
-    )
-    .filter(Boolean);
+  const categoriasPrincipalesDisponibles =
+    categoriasPrincipales
+      .map((slug) =>
+        categoriasProcesadas.find(
+          (categoria) => categoria.slug === slug
+        )
+      )
+      .filter(Boolean);
 
-  // Todo lo que no sea una categoría principal queda dentro de OTROS.
-  const categoriasOtros = categoriasProcesadas.filter(
-    (categoria) => !categoriasPrincipales.includes(categoria.slug)
-  );
+  // Todo lo que no sea una categoría principal
+  // queda dentro de OTROS.
+  const categoriasOtros =
+    categoriasProcesadas.filter(
+      (categoria) =>
+        !categoriasPrincipales.includes(
+          categoria.slug
+        )
+    );
 
   return (
     <nav className="bg-black border-y border-gray-800 relative z-50">
 
-      {/* BOTÓN HAMBURGUESA */}
-      <div className="h-16 flex items-center px-5">
-        <button
-          type="button"
-          onClick={() => {
-            setAbierto((prev) => !prev);
-            setOtrosAbierto(false);
-          }}
-          className="text-white text-3xl"
-          aria-label="Abrir categorías"
-          aria-expanded={abierto}
-        >
-          ☰
-        </button>
-      </div>
+      {/* =====================================================
+          BOTÓN HAMBURGUESA
+          Se oculta solamente en /productos
+         ===================================================== */}
 
-      {/* MENÚ */}
-      {abierto && (
+      {!ocultarHamburguesa && (
+        <div className="h-16 flex items-center px-5">
+        <button
+  type="button"
+  onClick={() => {
+    /*
+      Si la página nos proporciona onAbrirFiltros,
+      significa que estamos en la página de producto.
+
+      En ese caso la hamburguesa abre el filtro
+      de categorías y marcas.
+    */
+
+    if (onAbrirFiltros) {
+      setAbierto(false);
+      setOtrosAbierto(false);
+      onAbrirFiltros();
+      return;
+    }
+
+    /*
+      Comportamiento normal del menú
+      en el resto de páginas.
+    */
+
+    setAbierto((prev) => !prev);
+    setOtrosAbierto(false);
+  }}
+  className="text-white text-3xl"
+  aria-label="Abrir menú"
+  aria-expanded={onAbrirFiltros ? false : abierto}
+>
+  ☰
+</button>
+        </div>
+      )}
+
+      {/* =====================================================
+          MENÚ
+         ===================================================== */}
+
+      {abierto && !ocultarHamburguesa && (
         <div
           className="
             absolute
@@ -143,7 +200,9 @@ export default function NavbarMobile({
           {/* TODOS */}
           <button
             type="button"
-            onClick={() => cambiarCategoria("todos")}
+            onClick={() =>
+              cambiarCategoria("todos")
+            }
             className="
               block
               w-full
@@ -162,35 +221,44 @@ export default function NavbarMobile({
           </button>
 
           {/* CATEGORÍAS PRINCIPALES */}
-          {categoriasPrincipalesDisponibles.map((categoria) => (
-            <button
-              type="button"
-              key={categoria.key}
-              onClick={() => cambiarCategoria(categoria)}
-              className="
-                block
-                w-full
-                text-left
-                px-5
-                py-4
-                bg-black
-                text-white
-                border-0
-                hover:bg-[#1a1a1a]
-                transition-colors
-                duration-200
-              "
-            >
-              {categoria.nombre}
-            </button>
-          ))}
+          {categoriasPrincipalesDisponibles.map(
+            (categoria) => (
+              <button
+                type="button"
+                key={categoria.key}
+                onClick={() =>
+                  cambiarCategoria(categoria)
+                }
+                className="
+                  block
+                  w-full
+                  text-left
+                  px-5
+                  py-4
+                  bg-black
+                  text-white
+                  border-0
+                  hover:bg-[#1a1a1a]
+                  transition-colors
+                  duration-200
+                "
+              >
+                {categoria.nombre}
+              </button>
+            )
+          )}
 
           {/* OTROS */}
           {categoriasOtros.length > 0 && (
             <div className="relative">
+
               <button
                 type="button"
-                onClick={() => setOtrosAbierto((prev) => !prev)}
+                onClick={() =>
+                  setOtrosAbierto(
+                    (prev) => !prev
+                  )
+                }
                 className="
                   block
                   w-full
@@ -210,9 +278,12 @@ export default function NavbarMobile({
                 aria-expanded={otrosAbierto}
               >
                 <span>Otros</span>
+
                 <span
                   className={`text-xs transition-transform duration-200 ${
-                    otrosAbierto ? "rotate-180" : ""
+                    otrosAbierto
+                      ? "rotate-180"
+                      : ""
                   }`}
                 >
                   ▾
@@ -230,28 +301,34 @@ export default function NavbarMobile({
                     border-gray-200
                   "
                 >
-                  {categoriasOtros.map((categoria) => (
-                    <button
-                      type="button"
-                      key={categoria.key}
-                      onClick={() => cambiarCategoria(categoria)}
-                      className="
-                        block
-                        w-full
-                        text-left
-                        px-5
-                        py-4
-                        bg-white
-                        text-gray-900
-                        border-0
-                        hover:bg-gray-100
-                        transition-colors
-                        duration-200
-                      "
-                    >
-                      {categoria.nombre}
-                    </button>
-                  ))}
+                  {categoriasOtros.map(
+                    (categoria) => (
+                      <button
+                        type="button"
+                        key={categoria.key}
+                        onClick={() =>
+                          cambiarCategoria(
+                            categoria
+                          )
+                        }
+                        className="
+                          block
+                          w-full
+                          text-left
+                          px-5
+                          py-4
+                          bg-white
+                          text-gray-900
+                          border-0
+                          hover:bg-gray-100
+                          transition-colors
+                          duration-200
+                        "
+                      >
+                        {categoria.nombre}
+                      </button>
+                    )
+                  )}
                 </div>
               )}
             </div>
@@ -261,5 +338,3 @@ export default function NavbarMobile({
     </nav>
   );
 }
-
-

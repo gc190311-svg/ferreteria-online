@@ -1,4 +1,4 @@
-"use client";
+
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -197,10 +197,11 @@ const abrirProducto = (producto) => {
       <div
         className="
           grid
-          grid-cols-1
+          grid-cols-2
+          gap-3
           sm:grid-cols-2
           lg:grid-cols-3
-          gap-5
+          sm:gap-5
           items-start
         "
       >
@@ -263,13 +264,13 @@ const abrirProducto = (producto) => {
                   }
                   className="
                     w-full
-                    h-56
+                    h-36
                     sm:h-64
                     lg:h-72
 
                     object-contain
 
-                    p-4
+                    p-2
                     sm:p-6
 
                     transition-transform
@@ -289,31 +290,35 @@ const abrirProducto = (producto) => {
                   flex-col
                   justify-between
 
-                  px-6
-                  pb-6
+                  px-3
+                  pb-3
+                  sm:px-6
+                  sm:pb-6
                 "
               >
                 {/* NOMBRE */}
 
                 <h3
                   className="
-                    mt-4
+                    mt-3
 
                     text-center
 
                     font-semibold
 
-                    text-base
+                    text-sm
                     sm:text-lg
                     lg:text-xl
 
-                    leading-6
+                    leading-5
+                    sm:leading-6
 
                     text-gray-900
 
                     line-clamp-2
 
-                    min-h-[52px]
+                    min-h-[40px]
+                    sm:min-h-[52px]
                   "
                 >
                   <Link
@@ -341,7 +346,8 @@ const abrirProducto = (producto) => {
                   <p
                     className="
                       text-gray-500
-                      text-sm
+                      text-xs
+                      sm:text-sm
                       text-center
                       mt-2
                     "
@@ -355,11 +361,12 @@ const abrirProducto = (producto) => {
                 {producto.marca && (
                   <p
                     className="
-                      mt-3
+                      mt-2
 
                       text-center
 
-                      text-sm
+                      text-xs
+                      sm:text-sm
 
                       uppercase
 
@@ -379,11 +386,11 @@ const abrirProducto = (producto) => {
                 {usuario && (
                   <p
                     className="
-                      mt-6
+                      mt-4
 
                       text-center
 
-                      text-xl
+                      text-lg
                       sm:text-2xl
 
                       font-bold
@@ -421,7 +428,7 @@ const abrirProducto = (producto) => {
                     border-t
                     border-gray-200
 
-                    p-3
+                    p-2
                     sm:p-4
 
                     md:absolute
@@ -451,7 +458,8 @@ const abrirProducto = (producto) => {
                     flex
                     justify-center
 
-                    mb-3
+                    mb-2
+                    sm:mb-3
                   "
                 >
                   <div
@@ -481,8 +489,10 @@ const abrirProducto = (producto) => {
                         )
                       }
                       className="
-                        w-11
-                        h-10
+                        w-8
+                        h-8
+                        sm:w-11
+                        sm:h-10
 
                         flex
                         items-center
@@ -508,8 +518,10 @@ const abrirProducto = (producto) => {
 
                     <span
                       className="
-                        w-12
-                        h-10
+                        w-9
+                        h-8
+                        sm:w-12
+                        sm:h-10
 
                         flex
                         items-center
@@ -537,8 +549,10 @@ const abrirProducto = (producto) => {
                         )
                       }
                       className="
-                        w-11
-                        h-10
+                        w-8
+                        h-8
+                        sm:w-11
+                        sm:h-10
 
                         flex
                         items-center
@@ -586,8 +600,10 @@ const abrirProducto = (producto) => {
 
                     font-bold
 
-                    py-3
-                    px-4
+                    py-2
+                    px-2
+                    sm:py-3
+                    sm:px-4
 
                     rounded-lg
 

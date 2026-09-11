@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Hero from "../components/Hero";
-import Servicios from "../components/Servicios";
 import Marcas from "../components/Marcas";
 import Productos from "../components/Productos";
 import Footer from "../components/Footer";
@@ -12,21 +11,17 @@ import { CatalogoProvider } from "../components/context/CatalogoContext";
 import HeaderCompleto from "../components/HeaderCompleto";
 
 function HomeContenido() {
-
   const [categoriaSeleccionada, setCategoriaSeleccionada] =
     useState("todos");
 
   return (
-    
     <>
-  <HeaderCompleto
-    categoriaSeleccionada={categoriaSeleccionada}
-    setCategoriaSeleccionada={setCategoriaSeleccionada}
-  />
+      <HeaderCompleto
+        categoriaSeleccionada={categoriaSeleccionada}
+        setCategoriaSeleccionada={setCategoriaSeleccionada}
+      />
 
-  <Hero />
-
-      <Servicios />
+      <Hero />
 
       <Marcas />
 
@@ -39,20 +34,10 @@ function HomeContenido() {
       <WhatsAppButton />
     </>
   );
-
 }
 
 export default function Home() {
-
   return (
-
-    
-
-      <HomeContenido
-       />
-
-    
-
+    <HomeContenido />
   );
-
 }
