@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
   const sku = producto.sku || "";
 
   const precioNumero = Number(
-    producto.oferta || producto.precio || 0
+    producto.oferta ?? producto.precio ?? 0
   );
 
   const precio = precioNumero.toFixed(2);
@@ -94,6 +94,9 @@ export async function generateMetadata({ params }) {
       googleBot: {
         index: true,
         follow: true,
+        "max-image-preview": "large",
+        "max-video-preview": -1,
+        "max-snippet": -1,
       },
     },
   };
@@ -114,7 +117,7 @@ export default async function Page({ params }) {
   const sku = producto.sku || "";
 
   const precioNumero = Number(
-    producto.oferta || producto.precio || 0
+    producto.oferta ?? producto.precio ?? 0
   );
 
   const precio = precioNumero.toFixed(2);
@@ -152,38 +155,33 @@ export default async function Page({ params }) {
   const productSchema = {
     "@context": "https://schema.org",
     "@type": "Product",
-
-    name: nombre,
-
-    description: descripcion,
-
-    image:
+    "@id": `${urlProducto}#product`,
+    "url": urlProducto,
+    "name": nombre,
+    "description": descripcion,
+    "image":
       imagenes.length > 0
         ? imagenes
         : [imagenPrincipal],
-
-    sku: sku || undefined,
-
-    brand: marca
+    "sku": sku || undefined,
+    "brand": marca
       ? {
           "@type": "Brand",
-          name: marca,
+          "name": marca,
         }
       : undefined,
-
-    category: producto.categoria || "Ferretería",
-
-    offers: {
+    "category": producto.categoria || "Ferretería",
+    "offers": {
       "@type": "Offer",
-      url: urlProducto,
-      priceCurrency: "PEN",
-      price: precio,
-      availability: disponibilidad,
-      itemCondition: "https://schema.org/NewCondition",
-      seller: {
+      "url": urlProducto,
+      "priceCurrency": "PEN",
+      "price": precio,
+      "availability": disponibilidad,
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": {
         "@type": "Organization",
-        name: "Brico Hogar Perú",
-        url: URL_BASE,
+        "name": "Brico Hogar Perú",
+        "url": URL_BASE,
       },
     },
   };
