@@ -1,31 +1,22 @@
-import { db } from "./firebase";
 import { collection, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
 
-const baseUrl = "https://bricohogarperu.vercel.app";
+const BASE_URL = "https://bricohogarperu.vercel.app";
 
-// Convierte el nombre de una categoría en el mismo formato
-// utilizado por las URLs de tu tienda.
-function slugify(value) {
-  return String(value || "")
+function slugify(text = "") {
+  return text
+    .toString()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
     .toLowerCase()
     .trim()
-    .replace(/\s+/g, "-");
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
 }
 
-// Obtiene una fecha válida para lastModified.
 function getLastModified(producto) {
-  try {
-    if (producto?.updatedAt?.toDate) {
-      return producto.updatedAt.toDate();
-    }
-
-    if (producto?.updatedAt instanceof Date) {
-      return producto.updatedAt;
-    }
-  } catch (error) {
-    console.error("Error leyendo updatedAt:", error);
+  if (producto?.updatedAt?.toDate) {
+    return producto.updatedAt.toDate();
   }
 
   return new Date();
@@ -34,65 +25,72 @@ function getLastModified(producto) {
 export default async function sitemap() {
   const urls = [
     {
-      url: baseUrl,
+      url: BASE_URL,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: `${baseUrl}/productos`,
+      url: `${BASE_URL}/productos`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/nosotros`,
+      url: `${BASE_URL}/categorias`,
+      lastModified: new Date(),
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/nosotros`,
       lastModified: new Date(),
       changeFrequency: "monthly",
-      priority: 0.6,
+      priority: 0.5,
     },
   ];
 
+  const categorias = new Set();
+
   try {
-    const snapshot = await getDocs(collection(db, "productos"));
+    const productosSnapshot = await getDocs(
+      collection(db, "productos")
+    );
 
-    // Guardamos las categorías sin repetirlas
-    const categorias = new Set();
-
-    snapshot.forEach((productoDoc) => {
-      const producto = productoDoc.data();
+    productosSnapshot.forEach((doc) => {
+      const producto = doc.data();
 
       // No incluir productos desactivados
       if (producto.activo === false) {
         return;
       }
 
-      // Obtener categoría
-      if (producto.categoria) {
-        const slugCategoria = slugify(producto.categoria);
-
-        if (slugCategoria) {
-          categorias.add(slugCategoria);
-        }
-      }
-
-      // Agregar producto
+      // Producto individual
       urls.push({
-        url: `${baseUrl}/producto/${productoDoc.id}`,
+        url: `${BASE_URL}/producto/${doc.id}`,
         lastModified: getLastModified(producto),
         changeFrequency: "weekly",
         priority: 0.8,
       });
+
+      // Categoría
+      if (producto.categoria) {
+        categorias.add(producto.categoria);
+      }
     });
 
-    // Agregar páginas de categorías
-    categorias.forEach((slugCategoria) => {
-      urls.push({
-        url: `${baseUrl}/categorias/${slugCategoria}`,
-        lastModified: new Date(),
-        changeFrequency: "weekly",
-        priority: 0.7,
-      });
+    // Agregar categorías
+    categorias.forEach((categoria) => {
+      const slug = slugify(categoria);
+
+      if (slug) {
+        urls.push({
+          url: `${BASE_URL}/categorias/${slug}`,
+          lastModified: new Date(),
+          changeFrequency: "weekly",
+          priority: 0.7,
+        });
+      }
     });
   } catch (error) {
     console.error("Error generando sitemap:", error);
